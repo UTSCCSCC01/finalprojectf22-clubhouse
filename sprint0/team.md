@@ -8,4 +8,4 @@ Priyank Dave | davepri1 | 1007669587 | priyank.dave@mail.utoronto.ca | insta: @p
 Noah Cristino | cristin9 | 1007694791 | noah.cristino@mail.utoronto.ca | 5195215483 | nc#6631
 Tharuth Attanayake | attanay2 | 1006387161 | tharuth.attanayake@mail.utoronto.ca | +1 (647) 546-4565 | Tharuth#1702 
 
-**Discord Chat/Server Invite :** https://discord.gg/N64cfwbW
+**Discord Chat/Server Invite :** https://discord.gg/h7gqgNumjM
