@@ -3,13 +3,13 @@ We determined the tasks to be completed for the sprint and discussed them as a t
 
 Team member  | Tasks completed
 ------------  | ------------
-Amy  | summary.md, done.md, UI.md
-Priyank  | competition.md, setup
+Amy  | summary.md, done.md, competition.md
+Priyank  | competition.md, back end setup
 Arailym  | UI.md, process.md
-Tharuth  | Personas.pdf
+Tharuth  | personas.pdf
 Dhruv | PB.md
-Noah  | Readme.md, setup
-Faraz| UI.md, setup
+Noah  | Readme.md, database setup
+Faraz| UI.md, front end setup
 
 ## Tools and decision making: 
 A shared Google Drive folder was created for collaborating on deliverables. Each team member chose tasks they felt most comfortable working on. During our standup meetings, we reviewed everyone’s work and made revisions. 
@@ -18,10 +18,10 @@ We used our internal discord server for communication. During our meetings, we d
 
 ## Prioritization: 
 We defined priority by assigning high priority to user stories that are must-haves for our website and the features that we want to implement first. 
-Low priority - user stories that would be easier to implement after implementing the high and mid priority user stories, and aren’t integral to the experience of the target demographic of the app.
+Low priority user stories were stories that would be easier to implement after implementing the high and mid priority user stories, and aren’t integral to the experience of the target demographic of the app.
 
 ## Meetings: 
-We met 4 times, in person and over our internal discord server, during the duration of this sprint. 
+We met 4 times, in person and over our internal discord server, during the duration of this sprint. Each meeting was approximately 1 hour.
 	
 ## Lessons learned: 
 In the next sprint, we are planning on scheduling more frequent but shorter meetings to keep the team updated on the progress of the project and to make sure we're all on the same page. Also, we believe that starting work earlier on the next sprint would give us more time to review our work. Therefore, we have agreed to start Sprint 1 immediately after Sprint 0 due date.    
