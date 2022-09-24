@@ -12,7 +12,7 @@ Just create an account and select your plan then it will create a cluster which 
 Open `/finalprojectf22-minimum-viable-percentage/server/config.env` and replace the database string with yours which you can get from your database host.
 
 - Server
-- 
+
 ```npm install express
 cd /finalprojectf22-minimum-viable-percentage/server/
 node server.js
