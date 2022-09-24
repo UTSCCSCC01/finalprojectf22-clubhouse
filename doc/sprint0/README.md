@@ -15,7 +15,7 @@ Open `/finalprojectf22-minimum-viable-percentage/server/config.env` and replace 
 
 ```npm install express
 cd /finalprojectf22-minimum-viable-percentage/server/
-```npm i
+npm i
 node server.js
 Server is running on port: 5001
 Successfully connected to MongoDB.
