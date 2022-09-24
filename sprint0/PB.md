@@ -4,8 +4,8 @@ Sorted by priority.
 
 
 High:
-As a student, I want to login/register so that I can securely manage and use my individualized account.
-CoS: 
+1. As a student, I want to login/register so that I can securely manage and use my individualized account.
+CoS:
 Make sure a student can register using my UOFT email
 Make sure emails other than UOFT ones cannot register/login
 Make sure once registered, the student is able to sign in using their credentials that they used to register
