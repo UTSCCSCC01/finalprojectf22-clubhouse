@@ -17,4 +17,5 @@ Sarah McLaurhen - A twenty-three year old Management student at the University o
 ## The Key Principles
 
 * Community: This web application should make it easier for students to discover and stay up-to-date with the various clubs UTSC has to offer.
+* Communication: The web application should facilitate communication between club members and club admins, instantaneously and intuitively.
 * Ease of use: The design should be intuitive and simple. Users should be able to navigate through the website with ease.
