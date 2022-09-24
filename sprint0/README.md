@@ -9,15 +9,22 @@ Just create an account and select your plan then it will create a cluster which 
 
 - Configuration
 
-Open `server/db.env` and replace the login credentials with the correct ones.
+Open `/finalprojectf22-minimum-viable-percentage/server/config.env` and replace the database string with yours which you can get from your database host.
 
 - Server
 
-Download repo and run `node server.js` in the `server/` directory.
+```npm install express
+cd /finalprojectf22-minimum-viable-percentage/server/
+node server.js
+Server is running on port: 5001
+Successfully connected to MongoDB.
+```
 
 - Client
 
-Download repo and run `npm start` in the `client/` directory 
+```cd /finalprojectf22-minimum-viable-percentage/client/
+npm start dev
+```
 
 ## Contribution
 In order to contribute please fork our repository and submit a pull request, we will be monitoring them. If you find an issue but do not have a solution please check out `Issues`.
