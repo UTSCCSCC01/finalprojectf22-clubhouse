@@ -6,27 +6,23 @@ Our project is a webapp which allows UTSC students to connect with clubs by shar
 
 We used MongoDB for the database. We hosted our database through AWS via [MongoDB Atlas](https://www.mongodb.com/atlas/database). There is a free plan available and the rest of this installation will assume you use it. 
 Just create an account and select your plan then it will create a cluster which will host your database.
-DataBase Creds- Username: UTSC-ClubHouse123  ,   Password: b6R3JJvL4a2aYeAd
-- Configuration
+[Link to sample config.env (place in project folder)](https://cdn.discordapp.com/attachments/1016744999280459842/1023074197112623175/config.env)
 
+- Configuration
 Open `/finalprojectf22-minimum-viable-percentage/server/config.env` and replace the database string with yours which you can get from your database host.
 
-- Server
+- Setup
+`npm i`
+Please make sure you have a config.env file in the main folder, which sets the ATLUS_URI environment variable 
 
-```npm install express
-cd /finalprojectf22-minimum-viable-percentage/server/
-npm i
-node server.js
-Server is running on port: 5001
-Successfully connected to MongoDB.
-```
+- Dev API Server
+`npm run api_serve`
 
-- Client
+- Dev Client Server
+`npm run client_serve`
 
-```cd /finalprojectf22-minimum-viable-percentage/client/
-npm i
-npm start dev
-```
+- Client & API & React Watcher
+`npm run dev`
 
 ## Contribution
 In order to contribute please fork our repository and submit a pull request, we will be monitoring them. If you find an issue but do not have a solution please check out `Issues`.
