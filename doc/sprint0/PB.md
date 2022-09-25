@@ -50,6 +50,12 @@ Logging in as a club will send you to the club-side home page
 - COS:
   - Make sure club admins can post information about the club/upcoming events which send notifications to the joined/following members
 
+9. As a club admin, I want to create events so that students find out about it.
+- COS:
+  - Make sure events are displayed under a club's profile
+  - Make sure a club admin is able to create an event
+  - Make sure events are displayed under upcoming events
+
 
 __Mid:__
 
