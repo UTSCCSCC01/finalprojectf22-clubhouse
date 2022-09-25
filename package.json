@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "react-dev": "webpack --watch",
-    "dev": "concurrently --kill-others --raw \"npm run react-dev\" \"npm run start\"",
-    "serve": "webpack serve"
+    "client_serve": "nodemon client/server.js",
+    "react_dev": "webpack --watch",
+    "api_serve": "node server/server.js",
+    "dev": "concurrently --kill-others --raw \"npm run react_dev\" \"npm run client_serve\" \"npm run api_serve\""
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +25,9 @@
     "express": "^4.18.1",
     "nodemon": "^2.0.20",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "mongodb": "^4.10.0"
   }
 }

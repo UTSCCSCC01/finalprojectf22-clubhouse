@@ -4,7 +4,7 @@ const mode = 'development';
 module.exports = {
   mode: mode,
   entry: {
-    main: path.resolve(__dirname, './src/index.jsx'),
+    main: path.resolve(__dirname, './client/src/index.jsx'),
   },
   module: {
     rules: [
@@ -21,7 +21,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './client/dist'),
     filename: 'bundle.js',
   },
 };
