@@ -1,9 +1,9 @@
-Product Backlog
+# Product Backlog
 
 Sorted by priority.
 
+__High:__
 
-High:
 1. As a student, I want to login/register so that I can securely manage and use my individualized account
 - COS:
    - Make sure a student can register using my UOFT email
@@ -51,7 +51,7 @@ Logging in as a club will send you to the club-side home page
   - Make sure club admins can post information about the club/upcoming events which send notifications to the joined/following members
 
 
-Mid:
+__Mid:__
 
 9. As a student, I want to apply to club executive positions at the specific club so that I can become an executive.
 - COS:
@@ -86,7 +86,8 @@ Mid:
   - Students are able to view their followed/joined clubs so they can make the necessary modifications they desire
     - I.e. unfollow, change notifications preferences, check out a specific club event, etc
 
-Low:
+__Low:__
+
 16. As a student, I should be able to choose if I want email notifications as well so that I have another method to be instantly notified when a notification is sent.
 - COS:
   - Make sure I can choose whether I want to notifications in my email
