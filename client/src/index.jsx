@@ -14,8 +14,7 @@ ReactDOM.render(
     <Router>
       {/* Add global elements like navbar outside the switch */}
       <Routes>
-        <Route exact path="/" element={<Home />}>
-        </Route>
+        <Route exact path="/" element={<Home />} />
       </Routes>
     </Router>
   ),
