@@ -22,12 +22,15 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
     "express": "^4.18.1",
+    "mongodb": "^4.10.0",
     "nodemon": "^2.0.20",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.2",
-    "mongodb": "^4.10.0"
+    "react-helmet": "^6.1.0",
+    "react-router": "^6.4.1"
   }
 }
