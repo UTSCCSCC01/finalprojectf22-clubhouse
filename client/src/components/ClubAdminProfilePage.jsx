@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ClubAdminViewProfile from "./ClubAdminViewProfile";
-import ClubAdminEditProfile from "./ClubAdminEditProfile";
+import ClubAdminViewProfile from "./ClubAdminViewProfile.jsx";
+import ClubAdminEditProfile from "./ClubAdminEditProfile.jsx";
 function ClubAdminProfilePage() {
   const currentvalues = {
     clubName: "yello",

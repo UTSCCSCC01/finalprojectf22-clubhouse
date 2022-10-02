@@ -1,5 +1,16 @@
 .ClubAdminProfilePage {
   font-family: sans-serif;
+  max-height: 100px;
+  display: grid;
+  width: 100% ;
+  
+  
+}
+.adminchild{
+display: inline-block;
+padding: 2rem;
+
+border-radius: 10 rem;
 }
 
 .ClubProfileImgContainer {
@@ -7,33 +18,61 @@
   /* display: inline-block;
   vertical-align: top;
   align-items: padding-right; */
-  float: left;
-  width: 200px;
-  margin-right: 20px;
-  margin-bottom: 10px;
+  
+  width: 500px;
+  
 }
 
 .img2 {
   position: relative;
-  height: 250px;
-  width: 100%;
+  height:40vh; 
+  width: auto;
   border-radius: 60px;
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 10px;
 }
-
+.viewdesc{
+  background-color: #FFE498;
+  width:100%;
+  overflow-x:auto;
+  height: 100px;
+  overflow-y: scroll;
+  white-space: normal;
+  border-radius: 10px;
+  scroll-behavior: smooth;
+  scrollbar-shadow-color: black;
+}
+.cardcont{
+  display: inline;
+  margin-left: 10%;
+  float:right;
+}
+.evenCard{
+  height: 300px;
+  overflow-y:scroll;
+  width:fit-content; 
+  
+  
+ 
+}
+.card{
+  width: 300px;
+}
 .p {
   /* display: inline-block; */
+  background-color: #FFE498;
 }
 .info {
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  
+  width: 30%;
+  
+  display:inline-table;
 }
 .profileEditButton {
   width: 80px;
   padding: 5px;
-  margin: 0 3px;
   background-color: #7ba4d9;
   outline: none;
   border: 1px solid #7ba4d9;
@@ -55,6 +94,8 @@
 
 .clubEditDecription {
   resize: none;
-  width: 50%;
-  height: 300px;
+  width: 100%;
+  margin-right: 10%;
+  height: 100px;
+  overflow-y: scroll;
 }
