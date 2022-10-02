@@ -40,7 +40,7 @@ function ClubAdminEditProfile(props) {
       setPage(page+1);
     }
   return (
-    <body className="ClubAdminProfilePage">
+    <div class="mui-container-fluid" className="ClubAdminProfilePage">
       <h1 style={{ textAlign: "center" }}> Profile</h1>
       <div className="adminchild" >
       <div className="info">
@@ -51,7 +51,7 @@ function ClubAdminEditProfile(props) {
               src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
               alt="profile-picture"
             />
-
+            <h2>{props.values.clubName}</h2>
             <h3> Contact Info:</h3>
            <>Email: </> 
             <input
@@ -70,17 +70,19 @@ function ClubAdminEditProfile(props) {
                 value={props.values.phoneNumber}
                 placeholder="Phone Number"
               />
-            </p>
-          </div>
-          <button
+              <button
             className="profileEditButton"
             type="submit"
             onClick={props.editDone}
           >
             Done<span role="img">✅</span>
           </button>
+            </p>
+            
+          </div>
+          
 
-          <h2>{props.values.clubName}</h2>
+          
           <textarea
             name="description"
             onChange={props.onChange}
@@ -119,7 +121,7 @@ function ClubAdminEditProfile(props) {
       
      
       
-    </body>
+    </div>
   );
 }
 

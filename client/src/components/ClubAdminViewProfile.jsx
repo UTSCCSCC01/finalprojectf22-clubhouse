@@ -53,19 +53,22 @@ function ClubAdminViewProfile(props) {
             alt="profile-picture"
           />
           
-        
+          <h2>{props.values.clubName}</h2>
           <h3> Contact Info:</h3>
           <p> Email: {props.values.email}</p>
-          <p> Phone Number: {props.values.phoneNumber}</p>
-        </div>
-        <button
+          <p> Phone Number: {props.values.phoneNumber}
+          <button
           className="profileEditButton"
           type="submit"
           onClick={props.onClick}
         >
           Edit<span role="img">✒️</span>
         </button>
-        <h2>{props.values.clubName}</h2>
+          
+          </p>
+        </div>
+        
+        
         <div color="#FFE498" className="viewdesc">
         <p>{props.values.description}</p>
         </div>

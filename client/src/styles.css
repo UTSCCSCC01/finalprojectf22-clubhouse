@@ -19,14 +19,14 @@ border-radius: 10 rem;
   vertical-align: top;
   align-items: padding-right; */
   
-  width: 500px;
+  width: 100%;
   
 }
 
 .img2 {
   position: relative;
   height:40vh; 
-  width: auto;
+  width: 100%;
   border-radius: 60px;
   padding-left: 0px;
   padding-right: 0px;
@@ -34,14 +34,21 @@ border-radius: 10 rem;
 }
 .viewdesc{
   background-color: #FFE498;
-  width:100%;
+  width:90%;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
   overflow-x:auto;
   height: 100px;
   overflow-y: scroll;
   white-space: normal;
   border-radius: 10px;
-  scroll-behavior: smooth;
-  scrollbar-shadow-color: black;
+  
+  
+}
+.viewdesc::-webkit-scrollbar{
+  border-radius: 2rem;
+  display: none;
 }
 .cardcont{
   display: inline;
@@ -64,11 +71,13 @@ border-radius: 10 rem;
   background-color: #FFE498;
 }
 .info {
-  height: 100vh;
-  
+  height: fit-content;
+  background-color: #002A5C;
   width: 30%;
-  
+  padding: 2rem;
+  border-radius: 39pt;
   display:inline-table;
+  color: white;
 }
 .profileEditButton {
   width: 80px;
@@ -77,6 +86,9 @@ border-radius: 10 rem;
   outline: none;
   border: 1px solid #7ba4d9;
   box-shadow: 2px 2px 2px #3f3f3f;
+  
+  height: 100%;
+  
   float: right;
   color: white;
 }
