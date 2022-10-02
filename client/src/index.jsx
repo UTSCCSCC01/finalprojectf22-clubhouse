@@ -18,7 +18,7 @@ ReactDOM.render(
       {/* Add global elements like navbar outside the switch */}
       <Routes>
         {/* <Route exact path="/" element={<Home />} /> */}
-        <Route exact path="/" element={< Navbar/>} />
+        <Route exact path="/" element={<Navbar />} />
         <Route path="/events.html" element={<Events />} />
       </Routes>
     </Router>
