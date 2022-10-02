@@ -91,7 +91,8 @@ function ClubAdminEditProfile(props) {
         </form>
         
       </div>
-
+      <div className="cardcont">
+      <h2 style={{ textAlign: 'center' }}>My Events</h2>
       <div className="evenCard">
       <InfiniteScroll  
       dataLength={items.length} //This is important field to render the next data
@@ -113,7 +114,7 @@ function ClubAdminEditProfile(props) {
       </div>
 
 
-
+        </div>
       </div>
       
      
