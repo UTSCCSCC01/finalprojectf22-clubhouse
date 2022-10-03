@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
+import '../styles.css';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -40,16 +45,18 @@ class Login extends Component {
 
   render() {
     return (
+      <div>
+      <h2>Login</h2>
       <form onSubmit={this.submit}>
-        <label>
-        <p>Email: </p><input type="text" name="email" value={this.state.email} onChange={this.change}></input>
-        </label>
-        <label>
-        <p>Password: </p><input type="password" name="password" value={this.state.password} onChange={this.change}></input>
-        </label>
-        <br></br>
-        <input type="submit" value="Login"></input>
+        <div>
+        <TextField className="loginInput" id="outlined-basic" type="text" name="email" value={this.state.email} onChange={this.change} label="Email" variant="outlined" />
+        </div>
+        <div>
+        <TextField className="loginInput" id="outlined-basic" type="password" name="password" value={this.state.password} onChange={this.change} label="Password" variant="outlined" />
+        </div>
+        <Button type="submit" variant="contained">Login</Button>
       </form>
+      </div>
     );
   }
 }

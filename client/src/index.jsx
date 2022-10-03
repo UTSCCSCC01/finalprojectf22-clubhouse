@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import Home from './pages/Home.jsx';
-import Login from './pages/Login.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 
 ReactDOM.render(
   (
@@ -15,7 +15,7 @@ ReactDOM.render(
       {/* Add global elements like navbar outside the switch */}
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   ),

@@ -13,9 +13,14 @@ loginRoutes.route("/login").post(function (req, res) {
     .findOne(myquery, function (err, result) {
       if (err) throw err;
       var correct;
-      if (result.password == req.body.password) {
-        correct = true;
+      if (result == null) {
+        correct = false;
       } else {
+        if (result.password == req.body.password) {
+          correct = true;
+        } else {
+          correct = false;
+        }
       }
       res.json( { valid: correct } );
     });
