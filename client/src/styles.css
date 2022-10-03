@@ -26,8 +26,9 @@ border-radius: 10 rem;
 .img2 {
   position: relative;
   height:40vh; 
-  width: 100%;
-  border-radius: 60px;
+  width: 90%;
+  margin: 0 auto;
+  
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 10px;
@@ -39,7 +40,8 @@ border-radius: 10 rem;
   padding-left: 1rem;
   padding-right: 1rem;
   overflow-x:auto;
-  height: 100px;
+  height: 150px;
+  margin-top: 50px;
   overflow-y: scroll;
   white-space: normal;
   border-radius: 10px;
@@ -54,6 +56,12 @@ border-radius: 10 rem;
   display: inline;
   margin-left: 10%;
   float:right;
+  margin-right: 3%;
+  padding: 2rem;
+  background-color: #002A5C;
+  color: white;
+  
+
 }
 .evenCard{
   height: 300px;
@@ -71,12 +79,13 @@ border-radius: 10 rem;
   background-color: #FFE498;
 }
 .info {
-  height: fit-content;
+  height: 370px;
   background-color: #002A5C;
-  width: 30%;
+  width: 300px;
   padding: 2rem;
-  border-radius: 39pt;
+  margin-left: 3%;
   display:inline-table;
+  float: left;
   color: white;
 }
 .profileEditButton {
@@ -108,6 +117,8 @@ border-radius: 10 rem;
   resize: none;
   width: 100%;
   margin-right: 10%;
-  height: 100px;
+  
   overflow-y: scroll;
+  height: 150px;
+  margin-top: 20px;
 }

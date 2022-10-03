@@ -9,6 +9,7 @@ function ClubAdminEditProfile(props) {
   
   const [noMore,setnoMore] = useState(true);
   const [items, setItems ] = useState([]);
+  
   const [page, setPage] = useState(2);
   useEffect(() => {
   const getevents = async ()=>{
@@ -20,12 +21,11 @@ function ClubAdminEditProfile(props) {
     getevents();
   },[]);
 
- 
 
     const fetchData = async() => {
      const res = await fetch(url+'?page='+page);
       const data = await res.json();
-      console.log(data,page);
+      
       return data;
     };
 
@@ -39,20 +39,45 @@ function ClubAdminEditProfile(props) {
       
       setPage(page+1);
     }
+    
   return (
     <div class="mui-container-fluid" className="ClubAdminProfilePage">
       <h1 style={{ textAlign: "center" }}> Profile</h1>
+     <div className="img2">
+      <input type="file"
+        accept="image/*"
+        onChange={props.handleImageUpload}
+        ref={props.imageUploader}
+        style={{
+          display: "none"
+        }} />
+      <div 
+          onClick={() => props.imageUploader.current.click()}
+          >
+      <img  
+              className="img2"
+              alt={' for profile'}
+          ref={props.uploadedImage}
+          style={{
+            
+            width: "100%",
+            height: "100%",
+            position: "acsolute"}}
+            />
+      </div>
+
+      </div>
       <div className="adminchild" >
       <div className="info">
+        
         <form>
-          <div className="ClubProfileImgContainer">
-            <img
-              className="img2"
-              src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
-              alt="profile-picture"
-            />
-            <h2>{props.values.clubName}</h2>
+          
+          
+          
+            <h2 style={{ textAlign: "center" }}>{props.values.clubName}</h2>
+            
             <h3> Contact Info:</h3>
+            
            <>Email: </> 
             <input
             
@@ -65,12 +90,13 @@ function ClubAdminEditProfile(props) {
             <p>
             <>Phone Number:</>
               <input
+               style={{width: "90px", margin:"5px"}}
                 name="phoneNumber"
                 onChange={props.onChange}
                 value={props.values.phoneNumber}
                 placeholder="Phone Number"
               />
-              <button
+               <button
             className="profileEditButton"
             type="submit"
             onClick={props.editDone}
@@ -79,7 +105,7 @@ function ClubAdminEditProfile(props) {
           </button>
             </p>
             
-          </div>
+           
           
 
           

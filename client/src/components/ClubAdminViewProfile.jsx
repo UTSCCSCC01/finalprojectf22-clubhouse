@@ -43,17 +43,24 @@ function ClubAdminViewProfile(props) {
     
     <div class="mui-container-fluid" className="ClubAdminProfilePage">
       <h1 style={{ textAlign: "center" }}> Profile</h1>
-      <div className="adminchild" >
-      <div className="info">
-        <div className="ClubProfileImgContainer">
-        
-          <img
+      
+
+     <img
             className="img2"
-            src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
+            ref={props.uploadedImage}
             alt="profile-picture"
           />
+           
+      <div className="adminchild" >
+        
+      <div className="info">
+      <h2  style={{ textAlign: "center" }}>{props.values.clubName}</h2>
+
+      
+        
+        
           
-          <h2>{props.values.clubName}</h2>
+         
           <h3> Contact Info:</h3>
           <p> Email: {props.values.email}</p>
           <p> Phone Number: {props.values.phoneNumber}
@@ -66,7 +73,7 @@ function ClubAdminViewProfile(props) {
         </button>
           
           </p>
-        </div>
+        
         
         
         <div color="#FFE498" className="viewdesc">
