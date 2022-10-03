@@ -19,9 +19,7 @@ const CreateEvent = () => {
             <Typography variant="h4" color="primary" align="center" gutterBottom>
                 Create a New Event
             </Typography>
-
             <EventForm />
-
         </Container>
      );
 }

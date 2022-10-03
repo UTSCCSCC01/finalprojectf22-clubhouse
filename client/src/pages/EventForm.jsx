@@ -5,6 +5,7 @@ const useStyles = makeStyles( {
     field: {
         margin: 10,
         width: 500,
+        backgroundColor: "white",
     },
 
     btn: {
