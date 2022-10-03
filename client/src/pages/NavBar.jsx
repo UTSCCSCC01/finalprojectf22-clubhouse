@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { AppBar, Tabs, Tab, Typography, Toolbar, Button } from '@mui/material'
+import { AppBar, Tabs, Tab, Toolbar, Button } from '@mui/material'
 
 
 // class Events extends Component {
@@ -8,13 +8,13 @@ import { AppBar, Tabs, Tab, Typography, Toolbar, Button } from '@mui/material'
 //   }
 
   
-  const Events = () => {
+  const Navbar = () => {
     const [value, setValue] = useState();
     return (
         <React.Fragment>
             <AppBar sx={{ background: '#002A5C' }}>
                 <Toolbar>
-                   <Tabs textColor="inherit" value={value} onChange={(e, value) => setValue(value)} indicatorColor="secondary">
+                   <Tabs sx = {{ marginLeft: 'auto' }}textColor="inherit" value={value} onChange={(e, value) => setValue(value)} indicatorColor="primary">
                        <Tab label="Home"></Tab>
                        <Tab label="Clubs"></Tab>
                        <Tab label="Events"></Tab>
@@ -25,8 +25,7 @@ import { AppBar, Tabs, Tab, Typography, Toolbar, Button } from '@mui/material'
                 </Toolbar>
             </AppBar>
         </React.Fragment>
-      
     )
   }
 
-export default Events;
+export default Navbar;
