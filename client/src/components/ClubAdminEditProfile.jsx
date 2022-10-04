@@ -40,24 +40,68 @@ function ClubAdminEditProfile(props) {
       setPage(page+1);
     }
     
+  const [image,setImage] = useState('');
+  useEffect(() => {
+  const fetchImage = async()=>{
+    const res = await fetch("http://127.0.0.1:5001/club/profileimg");
+    const data = await res.json();
+    
+    setImage(data);
+    
+  }
+});
+  
+  
   return (
     <div class="mui-container-fluid" className="ClubAdminProfilePage">
       <h1 style={{ textAlign: "center" }}> Profile</h1>
      <div className="img2">
       <input type="file"
         accept="image/*"
-        onChange={props.handleImageUpload}
-        ref={props.imageUploader}
+        onChange={(input)=> {
+
+          let file = input.target.files[0];
+        
+          let reader = new FileReader();
+        
+          reader.readAsDataURL(file);
+          reader.onload = function() {
+            
+            var lins = reader.result.toString();
+            setImage(lins);
+            console.log(lins);
+            
+            fetch('http://127.0.0.1:5001/club/picupdate', {
+  method: 'PATCH', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({'image':lins}),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });         
+          };
+          reader.onerror = function() {
+            console.log(reader.error);
+          };
+        }}
+        
         style={{
-          display: "none"
+          
         }} />
       <div 
-          onClick={() => props.imageUploader.current.click()}
+          
           >
       <img  
               className="img2"
               alt={' for profile'}
-          ref={props.uploadedImage}
+              src = {image}
+              id = "myim"
           style={{
             
             width: "100%",

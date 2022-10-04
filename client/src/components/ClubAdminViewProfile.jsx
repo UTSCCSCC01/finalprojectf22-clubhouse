@@ -1,6 +1,6 @@
 import React from "react";
 import MultiActionAreaCard from "./EventCard.jsx";
-import { ContainerClassKey } from "@material-ui/core";
+
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 function ClubAdminViewProfile(props) {
@@ -24,7 +24,7 @@ function ClubAdminViewProfile(props) {
     const fetchData = async() => {
      const res = await fetch(url+'?page='+page);
       const data = await res.json();
-      console.log(data,page);
+      
       return data;
     };
 
@@ -38,6 +38,18 @@ function ClubAdminViewProfile(props) {
       
       setPage(page+1);
     }
+    const [image,setImage] = useState('');
+    useEffect(() => {
+      const fetchImage = async()=>{
+        const res = await fetch("http://127.0.0.1:5001/club/profileimg");
+        const data = await res.json();
+        
+        setImage(data);
+        
+        
+      }
+      fetchImage();
+    });
     
   return (
     
@@ -47,7 +59,7 @@ function ClubAdminViewProfile(props) {
 
      <img
             className="img2"
-            ref={props.uploadedImage}
+            src={image}
             alt="profile-picture"
           />
            

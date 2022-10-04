@@ -24,6 +24,33 @@ recordRoutes.route("/club").get(function (req, res) {
      res.json(result);
    });
 });
+recordRoutes.route("/club/profileimg").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  let myquery = { email: 'test@mail.utoronto.ca' };
+  db_connect
+    .collection("clubs")
+    .findOne(myquery,function (err, result) {
+      if (err) throw err;
+      res.json(result.image);
+    });
+ });
+ //update--------
+ recordRoutes.route("/club/picupdate").patch(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { email:'test@mail.utoronto.ca'};
+  let newvalues = {
+    $set: {
+      image: req.body.image,
+    },
+  };
+  db_connect
+    .collection("clubs")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+      response.json(res);
+    });
+ });
 
 recordRoutes.route("/club/events").get(function (req, res) {
   let db_connect = dbo.getDb("main");
