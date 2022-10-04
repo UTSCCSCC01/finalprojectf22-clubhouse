@@ -8,9 +8,12 @@ const InputTags = () => {
     const [tags, setTags] = useState([]);
     const tagRef = useRef();
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
+    const handleKeyDown = (e) => {
+        if (e.which !== 13) {
+            return;
+        }
 
+        e.preventDefault();
         if (tagRef.current.value === "" || tags.includes(tagRef.current.value)) {
             tagRef.current.value = "";
             return;
@@ -25,28 +28,30 @@ const InputTags = () => {
     }
 
     return (
-        <Box>
-            <form onSubmit={ handleOnSubmit }>
-                <TextField
-                    variant='outlined'
-                    placeholder='Enter tags here'
-                    fullWidth
-                    inputRef={ tagRef }
-                    InputProps={{
-                        startAdornment: (
-                            <Box sx={{ margin: "2px", display: "flex" }}>
-                                {tags.map((text, index) => {
-                                    return (
-                                        <Tag data={ text } key={ index } handleDelete={ handleDelete } />
-                                    )
-                                })}
-                            </Box>
-                        ),
-                    }}
-                >
-                </TextField>
-            </form>
-        </Box>
+        <form style={{width: "100%", margin: "0px"}}>
+            <TextField
+                variant='outlined'
+                placeholder='Enter tags here'
+                fullWidth
+                minRows={1}
+                multiline
+                marginTop="0px"
+                onKeyDown={handleKeyDown}
+                inputRef={tagRef}
+                InputProps={{
+                    startAdornment: (
+                        <Box marginTop="100px" sx={{ margin: "2px", display: "inline-flex", flexWrap: "wrap"}}>
+                            {tags.map((text, index) => {
+                                return (
+                                    <Tag data={text} key={index} handleDelete={handleDelete} />
+                                )
+                            })}
+                        </Box>
+                    ),
+                }}
+            >
+            </TextField>
+        </form>
     );
 }
 

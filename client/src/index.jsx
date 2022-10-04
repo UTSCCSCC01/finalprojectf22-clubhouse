@@ -9,6 +9,7 @@ import {
 
 import Home from './pages/Home.jsx';
 import CreateEvent from './pages/CreateEvent.jsx'
+import InputTags from './pages/InputTags.jsx'
 
 ReactDOM.render(
   (
@@ -20,6 +21,7 @@ ReactDOM.render(
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/create-event" element={<CreateEvent />} />
+        <Route exact path="/tags" element={<InputTags />} />
       </Routes>
     </Router>
   ),

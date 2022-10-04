@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Container, makeStyles, TextField } from '@material-ui/core/';
+import { Button, Container, makeStyles, TextField, Box } from '@material-ui/core/';
 import EventTimePicker from './EventTimePicker.jsx'
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import InputTags from './InputTags.jsx'
 
 const useStyles = makeStyles({
     field: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: "space-between",
         padding: 0,
+        margin: '16px'
     },
 
     inputs: {
@@ -34,7 +36,8 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         alignContent: 'center',
-        width: '550px',
+        width: '500px',
+        margin: '16px'
     }
 });
 
@@ -43,8 +46,8 @@ const EventForm = () => {
     const classes = useStyles();
 
     return (
-        <Container className={classes.form}>
-            <form className={classes.inputs} noValidate autoComplete='off'>
+        <Box className={classes.form}>
+            <Box className={classes.inputs} autoComplete='on' gridGap={3}>
                 <TextField
                     className={classes.field}
                     label="Event Name"
@@ -60,17 +63,20 @@ const EventForm = () => {
                     variant="outlined"
                     size="small"
                     required />
+
+                <InputTags />
+
                 <TextField
                     className={classes.field}
                     label="Description"
                     variant="outlined"
                     multiline
                     size="small"
-                    rows={6}
+                    minRows={6}
                     required />
-            </form>
+            </Box>
 
-            <Container className={classes.buttons}>
+            <Box className={classes.buttons}>
                 <Button
                     className={classes.btn}
                     onClick={() => console.log("Cancel event creation")}
@@ -86,8 +92,8 @@ const EventForm = () => {
                     color="primary"
                     endIcon={<EventAvailableIcon />}
                 >Save</Button>
-            </Container>
-        </Container>
+            </Box>
+        </Box>
     );
 }
 

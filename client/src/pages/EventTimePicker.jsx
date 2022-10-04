@@ -40,7 +40,7 @@ const EventTimePicker = () => {
             value={start}
             onChange={handleStartChange}
             required
-            renderInput={(params) => <TextField {...params} sx={{ m: 1.5 }} />}
+            renderInput={(params) => <TextField {...params} sx={{ m: 1 }} />}
           />
           <TimePicker
             className={classes.picker}
@@ -48,7 +48,7 @@ const EventTimePicker = () => {
             value={start}
             onChange={handleStartChange}
             required
-            renderInput={(params) => <TextField {...params} sx={{ m: 1.5 }} />}
+            renderInput={(params) => <TextField {...params} sx={{ m: 1 }} />}
           />
         </Box>
       </Stack>
@@ -60,14 +60,14 @@ const EventTimePicker = () => {
             inputFormat="MM/DD/YYYY"
             value={end}
             onChange={handleEndChange}
-            renderInput={(params) => <TextField {...params} sx={{ m: 1.5 }} />}
+            renderInput={(params) => <TextField {...params} sx={{ m: 1 }} />}
           />
           <TimePicker
             className={classes.picker}
             label="End Time"
             value={end}
             onChange={handleEndChange}
-            renderInput={(params) => <TextField {...params} sx={{ m: 1.5 }} />}
+            renderInput={(params) => <TextField {...params} sx={{ m: 1 }} />}
           />
         </Box>
       </Stack>
