@@ -57,26 +57,6 @@ const InputTags = () => {
             </TextField>
         </Box>
 
-        // <form style={{width: "100%", margin: "0px"}}>
-        //     <TextField
-        //         variant='outlined'
-        //         placeholder='Enter tags here'
-        //         fullWidth
-        //         minRows={1}
-        //         multiline
-        //         marginTop="0px"
-        //         onKeyDown={handleKeyDown}
-        //         inputRef={tagRef}
-        //         InputProps={{
-        //             startAdornment: (
-        //                 <Box sx={{ margin: "2px", display: "inline-flex", flexWrap: "wrap"}}>
-
-        //                 </Box>
-        //             ),
-        //         }}
-        //     >
-        //     </TextField>
-        // </form>
     );
 }
 
