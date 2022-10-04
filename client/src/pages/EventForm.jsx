@@ -7,7 +7,7 @@ import InputTags from './InputTags.jsx'
 
 const useStyles = makeStyles({
     field: {
-        margin: 10,
+        margin: "10px",
         flex: 'auto',
         backgroundColor: "white",
         width: '100%',
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: "space-between",
         padding: 0,
-        margin: '16px'
+        margin: '24px 0px 24px 0px'
     },
 
     inputs: {
@@ -47,12 +47,11 @@ const EventForm = () => {
 
     return (
         <Box className={classes.form}>
-            <Box className={classes.inputs} autoComplete='on' gridGap={3}>
+            <Box className={classes.inputs} autoComplete='on' gridGap={10}>
                 <TextField
                     className={classes.field}
                     label="Event Name"
                     variant="outlined"
-                    size="small"
                     required />
 
                 <EventTimePicker />
@@ -61,7 +60,6 @@ const EventForm = () => {
                     className={classes.field}
                     label="Location"
                     variant="outlined"
-                    size="small"
                     required />
 
                 <InputTags />
@@ -71,7 +69,6 @@ const EventForm = () => {
                     label="Description"
                     variant="outlined"
                     multiline
-                    size="small"
                     minRows={6}
                     required />
             </Box>

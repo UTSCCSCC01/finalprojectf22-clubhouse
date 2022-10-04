@@ -28,30 +28,55 @@ const InputTags = () => {
     }
 
     return (
-        <form style={{width: "100%", margin: "0px"}}>
-            <TextField
-                variant='outlined'
+
+        <Box display="flex" flexDirection="column" sx={{
+            border: 1,
+            borderColor: "#D3D3D3",
+            borderRadius: "4px",
+            marginLeft: "0",
+            marginRight: "auto",
+            width: "100%",
+            padding: "8px",
+            boxSizing: "border-box"
+        }}>
+
+            <Box display="inline-flex" flexWrap="wrap">
+                {tags.map((text, index) => {
+                    return (
+                        <Tag data={text} key={index} handleDelete={handleDelete} />
+                    )
+                })}
+            </Box>
+
+            <TextField sx={{margin: "8px"}}
+                variant='standard'
                 placeholder='Enter tags here'
-                fullWidth
-                minRows={1}
-                multiline
-                marginTop="0px"
                 onKeyDown={handleKeyDown}
-                inputRef={tagRef}
-                InputProps={{
-                    startAdornment: (
-                        <Box marginTop="100px" sx={{ margin: "2px", display: "inline-flex", flexWrap: "wrap"}}>
-                            {tags.map((text, index) => {
-                                return (
-                                    <Tag data={text} key={index} handleDelete={handleDelete} />
-                                )
-                            })}
-                        </Box>
-                    ),
-                }}
-            >
+                inputRef={tagRef}>
+
             </TextField>
-        </form>
+        </Box>
+
+        // <form style={{width: "100%", margin: "0px"}}>
+        //     <TextField
+        //         variant='outlined'
+        //         placeholder='Enter tags here'
+        //         fullWidth
+        //         minRows={1}
+        //         multiline
+        //         marginTop="0px"
+        //         onKeyDown={handleKeyDown}
+        //         inputRef={tagRef}
+        //         InputProps={{
+        //             startAdornment: (
+        //                 <Box sx={{ margin: "2px", display: "inline-flex", flexWrap: "wrap"}}>
+
+        //                 </Box>
+        //             ),
+        //         }}
+        //     >
+        //     </TextField>
+        // </form>
     );
 }
 
