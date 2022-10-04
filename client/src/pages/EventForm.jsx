@@ -1,22 +1,27 @@
 import React from 'react';
-import { Button , Container , makeStyles, TextField } from '@material-ui/core/';
+import { Button, Container, makeStyles, TextField } from '@material-ui/core/';
+import EventTimePicker from './EventTimePicker.jsx'
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-const useStyles = makeStyles( {
+const useStyles = makeStyles({
     field: {
         margin: 10,
-        width: 500,
+        flex: 'auto',
         backgroundColor: "white",
+        width: '100%',
     },
 
     btn: {
-        width: 110,
-        height: 45,
+        width: 130,
+        height: 48,
+        fontSize: 17,
     },
 
     buttons: {
         display: 'flex',
-        justifyContent: "space-around",
-        width: 500,
+        justifyContent: "space-between",
+        padding: 0,
     },
 
     inputs: {
@@ -29,6 +34,7 @@ const useStyles = makeStyles( {
         display: 'flex',
         flexDirection: 'column',
         alignContent: 'center',
+        width: '550px',
     }
 });
 
@@ -39,30 +45,50 @@ const EventForm = () => {
     return (
         <Container className={classes.form}>
             <form className={classes.inputs} noValidate autoComplete='off'>
-                <TextField className={classes.field} label="Event Name" size="small" variant="outlined" required/>
-                <TextField className={classes.field} label="Location" size="small" variant="outlined" required/>
-                <TextField className={classes.field} label="Description" size="small" variant="outlined" required/>
+                <TextField
+                    className={classes.field}
+                    label="Event Name"
+                    variant="outlined"
+                    size="small"
+                    required />
+
+                <EventTimePicker />
+
+                <TextField
+                    className={classes.field}
+                    label="Location"
+                    variant="outlined"
+                    size="small"
+                    required />
+                <TextField
+                    className={classes.field}
+                    label="Description"
+                    variant="outlined"
+                    multiline
+                    size="small"
+                    rows={6}
+                    required />
             </form>
 
             <Container className={classes.buttons}>
                 <Button
                     className={classes.btn}
                     onClick={() => console.log("Cancel event creation")}
-                    variant="contained" 
+                    variant="contained"
                     color="secondary"
-                    >Cancel</Button>
-                <Button 
+                    endIcon={<HighlightOffIcon />}
+                >Cancel</Button>
+                <Button
                     className={classes.btn}
                     onClick={() => console.log("Event saved")}
-                    type="submit" 
-                    variant="contained" 
+                    type="submit"
+                    variant="contained"
                     color="primary"
-                    >Save</Button>
+                    endIcon={<EventAvailableIcon />}
+                >Save</Button>
             </Container>
-            
-
         </Container>
     );
 }
- 
+
 export default EventForm;

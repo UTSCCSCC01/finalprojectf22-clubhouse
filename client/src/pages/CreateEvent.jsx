@@ -1,27 +1,33 @@
 import React from 'react';
-import { Typography , Container , makeStyles } from '@material-ui/core/';
+import { Typography, Container, makeStyles } from '@material-ui/core/';
 import EventForm from './EventForm.jsx'
 
 const useStyles = makeStyles({
     container: {
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
-    }
+        alignItems: "center",
+        margin: '48px'
+    },
+
+    title: {
+        fontWeight: 500,
+        margin: 8,
+    },
 });
 
 const CreateEvent = () => {
 
     const classes = useStyles();
 
-    return ( 
+    return (
         <Container className={classes.container}>
-            <Typography variant="h4" color="primary" align="center" gutterBottom>
+            <Typography variant="h4" className={classes.title} color="primary" align="center">
                 Create a New Event
             </Typography>
             <EventForm />
         </Container>
-     );
+    );
 }
- 
+
 export default CreateEvent;
