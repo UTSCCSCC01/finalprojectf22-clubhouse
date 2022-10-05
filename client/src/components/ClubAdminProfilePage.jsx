@@ -37,8 +37,9 @@ function ClubAdminProfilePage(props) {
   
 
 
-
+ 
   return editMode ? (
+    
     <ClubAdminEditProfile
       editDone={doneEditing}
   

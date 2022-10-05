@@ -1,4 +1,4 @@
-.ClubAdminProfilePage {
+.ClubAdminProfilePage{
   font-family: sans-serif;
   max-height: 100px;
   display: grid;
@@ -34,17 +34,18 @@ border-radius: 10 rem;
   padding-bottom: 10px;
 }
 .viewdesc{
-  background-color: #FFE498;
+  background-color: #7ba4d9;
   width:90%;
-  margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;
   overflow-x:auto;
-  height: 150px;
+  height: 250px;
   margin-top: 50px;
   overflow-y: scroll;
-  white-space: normal;
+  white-space: pre-line;
   border-radius: 10px;
+  color:azure;
+  min-width: 300px;
   
   
 }
@@ -52,16 +53,22 @@ border-radius: 10 rem;
   border-radius: 2rem;
   display: none;
 }
+
+.contactinfo{
+  padding: "5px";
+  width: "250px";
+  display: inline-block;
+  word-wrap: "break-word";
+}
 .cardcont{
-  display: inline;
-  margin-left: 10%;
-  float:right;
+  display: inline-block;
+  margin-left: 5%;
+  margin-top: 5%;
   margin-right: 3%;
   padding: 2rem;
   background-color: #002A5C;
   color: white;
   
-
 }
 .evenCard{
   height: 300px;
@@ -71,22 +78,25 @@ border-radius: 10 rem;
   
  
 }
+
 .card{
-  width: 300px;
+  width: 250px;
 }
 .p {
   /* display: inline-block; */
   background-color: #FFE498;
 }
 .info {
-  height: 370px;
+  height: 365px;
   background-color: #002A5C;
-  width: 300px;
+  width: 60%;
   padding: 2rem;
   margin-left: 3%;
+  margin-top: 5%;
   display:inline-table;
   float: left;
   color: white;
+  position: relative;
 }
 .profileEditButton {
   width: 80px;
@@ -95,18 +105,34 @@ border-radius: 10 rem;
   outline: none;
   border: 1px solid #7ba4d9;
   box-shadow: 2px 2px 2px #3f3f3f;
-  
   height: 100%;
-  
   float: right;
   color: white;
 }
 
-.profileEditButton:hover {
+.profileDoneButton{
+  width: 80px;
+  padding: 5px;
+  background-color: #7ba4d9;
+  outline: none;
+  border: 1px solid #7ba4d9;
+  box-shadow: 2px 2px 2px #3f3f3f;
+  height: auto;
+  float: right;
+  color: white;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  margin: 10px;
+}
+
+
+
+.profileEditButton:hover, .profileDoneButton:hover {
   box-shadow: 2px 2px 3px;
 }
 
-.profileEditButton:active {
+.profileEditButton:active , .profileDoneButton:hover{
   box-shadow: 1px 1px 3px;
 }
 .profileContactInfo {
@@ -115,10 +141,15 @@ border-radius: 10 rem;
 
 .clubEditDecription {
   resize: none;
-  width: 100%;
-  margin-right: 10%;
-  
+  width: 60%;
+  margin-top: 10px;
   overflow-y: scroll;
-  height: 150px;
-  margin-top: 20px;
+  height: 250px;
+  float: right;
+  min-width: 300px;
+  position: relative;
+  margin-right: 5%;
+  border-radius: 10px;
+  display: "inline-block";
+  white-space: normal;
 }

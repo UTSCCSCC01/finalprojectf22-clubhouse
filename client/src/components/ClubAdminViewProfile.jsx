@@ -3,6 +3,10 @@ import MultiActionAreaCard from "./EventCard.jsx";
 
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
+import Fab from '@mui/material/Fab'
+import EditIcon from '@mui/icons-material/Edit';
+
+
 function ClubAdminViewProfile(props) {
   const url = 'http://127.0.0.1:5001/club/events';
   
@@ -66,34 +70,29 @@ function ClubAdminViewProfile(props) {
       <div className="adminchild" >
         
       <div className="info">
-      <h2  style={{ textAlign: "center" }}>{props.values.clubName}</h2>
-
-      
-        
-        
-          
-         
-          <h3> Contact Info:</h3>
-          <p> Email: {props.values.email}</p>
-          <p> Phone Number: {props.values.phoneNumber}
-          <button
+      <Fab  aria-label="edit"
           className="profileEditButton"
           type="submit"
-          onClick={props.onClick}
-        >
-          Edit<span role="img">✒️</span>
-        </button>
+          color="primary"
           
-          </p>
-        
-        
-        
-        <div color="#FFE498" className="viewdesc">
-        <p>{props.values.description}</p>
-        </div>
-        
+          onClick={props.onClick}>
+        <EditIcon />
+      </Fab>
+      <h2  style={{ textAlign: "center" }}>{props.values.clubName}</h2>
 
+          
+          <div color="#FFE498" className="viewdesc" style = {{float: "right", width:"60%", margin:"5px", display: "inline-block", padding:"5px"}}>
+        
+        <p style={{paddingLeft:"5px"}}>{props.values.description}</p>
+        </div>
+
+        <div className="contactinfo">
+        <h3> Contact Info:</h3>
+          <p > Email: {props.values.email}</p>
+          <p> Phone Number: {props.values.phoneNumber} </p>
+          </div>
       </div>
+
       <div className="cardcont">
       <h2 style={{ textAlign: 'center' }}>My Events</h2>
       <div className="evenCard">

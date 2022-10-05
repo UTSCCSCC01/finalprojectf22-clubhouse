@@ -1,6 +1,7 @@
 import React from "react";
-
+import TextField from '@mui/material/TextField';
 import MultiActionAreaCard from "./EventCard.jsx";
+
 
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -21,6 +22,24 @@ function ClubAdminEditProfile(props) {
     getevents();
   },[]);
 
+  const style = {
+    input: {
+      color: "white",
+    },
+    "& .MuiInputLabel-root": {color: 'white'},
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightBlue',
+      },
+      "& fieldset": { borderColor: "white" }
+    },
+    '& label.Mui-focused': {
+      color: 'lightBlue',
+    }
+  }
 
     const fetchData = async() => {
      const res = await fetch(url+'?page='+page);
@@ -118,48 +137,52 @@ function ClubAdminEditProfile(props) {
           
           
           
-            <h2 style={{ textAlign: "center" }}>{props.values.clubName}</h2>
+            <h2 style={{ textAlign: "center"}}>{props.values.clubName}</h2>
             
-            <h3> Contact Info:</h3>
             
-           <>Email: </> 
-            <input
-            
-              name="email"
-              onChange={props.onChange}
-              value={props.values.email}
-              placeholder="Email"
-            />
-            <h5></h5>
-            <p>
-            <>Phone Number:</>
-              <input
-               style={{width: "90px", margin:"5px"}}
-                name="phoneNumber"
-                onChange={props.onChange}
-                value={props.values.phoneNumber}
-                placeholder="Phone Number"
-              />
-               <button
-            className="profileEditButton"
-            type="submit"
-            onClick={props.editDone}
-          >
-            Done<span role="img">✅</span>
-          </button>
-            </p>
-            
-           
-          
-
-          
-          <textarea
+            <textarea
             name="description"
             onChange={props.onChange}
             className="clubEditDecription"
             value={props.values.description}
             placeholder="Description of Club..."
           ></textarea>
+            <div className="contactinfo">
+             <h3 > Contact Info:</h3>
+             <p>
+           <TextField id="emailEdit" label="Email" variant="outlined"
+              name="email"
+              sx={style}
+              style = {{display: "inline-block", margin:"5px"}}
+              // inputProps={{ style: { fontFamily: 'nunito', color: 'white'}}}
+              onChange={props.onChange}
+              value={props.values.email}
+            />
+            </p>
+           
+            <p><TextField id="phoneEdit" label="Phone Number" variant="outlined"
+              //  style={{width: "90px", margin:"5px"}}
+               sx={style}
+               style={{display: "inline-block", margin:"5px"}}
+                name="phoneNumber"
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*'}}
+                onChange={props.onChange}
+   
+                value={props.values.phoneNumber}
+                placeholder="Phone Number"
+              />
+              </p>
+             </div>
+               <button
+            className="profileDoneButton"
+            type="submit"
+            onClick={props.editDone}
+          >
+            Done<span role="img">✅</span>
+          </button>
+            
+            
+
         </form>
         
       </div>
