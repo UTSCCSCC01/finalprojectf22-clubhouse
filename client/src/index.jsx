@@ -9,7 +9,6 @@ import {
 import Home from './pages/Home.jsx';
 import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
-// import Navbar from './components/index.jsx'
 
 ReactDOM.render(
   (

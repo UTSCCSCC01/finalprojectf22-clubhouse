@@ -1,24 +1,9 @@
 import React, { Component, useState } from 'react';
-import { AppBar, Tabs, Tab, Toolbar, Button, Box } from '@mui/material'
+import { AppBar, Tabs, Tab, Toolbar, Button, Box} from '@mui/material'
 
 
-// class Events extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
   const Navbar = () => {
     const [value, setValue] = useState();
@@ -36,11 +21,7 @@ function Copyright() {
                       <Button sx={{ marginLeft: '10px' }} variant="contained">Sign up</Button>
                 </Toolbar>
             </AppBar>
-            {/* <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-                <Typography variant="h6" align="center" gutterBottom>UTSC ClubHouse</Typography>
-          <Typography variant="subtitle1" align="center" color="text.secondary" component="p">Arai, Amy, Faraz, Noah, Tharuth, Priyank, Dhruv</Typography>
-          <Copyright />
-          </Box> */}
+
         </React.Fragment>
         
         

@@ -1,62 +1,70 @@
-import React, { Component } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
+import React from "react";
+import EventCard from "./EventCard.jsx";
+import { useEffect,useState } from 'react';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-const theme = createTheme();
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+function Events(props) {
+    const [filter, setFilter] = React.useState('');
 
-export default function Events() { 
+    const handleChange = (event) => {
+      setFilter(event.target.value);
+    };
+  const url = 'http://127.0.0.1:5001/events';
+  const [items, setItems ] = useState([]);
+  const tags = [];
+  
+  useEffect(() => {
+    const getevents = async ()=>{
+      const res = await fetch(url+"?page=1");
+        const data = await res.json();
+        setItems(data);
+    };
+    getevents();
+  },[]);
+    
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar position="relative"> <Toolbar></Toolbar> </AppBar>
-      <main>
-        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6, }}>
-          <Container maxWidth="lg">
+    <div>
+      <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
+          <Container maxWidth="lg" >
             <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Some text about upcoming events. 
-            </Typography>
-          </Container>
-        </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
+            <FormControl sx ={{ minWidth: 120}}>
+                <InputLabel id="demo-simple-select-label" >Sort by</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={filter}
+                    label="Sort by"
+                    onChange={handleChange}
+                >
+                    <MenuItem value={10}>Date added</MenuItem>
+                    <MenuItem value={20}>Areas of interest</MenuItem>
+                    <MenuItem value={30}>Signed up</MenuItem>
+                </Select>
+                </FormControl>
+            </Container>
+            
+      </Box>
+      
+      <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={5}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                  <CardMedia
-                    component="img" 
-                    // sx={{// 16:9
-                    //    pt: '56.25%',}}
-                    height="140"
-                    image="https://source.unsplash.com/random" alt="random"/>
-                    
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">Event 1 </Typography>
-                    <Typography>  This is Event 1 description. </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small">More info</Button>
-                    <Button size="small">Sign up</Button>
-                  </CardActions>
-                </Card>
+            {items && items.map((item) => (
+              <Grid item key={item} xs={12} sm={6} md={4}>
+                <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin}/>
               </Grid>
             ))}
           </Grid>
         </Container>
-      </main>
-    </ThemeProvider>
+   </div>   
   );
-}
+}  
+
+
+export default Events;
