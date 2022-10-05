@@ -53,6 +53,7 @@ function ClubAdminProfilePage(props) {
 
 
   return editMode ? (
+    
     <ClubAdminEditProfile
       editDone={doneEditing}
       onChange={handleChange}
@@ -63,7 +64,9 @@ function ClubAdminProfilePage(props) {
 
     />
   ) : (
+    <div style={{display: "flex", justifyContent: "space-between"}}>
     <ClubAdminViewProfile onClick={editHandleClick} values={profileInfo} uploadedImage={uploadedImage}/>
+    </div>
   );
 }
 
