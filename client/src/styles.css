@@ -9,6 +9,7 @@
 .adminchild{
 display: inline-block;
 padding: 2rem;
+text-align: center;
 
 border-radius: 10 rem;
 }
@@ -64,8 +65,9 @@ border-radius: 10 rem;
   display: inline-block;
   margin-left: 5%;
   margin-top: 5%;
-  margin-right: 3%;
+  margin-right: 5%;
   padding: 2rem;
+ 
   background-color: #002A5C;
   color: white;
   
@@ -89,10 +91,11 @@ border-radius: 10 rem;
 .info {
   height: 365px;
   background-color: #002A5C;
-  width: 60%;
+  width: 55%;
   padding: 2rem;
   margin-left: 3%;
   margin-top: 5%;
+  text-align: left;
   display:inline-table;
   float: left;
   color: white;
