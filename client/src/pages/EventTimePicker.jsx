@@ -1,5 +1,4 @@
 import * as React from 'react';
-import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -14,18 +13,7 @@ const useStyles = makeStyles({
   }
 })
 
-const EventTimePicker = () => {
-  const [start, setStart] = React.useState(dayjs().add(1, 'h').minute(0));
-  const [end, setEnd] = React.useState(dayjs().add(2, 'h').minute(0));
-
-  const handleStartChange = (newValue) => {
-    setStart(newValue);
-    setEnd(newValue.add(1, 'h'));
-  };
-
-  const handleEndChange = (newValue) => {
-    setEnd(newValue);
-  };
+const EventTimePicker = ( { start, end, handleStartChange, handleEndChange}) => {
 
   const classes = useStyles();
 

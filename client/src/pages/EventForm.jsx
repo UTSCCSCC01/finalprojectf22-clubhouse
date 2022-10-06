@@ -1,6 +1,7 @@
-import React from 'react';
-import { Button, Container, makeStyles, TextField, Box } from '@material-ui/core/';
+import React, { useState } from 'react';
+import { Button, makeStyles, TextField, Box } from '@material-ui/core/';
 import EventTimePicker from './EventTimePicker.jsx'
+import dayjs from 'dayjs';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import InputTags from './InputTags.jsx'
@@ -45,6 +46,42 @@ const EventForm = () => {
 
     const classes = useStyles();
 
+    const [eventName, setName] = useState("");
+    const [eventLoc, setLoc] = useState("");
+    const [eventDesc, setDesc] = useState("");
+    const [eventStartTime, setStartTime] = useState(dayjs().add(1, 'h').minute(0));
+    const [eventEndTime, setEndTime] = useState(dayjs().add(2, 'h').minute(0));
+    const [eventTags, setEventTags] = useState([]);
+
+    const handleStartChange = (newValue) => {
+        if (newValue.isAfter(eventEndTime)) {
+            setEndTime(newValue.add(1, 'h'));
+        }
+        setStartTime(newValue);
+    };
+
+    const handleEndChange = (newValue) => {
+        if (newValue.isBefore(eventStartTime)) {
+            setStartTime(newValue.add(-1, 'h'));
+        }
+        setEndTime(newValue);
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const clubName = "ClubHouse"
+        const newEvent = { clubName, eventName, eventLoc, eventDesc, eventStartTime, eventEndTime, eventTags };
+
+        fetch('http://localhost:5001/events/create', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newEvent)
+        }).then(() => {
+            console.log(newEvent);
+        })
+    }
+
     return (
         <Box className={classes.form}>
             <Box className={classes.inputs} autoComplete='on' gridGap={10}>
@@ -52,17 +89,23 @@ const EventForm = () => {
                     className={classes.field}
                     label="Event Name"
                     variant="outlined"
-                    required />
+                    required
+                    value={eventName}
+                    onChange={(e) => setName(e.target.value)}
+                />
 
-                <EventTimePicker />
+                <EventTimePicker start={eventStartTime} end={eventEndTime} handleStartChange={handleStartChange} handleEndChange={handleEndChange}/>
 
                 <TextField
                     className={classes.field}
                     label="Location"
                     variant="outlined"
-                    required />
+                    required
+                    value={eventLoc}
+                    onChange={(e) => setLoc(e.target.value)}
+                />
 
-                <InputTags />
+                <InputTags tags={eventTags} setTags={setEventTags}/>
 
                 <TextField
                     className={classes.field}
@@ -70,7 +113,10 @@ const EventForm = () => {
                     variant="outlined"
                     multiline
                     minRows={6}
-                    required />
+                    required
+                    value={eventDesc}
+                    onChange={(e) => setDesc(e.target.value)}
+                />
             </Box>
 
             <Box className={classes.buttons}>
@@ -83,7 +129,7 @@ const EventForm = () => {
                 >Cancel</Button>
                 <Button
                     className={classes.btn}
-                    onClick={() => console.log("Event saved")}
+                    onClick={onSubmit}
                     type="submit"
                     variant="contained"
                     color="primary"

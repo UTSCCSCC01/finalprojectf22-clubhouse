@@ -1,11 +1,10 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Box, TextField } from '@mui/material';
 import Tag from "./Tag.jsx"
 
-const InputTags = () => {
+const InputTags = ( { tags, setTags }) => {
 
-    const [tags, setTags] = useState([]);
     const tagRef = useRef();
 
     const handleKeyDown = (e) => {
