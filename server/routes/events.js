@@ -23,7 +23,7 @@ eventRoutes.route("/events").get(function (req, res) {
      res.json(result);
    });
 });
- 
+
 // This section will help you get a single record by id
 eventRoutes.route("/events/:id").get(function (req, res) {
  let db_connect = dbo.getDb();

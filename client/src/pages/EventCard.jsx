@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import dateFormat from 'dateformat';
+import EventIcon from '@mui/icons-material/Event';
 
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useEffect,useState } from 'react';
@@ -17,6 +18,7 @@ export default function EventCard(props) {
 //   const [eTags, setEtags] = useState('');
 
 
+
   return (
 
 
@@ -27,11 +29,12 @@ export default function EventCard(props) {
             <CardMedia
                 component="img"
                 height="250"
-                image="https://www.logolynx.com/images/logolynx/3d/3d78fdda0795681f7ef19d5e1acc0858.png" alt="UTSC"/>
+                image={props.eImage} alt="UTSC"/>
                     
             <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">{props.eName} by {props.cName} </Typography>
-                <Typography>  Date: {dateFormat(props.eDate, "mmmm dS, yyyy")} </Typography>
+                
+                <Typography> <EventIcon fontSize="small" ></EventIcon>  {dateFormat(props.eDate, "mmmm dS, yyyy")} </Typography>
                 {/* <Typography>  {props.eDesc} </Typography>
                 <Typography>  {props.eTags} </Typography> */}
             </CardContent>
