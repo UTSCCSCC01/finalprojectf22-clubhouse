@@ -30,11 +30,7 @@ export default function MultiActionAreaCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" href={props.eJoin}>
-          Register for event.
-        </Button> 
-      </CardActions>
+    
     </Card>
   );
 }
