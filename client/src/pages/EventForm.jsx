@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
-import { TextField, Box, Button } from '@mui/material';
+import { TextField, Box, Button, IconButton, Stack } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
@@ -8,6 +8,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Tag from "./Tag.jsx"
 
 const EventForm = () => {
@@ -74,6 +75,18 @@ const EventForm = () => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', width: '512px', margin: '16px' }}>
+
+            <Stack alignSelf="center" direction="row" alignItems="center" spacing={2}>
+                <Button variant="contained" component="label">
+                    Upload Image
+                    <input hidden accept="image/*" multiple type="file" />
+                </Button>
+                <IconButton color="primary" aria-label="upload picture" component="label">
+                    <input hidden accept="image/*" type="file" />
+                    <PhotoCamera />
+                </IconButton>
+            </Stack>
+
             <Box sx={{ display: 'flex', flexDirection: 'column', }}>
                 <TextField
                     sx={{ margin: "0", flex: 'auto', backgroundColor: "white", width: '100%', }}
