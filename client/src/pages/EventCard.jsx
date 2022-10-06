@@ -5,6 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import dateFormat from 'dateformat';
 import EventIcon from '@mui/icons-material/Event';
+import TimeIcon from '@mui/icons-material/AccessTime';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useEffect,useState } from 'react';
@@ -32,9 +34,11 @@ export default function EventCard(props) {
                 image={props.eImage} alt="UTSC"/>
                     
             <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">{props.eName} by {props.cName} </Typography>
+                <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>
                 
-                <Typography> <EventIcon fontSize="small" ></EventIcon>  {dateFormat(props.eDate, "mmmm dS, yyyy")} </Typography>
+                <Typography><EventIcon fontSize="small" ></EventIcon>  {dateFormat(props.eDate, "mmmm dS, yyyy")} </Typography>
+                <Typography><TimeIcon fontSize="small"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
+                <Typography> <LocationOnIcon fontSize="small"></LocationOnIcon> {props.eLoc} </Typography>
                 {/* <Typography>  {props.eDesc} </Typography>
                 <Typography>  {props.eTags} </Typography> */}
             </CardContent>

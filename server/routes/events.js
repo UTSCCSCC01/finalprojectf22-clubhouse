@@ -24,6 +24,42 @@ eventRoutes.route("/events").get(function (req, res) {
    });
 });
 
+eventRoutes.route("/eventssortByDate").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  db_connect
+    .collection("events")
+    .find({})
+    .sort('eventDate')
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ });
+
+ eventRoutes.route("/eventssortByClubs").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  db_connect
+    .collection("events")
+    .find({})
+    .sort('clubName')
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ });
+
+ eventRoutes.route("/eventssortByCategories").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  db_connect
+    .collection("events")
+    .find({})
+    .sort('clubName')
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ });
+
 // This section will help you get a single record by id
 eventRoutes.route("/events/:id").get(function (req, res) {
  let db_connect = dbo.getDb();

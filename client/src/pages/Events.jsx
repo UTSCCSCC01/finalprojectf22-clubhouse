@@ -9,28 +9,38 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import dateFormat from 'dateformat';
 
 function Events(props) {
     const [filter, setFilter] = React.useState('');
 
     const handleChange = (event) => {
-      setFilter(event.target.value);
-      
+      setFilter(event.target.value); 
     };
-  const url = 'http://127.0.0.1:5001/events';
+
   const [items, setItems ] = useState([]);
   const tags = [];
-  
+  const now = new Date();
+
   useEffect(() => {
     const getevents = async ()=>{
-      const res = await fetch(url); //+"?page=1"
-        const data = await res.json();
+      
+      const changeFilter = (filter) => {
+        let url = 'http://127.0.0.1:5001/events';
+        if (filter==="Date"){ url = 'http://127.0.0.1:5001/eventssortByDate';}
+        else if (filter==="Clubs"){ url = 'http://127.0.0.1:5001/eventssortByClubs';}
+        else if (filter==="Categories"){url = 'http://127.0.0.1:5001/eventssortByCategories';}
+        else{ url = 'http://127.0.0.1:5001/events';}
+        return url;
+      };
+      const res = await fetch(changeFilter(filter));
+      console.log(changeFilter(filter));
+      const data = await res.json();
         setItems(data);
     };
     getevents();
-  },[]);
-    
+  },[filter]);
+  
   return (
     <div>
       <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
@@ -46,8 +56,8 @@ function Events(props) {
                     label="Sort by"
                     onChange={handleChange}
                 >
-                    <MenuItem value={'Empty'}> </MenuItem>
-                    <MenuItem value={"Date added"}>Date added</MenuItem>
+                    <MenuItem value={"Empty"}> </MenuItem>
+                    <MenuItem value={"Date"}>Date</MenuItem>
                     <MenuItem value={"Clubs"}>Clubs</MenuItem>
                     <MenuItem value={"Categories"}>Categories</MenuItem>
                 </Select>
@@ -58,9 +68,9 @@ function Events(props) {
       
       <Container sx={{ py: 4 }} maxWidth="md">
           <Grid container spacing={5}>
-            {items && items.map((item) => (
+            {items && items.filter(item=>item.eventDate>=dateFormat(now, "isoDateTime")).map((item) => (
               <Grid item key={item} xs={12} sm={6} md={4}>
-                <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage}/>
+                <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc}/>
               </Grid>
             ))}
           </Grid>
