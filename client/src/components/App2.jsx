@@ -7,6 +7,7 @@ export default function App2() {
       <ClubAdminProfilePage 
       email = "email"
       description = "description"
+
       phoneNumber = "1234567890"
       clubName = "Club Name"
       />

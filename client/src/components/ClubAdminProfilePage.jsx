@@ -3,7 +3,7 @@ import ClubAdminViewProfile from "./ClubAdminViewProfile.jsx";
 import ClubAdminEditProfile from "./ClubAdminEditProfile.jsx";
 function ClubAdminProfilePage(props) {
   const currentvalues = {
-
+    
     clubName: props.clubName,
     description: props.description,
     phoneNumber: props.phoneNumber,
@@ -42,7 +42,7 @@ function ClubAdminProfilePage(props) {
     
     <ClubAdminEditProfile
       editDone={doneEditing}
-  
+      onChange={handleChange}
       values={profileInfo}
      
     />
