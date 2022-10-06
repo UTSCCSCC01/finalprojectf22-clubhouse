@@ -1,8 +1,8 @@
 import React from "react";
 import TextField from '@mui/material/TextField';
 import MultiActionAreaCard from "./EventCard.jsx";
-
-
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 function ClubAdminEditProfile(props) {
@@ -69,8 +69,18 @@ function ClubAdminEditProfile(props) {
     
   }
 });
+const handleClick = () => {
+  setOpen(true);
+};
+const handleClose = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+
+  setOpen(false);
+};
   
-  
+const [open, setOpen] = useState(false);
   return (
     <div class="mui-container-fluid" className="ClubAdminProfilePage">
       <h1 style={{ textAlign: "center" }}> Profile</h1>
@@ -101,7 +111,9 @@ function ClubAdminEditProfile(props) {
   .then((data) => {
     
   })
-  .catch((error) => {
+  .catch((error) => { 
+  handleClick();
+
     console.error('Error:', error);
   });         
           };
@@ -127,6 +139,12 @@ function ClubAdminEditProfile(props) {
             height: "100%",
             position: "acsolute"}}
             />
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Image Upload Unsuccesful:
+          Choose another Image!
+        </Alert>
+      </Snackbar>
       </div>
 
       </div>
