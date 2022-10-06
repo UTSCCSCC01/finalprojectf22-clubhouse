@@ -16,6 +16,19 @@ class Login extends Component {
     this.change = this.change.bind(this);
   }
 
+  componentDidMount() {
+    fetch("http://localhost:5001/loginstatus", {
+      method: 'get',
+      credentials: 'include'
+    }).then(response => response.text())
+    .then(data => {
+      console.log(data);
+      if (data != "false") {
+        location.href = "http://localhost:3000/testlogin";
+      }
+    });
+  }
+
   change(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -27,6 +40,7 @@ class Login extends Component {
     fetch('http://localhost:5001/login', 
     {
       method: 'post',
+      credentials: 'include',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
            "email": this.state.email,
@@ -36,7 +50,7 @@ class Login extends Component {
       .then(data => {
         var v = JSON.parse(data);
         if (v.valid) {
-          alert("Logged in!");
+          location.href = "http://localhost:3000/testlogin";
         } else {
           alert("Incorrect Password!")
         }

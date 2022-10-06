@@ -1,4 +1,5 @@
 const express = require("express");
+
 const loginRoutes = express.Router();
 
 const dbo = require("../db/conn");
@@ -17,6 +18,7 @@ loginRoutes.route("/login").post(function (req, res) {
         correct = false;
       } else {
         if (result.password == req.body.password) {
+          res.cookie("username", req.body.email, {maxAge: 3600000}); // httpOnly: true, signed: true}
           correct = true;
         } else {
           correct = false;
@@ -25,5 +27,19 @@ loginRoutes.route("/login").post(function (req, res) {
       res.json( { valid: correct } );
     });
 });
- 
+
+loginRoutes.route("/loginstatus").get(function (req, res) {
+  var currentuser = req.cookies.username;
+  if (currentuser != null) {
+    res.send(req.cookies.username);
+  } else {
+    res.send(false);
+  }
+});
+
+loginRoutes.route("/logout").get(function (req, res) {
+  res.clearCookie("username", {})
+  res.end();
+});
+
 module.exports = loginRoutes;

@@ -8,6 +8,7 @@ import {
 
 import Home from './pages/Home.jsx';
 import LoginPage from './pages/LoginPage.jsx';
+import TestLogin from './pages/TestLogin.jsx';
 
 ReactDOM.render(
   (
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/testlogin" element={<TestLogin />} />
       </Routes>
     </Router>
   ),
