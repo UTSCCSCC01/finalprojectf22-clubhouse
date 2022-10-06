@@ -21,13 +21,6 @@ const EventForm = () => {
     const [eventEndTime, setEndTime] = useState(dayjs().add(2, 'h').minute(0));
     const [eventTags, setEventTags] = useState([]);
 
-    const handleStartChange = (newValue) => {
-        if (newValue.isAfter(eventEndTime)) {
-            setEndTime(newValue.add(1, 'h'));
-        }
-        setStartTime(newValue);
-    };
-
     const tagRef = useRef();
 
     const handleTagKeyDown = (e) => {
@@ -48,6 +41,13 @@ const EventForm = () => {
     const deleteTag = (toDelete) => {
         setEventTags(eventTags.filter((t) => t !== toDelete));
     }
+
+    const handleStartChange = (newValue) => {
+        if (newValue.isAfter(eventEndTime)) {
+            setEndTime(newValue.add(1, 'h'));
+        }
+        setStartTime(newValue);
+    };
 
     const handleEndChange = (newValue) => {
         if (newValue.isBefore(eventStartTime)) {
@@ -76,7 +76,7 @@ const EventForm = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', width: '512px', margin: '16px' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', }}>
                 <TextField
-                    sx={{margin: "0", flex: 'auto', backgroundColor: "white", width: '100%', }}
+                    sx={{ margin: "0", flex: 'auto', backgroundColor: "white", width: '100%', }}
                     label="Event Name"
                     variant="outlined"
                     required
@@ -91,14 +91,14 @@ const EventForm = () => {
                             value={eventStartTime}
                             onChange={handleStartChange}
                             required
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 2, marginRight: 1 }} />}
+                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginRight: 1 }} />}
                         />
                         <TimePicker
                             label="Start Time"
                             value={eventStartTime}
                             onChange={handleStartChange}
                             required
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 2, marginLeft: 1 }} />}
+                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginLeft: 1 }} />}
                         />
                     </Box>
                     <Box whiteSpace='nowrap'>
@@ -107,20 +107,19 @@ const EventForm = () => {
                             inputFormat="MM/DD/YYYY"
                             value={eventEndTime}
                             onChange={handleEndChange}
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 2, marginRight: 1 }} />}
+                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginRight: 1 }} />}
                         />
                         <TimePicker
                             label="End Time"
                             value={eventEndTime}
                             onChange={handleEndChange}
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 2, marginLeft: 1 }} />}
+                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginLeft: 1 }} />}
                         />
                     </Box>
-
                 </LocalizationProvider>
 
                 <TextField
-                    sx={{ margin: "16px 0 16px 0", flex: 'auto', backgroundColor: "white", width: '100%', }}
+                    sx={{ margin: "24px 0 24px 0", flex: 'auto', backgroundColor: "white", width: '100%', }}
                     label="Location"
                     variant="outlined"
                     required
@@ -156,7 +155,7 @@ const EventForm = () => {
                 </Box>
 
                 <TextField
-                    sx={{ margin: "16px 0 16px 0", flex: 'auto', backgroundColor: "white", width: '100%', }}
+                    sx={{ margin: "24px 0 24px 0", flex: 'auto', backgroundColor: "white", width: '100%', }}
                     label="Description"
                     variant="outlined"
                     multiline
@@ -167,7 +166,7 @@ const EventForm = () => {
                 />
             </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: "space-between", padding: 0, margin: '16px 0px 16px 0px' }}>
+            <Box sx={{ display: 'flex', justifyContent: "space-between", padding: 0, margin: '24px 0px 24px 0px' }}>
                 <Button
                     sx={{ width: "130px", height: "48px", fontSize: "17px", }}
                     onClick={() => navigate("/")} // change path
