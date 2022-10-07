@@ -8,7 +8,9 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(require("./routes/record"));
+app.use(require("./routes/events"));
 app.use(require("./routes/login"));
+
 // get driver connection
 const dbo = require("./db/conn");
 
