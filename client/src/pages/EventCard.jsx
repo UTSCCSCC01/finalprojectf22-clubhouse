@@ -7,10 +7,12 @@ import dateFormat from 'dateformat';
 import EventIcon from '@mui/icons-material/Event';
 import TimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-
+// import Paper from '@mui/material/Paper';
+// import Stack from '@mui/material/Stack';
+// import { styled } from '@mui/material/styles';
 
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { useEffect,useState } from 'react';
+import { useState } from 'react';
 
 export default function EventCard(props) {
   
@@ -19,7 +21,13 @@ export default function EventCard(props) {
   const [eName, setEname] = useState('');
   const [eTags, setETags] = useState([]);
 
-
+  // const Item = styled(Paper)(({ theme }) => ({
+  //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  //   ...theme.typography.body2,
+  //   padding: theme.spacing(1),
+  //   textAlign: 'center',
+  //   color: theme.palette.text.secondary,
+  // }));
 
 
   return (
@@ -37,8 +45,15 @@ export default function EventCard(props) {
                 <Typography><EventIcon fontSize="small" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
                 <Typography><TimeIcon fontSize="small"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
                 <Typography> <LocationOnIcon fontSize="small"></LocationOnIcon> {props.eLoc} </Typography>
-                {/* <Typography>  {props.eDesc} </Typography>
-                <Typography>  {props.eTags} </Typography> */}
+                {/* <Typography>  {props.eDesc} </Typography> */}
+                {/* <Typography> 
+                               <Stack
+                                direction={{ xs: 'column', sm: 'row' }}
+                                spacing={{ xs: 1, sm: 2, md: 4 }}
+                              >
+                                <Item>{(props.eTag).map((tag) => (tag))}</Item>
+                              </Stack>
+                               </Typography> */}
                 
             </CardContent>
         </CardActionArea>

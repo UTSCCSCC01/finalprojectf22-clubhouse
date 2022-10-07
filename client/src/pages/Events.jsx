@@ -13,7 +13,6 @@ import dateFormat from 'dateformat';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import { DisabledByDefault } from "@mui/icons-material";
 
 function Events(props) {
   const ITEM_HEIGHT = 48;
@@ -27,18 +26,7 @@ function Events(props) {
     },
   };
 
-  const tags = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
+  let tags = [ "arts", "sports", "culture"];
 
   const [tagName, setTagName] = React.useState([]);
 
@@ -72,13 +60,13 @@ function Events(props) {
         return url;
       };
       const res = await fetch(changeFilter(filter));
-      // console.log(changeFilter(filter));
       const data = await res.json();
-        setItems(data);
+      setItems(data);
+        
+        
     };
     getevents();
   },[filter]);
-  console.log(tagName);
   return (
     <div>
       <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
@@ -121,8 +109,6 @@ function Events(props) {
                     ))}
                   </Select>
                 </FormControl>
-
-
             </Container>
             
       </Box>
