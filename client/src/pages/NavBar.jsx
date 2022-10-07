@@ -1,10 +1,10 @@
 import React, { Component, useState } from 'react';
 import { AppBar, Tabs, Tab, Toolbar, Button, Box} from '@mui/material'
 
-
-
-
-
+/**
+ * Create navbar and change color
+ * when selected
+ */
   const Navbar = () => {
     const [value, setValue] = useState();
     return (
@@ -21,10 +21,7 @@ import { AppBar, Tabs, Tab, Toolbar, Button, Box} from '@mui/material'
                       <Button sx={{ marginLeft: '10px' }} variant="contained">Sign up</Button>
                 </Toolbar>
             </AppBar>
-
         </React.Fragment>
-        
-        
     )
   }
 
