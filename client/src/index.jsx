@@ -9,6 +9,8 @@ import {
 
 import Home from './pages/Home.jsx';
 import CreateEvent from './pages/CreateEvent.jsx'
+import LoginPage from './pages/LoginPage.jsx';
+import TestLogin from './pages/TestLogin.jsx';
 
 ReactDOM.render(
   (
@@ -20,6 +22,8 @@ ReactDOM.render(
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/create-event" element={<CreateEvent />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/testlogin" element={<TestLogin />} />
       </Routes>
     </Router>
   ),
