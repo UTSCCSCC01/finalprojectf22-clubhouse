@@ -9,6 +9,7 @@ import {
 
 import Home from './pages/Home.jsx';
 import ClubAdminProfilePage from './pages/ClubAdminProfilePage.jsx'
+import BrowseClubs from './pages/BrowseClubs.jsx'
 
 ReactDOM.render(
   (
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route exact path={"/club-admin-profile.html"} element={<ClubAdminProfilePage email = "email" description = "description" phoneNumber = "1234567890"
       clubName = "Club Name"
       />} />
+        <Route path="/browse-clubs.html" element={<BrowseClubs />} />
       </Routes>
     </Router>
   ),
