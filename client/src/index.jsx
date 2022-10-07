@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 
 import Home from './pages/Home.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import TestLogin from './pages/TestLogin.jsx';
 
 ReactDOM.render(
   (
@@ -18,6 +20,8 @@ ReactDOM.render(
       {/* Add global elements like navbar outside the switch */}
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/testlogin" element={<TestLogin />} />
       </Routes>
     </Router>
   ),
