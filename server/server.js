@@ -7,7 +7,8 @@ const port = process.env.PORT || 5000;
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(require("./routes/record"));
+
+app.use(require("./routes/register"))
 app.use(require("./routes/events"));
 app.use(require("./routes/login"));
 
