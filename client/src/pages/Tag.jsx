@@ -11,9 +11,9 @@ const Tag = ({ data, handleDelete }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: "3px",
+            padding: "3px 4px 3px 12px",
         }}>
-            <Typography marginLeft="12px" marginRight="4px">{data}</Typography>
+            <Typography>{data}</Typography>
             <HighlightOffIcon color="primary"
                 sx={{padding: "4px", 
                 marginRight: "2px", 

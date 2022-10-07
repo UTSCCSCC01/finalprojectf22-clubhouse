@@ -1,47 +1,45 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { TextField, Box, Button, IconButton, Stack } from '@mui/material';
+import { TextField, Box, Button, Stack } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
+import Resizer from "react-image-file-resizer";
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import Tag from "./Tag.jsx"
+import { makeStyles } from '@material-ui/core';
+import TagsInput from "./TagsInput.jsx"
+
+const useStyles = makeStyles({
+    timepicker: {
+        width: "240px",
+    },
+
+    button: {
+        width: "120px",
+        height: "40px",
+        fontSize: "17px",
+    }
+})
 
 const EventForm = () => {
 
     const navigate = useNavigate();
+    const classes = useStyles();
 
-    const [eventName, setName] = useState("");
-    const [eventLoc, setLoc] = useState("");
-    const [eventDesc, setDesc] = useState("");
+    // stores the url of the image
+    const [eventImage, setEventImage] = useState("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png");
+
+    const [eventName, setEventName] = useState("");
+    const [eventLoc, setEventLoc] = useState("");
+    const [eventDesc, setEventDesc] = useState("");
     const [eventStartTime, setStartTime] = useState(dayjs().add(1, 'h').minute(0));
     const [eventEndTime, setEndTime] = useState(dayjs().add(2, 'h').minute(0));
     const [eventTags, setEventTags] = useState([]);
-
-    const tagRef = useRef();
-
-    const handleTagKeyDown = (e) => {
-        if (e.which !== 13) {
-            return;
-        }
-
-        e.preventDefault();
-        if (tagRef.current.value === "" || eventTags.includes(tagRef.current.value)) {
-            tagRef.current.value = "";
-            return;
-        }
-
-        setEventTags([...eventTags, tagRef.current.value]);
-        tagRef.current.value = "";
-    }
-
-    const deleteTag = (toDelete) => {
-        setEventTags(eventTags.filter((t) => t !== toDelete));
-    }
+    const eventAttendees = [];
 
     const handleStartChange = (newValue) => {
         if (newValue.isAfter(eventEndTime)) {
@@ -57,11 +55,36 @@ const EventForm = () => {
         setEndTime(newValue);
     };
 
+    const resizeFile = (image) =>
+        new Promise((resolve) => {
+            Resizer.imageFileResizer(
+                image,
+                300,
+                300,
+                "JPEG",
+                90,
+                0,
+                (uri) => {
+                    resolve(uri);
+                },
+                "base64"
+            );
+        });
+
+    const handleImgUpload = async (e) => {
+
+        const file = e.target.files[0];
+        console.log("image changed")
+        const image = await resizeFile(file);
+        setEventImage(image);
+
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const clubName = "ClubHouse"
-        const newEvent = { clubName, eventName, eventLoc, eventDesc, eventStartTime, eventEndTime, eventTags };
+        const clubName = "ClubHouse";
+        const newEvent = { clubName, eventName, eventImage, eventLoc, eventDesc, eventStartTime, eventEndTime, eventTags, eventAttendees };
 
         fetch('http://localhost:5001/events/create', {
             method: 'POST',
@@ -69,67 +92,88 @@ const EventForm = () => {
             body: JSON.stringify(newEvent)
         }).then(() => {
             console.log(newEvent);
+        }).catch((err) => {
+            console.log(err);
         })
         navigate("/"); // change path
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', width: '512px', margin: '16px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', width: '700px', margin: '16px' }}>
 
-            <Stack alignSelf="center" direction="row" alignItems="center" spacing={2}>
-                <Button variant="contained" component="label">
-                    Upload Image
-                    <input hidden accept="image/*" multiple type="file" />
-                </Button>
-                <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="image/*" type="file" />
-                    <PhotoCamera />
-                </IconButton>
-            </Stack>
+            <Box display="flex" margin="0" width="100%" alignItems="center" gap={4}>
+                <Stack gap={0.5} alignItems="center">
+                    <img src={eventImage}
+                        alt={eventName}
+                        border="1px"
+                        style={{
+                            borderColor: "#aaaaaa",
+                            borderRadius: "4px",
+                            objectFit: "cover",
+                            objectPosition: "center"
+                        }}
+                        height="170px"
+                        width="170px" />
+                    <Button className={classes.button} startIcon={<PhotoCamera />} variant="text" component="label">
+                        Upload
+                        <input
+                            onChange={handleImgUpload}
+                            hidden
+                            accept="image/*"
+                            type="file" />
+                    </Button>
+                </Stack>
+
+                <Stack width="100%">
+                    <TextField
+                        sx={{ backgroundColor: "white" }}
+                        label="Event Name"
+                        variant="outlined"
+                        required
+                        value={eventName}
+                        onChange={(e) => setEventName(e.target.value)} />
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <Box whiteSpace='nowrap'>
+                            <DesktopDatePicker
+                                className={classes.timepicker}
+                                label="Start Date"
+                                inputFormat="MM/DD/YYYY"
+                                value={eventStartTime}
+                                onChange={handleStartChange}
+                                required
+                                renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginRight: 1 }} />}
+                            />
+                            <TimePicker
+                                className={classes.timepicker}
+                                label="Start Time"
+                                value={eventStartTime}
+                                onChange={handleStartChange}
+                                required
+                                renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginLeft: 1 }} />}
+                            />
+                        </Box>
+                        <Box whiteSpace='nowrap'>
+                            <DesktopDatePicker
+                                className={classes.timepicker}
+                                label="End Date"
+                                inputFormat="MM/DD/YYYY"
+                                value={eventEndTime}
+                                onChange={handleEndChange}
+                                renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginRight: 1 }} />}
+                            />
+                            <TimePicker
+                                className={classes.timepicker}
+                                label="End Time"
+                                value={eventEndTime}
+                                onChange={handleEndChange}
+                                renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginLeft: 1 }} />}
+                            />
+                        </Box>
+                    </LocalizationProvider>
+                </Stack>
+            </Box>
 
             <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                <TextField
-                    sx={{ margin: "0", flex: 'auto', backgroundColor: "white", width: '100%', }}
-                    label="Event Name"
-                    variant="outlined"
-                    required
-                    value={eventName}
-                    onChange={(e) => setName(e.target.value)} />
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Box whiteSpace='nowrap'>
-                        <DesktopDatePicker
-                            label="Start Date"
-                            inputFormat="MM/DD/YYYY"
-                            value={eventStartTime}
-                            onChange={handleStartChange}
-                            required
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginRight: 1 }} />}
-                        />
-                        <TimePicker
-                            label="Start Time"
-                            value={eventStartTime}
-                            onChange={handleStartChange}
-                            required
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginLeft: 1 }} />}
-                        />
-                    </Box>
-                    <Box whiteSpace='nowrap'>
-                        <DesktopDatePicker
-                            label="End Date"
-                            inputFormat="MM/DD/YYYY"
-                            value={eventEndTime}
-                            onChange={handleEndChange}
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginRight: 1 }} />}
-                        />
-                        <TimePicker
-                            label="End Time"
-                            value={eventEndTime}
-                            onChange={handleEndChange}
-                            renderInput={(params) => <TextField {...params} sx={{ marginTop: 3, marginLeft: 1 }} />}
-                        />
-                    </Box>
-                </LocalizationProvider>
 
                 <TextField
                     sx={{ margin: "24px 0 24px 0", flex: 'auto', backgroundColor: "white", width: '100%', }}
@@ -137,58 +181,33 @@ const EventForm = () => {
                     variant="outlined"
                     required
                     value={eventLoc}
-                    onChange={(e) => setLoc(e.target.value)}
+                    onChange={(e) => setEventLoc(e.target.value)}
                 />
 
-                <Box display="flex" flexDirection="column"
-                    sx={{
-                        border: 1,
-                        borderColor: "#D3D3D3",
-                        borderRadius: "4px",
-                        margin: "0",
-                        width: "100%",
-                        padding: "8px",
-                        boxSizing: "border-box"
-                    }}>
-
-                    <Box display="inline-flex" flexWrap="wrap">
-                        {eventTags.map((text, index) => {
-                            return (
-                                <Tag data={text} key={index} handleDelete={deleteTag} />
-                            )
-                        })}
-                    </Box>
-
-                    <TextField sx={{ margin: "8px" }}
-                        variant='standard'
-                        placeholder='Enter tags here'
-                        onKeyDown={handleTagKeyDown}
-                        inputRef={tagRef}>
-                    </TextField>
-                </Box>
+                <TagsInput tags={eventTags} setTags={setEventTags} />
 
                 <TextField
-                    sx={{ margin: "24px 0 24px 0", flex: 'auto', backgroundColor: "white", width: '100%', }}
+                    sx={{ marginTop: "24px", flex: 'auto', backgroundColor: "white", width: '100%', }}
                     label="Description"
                     variant="outlined"
                     multiline
                     minRows={6}
                     required
                     value={eventDesc}
-                    onChange={(e) => setDesc(e.target.value)}
+                    onChange={(e) => setEventDesc(e.target.value)}
                 />
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: "space-between", padding: 0, margin: '24px 0px 24px 0px' }}>
                 <Button
-                    sx={{ width: "130px", height: "48px", fontSize: "17px", }}
+                    className={classes.button}
                     onClick={() => navigate("/")} // change path
                     variant="contained"
                     color="secondary"
-                    endIcon={<HighlightOffIcon />}
-                >Cancel</Button>
+                    endIcon={<DeleteForeverOutlinedIcon />}
+                >Delete</Button>
                 <Button
-                    sx={{ width: "130px", height: "48px", fontSize: "17px", }}
+                    className={classes.button}
                     onClick={onSubmit}
                     type="submit"
                     variant="contained"

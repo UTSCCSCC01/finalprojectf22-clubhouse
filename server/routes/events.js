@@ -40,14 +40,17 @@ eventRoutes.route("/events/:id").get(function (req, res) {
 eventRoutes.route("/events/create").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
+
     clubName: req.body.clubName,
     eventName: req.body.eventName,
+    eventImage: req.body.eventImage,
     eventDesc: req.body.eventDesc,
     eventLoc: req.body.eventLoc,
     // eventJoin: req.body.eventJoin,
     eventStartTime: req.body.eventStartTime,
     eventEndTime: req.body.eventEndTime,
     eventTags: req.body.eventTags,
+    eventAttendees: req.body.eventAttendees,
   };
   db_connect.collection("events").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -63,12 +66,14 @@ eventRoutes.route("/events/:id").post(function (req, response) {
     $set: {
       clubName: req.body.clubName,
       eventName: req.body.eventName,
+      eventImage: req.body.eventImage,
       eventDesc: req.body.eventDesc,
       eventLoc: req.body.eventLoc,
       // eventJoin: req.body.eventJoin,
       eventStartTime: req.body.eventStartTime,
       eventEndTime: req.body.eventEndTime,
       eventTags: req.body.eventTags,
+      eventAttendees: req.body.eventAttendees,
     },
   };
   db_connect
