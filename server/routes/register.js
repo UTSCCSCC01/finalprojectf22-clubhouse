@@ -1,8 +1,8 @@
 const express = require("express");
 const recordRoutes = express.Router();
 require("dotenv").config({ path: "./config.env" });
-const DAO = require("../userDAO");
-const EmlWrp = require("../emailWrapper");
+const DAO = require("../modules/userDAO");
+const EmlWrp = require("../modules/emailWrapper");
 
 
 recordRoutes.route("/register").post(async function (req, response) {
@@ -42,6 +42,8 @@ recordRoutes.route("/submitCode").post(async function (req, response) {
         response.status(400);
         response.json({ "error": "Code is incorrect", "registered": false});
     }
+
+    DAO.removePotentialUser(req.body.email, req.body.code)
 });
 
 module.exports = recordRoutes;

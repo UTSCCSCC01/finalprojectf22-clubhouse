@@ -1,4 +1,5 @@
-const dbo = require("./db/conn");
+const { ModuleFilenameHelpers } = require("webpack");
+const dbo = require("../db/conn");
 /**
  * @module userDAO
  */
@@ -109,7 +110,7 @@ module.exports.verifyPotentialUser = function (email, code) {
         accountType: "student"
     }
 
-    if (await DAO.findUser(email) != null) { // User already found
+    if (await module.exports.findUser(email) != null) { // User already found
         return async () => {}; // Empty promise ;-;
     }
 

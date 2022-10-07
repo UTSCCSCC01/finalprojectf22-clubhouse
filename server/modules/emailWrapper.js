@@ -1,3 +1,7 @@
+/**
+ * @module emailWrapper
+ */
+
 var nodemailer = require('nodemailer');
 const SMTPTransport = require('nodemailer/lib/smtp-transport');
 
