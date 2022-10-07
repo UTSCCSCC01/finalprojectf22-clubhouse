@@ -8,7 +8,8 @@
     "client_serve": "nodemon client/server.js",
     "react_dev": "webpack --watch",
     "api_serve": "node server/server.js",
-    "dev": "concurrently --kill-others --raw \"npm run react_dev\" \"npm run client_serve\" \"npm run api_serve\""
+    "dev": "concurrently --kill-others --raw \"npm run react_dev\" \"npm run client_serve\" \"npm run api_serve\"",
+    "doc": "jsdoc -c jsdoc.json --readme ./README.md"
   },
   "author": "",
   "license": "ISC",
@@ -23,9 +24,11 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "better-docs": "^2.7.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
+    "jsdoc": "^3.6.11",
     "mongodb": "^4.10.0",
     "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20",

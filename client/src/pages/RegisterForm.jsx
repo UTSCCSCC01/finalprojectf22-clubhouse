@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { TextField, Container, Typography, Grid, Button } from '@material-ui/core'
 import config from  '../../config.json'
 
+/**
+ * RegisterForm
+ * @component
+ */
+
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -58,13 +63,18 @@ class RegisterForm extends Component {
       </Container>
     );
   }
-
+  /**
+   * Handle text field changes by simply updating the state variable that matches the targets id
+   * @param {Event} event Event object that is passed using DOM
+   */
   handleTextFieldChange(event) {
     let obj = {};
     obj[event.target.id] = event.target.value; // Uses the id as key - so i only have to write 1 handler
     this.setState(obj)
   }
-
+  /**
+   * First phase of registering - simply sending the user's email address to the endpoint for email verification
+   */
   async submit() {
     this.setState({pwerror: null, eerror: null}) // Reset error states
     // Verification
@@ -91,7 +101,9 @@ class RegisterForm extends Component {
     // Now in verification phase
     this.setState({ showVerification: true })
   }
-
+  /**
+   * Second phase of verification - sending the entered code to the submitCode endpoint, the redirecting if registered
+   */
   async submitCode() {
     this.setState({scerror: null}) // Reset error states
 
