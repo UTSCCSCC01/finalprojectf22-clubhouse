@@ -9,6 +9,9 @@ import {
 
 import Home from './pages/Home.jsx';
 import ClubAdminProfilePage from './pages/ClubAdminProfilePage.jsx'
+import CreateEvent from './pages/CreateEvent.jsx'
+import LoginPage from './pages/LoginPage.jsx';
+import TestLogin from './pages/TestLogin.jsx';
 
 ReactDOM.render(
   (
@@ -19,12 +22,14 @@ ReactDOM.render(
       {/* Add global elements like navbar outside the switch */}
       <Routes>
         <Route exact path="/" element={<Home />} />
-      
         <Route exact path={"/club-admin-profile.html"} element={<ClubAdminProfilePage email = "email" description = "description" phoneNumber = "1234567890"
       clubName = "Club Name"
       />} />
+        <Route exact path="/create-event" element={<CreateEvent />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/testlogin" element={<TestLogin />} />
       </Routes>
     </Router>
   ),
-  document.getElementById('root')
+  document.getElementById('root'),
 );
