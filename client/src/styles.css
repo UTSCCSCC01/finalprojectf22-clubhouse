@@ -1,0 +1,165 @@
+.ClubAdminProfilePage{
+  font-family: sans-serif;
+  max-height: 100px;
+  display: grid;
+  width: 100% ;
+  
+  
+}
+.adminchild{
+display: inline-block;
+padding: 2rem;
+text-align: center;
+
+border-radius: 10 rem;
+}
+
+.ClubProfileImgContainer {
+  /* display: flex; */
+  /* display: inline-block;
+  vertical-align: top;
+  align-items: padding-right; */
+  
+  width: 100%;
+  
+}
+
+.img2 {
+  position: relative;
+  height:40vh; 
+  width: 90%;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 10px;
+}
+.viewdesc{
+  background-color: #7ba4d9;
+  width:90%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow-x:auto;
+  height: 250px;
+  margin-top: 50px;
+  overflow-y: scroll;
+  white-space: pre-line;
+  border-radius: 10px;
+  color:azure;
+  min-width: 300px;
+  
+  
+}
+.viewdesc::-webkit-scrollbar{
+  border-radius: 2rem;
+  display: none;
+}
+
+.contactinfo{
+  padding: "5px";
+  width: "250px";
+  display: inline-block;
+  word-wrap: "break-word";
+}
+.cardcont{
+  display: inline-block;
+  margin-left: 5%;
+  margin-top: 5%;
+  margin-right: 5%;
+  padding: 2rem;
+ border-radius: 20px;
+  background-color: #002A5C;
+  color: white;
+  
+}
+.evenCard::-webkit-scrollbar{
+  display: none;
+}
+.evenCard{
+  height: 300px;
+  border-radius: 20px;
+  overflow-y:scroll;
+  width:fit-content; 
+  scrollbar-color: none;
+
+  
+ 
+}
+
+.card{
+  width: 250px;
+}
+.p {
+  /* display: inline-block; */
+  background-color: #FFE498;
+}
+.info {
+  height: 365px;
+  background-color: #002A5C;
+  width: 55%;
+  padding: 2rem;
+  margin-left: 3%;
+  margin-top: 5%;
+  text-align: left;
+  display:inline-table;
+  float: left;
+  color: white;
+  border-radius: 20px;
+  position: relative;
+}
+.profileEditButton {
+  width: 80px;
+  padding: 5px;
+  background-color: #7ba4d9;
+  outline: none;
+  border: 1px solid #7ba4d9;
+  box-shadow: 2px 2px 2px #3f3f3f;
+  height: 100%;
+  float: right;
+  color: white;
+}
+
+.profileDoneButton{
+  width: 80px;
+  padding: 5px;
+  background-color: #7ba4d9;
+  outline: none;
+  border: 1px solid #7ba4d9;
+  box-shadow: 2px 2px 2px #3f3f3f;
+  height: auto;
+  float: right;
+  color: white;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  margin: 10px;
+}
+
+
+
+.profileEditButton:hover, .profileDoneButton:hover {
+  box-shadow: 2px 2px 3px;
+}
+
+.profileEditButton:active , .profileDoneButton:hover{
+  box-shadow: 1px 1px 3px;
+}
+.profileContactInfo {
+  margin-top: 10px;
+}
+
+.clubEditDecription {
+  resize: none;
+  width: 60%;
+  margin-top: 10px;
+  overflow-y: scroll;
+  height: 250px;
+  float: right;
+  min-width: 300px;
+  position: relative;
+  margin-right: 5%;
+  border-radius: 10px;
+  display: "inline-block";
+  white-space: normal;
+}

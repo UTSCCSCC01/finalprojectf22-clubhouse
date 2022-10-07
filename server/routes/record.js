@@ -1,3 +1,4 @@
+const { request } = require("express");
 const express = require("express");
  
 // recordRoutes is an instance of the express router.
@@ -12,17 +13,68 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
  
  
-// This section will help you get a list of all the records.
-recordRoutes.route("/record").get(function (req, res) {
- let db_connect = dbo.getDb("employees");
+// This section will help you get a club by email.
+recordRoutes.route("/club").get(function (req, res) {
+ let db_connect = dbo.getDb("main");
+ let myquery = { email: 'test@mail.utoronto.ca' };
  db_connect
-   .collection("records")
-   .find({})
-   .toArray(function (err, result) {
+   .collection("clubs")
+   .findOne(myquery,function (err, result) {
      if (err) throw err;
      res.json(result);
    });
 });
+recordRoutes.route("/club/profileimg").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  let myquery = { email: 'test@mail.utoronto.ca' };
+  db_connect
+    .collection("clubs")
+    .findOne(myquery,function (err, result) {
+      if (err) throw err;
+      res.json(result.image);
+    });
+ });
+ //update--------
+ recordRoutes.route("/club/picupdate").patch(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { email:'test@mail.utoronto.ca'};
+  let newvalues = {
+    $set: {
+      image: req.body.image,
+    },
+  };
+  db_connect
+    .collection("clubs")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+      response.json(res);
+    });
+ });
+
+recordRoutes.route("/club/events").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  var perpage = 3;
+  var total =  db_connect.collection("events").count();
+  var pages = Math.ceil(total/perpage);
+  var pageNumber = (req.query.page == null) ? 1 : req.query.page;
+  var startFrom = (pageNumber-1) * perpage;
+
+
+  
+  let myquery = {clubName:'Sports'};
+  
+  
+  
+  
+  db_connect
+    .collection("events")
+    .find(myquery).sort({"id": -1 }).skip(startFrom).limit(perpage)
+      .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ });
  
 // This section will help you get a single record by id
 recordRoutes.route("/record/:id").get(function (req, res) {
