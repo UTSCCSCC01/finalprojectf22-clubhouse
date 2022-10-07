@@ -34,7 +34,7 @@ function Events(props) {
         return url;
       };
       const res = await fetch(changeFilter(filter));
-      console.log(changeFilter(filter));
+      // console.log(changeFilter(filter));
       const data = await res.json();
         setItems(data);
     };
@@ -68,7 +68,7 @@ function Events(props) {
       
       <Container sx={{ py: 4 }} maxWidth="md">
           <Grid container spacing={5}>
-            {items && items.filter(item=>item.eventDate>=dateFormat(now, "isoDateTime")).map((item) => (
+            {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => (
               <Grid item key={item} xs={12} sm={6} md={4}>
                 <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc}/>
               </Grid>

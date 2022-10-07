@@ -16,16 +16,9 @@ export default function EventCard(props) {
   const [cName, setCname] = useState('');
   const [eDate, setEdate] = useState('');
   const [eName, setEname] = useState('');
-//   const [eDesc, setEdesc] = useState('');
-//   const [eTags, setEtags] = useState('');
-
-
 
   return (
-
-
-    <>
-    
+    <>  
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardActionArea>
             <CardMedia
@@ -36,7 +29,7 @@ export default function EventCard(props) {
             <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>
                 
-                <Typography><EventIcon fontSize="small" ></EventIcon>  {dateFormat(props.eDate, "mmmm dS, yyyy")} </Typography>
+                <Typography><EventIcon fontSize="small" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
                 <Typography><TimeIcon fontSize="small"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
                 <Typography> <LocationOnIcon fontSize="small"></LocationOnIcon> {props.eLoc} </Typography>
                 {/* <Typography>  {props.eDesc} </Typography>
