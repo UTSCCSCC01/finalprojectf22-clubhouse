@@ -27,9 +27,7 @@ const useStyles = makeStyles({
 
 /**
  * Component for displaying blank event details form.
- * @component
  */
-
 const EventForm = () => {
 
     const navigate = useNavigate();
@@ -72,8 +70,8 @@ const EventForm = () => {
 
     /**
      * Return a resized image.
-     * @param {String} image 
-     * @returns {String} A base64 encoded image
+     * @param {File} image 
+     * @returns {Function} A base64 encoded image
      */
     const resizeFile = (image) =>
         new Promise((resolve) => {
@@ -87,7 +85,6 @@ const EventForm = () => {
     const handleImgUpload = async (e) => {
 
         const file = e.target.files[0];
-        console.log("image changed")
         const image = await resizeFile(file);
         setEventImage(image);
 

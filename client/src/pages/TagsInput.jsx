@@ -4,7 +4,6 @@ import Tag from "./Tag.jsx"
 
 /**
  * Component that displays an input field for tags.
- * @component
  * @param {Array.<String>} [tags=[]] An array of tags.
  * @param {Function} setTags SetStateSction for updating the array of tags.
  */
