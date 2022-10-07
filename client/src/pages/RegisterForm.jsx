@@ -8,19 +8,23 @@ class RegisterForm extends Component {
 
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.submit = this.submit.bind(this);
+    this.submitCode = this.submitCode.bind(this);
 
     this.state = {
       password: "",
       email: "",
       passwordC: "",
       eerror: null,
-      pwerror: null
+      pwerror: null,
+      scerror: null,
+      showVerification: false
     };
   }
 
   render() {
     let ee = this.state.eerror !== null;
     let pe = this.state.pwerror !== null;
+    let ce = this.state.scerror !== null;
     return (
       <Container>
         <Typography style={{paddingTop: "200px"}} variant="h2" align="center">Register</Typography>
@@ -37,6 +41,19 @@ class RegisterForm extends Component {
             <Grid item>
               <Button variant="contained"  color="primary" style={{width: 300, marginTop: 25}} onClick={this.submit}>Register</Button>
             </Grid>
+            {!this.state.showVerification ? null : (
+              <div>
+                <Grid item>
+                  <TextField type="number" error={ce} helperText={this.state.scerror} margin="normal" id="code" label="Code" variant="outlined" style={{width: 500}} onChange={this.handleTextFieldChange}/>
+                </Grid>
+                <Grid item>
+                  <Typography style={{paddingTop: 50}} variant="caption" align="center">Please enter emailed code</Typography>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained"  color="primary" style={{width: 300, marginTop: 25}} onClick={this.submitCode}>Submit Code</Button>
+                </Grid>
+              </div>
+            )}
           </Grid>
       </Container>
     );
@@ -48,7 +65,7 @@ class RegisterForm extends Component {
     this.setState(obj)
   }
 
-  submit() {
+  async submit() {
     this.setState({pwerror: null, eerror: null}) // Reset error states
     // Verification
 
@@ -63,15 +80,38 @@ class RegisterForm extends Component {
       return;
     }
 
-    const url = config.api_url + "/register" // Now submit
+    const url = config.api_url + "register" // Now submit
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: this.state.email, password: this.state.password })
+        body: JSON.stringify({ email: this.state.email }) // Only need email before verification
     };
-    fetch(url, requestOptions)
-        .then(response => console.log('Submitted successfully'))
-        .catch(error => console.log('Form submit error', error))
+    await fetch(url, requestOptions);
+    
+    // Now in verification phase
+    this.setState({ showVerification: true })
+  }
+
+  async submitCode() {
+    this.setState({scerror: null}) // Reset error states
+
+    const url = config.api_url + "submitCode" // Now submit
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: this.state.email, password: this.state.password, code: this.state.code }) // Only need email before verification
+    };
+    const responseObj = await fetch(url, requestOptions);
+
+    let response = await responseObj.json();
+    //console.log(response);
+
+    if (!response.registered) {
+      this.setState({ scerror: response.error });
+    } else {
+      // Redirect to login
+      window.location.replace("/login.html");
+    }
   }
 }
 
