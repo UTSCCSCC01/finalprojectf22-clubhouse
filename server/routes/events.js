@@ -60,36 +60,9 @@ eventRoutes.route("/eventssortByDate").get(function (req, res) {
     });
  });
 
-// This section will help you get a single record by id
-eventRoutes.route("/events/:id").get(function (req, res) {
- let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
- db_connect
-   .collection("events")
-   .findOne(myquery, function (err, result) {
-     if (err) throw err;
-     res.json(result);
-   });
-});
+
  
-// This section will help you create a new record.
-eventRoutes.route("/events/add").post(function (req, response) {
- let db_connect = dbo.getDb();
- let myobj = {
-   clubName: req.body.clubName,
-   eventName: req.body.eventName,
-   eventDesc: req.body.eventDesc,
-   eventJoin: req.body.eventJoin,
-   eventDate: req.body.eventDate,
-   eventTags: req.body.eventTags,
- };
- db_connect.collection("events").insertOne(myobj, function (err, res) {
-   if (err) throw err;
-   response.json(res);
- });
-});
- 
-// This section will help you update a record by id.
+// This section will help you update a record by id.for sign up
 eventRoutes.route("/events/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
@@ -99,8 +72,12 @@ eventRoutes.route("/events/:id").post(function (req, response) {
     eventName: req.body.eventName,
     eventDesc: req.body.eventDesc,
     eventJoin: req.body.eventJoin,
-    eventDate: req.body.eventDate,
+    eventStartTime: req.body.eventStartTime,
+    eventEndTime: req.body.eventEndTime,
     eventTags: req.body.eventTags,
+    eventLoc: req.body.eventLoc,
+    eventImage: req.body.eventImage,
+    eventAttendees: req.body.eventAttendees,
    },
  };
  db_connect
@@ -112,15 +89,5 @@ eventRoutes.route("/events/:id").post(function (req, response) {
    });
 });
  
-// This section will help you delete a record
-eventRoutes.route("/:id").delete((req, response) => {
- let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
- db_connect.collection("events").deleteOne(myquery, function (err, obj) {
-   if (err) throw err;
-   console.log("1 document deleted");
-   response.json(obj);
- });
-});
  
 module.exports = eventRoutes;

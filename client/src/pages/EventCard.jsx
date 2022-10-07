@@ -8,6 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import TimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
+
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useEffect,useState } from 'react';
 
@@ -16,6 +17,10 @@ export default function EventCard(props) {
   const [cName, setCname] = useState('');
   const [eDate, setEdate] = useState('');
   const [eName, setEname] = useState('');
+  const [eTags, setETags] = useState([]);
+
+
+
 
   return (
     <>  
@@ -34,6 +39,7 @@ export default function EventCard(props) {
                 <Typography> <LocationOnIcon fontSize="small"></LocationOnIcon> {props.eLoc} </Typography>
                 {/* <Typography>  {props.eDesc} </Typography>
                 <Typography>  {props.eTags} </Typography> */}
+                
             </CardContent>
         </CardActionArea>
             <CardActions>
