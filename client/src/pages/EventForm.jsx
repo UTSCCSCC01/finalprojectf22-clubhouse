@@ -27,6 +27,7 @@ const useStyles = makeStyles({
 
 /**
  * Component for displaying blank event details form.
+ * @component
  */
 const EventForm = () => {
 

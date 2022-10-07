@@ -4,6 +4,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 /**
  * Component for displaying a single tag
+ * @component
  * @param {String} data The text of the tag
  * @param {Function} handleDelete A function that deletes this tag from an array of tags
  */

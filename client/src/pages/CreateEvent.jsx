@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 
 /**
  * Component for displaying a form to create a new event.
+ * @component
  */
 const CreateEvent = () => {
 
