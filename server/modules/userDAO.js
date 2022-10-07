@@ -65,7 +65,7 @@ module.exports.verifyPotentialUser = function (email, code) {
     };
 
     return new Promise( (res, rej) => {
-        db_connect.collection("potentialUsers").removeOne(dbobj, (err, result) => {
+        db_connect.collection("potentialUsers").deleteOne(dbobj, (err, result) => {
             if (err) throw rej(err);
             res(result);
         });
