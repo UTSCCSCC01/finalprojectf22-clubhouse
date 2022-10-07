@@ -122,7 +122,7 @@ class RegisterForm extends Component {
       this.setState({ scerror: response.error });
     } else {
       // Redirect to login
-      window.location.replace("/login.html");
+      window.location.replace("/login");
     }
   }
 }
