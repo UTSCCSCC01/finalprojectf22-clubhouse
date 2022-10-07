@@ -59,8 +59,8 @@ const EventForm = () => {
         new Promise((resolve) => {
             Resizer.imageFileResizer(
                 image,
-                300,
-                300,
+                400,
+                400,
                 "JPEG",
                 90,
                 0,
