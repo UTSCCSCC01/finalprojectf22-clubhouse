@@ -25,6 +25,11 @@ const useStyles = makeStyles({
     }
 })
 
+/**
+ * Component for displaying blank event details form.
+ * @component
+ */
+
 const EventForm = () => {
 
     const navigate = useNavigate();
@@ -41,6 +46,11 @@ const EventForm = () => {
     const [eventTags, setEventTags] = useState([]);
     const eventAttendees = [];
 
+    /**
+     * Update and store the event start time. Update the event 
+     * end time if the start time occurs after the end time.
+     * @param {dayjs} newValue 
+     */
     const handleStartChange = (newValue) => {
         if (newValue.isAfter(eventEndTime)) {
             setEndTime(newValue.add(1, 'h'));
@@ -48,6 +58,11 @@ const EventForm = () => {
         setStartTime(newValue);
     };
 
+    /**
+     * Update and store the event end time. Update the event 
+     * start time if the end time occurs before the start time.
+     * @param {dayjs} newValue 
+     */
     const handleEndChange = (newValue) => {
         if (newValue.isBefore(eventStartTime)) {
             setStartTime(newValue.add(-1, 'h'));
@@ -55,7 +70,12 @@ const EventForm = () => {
         setEndTime(newValue);
     };
 
-    const resizeFile = (image) =>
+    /**
+     * Return a resized image.
+     * @param {String} image 
+     * @returns {String} A base64 encoded image
+     */
+    const resizeFile = (image) => {
         new Promise((resolve) => {
             Resizer.imageFileResizer(
                 image,
@@ -69,8 +89,13 @@ const EventForm = () => {
                 },
                 "base64"
             );
-        });
+        })
+    };
 
+    /**
+     * Update the event image.
+     * @param {Event} e 
+     */
     const handleImgUpload = async (e) => {
 
         const file = e.target.files[0];
@@ -80,6 +105,10 @@ const EventForm = () => {
 
     }
 
+    /**
+     * Create the event and redirect to homepage.
+     * @param {Event} e 
+     */
     const onSubmit = (e) => {
         e.preventDefault();
 

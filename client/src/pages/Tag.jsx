@@ -2,6 +2,11 @@ import React from 'react';
 import { Box, Typography } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
+/**
+ * Component for displaying a single tag
+ * @param {String} data The text of the tag
+ * @param {Function} handleDelete A function that deletes this tag from an array of tags
+ */
 const Tag = ({ data, handleDelete }) => {
     return (
         <Box display="inline-flex" sx={{

@@ -2,25 +2,35 @@ import React, { useRef } from 'react';
 import { TextField, Box } from '@mui/material';
 import Tag from "./Tag.jsx"
 
+/**
+ * Component that displays an input field for tags.
+ * @component
+ * @param {Array.<String>} [tags=[]] An array of tags.
+ * @param {Function} setTags SetStateSction for updating the array of tags.
+ */
 const TagsInput = ({ tags, setTags }) => {
 
     const tagRef = useRef();
 
+    /**
+     * Add tag to list if the enter key is pressed.
+     * @param {Event} e 
+     */
     const handleTagKeyDown = (e) => {
         if (e.which !== 13) {
             return;
         }
-    
+
         e.preventDefault();
         if (tagRef.current.value === "" || tags.includes(tagRef.current.value)) {
             tagRef.current.value = "";
             return;
         }
-    
+
         setTags([...tags, tagRef.current.value]);
         tagRef.current.value = "";
     }
-    
+
     return (
         <Box display="flex" flexDirection="column"
             sx={{
