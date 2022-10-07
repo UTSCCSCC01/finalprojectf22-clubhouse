@@ -5,7 +5,6 @@ const port = 3000;
 
 app.use(express.static('client/dist'));
 
-// added this block
 const path = require('path');
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
