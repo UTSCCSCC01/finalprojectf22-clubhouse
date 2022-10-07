@@ -5,6 +5,11 @@ import TextField from '@mui/material/TextField';
 
 import '../styles.css';
 
+/**
+ * A component storing the Login form.
+ * @component
+ */
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -28,13 +33,19 @@ class Login extends Component {
       }
     });
   }
-
+  /**
+   * Updates state when the login form is modified.
+   * @param {Event} event - event containing modified data
+   */
   change(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
   }
-
+  /**
+   * POSTs login form to API when the login form is submitted.
+   * @param {Event} event - event containing submitted data
+   */
   submit(event) {
     event.preventDefault();
     fetch('http://localhost:5001/login', 

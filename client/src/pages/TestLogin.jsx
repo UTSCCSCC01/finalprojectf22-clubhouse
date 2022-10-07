@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 
-
+/**
+ * An example of how to check if the user is logged in.
+ * @component
+ */
 class TestLogin extends Component {
 
   constructor(props) {

@@ -6,6 +6,12 @@ const dbo = require("../db/conn");
  
 const ObjectId = require("mongodb").ObjectId;
 
+/**
+ * Handles submission of login form which provides
+ * req.body.email = email
+ * req.body.password = password
+ * sets the cookie to the username if the login matches database.
+ */
 loginRoutes.route("/login").post(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { email: req.body.email };
@@ -18,7 +24,7 @@ loginRoutes.route("/login").post(function (req, res) {
         correct = false;
       } else {
         if (result.password == req.body.password) {
-          res.cookie("username", req.body.email, {maxAge: 3600000}); // httpOnly: true, signed: true}
+          res.cookie("username", req.body.email, {maxAge: 3600000}); // test httpOnly: true, signed: true for security
           correct = true;
         } else {
           correct = false;
@@ -27,7 +33,9 @@ loginRoutes.route("/login").post(function (req, res) {
       res.json( { valid: correct } );
     });
 });
-
+/**
+ * Checks if the user is logged in by checking cookie value.
+ */
 loginRoutes.route("/loginstatus").get(function (req, res) {
   var currentuser = req.cookies.username;
   if (currentuser != null) {
@@ -37,6 +45,9 @@ loginRoutes.route("/loginstatus").get(function (req, res) {
   }
 });
 
+/**
+ * Logs the user out by clearing cookie.
+ */
 loginRoutes.route("/logout").get(function (req, res) {
   res.clearCookie("username", {})
   res.end();
