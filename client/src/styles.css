@@ -28,6 +28,7 @@ border-radius: 10 rem;
   position: relative;
   height:40vh; 
   width: 90%;
+  object-fit: contain;
   margin: 0 auto;
   border-radius: 20px;
   padding-left: 0px;
