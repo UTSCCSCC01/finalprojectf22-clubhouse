@@ -75,22 +75,10 @@ const EventForm = () => {
      * @param {String} image 
      * @returns {String} A base64 encoded image
      */
-    const resizeFile = (image) => {
+    const resizeFile = (image) =>
         new Promise((resolve) => {
-            Resizer.imageFileResizer(
-                image,
-                400,
-                400,
-                "JPEG",
-                90,
-                0,
-                (uri) => {
-                    resolve(uri);
-                },
-                "base64"
-            );
-        })
-    };
+            Resizer.imageFileResizer(image, 400, 400, "JPEG", 90, 0, (uri) => { resolve(uri); }, "base64" );
+        });
 
     /**
      * Update the event image.
@@ -120,7 +108,7 @@ const EventForm = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newEvent)
         }).then(() => {
-            console.log(newEvent);
+
         }).catch((err) => {
             console.log(err);
         })
