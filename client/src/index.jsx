@@ -12,6 +12,7 @@ import ClubAdminProfilePage from './pages/ClubAdminProfilePage.jsx'
 import CreateEvent from './pages/CreateEvent.jsx'
 import LoginPage from './pages/LoginPage.jsx';
 import TestLogin from './pages/TestLogin.jsx';
+import RegisterForm from './pages/RegisterForm.jsx'
 
 ReactDOM.render(
   (
@@ -28,6 +29,7 @@ ReactDOM.render(
         <Route exact path="/create-event" element={<CreateEvent />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
+        <Route path="/register" element={<RegisterForm />} />
       </Routes>
     </Router>
   ),
