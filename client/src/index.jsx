@@ -12,6 +12,8 @@ import ClubAdminProfilePage from './pages/ClubAdminProfilePage.jsx'
 import CreateEvent from './pages/CreateEvent.jsx'
 import LoginPage from './pages/LoginPage.jsx';
 import TestLogin from './pages/TestLogin.jsx';
+import Navbar from './pages/NavBar.jsx';
+import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
 
 ReactDOM.render(
@@ -20,6 +22,7 @@ ReactDOM.render(
       <Helmet>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
       </Helmet>
+      <Navbar />
       {/* Add global elements like navbar outside the switch */}
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -30,6 +33,7 @@ ReactDOM.render(
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/events" element={<Events />} />
       </Routes>
     </Router>
   ),
