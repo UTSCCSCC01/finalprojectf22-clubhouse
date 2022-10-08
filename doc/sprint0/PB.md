@@ -59,71 +59,71 @@ Logging in as a club will send you to the club-side home page
 
 __Mid:__
 
-9. As a student, I want to apply to club executive positions at the specific club so that I can become an executive.
+10. As a student, I want to apply to club executive positions at the specific club so that I can become an executive.
 - COS:
   - Make sure students can see all the job postings at each specific club page they visit
   - Students can apply for these job postings through the specified process by the club
 
-10. As a club admin, I want to see the members of my club so I can manage and prepare for events accordingly.
+11. As a club admin, I want to see the members of my club so I can manage and prepare for events accordingly.
 - COS:
   - Make sure a list of current members of the club is shown to the club admin
 
-11. As a club admin, I want to approve/deny club register requests so I can select the qualified members to join the club.
+12. As a club admin, I want to approve/deny club register requests so I can select the qualified members to join the club.
 - COS:
   - Students that apply to the clubs appear to the club admin where they can decide to let them join or deny their request
 
-12. As a club admin, I want to post executive positions descriptions so that I can receive/review applications.
+13. As a club admin, I want to post executive positions descriptions so that I can receive/review applications.
 - COS:
   - Make sure club admins can review all the applications for posting
   - Make sure all students can see the available hiring ads.
   - Easily able to choose qualified members for posting in an orderly fashion
 
-13. As a club admin, I want to add/modify profile details so that students can learn about the club and view contact details. (?)
+14. As a club admin, I want to add/modify profile details so that students can learn about the club and view contact details. (?)
 - COS:
   - Make sure club admins edit the information that is shown to the students about the club
   - Students can get a general overview about the club
 
-14. As a club admin, I want to be able to request to register a club so I can have a club account.
+15. As a club admin, I want to be able to request to register a club so I can have a club account.
 - COS:
   - Club admins can submit a request to form a new club once they register
 
-15. As a student, I want to see a list of clubs I'm following/a member of so I can keep track of them.
+16. As a student, I want to see a list of clubs I'm following/a member of so I can keep track of them.
 - COS:
   - Students are able to view their followed/joined clubs so they can make the necessary modifications they desire
     - I.e. unfollow, change notifications preferences, check out a specific club event, etc
 
 __Low:__
 
-16. As a student, I should be able to choose if I want email notifications as well so that I have another method to be instantly notified when a notification is sent.
+17. As a student, I should be able to choose if I want email notifications as well so that I have another method to be instantly notified when a notification is sent.
 - COS:
   - Make sure I can choose whether I want to notifications in my email
   - Emails are sent at the same time as the notification arrives in the inbox.
 
-17. As a student, I want to be able to contact the club so I can inquire about the club itself or an event hosted by the club.
+18. As a student, I want to be able to contact the club so I can inquire about the club itself or an event hosted by the club.
 - COS:
   - Students can ask any questions and directly communicate with the club using the contact information on each club's page.
   - Make sure that the contact information is valid and up to date.
 
-18. As a student, I want to follow clubs so that I get notifications (email and/or inbox) for announcements/events as wanted.
+19. As a student, I want to follow clubs so that I get notifications (email and/or inbox) for announcements/events as wanted.
 - COS:
   - Make sure notifications sent by any of the clubs that are followed/joined are received by the student.
 
-19. As a student, I want to unfollow/leave clubs so I can no longer be getting their notifications.
+20. As a student, I want to unfollow/leave clubs so I can no longer be getting their notifications.
 - COS:
   - Make sure once a student has unjoined/unfollowed, they don't receive notifications from them.
 
-20. As a club admin, I want to remove members so that members who are kicked off or quit the club no longer get the notifications sent to the current members.
+21. As a club admin, I want to remove members so that members who are kicked off or quit the club no longer get the notifications sent to the current members.
 - COS:
   - Make sure club admins can manually remove members from their club
   - Students may get removed from club for various reasons(inappropriate behaviour, absence, transfer, etc) which means they no longer should get the notifications
 
-21. As a system admin, I want to approve/deny club registration requests so that approved clubs can be added to the website.
+22. As a system admin, I want to approve/deny club registration requests so that approved clubs can be added to the website.
 - COS:
   - They must be approved by the system admin before they can proceed to form a club
   - If denied, the individual who sent the request receives a rejection email
   - If accepted, they are provided with the credentials they can use to sign in as a club admin.
 
-22. As a system admin, I want to remove clubs so that students cannot see clubs that no longer exist.
+23. As a system admin, I want to remove clubs so that students cannot see clubs that no longer exist.
 - COS:
   - Make sure clubs that are deleted by the system admin are no longer seen by students, thus they can no long join it
   - The club admin of that club cannot no longer sign into their club account

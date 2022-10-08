@@ -9,6 +9,7 @@ import {
 
 import Home from './pages/Home.jsx';
 import ClubAdminProfilePage from './pages/ClubAdminProfilePage.jsx'
+import Clubs from './pages/Clubs.jsx'
 import CreateEvent from './pages/CreateEvent.jsx'
 import LoginPage from './pages/LoginPage.jsx';
 import TestLogin from './pages/TestLogin.jsx';
@@ -29,6 +30,7 @@ ReactDOM.render(
         <Route exact path={"/club-admin-profile"} element={<ClubAdminProfilePage email = "email" description = "description" phoneNumber = "1234567890"
       clubName = "Club Name"
       />} />
+        <Route exact path="/clubs" element={<Clubs />} />
         <Route exact path="/create-event" element={<CreateEvent />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
