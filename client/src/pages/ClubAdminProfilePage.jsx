@@ -14,11 +14,17 @@ function ClubAdminProfilePage(props) {
 
   const [profileInfo, setProfileInfo] = useState(currentvalues);
   const [editMode, setEditMode] = useState(false);
+  /**
+ * <sets the edit mode to true when button clicked>
 
+ */
   function editHandleClick() {
     setEditMode(true);
   }
-
+/**
+ * <handles the changes for profile infor when the club admin saves their edits>
+ * @return  {<type>}        <changes the values of the club admin profile>
+ */
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -30,6 +36,10 @@ function ClubAdminProfilePage(props) {
     });
   }
 
+
+  /**
+ * <sets the edit mode to false>
+ */
   function doneEditing() {
     setEditMode(false);
   }

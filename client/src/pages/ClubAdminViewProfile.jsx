@@ -10,9 +10,12 @@ import EditIcon from '@mui/icons-material/Edit';
 function ClubAdminViewProfile(props) {
   const url = 'http://127.0.0.1:5001/club/events';
   
-  const [noMore,setnoMore] = useState(true);
+  const [isMore,setisMore] = useState(true);
   const [items, setItems ] = useState([]);
   const [page, setPage] = useState(2);
+    /**
+ * <Gets page 1 of events from the database>
+ */
   useEffect(() => {
   const getevents = async ()=>{
   const res = await fetch(url+"?page=1");
@@ -24,25 +27,37 @@ function ClubAdminViewProfile(props) {
   },[]);
 
  
+  /**
+ * <function description>
 
+ * @return  {<promise>}        <returns the events depending on the page number from the database>
+ */
     const fetchData = async() => {
      const res = await fetch(url+'?page='+page);
       const data = await res.json();
       
       return data;
     };
-
+/**
+ * < increments the page number by 1 and if there are no events left it sets the variable isMore to false>
+ * 
+ */
     const fetchd = async () => {
       const eventfromserv = await fetchData();
     
       setItems([...items, ...eventfromserv]);
       if(eventfromserv.length === 0 || eventfromserv.length <1){
-        setnoMore(false);
+        setisMore(false);
       }
       
       setPage(page+1);
     }
     const [image,setImage] = useState('');
+
+    /**
+ * <fetches the image base64 string and sets image to that>
+ * 
+ */
     useEffect(() => {
       const fetchImage = async()=>{
         const res = await fetch("http://127.0.0.1:5001/club/profileimg");
@@ -100,7 +115,7 @@ function ClubAdminViewProfile(props) {
       <InfiniteScroll  
       dataLength={items.length} //This is important field to render the next data
       next={fetchd}
-     hasMore={noMore}
+     hasMore={isMore}
       loader={<h4>Loading...</h4>}
       endMessage={
     <p style={{ textAlign: 'center' }}>
