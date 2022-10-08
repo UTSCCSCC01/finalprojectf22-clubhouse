@@ -1,21 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Helmet } from 'react-helmet';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes
-} from "react-router-dom";
 
-import Home from './pages/Home.jsx';
-import ClubAdminProfilePage from './pages/ClubAdminProfilePage.jsx'
-import Clubs from './pages/Clubs.jsx'
-import CreateEvent from './pages/CreateEvent.jsx'
-import LoginPage from './pages/LoginPage.jsx';
-import TestLogin from './pages/TestLogin.jsx';
-import Navbar from './pages/NavBar.jsx';
-import Events from './pages/Events.jsx';
-import RegisterForm from './pages/RegisterForm.jsx'
+import App from './components/App.jsx';
 
 ReactDOM.render(
   (
