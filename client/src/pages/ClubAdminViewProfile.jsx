@@ -6,7 +6,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Fab from '@mui/material/Fab'
 import EditIcon from '@mui/icons-material/Edit';
 
-
+/**
+ * ClubAdminViewProfile
+ * @component
+ */
 function ClubAdminViewProfile(props) {
   const url = 'http://127.0.0.1:5001/club/events';
   

@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import ClubAdminViewProfile from "./ClubAdminViewProfile.jsx";
 import ClubAdminEditProfile from "./ClubAdminEditProfile.jsx";
 import '../styles.css';
+/**
+ * ClubAdminProfilePage
+ * @component
+ */
 function ClubAdminProfilePage(props) {
   const currentvalues = {
     

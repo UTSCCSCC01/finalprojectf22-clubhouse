@@ -5,6 +5,10 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
+/**
+ * ClubAdminEditProfile
+ * @component
+ */
 function ClubAdminEditProfile(props) {
   const url = 'http://127.0.0.1:5001/club/events';
   

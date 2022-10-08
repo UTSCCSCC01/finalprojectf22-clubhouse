@@ -15,10 +15,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
 /**
- * Fetch data from the database, 
- * depending on the chosen sorting filter.
- * Retrieve only future events by sorting their dates. 
- * @param {*} props 
+ * Fetch data from the database, depending on the chosen sorting filter. Retrieve only future events by sorting their dates. 
+ * @component
  */
 function Events(props) {
   

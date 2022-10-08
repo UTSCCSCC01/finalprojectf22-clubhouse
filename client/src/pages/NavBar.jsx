@@ -4,6 +4,7 @@ import { AppBar, Tabs, Tab, Toolbar, Button, Box} from '@mui/material'
 /**
  * Create navbar and change color
  * when selected
+ * @component
  */
   const Navbar = () => {
     const [value, setValue] = useState();

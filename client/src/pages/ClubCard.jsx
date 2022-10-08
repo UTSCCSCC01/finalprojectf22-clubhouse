@@ -16,7 +16,7 @@ import '../styles.css';
       ));
  */
 
-export default function ClubCard(props) {
+function ClubCard(props) {
   
   const [cName, setCname] = useState('');
   const [cDesc, setCdesc] = useState('');
@@ -54,3 +54,5 @@ export default function ClubCard(props) {
     </>
   );
 }
+
+export default ClubCard;

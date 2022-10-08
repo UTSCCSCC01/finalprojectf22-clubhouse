@@ -14,8 +14,9 @@ import { useState } from 'react';
  * Display fetched information in a card
  * Reformat eventStartTime and eventEndTime. 
  * @param {*} props 
+ * @component
  */
-export default function StudentEventCard(props) {
+function StudentEventCard(props) {
   
   const [cName, setCname] = useState('');
   const [eDate, setEdate] = useState('');
@@ -44,3 +45,5 @@ export default function StudentEventCard(props) {
     </>
   );
 }
+
+export default StudentEventCard;
