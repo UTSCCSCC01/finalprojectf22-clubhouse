@@ -29,7 +29,7 @@ ReactDOM.render(
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/events.html" element={<Events />} />
+        <Route path="/events" element={<Events />} />
       </Routes>
     </Router>
   ),
