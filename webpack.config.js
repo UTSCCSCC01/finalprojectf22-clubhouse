@@ -1,15 +1,15 @@
 const path = require('path');
 const mode = 'development';
-
 module.exports = {
   mode: mode,
   entry: {
     main: path.resolve(__dirname, './client/src/index.jsx'),
   },
+  resolve:{},
   module: {
     rules: [
       {
-        test: [/\.jsx$/],
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -24,6 +24,9 @@ module.exports = {
           'style-loader',
           'css-loader']
       }
+
+
+
     ]
   },
   output: {
