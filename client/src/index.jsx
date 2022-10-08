@@ -26,9 +26,8 @@ ReactDOM.render(
       {/* Add global elements like navbar outside the switch */}
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path={"/club-admin-profile.html"} element={<ClubAdminProfilePage email = "email" description = "description" phoneNumber = "1234567890"
-      clubName = "Club Name"
-      />} />
+        <Route exact path={"/club-admin-profile"}
+          element={<ClubAdminProfilePage email="email" description="description" phoneNumber="1234567890" clubName="Club Name" />} />
         <Route exact path="/create-event" element={<CreateEvent />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
