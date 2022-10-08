@@ -10,7 +10,7 @@ app.use(cookieParser());
 app.use(require("./routes/register"))
 app.use(require("./routes/events"));
 app.use(require("./routes/login"));
-
+app.use(require("./routes/adminProfile"))
 // get driver connection
 const dbo = require("./db/conn");
 
