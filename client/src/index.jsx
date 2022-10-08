@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import {
@@ -40,5 +40,4 @@ ReactDOM.render(
     </Router>
   ),
   document.getElementById('root'),
-
 );
