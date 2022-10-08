@@ -15,7 +15,7 @@ import { useState } from 'react';
  * Reformat eventStartTime and eventEndTime. 
  * @param {*} props 
  */
-export default function EventCard(props) {
+export default function StudentEventCard(props) {
   
   const [cName, setCname] = useState('');
   const [eDate, setEdate] = useState('');

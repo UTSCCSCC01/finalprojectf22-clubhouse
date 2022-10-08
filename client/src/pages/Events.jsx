@@ -1,5 +1,5 @@
 import React from "react";
-import EventCard from "./EventCard.jsx";
+import EventCard from "./StudentEventCard.jsx";
 import { useEffect,useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -110,7 +110,7 @@ function Events(props) {
                     <MenuItem value={"Categories"}>Categories</MenuItem>
                 </Select>
                 </FormControl>
-                <FormControl sx={{ m: 2, width: 200, marginLeft: '800px' }} size="small">
+                <FormControl sx={{ m: 2, width: 150, marginLeft: '850px' }} size="small">
                   <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                   <Select disabled={filter!=="Categories" ? true : false}
                     labelId="multiple-checkbox-label"
