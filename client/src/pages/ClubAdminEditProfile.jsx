@@ -44,9 +44,8 @@ function ClubAdminEditProfile(props) {
     }
   }
   /**
- * <function description>
-
- * @return  {<promise>}        <returns the events depending on the page number from the database>
+ * function description
+ * @returns  {Promise<Object>}        returns the events depending on the page number from the database
  */
     const fetchData = async() => {
      const res = await fetch(url+'?page='+page);
@@ -54,7 +53,7 @@ function ClubAdminEditProfile(props) {
       
       return data;
     };
-      /**
+/**
  * < increments the page number by 1 and if there are no events left it sets the variable isMore to false>
  * 
  */
@@ -106,10 +105,10 @@ const handleClose = () => {
 };
   /**
  * <gets the base64 string for the image and updates it in the database.>
- * @param   {<image>} input <The uploaded image>
+ * @param   {Object} input <The uploaded image>
  
  */
-  const imagechange= (input)=> {
+  const imagechange = (input)=> {
 
     let file = input.target.files[0];
   

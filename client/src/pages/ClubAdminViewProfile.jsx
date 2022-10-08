@@ -30,7 +30,7 @@ function ClubAdminViewProfile(props) {
   /**
  * <function description>
 
- * @return  {<promise>}        <returns the events depending on the page number from the database>
+ * @returns  {Promise<Object>}        <returns the events depending on the page number from the database>
  */
     const fetchData = async() => {
      const res = await fetch(url+'?page='+page);

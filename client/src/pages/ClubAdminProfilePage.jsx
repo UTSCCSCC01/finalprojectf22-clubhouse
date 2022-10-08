@@ -23,7 +23,6 @@ function ClubAdminProfilePage(props) {
   }
 /**
  * <handles the changes for profile infor when the club admin saves their edits>
- * @return  {<type>}        <changes the values of the club admin profile>
  */
   function handleChange(event) {
     const { name, value } = event.target;
