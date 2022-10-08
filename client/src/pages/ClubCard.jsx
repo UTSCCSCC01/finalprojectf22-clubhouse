@@ -7,6 +7,15 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useState } from 'react';
 import '../styles.css';
 
+/**
+ * Component for club card format.
+ * @component
+ * @example
+ * return clubs.map((club, index) => (
+      <ClubCard key={index} eImage={club.image} cName={club.clubName} cDesc={club.clubDesc} cPhone={club.clubPhone} cEmail={club.email}></ClubCard>
+      ));
+ */
+
 export default function ClubCard(props) {
   
   const [cName, setCname] = useState('');

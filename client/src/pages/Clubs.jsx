@@ -15,6 +15,11 @@ import ListItemText from '@mui/material/ListItemText';
 import { PostAddSharp } from "@mui/icons-material";
 import '../styles.css';
 
+/**
+ * A component used for browsing clubs.
+ * @component
+ */
+
 class Clubs extends Component{
 
   state = {
@@ -40,6 +45,11 @@ class Clubs extends Component{
         alert('Error receiving data!');
       });
   }
+
+  /**
+   * Used to display club info from the db
+   * @param {Clubs} clubs - information containing basic club registration
+   */
 
   displayClubInfo = (clubs) => {
     if (!clubs.length) return null;
