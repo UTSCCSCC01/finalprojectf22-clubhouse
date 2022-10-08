@@ -1,39 +1,47 @@
 import * as React from 'react';
-import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { useEffect,useState } from 'react';
+import { useState } from 'react';
+import '../styles.css';
 
-export default function MultiActionAreaCard(props) {
+export default function ClubCard(props) {
   
-  const [eName, setEname] = useState('');
-  const [eDesc, setEdesc] = useState('');
+  const [cName, setCname] = useState('');
+  const [cDesc, setCdesc] = useState('');
+  const [cPhone, setCphone] = useState('');
+  const [cEmail, setCemail] = useState('');
 
   return (
-    <Card className='card' sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <>
+    <Card sx={{ height: "469px", display: 'flex', flexDirection: 'column', border: "2px solid red" }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="250"
-          image={props.eImage}
-          alt="Clubs"
+          image={props.eImage} alt="Clubs"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h7" component="h2">
-            {props.eName}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.eDesc}
-          </Typography>
+        <CardContent sx={{ flexGrow: 1 }}>
+        <Typography variant="h2" component="div">
+          {props.cName}
+        </Typography>
+        <Typography gutterBottom variant="h5" color="text.secondary">
+          {props.cDesc}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {props.cPhone}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {props.cEmail}
+        </Typography>
         </CardContent>
       </CardActionArea>
         <CardActions>
           <Button size="small">View Club</Button>
         </CardActions>
-    
     </Card>
+    </>
   );
 }
