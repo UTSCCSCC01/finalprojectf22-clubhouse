@@ -33,7 +33,7 @@ ReactDOM.render(
       clubName = "Club Name"
       />} />
         <Route exact path="/clubs" element={<Clubs />} />
-        <Route  path="/clubm" element={<ClubAdminMain/>} />
+        <Route  path="/clubMain" element={<ClubAdminMain/>} />
         <Route exact path="/create-event" element={<CreateEvent />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />

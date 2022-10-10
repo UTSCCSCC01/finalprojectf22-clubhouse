@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { FitScreen } from '@mui/icons-material';
 
+
 const bull = (
   <Box
     component="span"
@@ -16,7 +17,7 @@ const bull = (
 
 export default function MemberCard(props) {
   return (
-    <Card className='memberscard'>
+    <Card  >
       <CardContent>
         
         <Typography variant="h7" component="div">

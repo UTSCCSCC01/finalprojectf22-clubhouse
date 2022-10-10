@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container, Stack, Typography, Grid, Divider } from '@mui/material';
+import { Container, Stack, Typography, Grid, Divider,Box } from '@mui/material';
 import { useState, useEffect } from 'react';
 import MemberCard from './MemberCard1.jsx';
 import { margin } from '@mui/system';
+
 export default function ClubAdminMain() {
     const [members,setMembers] = useState([]);
     
@@ -24,14 +25,16 @@ export default function ClubAdminMain() {
         <Grid container rowSpacing={3} margin={1} padding={2} columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
             
             <Grid item xs={6}  >
-                <Typography style={{textAlign:'center'}} variant="h4">Current Members</Typography>
-                <Stack style={{maxheight:'70%'}} divider={<Divider orientation="horizontal" flexItem />}>
+                <Typography style={{textAlign:'center', marginBottom:'20px'}} variant="h4">Current Members</Typography>
+                <div className='cons'>
+                <Stack   spacing={1}  style={{width:'300px', textAlign:'center', margin:'0 auto'}} divider={<Divider orientation="horizontal" flexItem />}>
                     {members.map((member) => {
                         return <MemberCard name = {member}/>
                     }
                     ) }
         
                  </Stack>
+                 </div>
             </Grid>
             
             <Grid item xs={6}>
