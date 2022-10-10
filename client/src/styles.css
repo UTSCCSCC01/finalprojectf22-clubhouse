@@ -6,6 +6,10 @@
   
   
 }
+.club-members{
+  margin-top: 4rem;
+  border-color: black;
+}
 .adminchild{
 display: inline-block;
 padding: 2rem;
