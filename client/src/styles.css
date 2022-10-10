@@ -6,9 +6,21 @@
   
   
 }
+.club-main-body{
+margin: 5rem;
+}
+.potential_members{
+  margin-top: 4rem;
+  border-color: black;
+  border-left: 0rem;
+  width: 50%;
+}
+
 .club-members{
   margin-top: 4rem;
   border-color: black;
+  border-left: 0rem;
+  width: 50%;
 }
 .adminchild{
 display: inline-block;
