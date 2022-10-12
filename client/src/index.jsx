@@ -16,6 +16,7 @@ import TestLogin from './pages/TestLogin.jsx';
 import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
+import NewAnnouncement from './pages/NewAnnouncement.jsx';
 
 ReactDOM.render(
   (
@@ -32,6 +33,7 @@ ReactDOM.render(
       />} />
         <Route exact path="/clubs" element={<Clubs />} />
         <Route exact path="/create-event" element={<CreateEvent />} />
+        <Route exact path="/new-announcement" element={<NewAnnouncement />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
