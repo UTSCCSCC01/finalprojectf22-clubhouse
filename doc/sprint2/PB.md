@@ -2,17 +2,16 @@
 
 ### High:
 
-1. As a student, I want to login/register so that I can securely manage and use my individualized account.
+1. As a student, I want to register so that I can securely manage and use my individualized account.
 * COS:
     * Make sure a student can register using my UOFT email
     * Make sure emails other than UOFT ones cannot register/login
     * Make sure once registered, the student is able to sign in using their credentials that they used to register
-    * Logging in as a student will take the student to the student-side home page
 
-2. As a club admin, I want to login so that I can manage my club
+2. As a student, I want to login so that I can securely manage and use my individualized account
 * COS: 
-    * One must be approved by the system admin before being able to login/register as a club
-    * The club admin account will be associated with the specified email by the system admin
+    * Login and store authenticated user in a cookie
+    * Make sure password and username match database
     * Logging in as a club will send you to the club-side home page
 
 3. As a student, I want to browse through a list of existing clubs so that I can see all the clubs at UTSC. 
@@ -123,8 +122,15 @@
     * The club admin of that club cannot no longer sign into their club account
     * All students in that club are removed from the club
 
+
 24. As a student, I want to be able to register for events so that I can attend events I'm interested in
 * COS:
     * Make sure when a logged in student joins an event, they are displayed in the list of attendees
     * Join button should change to Joined after joining
     * If button clicked again, should change to Join and remove them from the list
+
+25. As a club admin, I want to login so that I can manage my club
+* COS:
+    * One must be approved by the system admin before being able to login as a club
+    * The club admin account will be associated with the specified email by the system admin
+    * Logging in as a club will send you to the club-side home page
