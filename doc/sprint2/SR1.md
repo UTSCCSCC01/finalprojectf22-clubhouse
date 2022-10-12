@@ -30,5 +30,5 @@ Dhruv, Arai, Noah, Priyank, Tharuth, Amy, Faraz
 
 ## What was your best/worst experience during sprint 1?
 
-Best: Everyone attended all standups
-Worst: Stand-ups too long and rushing to finish all the necessary deliverables (documentation and system design pdfs)
+* Best: Everyone attended all standups
+* Worst: Stand-ups too long and rushing to finish all the necessary deliverables (documentation and system design pdfs)
