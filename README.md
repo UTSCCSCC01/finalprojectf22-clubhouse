@@ -8,11 +8,10 @@ We used MongoDB for the database. We hosted our database through AWS via [MongoD
 Just create an account and select your plan then it will create a cluster which will host your database.
 
 - Configuration
-Open `/finalprojectf22-minimum-viable-percentage/config.env` and replace the database string with yours which you can get from your database host.
+1) Open `/finalprojectf22-minimum-viable-percentage/config.env` and replace the database string with yours which you can get from your database host.
 [Download sample config.env](https://cdn.discordapp.com/attachments/1016744999280459842/1023074197112623175/config.env)
-- Setup
-`npm i`
-Please make sure you have a config.env file in the main folder, which sets the ATLUS_URI environment variable 
+
+2) Run `npm i` to install dependencies.
 
 - Dev API Server
 `npm run api_serve`
