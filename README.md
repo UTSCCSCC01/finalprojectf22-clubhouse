@@ -6,11 +6,10 @@ Our project is a webapp which allows UTSC students to connect with clubs by shar
 
 We used MongoDB for the database. We hosted our database through AWS via [MongoDB Atlas](https://www.mongodb.com/atlas/database). There is a free plan available and the rest of this installation will assume you use it. 
 Just create an account and select your plan then it will create a cluster which will host your database.
-[Link to sample config.env (place in project folder)](https://cdn.discordapp.com/attachments/1016744999280459842/1023074197112623175/config.env)
 
 - Configuration
-Open `/finalprojectf22-minimum-viable-percentage/server/config.env` and replace the database string with yours which you can get from your database host.
-
+Open `/finalprojectf22-minimum-viable-percentage/config.env` and replace the database string with yours which you can get from your database host.
+[Download sample config.env](https://cdn.discordapp.com/attachments/1016744999280459842/1023074197112623175/config.env)
 - Setup
 `npm i`
 Please make sure you have a config.env file in the main folder, which sets the ATLUS_URI environment variable 
