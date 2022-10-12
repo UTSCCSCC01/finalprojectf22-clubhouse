@@ -4,14 +4,34 @@ import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGrou
 import SendIcon from '@mui/icons-material/Send';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { useNavigate } from 'react-router';
+import dayjs from "dayjs";
 
 const NewAnnouncement = () => {
 
     const navigate = useNavigate();
 
     const [subject, setSub] = useState("");
-    const [desc, setDesc] = useState("");
+    const [message, setMessage] = useState("");
     const [recipients, setRecips] = useState("everyone");
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const clubName = "ClubHouse";
+        const time = dayjs();
+        const newEvent = { clubName, subject, message, recipients, time };
+
+        fetch('http://localhost:5001/announcements/new', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newEvent)
+        }).then(() => {
+
+        }).catch((err) => {
+            console.log(err);
+        })
+        navigate("/"); // change path
+    };
 
     return (
         <Box
@@ -29,6 +49,7 @@ const NewAnnouncement = () => {
                 fullWidth
                 variant="outlined"
                 label="Subject"
+                onChange={(e) => setSub(e.target.value)}
                 required
             ></TextField>
 
@@ -38,6 +59,7 @@ const NewAnnouncement = () => {
                 variant="outlined"
                 minRows={3}
                 required
+                onChange={(e) => setMessage(e.target.value)}
                 label="Message"
             ></TextField>
 
@@ -46,8 +68,8 @@ const NewAnnouncement = () => {
                 <RadioGroup
                     row
                     defaultValue={recipients}
-                    onChange={() => {
-                        setRecips(value)
+                    onChange={(e) => {
+                        setRecips(e.target.value)
                     }}
                 >
                     <FormControlLabel value="everyone" control={<Radio />} label="Everyone" />
@@ -64,7 +86,7 @@ const NewAnnouncement = () => {
                     endIcon={<DeleteForeverOutlinedIcon />}
                 >Cancel</Button>
                 <Button
-                    //onClick={onSubmit}
+                    onClick={onSubmit}
                     sx={{width: "120px"}}
                     type="submit"
                     variant="contained"
