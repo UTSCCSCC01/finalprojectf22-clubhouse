@@ -6,6 +6,11 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import { useNavigate } from 'react-router';
 import dayjs from "dayjs";
 
+/**
+ * Component for displaying a new announcements form
+ * @component
+ */
+
 const NewAnnouncement = () => {
 
     const navigate = useNavigate();
@@ -14,6 +19,11 @@ const NewAnnouncement = () => {
     const [message, setMessage] = useState("");
     const [recipients, setRecips] = useState("everyone");
 
+    /**
+     * Write the announcement to the database and redirect to the home page
+     * @param {Event} e 
+     */
+    
     const onSubmit = (e) => {
         e.preventDefault();
 
