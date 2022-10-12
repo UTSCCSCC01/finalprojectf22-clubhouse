@@ -7,7 +7,7 @@ Dhruv, Arai, Noah, Priyank, Tharuth, Amy, Faraz
 ## Unfinished tasks
 
 * MIN-3: As a student, I want to see a good UI/layout when browsing through clubs
-* MIN-6: As a student, I want to be able to register for events
+* MIN-24: As a student, I want to be able to register for events
 
 ## What are practices that you should continue during next sprint?
 
