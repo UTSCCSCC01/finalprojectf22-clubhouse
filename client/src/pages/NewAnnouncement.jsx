@@ -19,12 +19,12 @@ const NewAnnouncement = () => {
 
         const clubName = "ClubHouse";
         const time = dayjs();
-        const newEvent = { clubName, subject, message, recipients, time };
+        const newAnnouncement = { clubName, subject, message, recipients, time };
 
         fetch('http://localhost:5001/announcements/new', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newEvent)
+            body: JSON.stringify(newAnnouncement)
         }).then(() => {
 
         }).catch((err) => {
