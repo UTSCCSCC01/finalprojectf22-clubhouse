@@ -1,12 +1,14 @@
 import React from 'react';
-import { Container, Stack, Typography, Grid, Divider,Box } from '@mui/material';
+import { Container, Stack, Typography, Grid, Divider,Box, Dialog, DialogTitle,DialogContent,DialogContentText } from '@mui/material';
 import { useState, useEffect } from 'react';
 import MemberCard from './MemberCard1.jsx';
 import { margin } from '@mui/system';
+import PotentialMemCard from './PotentialMemCard.jsx';
 
 export default function ClubAdminMain() {
     const [members,setMembers] = useState([]);
-    
+
+    const [potentialMembers, setPotentialMembers] = useState(['yo','bro']);
     useEffect(  ()  => {
           const  fetchmembers = async () => {
             const res = await fetch("http://127.0.0.1:5001/club/members");
@@ -38,10 +40,19 @@ export default function ClubAdminMain() {
             </Grid>
             
             <Grid item xs={6}>
-            <Typography style={{textAlign:'center'}} variant="h4">Requesting Members</Typography>
-                <Stack>
-                    <p>hey</p>
+            <Typography style={{textAlign:'center', marginBottom:'20px'}} variant="h4">Requesting Members</Typography>
+            <div className='cons'>
+                <Stack spacing={1} style={{width:'400px', textAlign:'center', margin:'0 auto'}}>
+                {potentialMembers.map((member) => {
+                        return (
+                        <><PotentialMemCard   name = {member}/>
+                                    
+                        </>);
+                    }
+                    ) }
                 </Stack>
+                
+            </div>
             </Grid>
   
         </Grid>
