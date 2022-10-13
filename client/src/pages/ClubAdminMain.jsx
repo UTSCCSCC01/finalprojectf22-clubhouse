@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Stack, Typography, Grid, Divider,Box } from '@mui/material';
 import { useState, useEffect } from 'react';
 import MemberCard from './MemberCard1.jsx';
+import RequestingMemberCard from './RequestingMemberCard.jsx';
 import { margin } from '@mui/system';
 
 export default function ClubAdminMain() {
@@ -38,10 +39,15 @@ export default function ClubAdminMain() {
             </Grid>
             
             <Grid item xs={6}>
-            <Typography style={{textAlign:'center'}} variant="h4">Requesting Members</Typography>
-                <Stack>
-                    <p>hey</p>
+            <Typography style={{textAlign:'center', marginBottom:'20px'}} variant="h4">Requesting Members</Typography>
+            <div className='cons'>
+            <Stack spacing={1}  style={{width:'400px', height:'400px', textAlign:'center', margin:'10px auto'}} divider={<Divider orientation="horizontal" flexItem />}>
+            {members.map((member) => {
+                        return <RequestingMemberCard name={member}/>
+                    }
+                    ) }
                 </Stack>
+                </div>
             </Grid>
   
         </Grid>
