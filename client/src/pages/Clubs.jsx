@@ -54,28 +54,23 @@ class Clubs extends Component{
   displayClubInfo = (clubs) => {
     if (!clubs.length) return null;
     return clubs.map((club, index) => (
-      <ClubCard key={index} eImage={club.image} cName={club.clubName} cDesc={club.clubDesc} cPhone={club.clubPhone} cEmail={club.email}></ClubCard>
       
-      /*<div key={index}>
-        <Box m={2} pt={3}>
-          <Typography style={{paddingtop: "10px"}} variant="h4" align="left">{club.clubName}</Typography>
-          <p><b>{club.clubDesc}</b></p>
-          <p>{club.clubPhone}</p>
-          <p>{club.email}</p>
-        </Box>
-      </div>*/
+      <Grid item key={index} xs={12} sm={6} md={4}>
+        <ClubCard key={index} eImage={club.image} cName={club.clubName} cDesc={club.clubDesc} cPhone={club.clubPhone} cEmail={club.email}></ClubCard>
+      </Grid>
     ));
   }
 
   render() {
     console.log('State: ', this.state);
     return(
-      <div>
+
+      <Container sx={{ py: 4 }} maxWidth="md">
         <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse All Clubs</Typography>
-        <div className="club-">
+      <Grid container spacing={5}>
           {this.displayClubInfo(this.state.clubs)}
-        </div>
-      </div>
+      </Grid>
+      </Container>
     )
   }
 }
