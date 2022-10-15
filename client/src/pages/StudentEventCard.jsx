@@ -7,8 +7,14 @@ import dateFormat from 'dateformat';
 import EventIcon from '@mui/icons-material/Event';
 import TimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActions, Box} from '@mui/material';
 import { useState } from 'react';
+import EventTag from "./EventTag.jsx"
+import { styled } from '@mui/material/styles';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import RsvpIcon from '@mui/icons-material/Rsvp';
 
 /**
  * Display fetched information in a card
@@ -16,34 +22,71 @@ import { useState } from 'react';
  * @param {*} props 
  * @component
  */
-function StudentEventCard(props) {
-  
-  const [cName, setCname] = useState('');
-  const [eDate, setEdate] = useState('');
-  const [eName, setEname] = useState('');
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+
+
+export default function StudentEventCard(props) {
+    const [cName, setCname] = useState('');
+    const [eDate, setEdate] = useState('');
+    const [eName, setEname] = useState('');
+    const [eTags, setEtags] = useState('');
+    const [eDesc, setEdesc] = useState('');
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
 
   return (
-    <>  
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <CardActionArea>
-            <CardMedia
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
                 component="img"
                 height="250"
                 image={props.eImage} alt="UTSC"/>
-            <CardContent sx={{ flexGrow: 1 }}>
+      <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>  
-                <Typography><EventIcon fontSize="small" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
-                <Typography><TimeIcon fontSize="small"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
-                <Typography> <LocationOnIcon fontSize="small"></LocationOnIcon> {props.eLoc} </Typography>
+                <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
+                <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
+                <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>
+                
+                <Box display="inline-flex" flexWrap="wrap" mt="20px"> 
+                    {(props.eTags).map((tag) => (
+                        <EventTag data={tag}/> 
+                    ))}
+                </Box>
+                
             </CardContent>
-        </CardActionArea>
-            <CardActions>
-                <Button size="small">More info</Button>
-                <Button size="small" href={props.eJoin}>Sign up</Button>
-            </CardActions>
+
+
+      <CardActions disableSpacing>
+        <IconButton aria-label="RSVP"  href={props.eJoin}>
+          <RsvpIcon color="primary" sx={{ fontSize: 40 }}/>
+        </IconButton>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="more info"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>{props.eDesc}</Typography>
+        </CardContent>
+      </Collapse>
     </Card>
-    </>
   );
 }
-
-export default StudentEventCard;

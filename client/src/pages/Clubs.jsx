@@ -13,6 +13,7 @@ import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import { PostAddSharp } from "@mui/icons-material";
+import Checkbox from '@mui/material/Checkbox';
 import '../styles.css';
 
 /**
@@ -60,17 +61,20 @@ class Clubs extends Component{
       </Grid>
     ));
   }
+  
 
   render() {
     console.log('State: ', this.state);
-    return(
 
-      <Container sx={{ py: 4 }} maxWidth="md">
+    return(
+      <>
+      <Container sx={{ py: 4, px: 4}} maxWidth="lg">
         <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse All Clubs</Typography>
-      <Grid container spacing={5}>
+      <Grid container spacing={3}>
           {this.displayClubInfo(this.state.clubs)}
       </Grid>
       </Container>
+      </>
     )
   }
 }

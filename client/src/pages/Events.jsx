@@ -93,7 +93,7 @@ function Events(props) {
           <Container maxWidth="lg" >
             <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
             
-            <FormControl sx ={{ minWidth: 120, marginLeft: '850px'}} variant="outlined" size="small">
+            <FormControl sx ={{ minWidth: 120, marginLeft: '1010px'}} variant="outlined" size="small">
                 <InputLabel id="simple-select-label" >Sort by</InputLabel>
                 <Select
                     labelId="simple-select-label"
@@ -108,7 +108,7 @@ function Events(props) {
                     <MenuItem value={"Categories"}>Categories</MenuItem>
                 </Select>
                 </FormControl>
-                <FormControl sx={{ m: 2, width: 150, marginLeft: '850px' }} size="small">
+                <FormControl sx={{ m: 2, width: 150, marginLeft: '980px' }} size="small">
                   <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                   <Select disabled={filter!=="Categories" ? true : false}
                     labelId="multiple-checkbox-label"
@@ -132,11 +132,11 @@ function Events(props) {
             
       </Box>
       
-      <Container sx={{ py: 4 }} maxWidth="md">
-          <Grid container spacing={5}>
+      <Container sx={{ py: 4, px: 4}} maxWidth="lg">
+          <Grid container spacing={3}>
             {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => (
               <Grid item key={item} xs={12} sm={6} md={4}>
-                <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc}/>
+                <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
               </Grid>
             ))}
           </Grid>
