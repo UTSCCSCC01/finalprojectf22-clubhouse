@@ -31,8 +31,7 @@ function Events(props) {
     },
   };
 
-  // let tags = [ "arts", "sports", "culture"];
-  const [tags, setTags ] = useState([]);
+  let tags = [ "arts", "sports", "culture"];
 
   const [tagName, setTagName] = React.useState([]);
 
@@ -49,7 +48,6 @@ function Events(props) {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
-  console.log(tagName);
     const [filter, setFilter] = React.useState('');
 
     /**
@@ -78,9 +76,7 @@ function Events(props) {
         let url = 'http://127.0.0.1:5001/events';
         if (filter==="Date"){ url = 'http://127.0.0.1:5001/eventssortByDate';}
         else if (filter==="Clubs"){ url = 'http://127.0.0.1:5001/eventssortByClubs';}
-        else if (filter==="Categories"){ 
-          
-          url = 'http://127.0.0.1:5001/eventssortByCategories';}
+        else if (filter==="Categories"){ url = 'http://127.0.0.1:5001/eventssortByCategories';}
         else{ url = 'http://127.0.0.1:5001/events';}
         return url;
       };
@@ -89,38 +85,15 @@ function Events(props) {
       setItems(data);  
     };
     getevents();
-  },[filter, tagName]);
+  },[filter]);
 
-  useEffect(() => {
-    const gettags = async ()=>{
-      /**
-       * Set url depending on the selected sorting type
-       * @param {string} filter 
-       */
-      const resTags = await fetch('http://127.0.0.1:5001/tags');
-      const dataTags = await resTags.json();
-      setTags(dataTags);  
-    };
-    gettags();
-  },[]);
-
-  const TagMapped = [];
-  for (var key in tags){
-    for (var key2 in tags[key]){
-        if (key2==="eventTags"){
-          for (var tagKey in tags[key][key2]){
-            TagMapped.push(tags[key][key2][tagKey]);
-          }
-        }
-    }
-  }
   return (
     <div>
       <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
           <Container maxWidth="lg" >
             <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
             
-            <FormControl sx ={{ minWidth: 120, marginLeft: '1000px'}} variant="outlined" size="small">
+            <FormControl sx ={{ minWidth: 120, marginLeft: '1010px'}} variant="outlined" size="small">
                 <InputLabel id="simple-select-label" >Sort by</InputLabel>
                 <Select
                     labelId="simple-select-label"
@@ -147,7 +120,7 @@ function Events(props) {
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                   >
-                    {TagMapped.map((tag) => (
+                    {tags.map((tag) => (
                       <MenuItem key={tag} value={tag}>
                         <Checkbox checked={tagName.indexOf(tag) > -1} />
                         <ListItemText primary={tag} />

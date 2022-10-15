@@ -108,7 +108,7 @@ eventRoutes.route("/:id").delete((req, response) => {
   });
 });
 
-module.exports = eventRoutes;
+// module.exports = eventRoutes;
 
  eventRoutes.route("/eventssortByClubs").get(function (req, res) {
   let db_connect = dbo.getDb("main");

@@ -17,9 +17,10 @@ const EventTag = ({ data}) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: "3px 4px 3px 12px",
+            padding: "6px 8px 6px 8px",
         }}>
-            <Typography align="center">{data}</Typography>
+
+        <Typography align="center">{data}</Typography>
         </Box>
     );
 }
