@@ -133,5 +133,16 @@ eventRoutes.route("/:id").delete((req, response) => {
       res.json(result);
     });
  }); 
+
+ eventRoutes.route("/eventsNone").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  db_connect
+    .collection("eventsNone")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ }); 
  
 module.exports = eventRoutes;

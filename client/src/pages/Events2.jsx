@@ -53,8 +53,7 @@ function Events(props) {
      * @param {string} event 
      */
     const handleChange = (event) => {
-      setFilter(event.target.value);
-      
+      setFilter(event.target.value); 
     };
 
   const [items, setItems ] = useState([]);
@@ -70,14 +69,18 @@ function Events(props) {
 
   let contains = false;
   const conTains = (arrayTag) => {
-      contains = false;
+    contains = false;
+    arrayTag.forEach((itemArray) => {
       tagName.forEach((checkedTag) => {
-          if ((arrayTag.eventTags).includes(checkedTag)){
-              contains = true;
-              return contains; 
-          }
+        if ((itemArray.eventTags).includes(checkedTag)){
+          contains = true;
+          // console.log(contains);
+          return contains;
+        }
+        else{contains=false;}
       })
-      return contains;
+    })
+    return contains;
 };
 
   /**
@@ -95,17 +98,16 @@ function Events(props) {
         let url = 'http://127.0.0.1:5001/events';
         if (filter==="Date"){ url = 'http://127.0.0.1:5001/eventssortByDate';}
         else if (filter==="Clubs"){ url = 'http://127.0.0.1:5001/eventssortByClubs';}
-        else if (filter==="Categories" && Object.keys(tagName).length>=1){ url = 'http://127.0.0.1:5001/eventssortByCategories';}
+        else if (filter==="Categories"){ url = 'http://127.0.0.1:5001/eventssortByCategories';}
         else{ url = 'http://127.0.0.1:5001/events';}
         return url;
       };
       const res = await fetch(changeFilter(filter));
       const data = await res.json();
-      setItems(data); 
-      
+      setItems(data);  
     };
     getevents();
-  },[filter, tagName]);
+  },[filter, tagName, conTains(items)]);
 
   useEffect(() => {
     const gettags = async ()=>{
@@ -118,6 +120,12 @@ function Events(props) {
     };
     gettags();
   },[]);
+
+
+
+// console.log(contains);
+
+
 
 
   if (filter==="Categories"){
@@ -165,16 +173,21 @@ function Events(props) {
         </Box>
         <Container sx={{ py: 4, px: 4}} maxWidth="lg">
             <Grid container spacing={3}>
-            {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => {
-                if (conTains(item) && tagName){
-                    return (<Grid item key={item} xs={12} sm={6} md={4}>
-                             <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
-                            </Grid>)
+              {console.log(conTains(items))}
+              {/* {items.forEach((item) => {
+                if (conTains(tagName)){
+                  item.map((item) => {
+                    <Grid item key={item} xs={12} sm={6} md={4}>
+                  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
+                  </Grid>
+                  })
                 }
-                else{
-                    console.log("shouldnt display anything")
-                }          
-                    })}
+              })} */}
+              {items && conTains(items) && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => (
+                <Grid item key={item} xs={12} sm={6} md={4}>
+                  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
+                </Grid>
+              ))}
             </Grid>
           </Container>
      </div>   
