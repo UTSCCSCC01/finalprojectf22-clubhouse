@@ -29,7 +29,7 @@ eventRoutes.route("/eventssortByDate").get(function (req, res) {
   db_connect
     .collection("events")
     .find({})
-    .sort('eventDate')
+    .sort('eventStartTime')
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);

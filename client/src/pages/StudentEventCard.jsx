@@ -48,6 +48,8 @@ export default function StudentEventCard(props) {
         setExpanded(!expanded);
     };
 
+    // console.log(props.tagName);
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
