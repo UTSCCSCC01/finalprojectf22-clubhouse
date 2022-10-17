@@ -19,7 +19,6 @@ import Checkbox from '@mui/material/Checkbox';
  * @component
  */
 function Events(props) {
-  
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -86,7 +85,6 @@ function Events(props) {
    */
   useEffect(() => {
     const getevents = async ()=>{
-      
       /**
        * Set url depending on the selected sorting type
        * @param {string} filter 
@@ -105,7 +103,7 @@ function Events(props) {
       
     };
     getevents();
-  },[filter, tagName]);
+  },[filter]);
 
   useEffect(() => {
     const gettags = async ()=>{
@@ -119,10 +117,8 @@ function Events(props) {
     gettags();
   },[]);
 
-
-  if (filter==="Categories"){
-    return (
-      <div>
+  return (
+    <div>
         <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
             <Container maxWidth="lg" >
               <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
@@ -163,80 +159,30 @@ function Events(props) {
                   </FormControl>
               </Container>     
         </Box>
-        <Container sx={{ py: 4, px: 4}} maxWidth="lg">
+        <Container sx={{ py: 4}} maxWidth="lg">
             <Grid container spacing={3}>
             {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => {
-                if (conTains(item) && tagName){
-                    return (<Grid item key={item} xs={12} sm={6} md={4}>
+              if (filter=="Categories" && conTains(item)) {
+                    return (<Grid item key={item}>
                              <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
                             </Grid>)
-                }
-                else{
-                    console.log("shouldnt display anything")
-                }          
+              }
+              else if ( !(filter=="Categories" && !conTains(item)) && filter!="Categories"){
+                return (<Grid item key={item} >
+                  {/* <Grid item key={item} xs={12} sm={6} md={4}> */}
+                  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
+                 </Grid>)
+              }
+              else{
+                return (
+                <Grid item key={item} >
+                 </Grid>
+                )
+              }
                     })}
             </Grid>
           </Container>
-     </div>   
-    );
-  }
-  else {
-    return (
-      <div>
-        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
-            <Container maxWidth="lg" >
-              <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
-              
-              <FormControl sx ={{ minWidth: 120, marginLeft: '1000px'}} variant="outlined" size="small">
-                  <InputLabel id="simple-select-label" >Sort by</InputLabel>
-                  <Select
-                      labelId="simple-select-label"
-                      id="simple-select"
-                      value={filter}
-                      label="Sort by"
-                      onChange={handleChange}
-                  >
-                      <MenuItem value={"Empty"}> </MenuItem>
-                      <MenuItem value={"Date"}>Date</MenuItem>
-                      <MenuItem value={"Clubs"}>Clubs</MenuItem>
-                      <MenuItem value={"Categories"}>Categories</MenuItem>
-                  </Select>
-                  </FormControl>
-                  <FormControl sx={{ m: 2, width: 150, marginLeft: '980px' }} size="small">
-                    <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
-                    <Select disabled={filter!=="Categories" ? true : false}
-                      labelId="multiple-checkbox-label"
-                      id="multiple-checkbox"
-                      multiple
-                      value={tagName}
-                      onChange={handleChangeTag}
-                      input={<OutlinedInput label="Tag" />}
-                      renderValue={(selected) => selected.join(', ')}
-                      MenuProps={MenuProps}
-                    >
-                      {TagMapped.map((tag) => (
-                        <MenuItem key={tag} value={tag}>
-                          <Checkbox checked={tagName.indexOf(tag) > -1} />
-                          <ListItemText primary={tag} />
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-              </Container>        
-        </Box>
-        <Container sx={{ py: 4, px: 4}} maxWidth="lg">
-            <Grid container spacing={3}>
-              {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => (
-                <Grid item key={item} xs={12} sm={6} md={4}>
-                  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-     </div>   
-    );
-  }
-}  
-
-
+     </div>
+  );
+}
 export default Events;

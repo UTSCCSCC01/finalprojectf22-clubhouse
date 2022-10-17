@@ -51,12 +51,12 @@ export default function StudentEventCard(props) {
     // console.log(props.tagName);
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} >
       <CardMedia
                 component="img"
                 height="250"
                 image={props.eImage} alt="UTSC"/>
-      <CardContent sx={{ flexGrow: 1 }}>
+      <CardContent sx={{ flexGrow: 1, minWidth: 350 }}>
                 <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>  
                 <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
                 <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
