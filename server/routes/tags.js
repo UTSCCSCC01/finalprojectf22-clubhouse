@@ -24,5 +24,16 @@ tagRoutes.route("/tags").get(function (req, res) {
     });
  });
 
+ tagRoutes.route("/clubtags").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  db_connect
+    .collection("clubTags")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ });
+
  
 module.exports = tagRoutes;

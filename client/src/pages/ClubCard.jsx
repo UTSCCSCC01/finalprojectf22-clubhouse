@@ -23,6 +23,7 @@ function ClubCard(props) {
   const [cPhone, setCphone] = useState('');
   const [cEmail, setCemail] = useState('');
 
+
   return (
     <>
 
