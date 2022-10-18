@@ -13,8 +13,18 @@ const ObjectId = require("mongodb").ObjectId;
  * sets the cookie to the username if the login matches database.
  */
 loginRoutes.route("/login").post(function (req, res) {
+  let club = false;
   let db_connect = dbo.getDb();
   let myquery = { email: req.body.email };
+  db_connect
+    .collection("clubs")
+    .findOne(myquery, function (err, result) {
+      if (err) throw err;
+      if (result != null) {
+        club = true;
+      }
+    });
+  myquery = { email: req.body.email };
   db_connect
     .collection("users")
     .findOne(myquery, function (err, result) {
@@ -24,7 +34,13 @@ loginRoutes.route("/login").post(function (req, res) {
         correct = false;
       } else {
         if (result.password == req.body.password) {
-          res.cookie("username", req.body.email, {maxAge: 3600000}); // test httpOnly: true, signed: true for security
+          let cookiestring = req.body.email;
+          if (club) {
+            cookiestring = "CLUB"+cookiestring;
+          } else {
+            cookiestring = "USER"+cookiestring;
+          }
+          res.cookie("username", cookiestring, {maxAge: 3600000}); // test httpOnly: true, signed: true for security
           correct = true;
         } else {
           correct = false;
