@@ -14,13 +14,16 @@ const ObjectId = require("mongodb").ObjectId;
  */
 loginRoutes.route("/login").post(function (req, res) {
   let club = false;
+  let cookiestring = "";
   let db_connect = dbo.getDb();
   let myquery = { email: req.body.email };
   db_connect
     .collection("clubs")
     .findOne(myquery, function (err, result) {
       if (err) throw err;
-      if (result != null) {
+      if (result == null) {
+        club = false;
+      } else {
         club = true;
       }
     });
@@ -34,19 +37,19 @@ loginRoutes.route("/login").post(function (req, res) {
         correct = false;
       } else {
         if (result.password == req.body.password) {
-          let cookiestring = req.body.email;
+          cookiestring = req.body.email;
           if (club) {
             cookiestring = "CLUB"+cookiestring;
           } else {
             cookiestring = "USER"+cookiestring;
           }
-          res.cookie("username", cookiestring, {maxAge: 3600000}); // test httpOnly: true, signed: true for security
+          res.cookie("username", cookiestring, {maxAge: 3600000, sameSite: 'none', secure: true}); // test httpOnly: true, signed: true for security
           correct = true;
         } else {
           correct = false;
         }
       }
-      res.json( { valid: correct } );
+      res.json( { valid: correct, cookie: cookiestring } );
     });
 });
 /**

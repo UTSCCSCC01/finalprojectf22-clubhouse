@@ -27,9 +27,8 @@ class Login extends Component {
       credentials: 'include'
     }).then(response => response.text())
     .then(data => {
-      console.log(data);
       if (data != "false") {
-        location.href = "http://localhost:3000/testlogin";
+        location.href = "http://localhost:3000/testlogin"; //redirect if already logged in
       }
     });
   }
@@ -61,7 +60,13 @@ class Login extends Component {
       .then(data => {
         var v = JSON.parse(data);
         if (v.valid) {
-          location.href = "http://localhost:3000/testlogin";
+          let gotcookie = v.cookie;
+          console.log(gotcookie);
+          if (gotcookie.substring(0,4) === "CLUB") {
+            location.href = "http://localhost:3000/clubhome";
+          } else {
+            location.href = "http://localhost:3000/home";
+          }
         } else {
           alert("Incorrect Password!")
         }
