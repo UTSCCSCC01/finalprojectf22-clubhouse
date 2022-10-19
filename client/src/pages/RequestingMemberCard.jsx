@@ -16,7 +16,7 @@ function RequestingMemberCard(props) {
             <Container sx={{marginBottom: "20px"}}>
                 <Grid container spacing={1}>
                     <Grid item xs={8.5} sx={{ overflowX: "auto",}}>
-                    <Typography variant="h7" component="div" sx={{marginTop: "6%"}}>
+                    <Typography variant="h7" component="div" sx={{marginTop: "6%"}} noWrap={true}>
                     {props.name}
                     </Typography>
                     </Grid>

@@ -71,7 +71,7 @@ function ClubAdminViewProfile(props) {
         
       }
       fetchImage();
-    });
+    });l
     
   return (
     
