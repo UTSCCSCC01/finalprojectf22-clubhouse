@@ -24,6 +24,9 @@ export default function PotentialMemCard(props) {
     props.onDeny(props.member._id);
   };
   
+  const handleAcceptClick = () => {
+    props.onAccept(props.member._id);
+  };
   // console.log(props.member._id);
 
   return (
@@ -52,7 +55,7 @@ export default function PotentialMemCard(props) {
         </Dialog>
       </Grid>
       <Grid item>
-      <IconButton aria-label="accept request" color='success'>
+      <IconButton aria-label="accept request" color='success' onClick={handleAcceptClick}>
           <Check />
         </IconButton>
         <IconButton aria-label="deny request" color='warning' onClick={handleDenyClick}>

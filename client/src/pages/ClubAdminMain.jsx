@@ -40,17 +40,46 @@ export default function ClubAdminMain() {
 
     const denyMember = ((id) => {
         const  deletePotMem = async () => {
-        const response = await fetch("http://127.0.0.1:5001/club/reject/" + id , {method: 'DELETE'});
+        const response = await fetch("http://127.0.0.1:5001/club/potentialMembers/" + id , {method: 'DELETE'});
         console.log(potentialMembers);
       }
       deletePotMem();
       setPotentialMembers(potentialMembers.filter((mem) => {
-        console.log(mem);
+        // console.log(mem);
         return mem._id != id;
     }));
 });
         
-  
+    const acceptMember = ((id) => {
+        let student={};
+        const getStudent = () => {
+            student = {
+                userName: "test Name",
+                email: "test email",
+                clubName: "test club",
+                clubEmail: "test club email",
+            };
+            return student;
+        }
+        const acceptPotMem = async () => {
+
+            
+            fetch('http://localhost:5001/club/potentialMembers', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(student)
+            }).then(() => {
+    
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+    student = getStudent();
+    acceptPotMem();
+    denyMember(id);
+    //have to change members array state
+    console.log(members);
+});
 
     return (
        
@@ -80,7 +109,7 @@ export default function ClubAdminMain() {
                 <Stack spacing={1} style={{width:'400px', textAlign:'center', margin:'0 auto'}} divider={<Divider orientation="horizontal" flexItem />}>
                 {potentialMembers.map((member) => {
                         return (
-                        <PotentialMemCard  member = {member} onDeny = {denyMember}/>
+                        <PotentialMemCard  member = {member} onDeny = {denyMember} onAccept={acceptMember}/>
 
                         );
                     }
