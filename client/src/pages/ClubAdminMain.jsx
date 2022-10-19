@@ -13,8 +13,12 @@ export default function ClubAdminMain() {
           const  fetchmembers = async () => {
             const res = await fetch("http://127.0.0.1:5001/club/members");
           const data = await res.json();
-          
-          setMembers(data.members);
+          const a=[];
+          for (let index = 0; index < data.length; index++) {
+             a[index] = data[index].userName;
+            
+          }
+          setMembers(a);
           
         } 
         fetchmembers();
