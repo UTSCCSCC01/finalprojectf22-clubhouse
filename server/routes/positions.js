@@ -25,7 +25,7 @@ positionsRoutes.route("/positions").get(function (req, res) {
 });
 
 // This section will help you get a single record by id
-positionsRoutes.route("/positions/:id").get(function (req, res) {
+positionsRoutes.route("/positions/find").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect
@@ -45,6 +45,8 @@ positionsRoutes.route("/positions/create").post(function (req, response) {
     jobPosition: req.body.jobPosition,
     jobDescription: req.body.jobDescription,
     jobRequirements: req.body.jobRequirements,
+    email: req.body.email,
+    clubImage: req.body.clubImage,
   };
   db_connect.collection("positions").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -53,7 +55,7 @@ positionsRoutes.route("/positions/create").post(function (req, response) {
 });
 
 // This section will help you update a record by id.
-positionsRoutes.route("/positions/:id").post(function (req, response) {
+positionsRoutes.route("/positions/update").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
@@ -62,6 +64,8 @@ positionsRoutes.route("/positions/:id").post(function (req, response) {
       jobPosition: req.body.jobPosition,
       jobDescription: req.body.jobDescription,
       jobRequirements: req.body.jobRequirements,
+      email: req.body.email,
+      clubImage: req.body.clubImage,
     },
   };
   db_connect
@@ -74,7 +78,7 @@ positionsRoutes.route("/positions/:id").post(function (req, response) {
 });
 
 // This section will help you delete a record
-positionsRoutes.route("/:id").delete((req, response) => {
+positionsRoutes.route("/delete").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection("positions").deleteOne(myquery, function (err, obj) {

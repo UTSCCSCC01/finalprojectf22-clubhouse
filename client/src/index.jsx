@@ -16,6 +16,7 @@ import TestLogin from './pages/TestLogin.jsx';
 import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
+import PositionCreate from './pages/PositionCreate.jsx'
 import PositionPage from './pages/PositionPage.jsx'
 
 ReactDOM.render(
@@ -31,13 +32,14 @@ ReactDOM.render(
         <Route exact path={"/club-admin-profile"} element={<ClubAdminProfilePage email = "email" description = "description" phoneNumber = "1234567890"
       clubName = "Club Name"
       />} />
-        <Route exact path="/clubs" element={<Clubs />} />
+        <Route path="/clubs" element={<Clubs />} />
         <Route exact path="/create-event" element={<CreateEvent />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/events" element={<Events />} />
-        <Route exact path="/positions" element={<PositionPage />} />
+        <Route exact path="/create-position" element={<PositionCreate />} />
+        <Route path="/positions" element={<PositionPage />} />
       </Routes>
     </Router>
   ),
