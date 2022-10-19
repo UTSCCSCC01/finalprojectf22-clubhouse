@@ -16,6 +16,7 @@ import TestLogin from './pages/TestLogin.jsx';
 import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
+import PositionPage from './pages/PositionPage.jsx'
 
 ReactDOM.render(
   (
@@ -36,6 +37,7 @@ ReactDOM.render(
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/events" element={<Events />} />
+        <Route exact path="/positions" element={<PositionPage />} />
       </Routes>
     </Router>
   ),
