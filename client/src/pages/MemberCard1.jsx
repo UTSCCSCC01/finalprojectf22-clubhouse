@@ -20,7 +20,7 @@ export default function MemberCard(props) {
     <Card  >
       <CardContent>
         
-        <Typography variant="h7" component="div">
+        <Typography variant="h7" component="div" noWrap={true}>
           {props.name}
         </Typography>
         

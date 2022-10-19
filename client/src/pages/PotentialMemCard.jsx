@@ -18,20 +18,32 @@ export default function PotentialMemCard(props) {
   const handleCloseMember = () => {
     setOpen(false);
   };
+
+  const handleDenyClick = () => {
+    
+    props.onDeny(props.member._id);
+  };
+  
+  const handleAcceptClick = () => {
+    props.onAccept(props.member._id);
+  };
+  // console.log(props.member._id);
+
   return (
     <Card sx={{ width:'400'}} >
       <Grid container>
         <Grid item>
       <CardActionArea sx={{ width:'300'}} onClick={handleClickMember}>
-      <CardContent >
+      <CardContent>
         
-        <Typography variant="h7" component="div">
-          {props.name}
+        
+        <Typography variant="h7" component="div" noWrap={true}>
+         {props.member.clubEmail}
         </Typography>
-       
+      
         
       </CardContent>
-      </CardActionArea >
+      </CardActionArea>
       <Dialog  open={open} keepMounted onClose={handleCloseMember}>
             <DialogTitle >{props.name}</DialogTitle>
                <DialogContent>
@@ -43,10 +55,10 @@ export default function PotentialMemCard(props) {
         </Dialog>
       </Grid>
       <Grid item>
-      <IconButton aria-label="share">
+      <IconButton aria-label="accept request" color='success' onClick={handleAcceptClick}>
           <Check />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="deny request" color='warning' onClick={handleDenyClick}>
           <Clear />
         </IconButton>
         </Grid>
