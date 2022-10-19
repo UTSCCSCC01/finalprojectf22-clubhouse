@@ -38,17 +38,17 @@ export default function PotentialMemCard(props) {
         
         
         <Typography variant="h7" component="div" noWrap={true}>
-         {props.member.clubEmail}
+         {props.member.userName}
         </Typography>
       
         
       </CardContent>
       </CardActionArea>
       <Dialog  open={open} keepMounted onClose={handleCloseMember}>
-            <DialogTitle >{props.name}</DialogTitle>
+            <DialogTitle >{props.member.userName}</DialogTitle>
                <DialogContent>
                   <DialogContentText id="alert-dialog-slide-description">
-                     Temp info. will go here from the daata base.
+                  {props.member.email}
                     </DialogContentText>
                  </DialogContent>
         

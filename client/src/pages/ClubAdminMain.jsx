@@ -73,13 +73,15 @@ export default function ClubAdminMain() {
 });
         
     const acceptMember = ((id) => {
+
         let student={};
+        const acceptedMember = potentialMembers.find(mem => mem._id == id)
         const getStudent = () => {
             student = {
-                userName: "test Name",
-                email: "test email",
-                clubName: "test club",
-                clubEmail: "test club email",
+                userName: acceptedMember.userName,
+                email: acceptedMember.email,
+                clubName: acceptedMember.clubName,
+                clubEmail: acceptedMember.clubEmail,
             };
             return student;
         }
