@@ -74,7 +74,7 @@
 * COS:
     * Make sure club admins can review all the applications for posting
     * Make sure all students can see the available hiring ads.
-    * Easily able to choose qualified members for posting in an orderly fashion
+    * Easily able to choose qualified members for posting in an orderly fashion. (Tentative, can also just leave it to email).
 
 15. As a club admin, I want to be able to request to register a club so I can have a club account.
 * COS:
