@@ -99,7 +99,7 @@ export default function ClubAdminMain() {
     student = getStudent();
     acceptPotMem();
     denyMember(id);
-    //have to change members array state
+    setMembers([...members, student.userName]);
     console.log(members);
 });
 

@@ -9,7 +9,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 clubMainRoutes.route("/club/members").get(function (req, res) {
     let db_connect = dbo.getDb("main");
-    let myquery = { clubName: "The Volleyball Club" };
+    let myquery = {};
     db_connect
       .collection("club-members")
       .find(myquery).toArray(function (err, result) {
@@ -21,7 +21,7 @@ clubMainRoutes.route("/club/members").get(function (req, res) {
 
    clubMainRoutes.route("/club/potentialMembers").get(function (req, res) {
     let db_connect = dbo.getDb("main");
-    let myquery = { clubEmail: "d@mail.utoronto.ca" };
+    let myquery = {};
     db_connect
       .collection("clubApplicants")
       .find(myquery)
