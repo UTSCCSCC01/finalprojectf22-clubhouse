@@ -60,9 +60,7 @@ class Login extends Component {
       .then(data => {
         var v = JSON.parse(data);
         if (v.valid) {
-          let gotcookie = v.cookie;
-          console.log(gotcookie);
-          if (gotcookie.substring(0,4) === "CLUB") {
+          if (v.accountType === "club") {
             location.href = "http://localhost:3000/clubhome";
           } else {
             location.href = "http://localhost:3000/home";
