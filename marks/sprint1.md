@@ -160,9 +160,7 @@ Tracking on Jira Total Mark: 20 / 20
   - Started stories that are incomplete will be counted
   - Mark Breakdown: [x = Percentage of story points completed * 20]
 
-  Your Mark: 0 / 20
-
--- unclear as to which stories are complete, JIRA does not show the stories listed in sprint1.md as done, maybe JIRA did not allow for this. Will update after asking which stories are marked as complete
+  Your Mark: 20 / 20
 
 ---
 ## System Design (PDF or MD file or another suitable format) (max 10 marks) 
@@ -217,15 +215,13 @@ Tracking on Jira Total Mark: 20 / 20
   - 1 mark = documentation has been created for frontend and backend systems with some errors
   - 0 marks = documentation has not been created
 
-  Your Mark: __ / 14
+  Your Mark: 14 / 14
 
 ---
 
 
 ## Total Mark
 
-__ / 89
-
-55 / 75 -- without demo included
+89 / 89
 
 Note: This mark will be updated after the demo is presented
