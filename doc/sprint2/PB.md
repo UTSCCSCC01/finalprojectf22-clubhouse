@@ -1,5 +1,7 @@
 # Product Backlog
 
+Trello Invite: https://trello.com/invite/b/RwdqWLOQ/ATTI5e52efad3543012c3670073555f50d9fFA228C4D/utsc-clubhouse
+
 ### High:
 
 1. As a student, I want to register so that I can securely manage and use my individualized account.
