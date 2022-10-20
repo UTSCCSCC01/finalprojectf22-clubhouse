@@ -15,7 +15,6 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
     - Clubs are sorted by the user’s “areas of interest” by default
     - Clubs can be filtered and sorted by categories that the clubs put themselves into
     - Students can choose the specific category they want to browse
-
 - Subtasks: 
     - Create filter UI on clubs and events pages
     - Fetch clubs tags and event tags from the database
@@ -27,8 +26,8 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
 - Criteria of satisfaction: 
     - Make sure every student can apply to any of the clubs on the clubs profile page.
     - Once accepted, the student must receive all notifications related to that club.
-- Subtasks:  
-    - 
+ - Subtasks:  
+    - add subtasks
 
 3. **MIN-8:** 
 - Priority: high
@@ -47,7 +46,8 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
 - Criteria of satisfaction: 
     - Make sure a list of current members of the club is shown to the club admin
 - Subtasks: 
-    - 
+    - Create UI page
+    - Create functionality to view members
 
 5. **MIN-13:**
 - Priority: medium
@@ -69,9 +69,8 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
     - Make sure club admins can review all the applications for posting
     - Make sure all students can see the available hiring ads.
     - Easily able to choose qualified members for posting in an orderly fashion
-
 - Subtasks:  
-    - 
+    - add subtasks
 
 7. **MIN-25:**
 - Priority: low
@@ -81,7 +80,7 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
     - The club admin account will be associated with the specified email by the system admin
     - Logging in as a club will send you to the club-side home page
 - Subtasks:  
-    - 
+    - add subtasks
 
 ## Spikes 
 - 
