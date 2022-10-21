@@ -29,7 +29,7 @@ eventRoutes.route("/eventssortByDate").get(function (req, res) {
   db_connect
     .collection("events")
     .find({})
-    .sort('eventDate')
+    .sort('eventStartTime')
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -108,7 +108,7 @@ eventRoutes.route("/:id").delete((req, response) => {
   });
 });
 
-module.exports = eventRoutes;
+// module.exports = eventRoutes;
 
  eventRoutes.route("/eventssortByClubs").get(function (req, res) {
   let db_connect = dbo.getDb("main");
@@ -128,6 +128,17 @@ module.exports = eventRoutes;
     .collection("events")
     .find({})
     .sort('clubName')
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ }); 
+
+ eventRoutes.route("/eventsNone").get(function (req, res) {
+  let db_connect = dbo.getDb("main");
+  db_connect
+    .collection("eventsNone")
+    .find({})
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);

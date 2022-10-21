@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import ClubCard from "./ClubCard.jsx";
-import { useEffect,useState } from 'react';
+import { useEffect,useState } from "react";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import ListItemText from '@mui/material/ListItemText';
-import { PostAddSharp } from "@mui/icons-material";
+
 import '../styles.css';
 
 /**
@@ -29,6 +23,7 @@ class Clubs extends Component{
     email: '',
     clubs: []
   };
+
 
   componentDidMount = async () => {
     await this.getClubInfo();
@@ -54,7 +49,6 @@ class Clubs extends Component{
   displayClubInfo = (clubs) => {
     if (!clubs.length) return null;
     return clubs.map((club, index) => (
-      
       <Grid item key={index} xs={12} sm={6} md={4}>
         <ClubCard key={index} eImage={club.image} cName={club.clubName} cDesc={club.clubDesc} cPhone={club.clubPhone} cEmail={club.email}></ClubCard>
       </Grid>
@@ -63,14 +57,16 @@ class Clubs extends Component{
 
   render() {
     console.log('State: ', this.state);
-    return(
 
-      <Container sx={{ py: 4 }} maxWidth="md">
+    return(
+      <>
+      <Container sx={{ py: 4, px: 4}} maxWidth="lg">
         <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse All Clubs</Typography>
-      <Grid container spacing={5}>
+      <Grid container spacing={3}>
           {this.displayClubInfo(this.state.clubs)}
       </Grid>
       </Container>
+      </>
     )
   }
 }
