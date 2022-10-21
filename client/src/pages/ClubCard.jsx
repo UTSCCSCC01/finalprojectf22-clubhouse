@@ -44,7 +44,6 @@ function ClubCard(props) {
                 <ClubApplyButton size="small" clubEmail={props.cEmail} clubName={props.cName} />
             </CardActions>
     </Card>
-    </>
   );
 }
 
