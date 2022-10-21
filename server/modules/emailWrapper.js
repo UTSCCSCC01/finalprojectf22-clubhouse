@@ -19,13 +19,13 @@ var transporter = nodemailer.createTransport({
  * @returns {Promise<SMTPTransport.SentMessageInfo>} Info about sent email as returned by sendMail()
  */
 module.exports.sendEmail = function (emailObj) {
-    return new Promise( (res, rej) => {
-        transporter.sendMail(emailObj, function(error, info){
-            if (error) {
-              rej(error);
-            } else {
-              res(info)
-            }
-          });
-        });
+  return new Promise( (res, rej) => {
+      transporter.sendMail(emailObj, function(error, info){
+          if (error) {
+            rej(error);
+          } else {
+            res(info)
+          }
+      });
+  });
 }
