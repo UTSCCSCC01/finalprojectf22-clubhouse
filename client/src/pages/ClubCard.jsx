@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useState } from 'react';
+import ClubApplyButton from '../componenents/ClubApplyButton.jsx'
 import '../styles.css';
 
 /**
@@ -67,6 +68,7 @@ function ClubCard(props) {
         </CardActionArea>
             <CardActions>
                 <Button size="small">View Club</Button>
+                <ClubApplyButton size="small" clubEmail={props.cEmail} clubName={props.cName} />
             </CardActions>
     </Card>
     </>
