@@ -6,7 +6,7 @@ import { getCookie } from '../libraries/cookieDAO'
 import config from  '../../config.json'
 
 /**
- * A button that hf
+ * A button that applies for a club when clicked, by using the 'applyMember' endpoint
  * @component
  */
 
@@ -28,6 +28,9 @@ class ClubApplyButton extends React.Component {
         )
     }
 
+    /**
+     * Click handler for applying
+     */
     async applyForClub() {
         const username = getCookie('username');
         const name = getCookie('name');

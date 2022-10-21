@@ -7,13 +7,18 @@ const userDAO = require("../modules/userDAO");
 
 //require("dotenv").config({ path: "./config.env" });
 
+/**
+ * @module routes/membership
+ */
 
+/**
+ * Create a membership application. Expects a payload of at least email and clubEmail, with optional name and clubName with workarounds.
+ * Responds with {success: true} if op is successful, else {text, disabled} where text is the new button text, and disabled is whether the button should be disabled
+ * If there is already an application, it does not create a new one, and makes the corresponding response
+ * @name applyMember
+ */
 routes.route("/applyMember").post(
-    /**
-     * 
-     * @param {express.Request} req 
-     * @param {express.Response} res 
-     */
+    
     async (req, res) => {
 
     if (!req.body.email || !req.body.clubEmail) {
