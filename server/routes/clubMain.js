@@ -7,6 +7,10 @@ const dbo = require("../db/conn");
  
 const ObjectId = require("mongodb").ObjectId;
 
+
+/**
+ * Retrives all club members from the club-members collection in the main database
+ */
 clubMainRoutes.route("/club/members").get(function (req, res) {
     let db_connect = dbo.getDb("main");
     let myquery = {};
@@ -19,6 +23,9 @@ clubMainRoutes.route("/club/members").get(function (req, res) {
      
    });
 
+   /**
+ * Retrives all users applying to join the club from the clubApplicants collection in the main database
+ */
    clubMainRoutes.route("/club/potentialMembers").get(function (req, res) {
     let db_connect = dbo.getDb("main");
     let myquery = {};
@@ -31,6 +38,9 @@ clubMainRoutes.route("/club/members").get(function (req, res) {
       });
    });
 
+     /**
+ * Deletes the user with the id responding to req.params.id from the clubApplicants collection in the main database
+ */
    clubMainRoutes.route("/club/potentialMembers/:id").delete(function (req, res) {
     let db_connect = dbo.getDb("main");
     let myquery = { _id: ObjectId(req.params.id)  };
@@ -41,6 +51,9 @@ clubMainRoutes.route("/club/members").get(function (req, res) {
       });
    });
 
+     /**
+ * Adds the user with the id responding to req.params.id to the club-members collection in the main database
+ */
    clubMainRoutes.route("/club/potentialMembers").post(function (req, res) {
     let db_connect = dbo.getDb("main");
     let student = {

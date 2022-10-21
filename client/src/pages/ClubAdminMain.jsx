@@ -2,14 +2,22 @@ import React from 'react';
 import { Container, Stack, Typography, Grid, Divider,Box, Dialog, DialogTitle,DialogContent,DialogContentText } from '@mui/material';
 import { useState, useEffect } from 'react';
 import MemberCard from './MemberCard1.jsx';
-import RequestingMemberCard from './RequestingMemberCard.jsx';
 import { margin } from '@mui/system';
 import PotentialMemCard from './PotentialMemCard.jsx';
 
+/**
+ * ClubAdminMain
+ * @component
+ */
 export default function ClubAdminMain() {
     const [members,setMembers] = useState([]);
 
     const [potentialMembers, setPotentialMembers] = useState([]);
+
+    /**
+   * Fetch and set the members of the club from the database (club-members collection)
+   * 
+   */
     useEffect(  ()  => {
           const  fetchmembers = async () => {
             const res = await fetch("http://127.0.0.1:5001/club/members");
@@ -27,15 +35,15 @@ export default function ClubAdminMain() {
 
 
       
-
+/**
+   * Fetch and set the members applying to the club from the database (clubApplicants/potentialMembers collection)
+   * 
+   */
         useEffect(  ()  => {
             const  fetchpotmembers = async () => {
                 const res = await fetch("http://127.0.0.1:5001/club/potentialMembers");
                 const data = await res.json();
                 setPotentialMembers(data);
-                
-                // console.log(potentialMembers);
-                
               }
       fetchpotmembers();
 
@@ -43,34 +51,26 @@ export default function ClubAdminMain() {
 
       
 
-
-      
-
-        useEffect(  ()  => {
-            const  fetchpotmembers = async () => {
-                const res = await fetch("http://127.0.0.1:5001/club/potentialMembers");
-                const data = await res.json();
-                setPotentialMembers(data);
-                
-                // console.log(potentialMembers);
-                
-              }
-      fetchpotmembers();
-
-    }, []);
-
-
+/**
+   * Deletes the denied member according to their id from the potential members database
+   * and updates the potential members array
+   * @param {string} id - the id of the member to be deleted
+   */
     const denyMember = ((id) => {
         const  deletePotMem = async () => {
         const response = await fetch("http://127.0.0.1:5001/club/potentialMembers/" + id , {method: 'DELETE'});
-        console.log(potentialMembers);
       }
       deletePotMem();
       setPotentialMembers(potentialMembers.filter((mem) => {
-        // console.log(mem);
         return mem._id != id;
     }));
 });
+
+/**
+   * Removes the accepted member according to their id from the potential members database and adds them to the members database.
+   * And updates the potential members and members array
+   * @param {string} id - the id of the member to be deleted
+   */
         
     const acceptMember = ((id) => {
 
@@ -102,7 +102,7 @@ export default function ClubAdminMain() {
     acceptPotMem();
     denyMember(id);
     setMembers([...members, student.userName]);
-    console.log(members);
+   
 });
 
     return (
