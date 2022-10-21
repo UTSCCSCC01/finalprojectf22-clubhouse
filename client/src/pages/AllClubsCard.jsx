@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ClubApplyButton from '../componenents/ClubApplyButton.jsx';
+import ClubApplyButton from '../components/ClubApplyButton.jsx';
 
 /**
  * Display fetched information in a card

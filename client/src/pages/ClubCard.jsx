@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useState } from 'react';
-import ClubApplyButton from '../componenents/ClubApplyButton.jsx'
+import ClubApplyButton from '../components/ClubApplyButton.jsx'
 import '../styles.css';
 
 /**
