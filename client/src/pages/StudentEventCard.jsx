@@ -14,7 +14,7 @@ import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import RsvpIcon from '@mui/icons-material/Rsvp';
+import Button from '@mui/material/Button';
 
 /**
  * Display fetched information in a card
@@ -34,21 +34,23 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-
-
 export default function StudentEventCard(props) {
+
     const [cName, setCname] = useState('');
     const [eDate, setEdate] = useState('');
     const [eName, setEname] = useState('');
     const [eTags, setEtags] = useState('');
     const [eDesc, setEdesc] = useState('');
     const [expanded, setExpanded] = React.useState(false);
+    const [OnOff, setOnOff] = useState(false);
+
+  function handleClick() {
+    setOnOff(!OnOff);
+  }
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-
-    // console.log(props.tagName);
 
   return (
     <Card sx={{ maxWidth: 345 }} >
@@ -60,21 +62,22 @@ export default function StudentEventCard(props) {
                 <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>  
                 <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
                 <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
-                <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>
-                
+                <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>    
                 <Box display="inline-flex" flexWrap="wrap" mt="20px"> 
                     {(props.eTags).map((tag) => (
                         <EventTag data={tag}/> 
                     ))}
                 </Box>
-                
             </CardContent>
 
-
       <CardActions disableSpacing>
-        <IconButton aria-label="RSVP"  href={props.eJoin}>
-          <RsvpIcon color="primary" sx={{ fontSize: 40 }}/>
-        </IconButton>
+        {/* <IconButton aria-label="RSVP" onClick={handleClick} 
+        // href={props.eJoin}
+        >
+          <RsvpIcon color="primary" sx={{ fontSize: 40 }}>{buttonText}</RsvpIcon>
+        </IconButton> */}
+        <Button onClick={handleClick}  variant={OnOff ? "outlined": "contained"}
+        sx={{ marginBottom: 2, marginLeft: 2 }}>{OnOff ? 'cancel': 'sign up'}</Button>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

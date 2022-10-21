@@ -28,8 +28,6 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-
-
 export default function AllClubsCard(props) {
     const [cName, setCname] = useState('');
     const [cDesc, setCdesc] = useState('');
@@ -50,16 +48,13 @@ export default function AllClubsCard(props) {
                 image={props.cImage} alt="UTSC"/>
       <CardContent sx={{ flexGrow: 1, minWidth: 350 }}>
                 <Typography gutterBottom variant="h7" component="h2">{props.cName} </Typography>  
-                
                 <Box display="inline-flex" flexWrap="wrap" mt="20px"> 
                     {(props.cTags).map((tag) => (
                         <EventTag data={tag}/> 
                     ))}
                 </Box>
-                
             </CardContent>
-
-
+            
       <CardActions disableSpacing>
         <ExpandMore
           expand={expanded}

@@ -68,6 +68,10 @@ function Events(props) {
 
 
   let contains = false;
+  /**
+   * Check whether arrayTag includes any of checkedTags
+   * @param {array} arrayTag 
+   */
   const conTains = (arrayTag) => {
       contains = false;
       tagName.forEach((checkedTag) => {
@@ -105,6 +109,9 @@ function Events(props) {
     getevents();
   },[filter]);
 
+  /**
+   * Fetch and set tags from the database
+   */
   useEffect(() => {
     const gettags = async ()=>{
       /**
@@ -122,7 +129,7 @@ function Events(props) {
         <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
             <Container maxWidth="lg" >
               <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
-              <FormControl sx ={{ minWidth: 120, marginLeft: '1000px'}} variant="outlined" size="small">
+              <FormControl sx ={{ minWidth: 120, marginLeft: '940px'}} variant="outlined" size="small">
                   <InputLabel id="simple-select-label" >Sort by</InputLabel>
                   <Select
                       labelId="simple-select-label"
@@ -137,7 +144,7 @@ function Events(props) {
                       <MenuItem value={"Categories"}>Categories</MenuItem>
                   </Select>
                   </FormControl>
-                  <FormControl sx={{ m: 2, width: 150, marginLeft: '980px' }} size="small">
+                  <FormControl sx={{ m: 2, width: 150, marginLeft: '920px' }} size="small">
                     <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                     <Select disabled={filter!=="Categories" ? true : false}
                       labelId="multiple-checkbox-label"
@@ -175,7 +182,6 @@ function Events(props) {
                             </Grid>)
               }
               else if ( !(filter=="Categories" && !conTains(item)) && filter!="Categories"){
-                
                 return (<Grid item key={item} >
                   {/* <Grid item key={item} xs={12} sm={6} md={4}> */}
                   <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>

@@ -26,9 +26,7 @@ function AllClubs(props) {
       style: {
         maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
         width: 250,
-      },
-    },
-  };
+      },},};
 
   const [tags, setTags ] = useState([]);
   const [tagName, setTagName] = React.useState([]);
@@ -43,9 +41,7 @@ function AllClubs(props) {
     } = event;
     setTagName(
       typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
+    );};
 
   const [items, setItems ] = useState([]);
   const TagMapped = [];
@@ -57,6 +53,10 @@ function AllClubs(props) {
           }}}}
 
   let contains = false;
+  /**
+   * Check whether arrayTag includes any of checkedTags
+   * @param {array} arrayTag 
+   */
   const conTains = (arrayTag) => {
       contains = false;
       tagName.forEach((checkedTag) => {
@@ -80,8 +80,10 @@ function AllClubs(props) {
     };
     getclubs();
   },[tagName]);
-
-  console.log(tagName);
+  
+  /**
+   * Fetch and set tags from the database
+   */
   useEffect(() => {
     const gettags = async ()=>{
       /**
@@ -99,7 +101,7 @@ function AllClubs(props) {
         <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
             <Container maxWidth="lg" >
               <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  UTSC Clubs</Typography>
-                  <FormControl sx={{ m: 2, width: 150, marginLeft: '980px' }} size="small">
+                  <FormControl sx={{ m: 2, width: 150, marginLeft: '930px' }} size="small">
                     <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                     <Select
                       labelId="multiple-checkbox-label"
