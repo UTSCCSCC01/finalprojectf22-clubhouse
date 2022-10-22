@@ -20,7 +20,7 @@ import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
 import ClubAdminMain from './pages/ClubAdminMain.jsx';
 import PositionCreate from './pages/PositionCreate.jsx'
-import Positions from './pages/Positions.jsx;
+import Positions from './pages/Positions.jsx';
 import NewAnnouncement from './pages/NewAnnouncement.jsx';
 
 ReactDOM.render(
