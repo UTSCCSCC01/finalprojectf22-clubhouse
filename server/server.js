@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./config.env" });
@@ -16,6 +17,7 @@ app.use(require("./routes/login"));
 app.use(require("./routes/adminProfile"))
 app.use(require("./routes/positions"));
 app.use(require("./routes/adminProfile"));
+app.use(require("./routes/clubMain"));
 app.use(require("./routes/membership"));
 app.use(require("./routes/tags"))
 
