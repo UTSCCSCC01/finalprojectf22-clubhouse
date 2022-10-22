@@ -3,8 +3,15 @@ const recordRoutes = express.Router();
 require("dotenv").config({ path: "./config.env" });
 const DAO = require("../modules/userDAO");
 const EmlWrp = require("../modules/emailWrapper");
+/**
+ * @module routes/register
+ */
 
 
+/**
+ * Add potential user to database with randomised code. Also send code to user by email and delete potential user after 5 minutes
+ * @name /register
+ */
 recordRoutes.route("/register").post(async function (req, response) {
     let code = Math.floor(Math.random() * 9000) + 1000; // At most 4 digit code
 
@@ -32,6 +39,10 @@ recordRoutes.route("/register").post(async function (req, response) {
     }, 5 * 60 * 1000); // 5 minutes to millisec
 });
 
+/**
+ * Verifies user by code and adds them to the user database. If they are already registered this does nothing
+ * @name /submitCode
+ */
 recordRoutes.route("/submitCode").post(async function (req, response) {
     const verified = await DAO.verifyPotentialUser(req.body.email, req.body.code);
 

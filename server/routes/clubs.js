@@ -11,8 +11,13 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 
+/**
+ * @module routes/clubs
+ */
 
-// This section will help you get a list of all the records.
+/** This section will help you get a list of all the records.
+ *  @name /clubs
+ */
 clubRoutes.route("/clubs").get(function (req, res) {
   let db_connect = dbo.getDb("main");
   db_connect
@@ -24,7 +29,9 @@ clubRoutes.route("/clubs").get(function (req, res) {
     });
 });
 
-// This section will help you get a single record by id
+/** This section will help you get a single record by id
+ *  @name /clubs/:id
+ */
 clubRoutes.route("/clubs/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
@@ -36,7 +43,9 @@ clubRoutes.route("/clubs/:id").get(function (req, res) {
     });
 });
 
-// This section will help you create a new record.
+/** This section will help you create a new record.
+ *  @name /clubs/create
+ */
 clubRoutes.route("/clubs/create").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
@@ -52,7 +61,9 @@ clubRoutes.route("/clubs/create").post(function (req, response) {
   });
 });
 
-// This section will help you update a record by id.
+/** This section will help you update a record by id.
+ * @name /clubs/:id
+ */
 clubRoutes.route("/clubs/:id").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
@@ -73,7 +84,9 @@ clubRoutes.route("/clubs/:id").post(function (req, response) {
     });
 });
 
-// This section will help you delete a record
+/** This section will help you delete a record
+ * @name /:id
+ */
 clubRoutes.route("/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };

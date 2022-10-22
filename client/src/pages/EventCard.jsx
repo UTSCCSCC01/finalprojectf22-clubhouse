@@ -7,7 +7,11 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useEffect,useState } from 'react';
 
-export default function MultiActionAreaCard(props) {
+/**
+ * @component
+ */
+
+function MultiActionAreaCard(props) {
   
   const [eName, setEname] = useState('');
   const [eDesc, setEdesc] = useState('');
@@ -34,3 +38,4 @@ export default function MultiActionAreaCard(props) {
     </Card>
   );
 }
+export default MultiActionAreaCard;

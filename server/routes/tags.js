@@ -10,9 +10,14 @@ const dbo = require("../db/conn");
  
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
- 
 
-// This section will help you get a list of all the tags.
+/**
+ * @module routes/tags
+ */
+
+/** This section will help you get a list of all the tags.
+ *  @name /tags
+ */
 tagRoutes.route("/tags").get(function (req, res) {
   let db_connect = dbo.getDb("main");
   db_connect

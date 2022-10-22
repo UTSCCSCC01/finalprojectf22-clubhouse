@@ -1,7 +1,7 @@
 const dbo = require("../db/conn");
 
 /**
- * @module memberDAO
+ * @module modules/memberDAO
  */
 
 

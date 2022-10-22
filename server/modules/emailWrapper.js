@@ -1,5 +1,5 @@
 /**
- * @module emailWrapper
+ * @module modules/emailWrapper
  */
 
 var nodemailer = require('nodemailer');

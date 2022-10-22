@@ -3,13 +3,17 @@ const announcementRoutes = express.Router();
 const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
-announcementRoutes.route("/announcements").get(
+/**
+ * @module routes/announcements
+ */
 
   /**
      * Endpoint that gets a list of all announcements
-     * @param {express.Request} req 
-     * @param {express.Response} res 
+     * @name /announcements 
      */
+announcementRoutes.route("/announcements").get(
+
+
 
   function (req, res) {
     let db_connect = dbo.getDb("main");
@@ -22,14 +26,13 @@ announcementRoutes.route("/announcements").get(
       });
   });
 
-
-announcementRoutes.route("/announcements/:id").get(
-
   /**
      * Endpoint that gets a single announcement by id
-     * @param {express.Request} req 
-     * @param {express.Response} res 
+     * @name /announcements/:id
      */
+announcementRoutes.route("/announcements/:id").get(
+
+
 
   function (req, res) {
     let db_connect = dbo.getDb();
@@ -42,13 +45,13 @@ announcementRoutes.route("/announcements/:id").get(
       });
   });
 
+/**
+     * Endpoint that creates a new announcement
+     * @name /announcements/new
+     */
 announcementRoutes.route("/announcements/new").post(
 
-  /**
-     * Endpoint that creates a new announcement
-     * @param {express.Request} req 
-     * @param {express.Response} res 
-     */
+  
 
   function (req, response) {
     let db_connect = dbo.getDb();
@@ -65,15 +68,11 @@ announcementRoutes.route("/announcements/new").post(
     });
   });
 
-
-announcementRoutes.route("/:id").delete(
-
-  /**
+/**
      * Endpoint that deletes a single announcement given an id
-     * @param {express.Request} req 
-     * @param {express.Response} res 
+     * @name /:id
      */
-
+announcementRoutes.route("/:id").delete(
   (req, response) => {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId(req.params.id) };

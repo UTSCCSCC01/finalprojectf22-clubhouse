@@ -1,7 +1,7 @@
 const { ModuleFilenameHelpers } = require("webpack");
 const dbo = require("../db/conn");
 /**
- * @module userDAO
+ * @module modules/userDAO
  */
 
 /**

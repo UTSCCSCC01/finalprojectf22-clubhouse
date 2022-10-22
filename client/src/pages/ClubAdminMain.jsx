@@ -9,7 +9,7 @@ import PotentialMemCard from './PotentialMemCard.jsx';
  * ClubAdminMain
  * @component
  */
-export default function ClubAdminMain() {
+function ClubAdminMain() {
     const [members,setMembers] = useState([]);
 
     const [potentialMembers, setPotentialMembers] = useState([]);
@@ -150,3 +150,5 @@ export default function ClubAdminMain() {
 
     );
  }
+
+ export default ClubAdminMain;

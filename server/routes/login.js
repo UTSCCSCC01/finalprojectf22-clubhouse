@@ -5,12 +5,17 @@ const loginRoutes = express.Router();
 
 const dbo = require("../db/conn");
 const DAO = require("../modules/userDAO");
+/**
+ * @module routes/login
+ */
+
 
 /**
  * Handles submission of login form which provides
  * req.body.email = email
  * req.body.password = password
  * sets the cookie to the username if the login matches database.
+ * @name /login
  */
 loginRoutes.route("/login").post(async function (req, res) {
   let valid = true;
@@ -29,6 +34,7 @@ loginRoutes.route("/login").post(async function (req, res) {
 });
 /**
  * Checks if the user is logged in by checking cookie value.
+ * @name /loginstatus
  */
 loginRoutes.route("/loginstatus").get(function (req, res) {
   var currentuser = req.cookies.username;
@@ -41,6 +47,7 @@ loginRoutes.route("/loginstatus").get(function (req, res) {
 
 /**
  * Logs the user out by clearing cookie.
+ * @name /logout
  */
 loginRoutes.route("/logout").get(function (req, res) {
   res.clearCookie("username", {})

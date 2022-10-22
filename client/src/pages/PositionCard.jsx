@@ -12,7 +12,8 @@ import '../styles.css';
  * @component
  * @example
  * return positions.map((positions, index) => (
-      <PositionCard key={index} jobPosition={position.jobPosition} clubName={position.clubName} email={position.email} jobDescription={position.jobDesciption} jobRequirements={position.jobRequirements}></PositionCard>
+      <PositionCard key={index} jobPosition={position.jobPosition} clubName={position.clubName} email={position.email}
+       jobDescription={position.jobDesciption} jobRequirements={position.jobRequirements}></PositionCard>
       ));
  */
 

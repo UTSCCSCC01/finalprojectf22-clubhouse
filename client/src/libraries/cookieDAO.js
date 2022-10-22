@@ -1,5 +1,5 @@
 /**
- * @module cookieDAO
+ * @module libraries/cookieDAO
  */
 
 const Cookie = require('js-cookie')
