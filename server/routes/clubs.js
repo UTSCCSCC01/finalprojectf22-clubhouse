@@ -85,9 +85,9 @@ clubRoutes.route("/clubs/:id").post(function (req, response) {
 });
 
 /** This section will help you delete a record
- * @name /:id
+ * @name /clubs/del/:id
  */
-clubRoutes.route("/:id").delete((req, response) => {
+clubRoutes.route("/clubs/del/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection("clubs").deleteOne(myquery, function (err, obj) {

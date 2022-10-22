@@ -109,9 +109,9 @@ eventRoutes.route("/events/:id").post(function (req, response) {
 });
 
 /** This section will help you delete a record
- *  @name /:id
+ *  @name /events/del/:id
  */
-eventRoutes.route("/:id").delete((req, response) => {
+eventRoutes.route("/events/del/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection("events").deleteOne(myquery, function (err, obj) {
