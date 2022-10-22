@@ -36,7 +36,7 @@ recordRoutes.route("/submitCode").post(async function (req, response) {
     const verified = await DAO.verifyPotentialUser(req.body.email, req.body.code);
 
     if (verified) {
-        await DAO.addUser(req.body.email, req.body.password)
+        await DAO.addUser(req.body.email, req.body.password, req.body.name)
         response.json({"registered": true})
     } else {
         response.status(400);

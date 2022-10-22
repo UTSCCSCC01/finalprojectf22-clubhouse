@@ -13,7 +13,8 @@ app.use(require("./routes/register"))
 app.use(require("./routes/events"));
 app.use(require("./routes/announcements"));
 app.use(require("./routes/login"));
-app.use(require("./routes/adminProfile"))
+app.use(require("./routes/adminProfile"));
+app.use(require("./routes/membership"));
 app.use(require("./routes/tags"))
 
 // get driver connection
