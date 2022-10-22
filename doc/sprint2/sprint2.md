@@ -27,7 +27,10 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
     - Make sure every student can apply to any of the clubs on the clubs profile page.
     - Once accepted, the student must receive all notifications related to that club.
  - Subtasks:  
-    - add subtasks
+    - Creation of Button component and behavior
+    - applyMember endpoint
+    - membership DAO
+    - Database schema
 
 3. **MIN-8:** 
 - Priority: high
@@ -70,7 +73,12 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
     - Make sure all students can see the available hiring ads.
     - Easily able to choose qualified members for posting in an orderly fashion
 - Subtasks:  
-    - add subtasks
+    - Make Form
+    - Style Form + UI
+    - Implement and Route Form to Page
+    - Make new Page to see Listings
+    - Style Page
+    - Pull listings from Database into new Page
 
 7. **MIN-25:**
 - Priority: low
@@ -80,10 +88,12 @@ Finish user stories MIN-4, MIN-7, MIN-8, MIN-12, MIN-13, MIN-14, MIN-25
     - The club admin account will be associated with the specified email by the system admin
     - Logging in as a club will send you to the club-side home page
 - Subtasks:  
-    - add subtasks
+    - Detect if account is User or Club
+    - Store accountType in seperate cookie
+    - Use DAO instead of normal DB calls
 
 ## Spikes 
-- 
+- none
 
 ## Team capacity
 Team member | Capacity (hr/day)

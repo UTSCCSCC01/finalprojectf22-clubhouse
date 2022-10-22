@@ -49,6 +49,8 @@ class Clubs extends Component{
   displayClubInfo = (clubs) => {
     if (!clubs.length) return null;
     return clubs.map((club, index) => (
+
+
       <Grid item key={index} xs={12} sm={6} md={4}>
         <ClubCard key={index} eImage={club.image} cName={club.clubName} cDesc={club.clubDesc} cPhone={club.clubPhone} cEmail={club.email}></ClubCard>
       </Grid>
@@ -59,14 +61,12 @@ class Clubs extends Component{
     console.log('State: ', this.state);
 
     return(
-      <>
       <Container sx={{ py: 4, px: 4}} maxWidth="lg">
         <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse All Clubs</Typography>
       <Grid container spacing={3}>
           {this.displayClubInfo(this.state.clubs)}
       </Grid>
       </Container>
-      </>
     )
   }
 }

@@ -19,6 +19,7 @@ class RegisterForm extends Component {
       password: "",
       email: "",
       passwordC: "",
+      name: "",
       eerror: null,
       pwerror: null,
       scerror: null,
@@ -34,6 +35,9 @@ class RegisterForm extends Component {
       <Container>
         <Typography style={{paddingTop: "200px"}} variant="h2" align="center">Register</Typography>
           <Grid container direction="column" style={{textAlign: "center"}}>
+            <Grid item>
+              <TextField margin="normal" id="name" label="Name" variant="outlined" style={{width: 500}} onChange={this.handleTextFieldChange}/>
+            </Grid>
             <Grid item>
               <TextField error={ee} helperText={this.state.eerror} margin="normal" id="email" label="Email" variant="outlined" style={{width: 500}} onChange={this.handleTextFieldChange}/>
             </Grid>
@@ -111,7 +115,7 @@ class RegisterForm extends Component {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: this.state.email, password: this.state.password, code: this.state.code }) // Only need email before verification
+        body: JSON.stringify({ email: this.state.email, password: this.state.password, code: this.state.code, name: this.state.name }) // Only need email before verification
     };
     const responseObj = await fetch(url, requestOptions);
 
