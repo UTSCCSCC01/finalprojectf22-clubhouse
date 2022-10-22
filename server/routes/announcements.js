@@ -66,7 +66,7 @@ announcementRoutes.route("/announcements/new").post(
   });
 
 
-announcementRoutes.route("/:id").delete(
+announcementRoutes.route("/announcements/:id").delete(
 
   /**
      * Endpoint that deletes a single announcement given an id
