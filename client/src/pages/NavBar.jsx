@@ -16,6 +16,7 @@ import { AppBar, Tabs, Tab, Toolbar, Button, Box} from '@mui/material'
                        <Tab label="Home"></Tab>
                        <Tab label="Clubs"></Tab>
                        <Tab label="Events"></Tab>
+                       <Tab label="Job Postings"></Tab>
                        <Tab label="My account"></Tab>
                     </Tabs> 
                       <Button sx={{ marginLeft: 'auto' }} variant="contained">Login</Button>

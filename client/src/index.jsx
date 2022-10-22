@@ -19,6 +19,8 @@ import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
 import ClubAdminMain from './pages/ClubAdminMain.jsx';
+import PositionCreate from './pages/PositionCreate.jsx'
+import Positions from './pages/Positions.jsx;
 import NewAnnouncement from './pages/NewAnnouncement.jsx';
 
 ReactDOM.render(
@@ -34,6 +36,7 @@ ReactDOM.render(
         <Route exact path={"/club-admin-profile"} element={<ClubAdminProfilePage email = "email" description = "description" phoneNumber = "1234567890"
       clubName = "Club Name"
       />} />
+        <Route path="/clubs" element={<Clubs />} />
         <Route exact path="/clubs" element={<Clubs />} />
         <Route  path="/clubMain" element={<ClubAdminMain/>} />
         <Route exact path="/allclubs" element={<AllClubs />} />
@@ -43,6 +46,8 @@ ReactDOM.render(
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/events" element={<Events />} />
+        <Route exact path="/create-position" element={<PositionCreate />} />
+        <Route path="/positions" element={<Positions />} />
       </Routes>
     </Router>
   ),
