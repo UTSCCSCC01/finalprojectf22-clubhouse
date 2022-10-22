@@ -1,10 +1,10 @@
+const { DoneAllOutlined } = require("@mui/icons-material");
 const express = require("express");
 
 const loginRoutes = express.Router();
 
 const dbo = require("../db/conn");
- 
-const ObjectId = require("mongodb").ObjectId;
+const DAO = require("../modules/userDAO");
 
 /**
  * Handles submission of login form which provides
@@ -12,26 +12,20 @@ const ObjectId = require("mongodb").ObjectId;
  * req.body.password = password
  * sets the cookie to the username if the login matches database.
  */
-loginRoutes.route("/login").post(function (req, res) {
-  let db_connect = dbo.getDb();
-  let myquery = { email: req.body.email };
-  db_connect
-    .collection("users")
-    .findOne(myquery, function (err, result) {
-      if (err) throw err;
-      var correct;
-      if (result == null) {
-        correct = false;
-      } else {
-        if (result.password == req.body.password) {
-          res.cookie("username", req.body.email, {maxAge: 3600000}); // test httpOnly: true, signed: true for security
-          correct = true;
-        } else {
-          correct = false;
-        }
-      }
-      res.json( { valid: correct } );
-    });
+loginRoutes.route("/login").post(async function (req, res) {
+  let valid = true;
+  const user = await DAO.findUser(req.body.email);
+  if (user == null) {
+    valid = false;
+  } else {
+    if (user.password == req.body.password) {
+      res.cookie("accountType", user.accountType, {maxAge: 3600000, sameSite: 'none', secure: true});
+      res.cookie("username", req.body.email, {maxAge: 3600000, sameSite: 'none', secure: true});
+    } else {
+      valid = false;
+    }
+  }
+  res.json({ "valid": valid, "username": req.body.email, "accountType": user.accountType});
 });
 /**
  * Checks if the user is logged in by checking cookie value.

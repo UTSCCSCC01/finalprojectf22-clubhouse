@@ -11,6 +11,7 @@ import Home from './pages/Home.jsx';
 
 import ClubAdminProfilePage from './pages/ClubAdminProfilePage.jsx'
 import Clubs from './pages/Clubs.jsx'
+import AllClubs from './pages/AllClubs.jsx'
 import CreateEvent from './pages/CreateEvent.jsx'
 import LoginPage from './pages/LoginPage.jsx';
 import TestLogin from './pages/TestLogin.jsx';
@@ -18,6 +19,7 @@ import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
 import ClubAdminMain from './pages/ClubAdminMain.jsx';
+import NewAnnouncement from './pages/NewAnnouncement.jsx';
 
 ReactDOM.render(
   (
@@ -34,7 +36,9 @@ ReactDOM.render(
       />} />
         <Route exact path="/clubs" element={<Clubs />} />
         <Route  path="/clubMain" element={<ClubAdminMain/>} />
+        <Route exact path="/allclubs" element={<AllClubs />} />
         <Route exact path="/create-event" element={<CreateEvent />} />
+        <Route exact path="/new-announcement" element={<NewAnnouncement />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />

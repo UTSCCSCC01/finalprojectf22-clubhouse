@@ -101,12 +101,13 @@ module.exports.verifyPotentialUser = function (email, code) {
  * @param {String} password Password for new user
  * @returns {Promise<Object>} Object returned from .inserteOne() call
  */
- module.exports.addUser = async function (email, password) {
+ module.exports.addUser = async function (email, password, name) {
     let db_connect = dbo.getDb();
 
     let userObj = {
         email: email,
         password: password,
+        name: name,
         accountType: "student"
     }
 
