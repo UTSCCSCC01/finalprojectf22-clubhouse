@@ -9,6 +9,10 @@
 .club-main-body{
 margin: 5rem;
 }
+.profileEditButton2{
+  margin-top: 2rem;
+  float:right;
+}
 .potential_members{
   margin-top: 4rem;
   border-color: black;

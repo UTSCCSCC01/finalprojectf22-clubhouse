@@ -5,23 +5,27 @@ import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Fab from '@mui/material/Fab'
 import EditIcon from '@mui/icons-material/Edit';
+import { Clear } from "@mui/icons-material";
+import { Container, Grid } from "@mui/material";
+import { Stack } from "@mui/system";
 
 /**
- * ClubAdminViewProfile
+ * StudentClubProfile
  * @component
  */
-function ClubAdminViewProfile(props) {
+function StudentClubProfile(props) {
   const url = 'http://127.0.0.1:5001/club/events';
   
   const [isMore,setisMore] = useState(true);
   const [items, setItems ] = useState([]);
   const [page, setPage] = useState(2);
+  const [clubName, setClubName] = useState(props.clubName);
     /**
  * <Gets page 1 of events from the database>
  */
   useEffect(() => {
   const getevents = async ()=>{
-  const res = await fetch(url+"?page=1"+"&clname="+"ClubHouse");
+  const res = await fetch(url+"?page=1"+"&clname="+clubName);
     const data = await res.json();
     setItems(data);
   };
@@ -36,7 +40,7 @@ function ClubAdminViewProfile(props) {
  * @returns  {Promise<Object>}        <returns the events depending on the page number from the database>
  */
     const fetchData = async() => {
-     const res = await fetch(url+'?page='+page+"&clname="+"ClubHouse");
+     const res = await fetch(url+'?page='+page+"&clname="+clubName);
       const data = await res.json();
       
       return data;
@@ -76,50 +80,57 @@ function ClubAdminViewProfile(props) {
   return (
     
     <div class="mui-container-fluid" className="ClubAdminProfilePage">
-      <h1 style={{ textAlign: "center" }}> Profile</h1>
+        <Container style={{padding:'10'}}>
+         <Fab  aria-label="edit"
+          className="profileEditButton2"
+          type="submit"
+          color="primary"
+          
+          onClick={props.close}>
+        <Clear/>
+      </Fab>
       
-
+      
+      <h1 style={{ textAlign: "center" }}> Profile</h1>
+      </Container>
+      
+        
+      
+      
      <img
             className="img2"
-            src={image}
+            src={props.img}
             alt="profile-picture"
           />
            
       <div className="adminchild" >
         
       <div className="info">
-      <Fab  aria-label="edit"
-          className="profileEditButton"
-          type="submit"
-          color="primary"
-          
-          onClick={props.onClick}>
-        <EditIcon />
-      </Fab>
-      <h2  style={{ textAlign: "center" }}>{props.values.clubName}</h2>
+      
+      <h2  style={{ textAlign: "center" }}>{props.clubName}</h2>
 
           
           <div color="#FFE498" className="viewdesc" style = {{float: "right", width:"60%", margin:"5px", display: "inline-block", padding:"5px"}}>
         
-        <p style={{paddingLeft:"5px"}}>{props.values.description}</p>
+        <p style={{paddingLeft:"5px"}}>{props.description}</p>
         </div>
 
         <div className="contactinfo">
         <h3> Contact Info:</h3>
-          <p > Email: {props.values.email}</p>
-          <p> Phone Number: {props.values.phoneNumber} </p>
+          <p > Email: {props.email}</p>
+          <p> Phone Number: {props.phoneNumber} </p>
           </div>
       </div>
 
       <div className="cardcont">
       <h2 style={{ textAlign: 'center' }}>My Events</h2>
-      <div id="scdiv" className="evenCard">
+      <div id="scrollableDiv" className="evenCard">
       
       <InfiniteScroll  
       dataLength={items.length} //This is important field to render the next data
       next={fetchd}
      hasMore={isMore}
-     scrollableTarget="scdiv"
+     scrollableTarget="scrollableDiv"
       loader={<h4>Loading...</h4>}
       endMessage={
     <p style={{ textAlign: 'center' }}>
@@ -143,4 +154,4 @@ function ClubAdminViewProfile(props) {
 }  
 
 
-export default ClubAdminViewProfile;
+export default StudentClubProfile;

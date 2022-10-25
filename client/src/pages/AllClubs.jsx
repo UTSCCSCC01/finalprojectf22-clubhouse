@@ -128,7 +128,7 @@ function AllClubs(props) {
             {items.map((item) => {
               if (Object.keys(tagName).length == 0){
                 return (<Grid item key={item}>
-                  <AllClubsCard key={item._id} cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
+                  <AllClubsCard key={item._id}  cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
                  </Grid>)
               }
               else if (conTains(item)) { 
