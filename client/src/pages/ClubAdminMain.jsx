@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Stack, Typography, Grid, Divider,Box, Dialog, DialogTitle,DialogContent,DialogContentText } from '@mui/material';
 import { useState, useEffect } from 'react';
-import MemberCard from './MemberCard1.jsx';
 import { margin } from '@mui/system';
 import PotentialMemCard from './PotentialMemCard.jsx';
 
@@ -27,7 +26,8 @@ function ClubAdminMain() {
              a[index] = data[index].userName;
             
           }
-          setMembers(a);
+          setMembers(data);
+          console.log(data);
           
         } 
         fetchmembers();
@@ -101,8 +101,17 @@ function ClubAdminMain() {
     student = getStudent();
     acceptPotMem();
     denyMember(id);
-    setMembers([...members, student.userName]);
+    setMembers([...members, student]);
    
+});
+
+
+const deleteMember = ((id) => {
+    const  deleteMem = async () => {
+    const response = await fetch("http://127.0.0.1:5001/club/members/" + id , {method: 'DELETE'});
+}
+deleteMem();
+setMembers(members.filter((mem) => { return mem._id != id; }));
 });
 
     return (
@@ -114,12 +123,12 @@ function ClubAdminMain() {
         
             <Grid item xs={6} >
             <Container>
-                <Typography style={{textAlign:'center', marginBottom:'20px'}} variant="h4"  >Current Members</Typography>
+                <Typography style={{textAlign:'center', marginBottom:'20px'}} variant="h4">Current Members</Typography>
                 </Container>
                 <div className='cons'>
-                <Stack   spacing={1}  style={{width:'300px', textAlign:'center', margin:'0 auto'}} divider={<Divider orientation="horizontal" flexItem />}>
+                <Stack   spacing={1}  style={{width:'300px', textAlign:'center', marginLeft:'22%'}} divider={<Divider orientation="horizontal" flexItem />}>
                     {members.map((member) => {
-                        return <MemberCard name = {member}/>
+                        return <PotentialMemCard member = {member} onDeny = {deleteMember} visible = {false} message={"Are you sure you want to remove this member from the club?"}/>
                     }
                     ) }
                  </Stack>
@@ -133,7 +142,7 @@ function ClubAdminMain() {
                 <Stack spacing={1} style={{width:'400px', textAlign:'center', margin:'0 auto'}} divider={<Divider orientation="horizontal" flexItem />}>
                 {potentialMembers.map((member) => {
                         return (
-                        <PotentialMemCard  member = {member} onDeny = {denyMember} onAccept={acceptMember}/>
+                        <PotentialMemCard  member = {member} onDeny = {denyMember} onAccept={acceptMember} visible = {true} message={"Are you sure you want to deny this member from joining the club?"}/>
 
                         );
                     }
@@ -149,6 +158,6 @@ function ClubAdminMain() {
 
 
     );
- }
+ } 
 
  export default ClubAdminMain;

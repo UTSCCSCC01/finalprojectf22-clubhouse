@@ -26,6 +26,17 @@ clubMainRoutes.route("/club/members").get(function (req, res) {
      
    });
 
+   clubMainRoutes.route("/club/members/:id").delete(function (req, res) {
+    let db_connect = dbo.getDb("main");
+    let myquery = { _id: ObjectId(req.params.id)  };
+    db_connect
+      .collection("club-members")
+      .deleteOne(myquery, function (err, result) {
+        if (err) throw err;
+      });
+     
+   });
+
    /**
  * Retrives all users applying to join the club from the clubApplicants collection in the main database
  * @name /club/potentialMembers
@@ -72,7 +83,6 @@ clubMainRoutes.route("/club/members").get(function (req, res) {
       .collection("club-members")
       .insertOne(student, function (err, result) {
         if (err) throw err;
-        console.log("Student added to club");
       });
    });
 
