@@ -128,7 +128,7 @@ setMembers(members.filter((mem) => { return mem._id != id; }));
                 <div className='cons'>
                 <Stack   spacing={1}  style={{width:'300px', textAlign:'center', marginLeft:'22%'}} divider={<Divider orientation="horizontal" flexItem />}>
                     {members.map((member) => {
-                        return <PotentialMemCard member = {member} onDeny = {deleteMember} visible = {false} message={"Are you sure you want to remove this member from the club?"}/>
+                        return <PotentialMemCard member = {member} onDeny = {deleteMember} visible = {false} message={"Are you sure you want to remove " + member.userName + " from the club?"}/>
                     }
                     ) }
                  </Stack>
@@ -142,7 +142,7 @@ setMembers(members.filter((mem) => { return mem._id != id; }));
                 <Stack spacing={1} style={{width:'400px', textAlign:'center', margin:'0 auto'}} divider={<Divider orientation="horizontal" flexItem />}>
                 {potentialMembers.map((member) => {
                         return (
-                        <PotentialMemCard  member = {member} onDeny = {denyMember} onAccept={acceptMember} visible = {true} message={"Are you sure you want to deny this member from joining the club?"}/>
+                        <PotentialMemCard  member = {member} onDeny = {denyMember} onAccept={acceptMember} visible = {true} message={"Are you sure you want to deny " + member.userName + " from joining the club?"}/>
 
                         );
                     }

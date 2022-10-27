@@ -74,7 +74,7 @@ const bool = props.visible;
         </Dialog>
 
         <Dialog  open={confirmYes} keepMounted onClose={handleConfirmYesClose}>
-            <DialogTitle >Are you sure you want to accept this user to the club?</DialogTitle>
+            <DialogTitle >Are you sure you want to accept {props.member.userName} to the club?</DialogTitle>
                <DialogContent>
                   <DialogContentText id="alert-dialog-slide-description">
                   You cannot undo this action
