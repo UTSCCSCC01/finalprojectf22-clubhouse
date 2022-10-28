@@ -7,7 +7,6 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import SendIcon from '@mui/icons-material/Send';
 import TagsInput from "./TagsInput.jsx"
 
-
 const ClubRegisterReq = () => {
 
     const navigate = useNavigate();
@@ -18,20 +17,67 @@ const ClubRegisterReq = () => {
     const [tags, setTags] = useState([]);
     const [desc, setDesc] = useState("");
 
-    const onSubmit = (e) => {
+    const [nameError, setNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [phoneError, setPhoneError] = useState("");
+    const [descError, setDescError] = useState("");
+
+    function isValid(cName, cEmail, cPhone, cDesc) {
+
+        let valid = true;
+
+        if (!cName) {
+            setNameError("Name cannot be empty.")
+            valid = false;
+        }
+        if (!cEmail) {
+            setEmailError("Email cannot be empty.")
+            valid = false;
+        }
+        if (!cDesc) {
+            setDescError("Description cannot be empty.")
+            valid = false;
+        }
+
+        if (cPhone && !matchIsValidTel(cPhone)) {
+            setPhoneError("Not a valid phone number");
+            valid = false;
+        }
+
+        return valid;
+
+    }
+
+    const onSubmit = async (e) => {
         e.preventDefault();
+
+        if (!isValid(clubName, email, phone, desc)) {
+            return;
+        }
 
         const newClub = { clubName, email, phone, tags, desc };
 
-        fetch('http://localhost:5001/clubs/register-request/create', {
+        console.log(newClub);
+
+        const responseObj = await fetch('http://localhost:5001/clubs/register-request/create', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newClub)
-        }).then(() => {
-
-        }).catch((err) => {
-            console.log(err);
         })
+
+        let response = await responseObj.json();
+        console.log(response);
+
+        if (response.failed) {
+            if (response.nameTaken) {
+                setNameError("This club name is already taken.");
+            }
+            if (response.emailTaken) {
+                setEmailError("An account with this email already exists.");
+            }
+            return;
+        }
+
         navigate("/"); // change path
     };
 
@@ -54,7 +100,10 @@ const ClubRegisterReq = () => {
                 variant="outlined"
                 fullWidth
                 required
+                error={nameError !== ""}
+                helperText={nameError}
                 value={clubName}
+                onBlur={() => setNameError("")}
                 onChange={(e) => setClubName(e.target.value)}
             />
 
@@ -65,16 +114,21 @@ const ClubRegisterReq = () => {
                     label="Email"
                     required
                     value={email}
+                    error={emailError !== ""}
+                    helperText={emailError}
+                    onBlur={() => setEmailError("")}
                     onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <MuiTelInput
                     sx={{ width: "48%" }}
-
+                    error={phoneError !== ""}
+                    helperText={phoneError}
                     defaultCountry="CA"
                     onlyCountries={['CA', 'US']}
                     label="Phone Number (optional)"
                     value={phone}
+                    onBlur={() => setPhoneError("")}
                     onChange={(value) => setPhone(value)} />
             </Box>
 
@@ -87,6 +141,9 @@ const ClubRegisterReq = () => {
                 multiline
                 minRows={6}
                 required
+                error={descError !== ""}
+                helperText={descError}
+                onBlur={() => setDescError("")}
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
             />

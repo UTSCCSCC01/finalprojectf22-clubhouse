@@ -3,6 +3,9 @@ const newClubRequestRoutes = express.Router();
 const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
+const userDAO = require("../modules/userDAO");
+const clubDAO = require("../modules/clubDAO");
+ 
 /**
  * @module routes/newClubRequest
  */
@@ -24,8 +27,17 @@ const ObjectId = require("mongodb").ObjectId;
 /** This section will help you create a new club signup request.
  *  @name /clubs/register-request/create
  */
- newClubRequestRoutes.route("/clubs/register-request/create").post(function (req, response) {
+ newClubRequestRoutes.route("/clubs/register-request/create").post(async function (req, response) {
     let db_connect = dbo.getDb();
+
+    const isNameTaken = await clubDAO.isClubNameTaken(req.body.clubName);
+    const isEmailTaken = (await userDAO.findUser(req.body.email)) !== null;
+
+    if (isNameTaken || isEmailTaken) {
+        response.json({failed: true, nameTaken: isNameTaken, emailTaken: isEmailTaken});
+        return;
+    }
+
     let myobj = {
 
         clubName: req.body.clubName,
@@ -35,6 +47,7 @@ const ObjectId = require("mongodb").ObjectId;
         clubDesc: req.body.desc,
 
     };
+
     db_connect.collection("club-registration-requests").insertOne(myobj, function (err, res) {
         if (err) throw err;
         response.json(res);
