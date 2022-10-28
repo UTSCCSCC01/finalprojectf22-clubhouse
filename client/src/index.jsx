@@ -22,6 +22,7 @@ import ClubAdminMain from './pages/ClubAdminMain.jsx';
 import PositionCreate from './pages/PositionCreate.jsx'
 import Positions from './pages/Positions.jsx';
 import NewAnnouncement from './pages/NewAnnouncement.jsx';
+import ClubRegisterReq from './pages/ClubRegisterReq.jsx';
 
 ReactDOM.render(
   (
@@ -37,6 +38,7 @@ ReactDOM.render(
       clubName = "Club Name"
       />} />
         <Route path="/clubs" element={<Clubs />} />
+        <Route path="/club-register" element={<ClubRegisterReq />} />
         <Route exact path="/clubs" element={<Clubs />} />
         <Route  path="/clubMain" element={<ClubAdminMain/>} />
         <Route exact path="/allclubs" element={<AllClubs />} />
