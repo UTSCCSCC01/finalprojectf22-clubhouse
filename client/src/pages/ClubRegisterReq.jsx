@@ -78,7 +78,7 @@ const ClubRegisterReq = () => {
             return;
         }
 
-        navigate("/"); // change path
+        navigate("/club-signup-confirmation"); // redirect to confirmation page
     };
 
     return (
