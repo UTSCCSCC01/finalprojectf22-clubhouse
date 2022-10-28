@@ -21,18 +21,17 @@ const ClubRegisterReq = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        // const clubName = "ClubHouse";
-        // const newEvent = { clubName, eventName, eventImage, eventLoc, eventDesc, eventStartTime, eventEndTime, eventTags, eventAttendees };
+        const newClub = { clubName, email, phone, tags, desc };
 
-        // fetch('http://localhost:5001/events/create', {
-        //     method: 'POST',
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(newEvent)
-        // }).then(() => {
+        fetch('http://localhost:5001/clubs/register-request/create', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newClub)
+        }).then(() => {
 
-        // }).catch((err) => {
-        //     console.log(err);
-        // })
+        }).catch((err) => {
+            console.log(err);
+        })
         navigate("/"); // change path
     };
 
@@ -65,6 +64,8 @@ const ClubRegisterReq = () => {
                     sx={{ width: "48%" }}
                     label="Email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <MuiTelInput
@@ -78,7 +79,6 @@ const ClubRegisterReq = () => {
             </Box>
 
             <TagsInput tags={tags} setTags={setTags} />
-
 
             <TextField
                 sx={{ flex: 'auto', backgroundColor: "white", width: '100%', }}
