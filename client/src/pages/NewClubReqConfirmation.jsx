@@ -7,7 +7,7 @@ const NewClubReqConfirmation = () => {
         <Box sx={{
             height: "100%",
             maxWidth: "500px",
-            margin: "auto",
+            margin: "50px auto auto auto",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
