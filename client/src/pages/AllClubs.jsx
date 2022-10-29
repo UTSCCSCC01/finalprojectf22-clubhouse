@@ -12,12 +12,18 @@ import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
 /**
  * Fetch club data from the database.
  * @component
  */
 function AllClubs(props) {
+  
+  const [search, setSearch ] = useState("");
  
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -67,6 +73,21 @@ function AllClubs(props) {
       })
       return contains;
 };
+let containsS = false;
+/**
+   * Check whether arrayTag includes any of search string
+   * @param {array} arrayTag 
+   */
+const conTainsS = (arrayTag) => {
+  containsS = false;
+  arrayTag.clubTags.forEach((clubTAG) => {
+    if(clubTAG.toLowerCase().includes(search)){
+      containsS = true;
+      return containsS;
+    }
+  })
+  return containsS;
+};
 
   /**
    * Fetch and set data from the database
@@ -79,7 +100,7 @@ function AllClubs(props) {
       setItems(data); 
     };
     getclubs();
-  },[tagName]);
+  }, [tagName]);
   
   /**
    * Fetch and set tags from the database
@@ -101,6 +122,18 @@ function AllClubs(props) {
         <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
             <Container maxWidth="lg" >
               <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  UTSC Clubs</Typography>
+                <TextField
+                sx={{m: 2, width: 150, marginLeft: '930px' }}
+                  id="outlined-start-adornment"
+                  variant="outlined"
+                  label="Search"
+                  size="small"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
+                }}
+              ></TextField>
                   <FormControl sx={{ m: 2, width: 150, marginLeft: '930px' }} size="small">
                     <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                     <Select
@@ -126,21 +159,13 @@ function AllClubs(props) {
         <Container sx={{ py: 4}} maxWidth="lg">
             <Grid container spacing={3}>
             {items.map((item) => {
-              if (Object.keys(tagName).length == 0){
+              if ( (search==="" && Object.keys(tagName).length == 0) || (search!=="" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item)) ){
                 return (<Grid item key={item}>
                   <AllClubsCard key={item._id} cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
                  </Grid>)
               }
-              else if (conTains(item)) { 
-                    return (<Grid item key={item}>
-                             <AllClubsCard key={item._id} cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
-                            </Grid>)
-              }
               else{
-                return (
-                <Grid item key={item}>
-                 </Grid>
-                )
+                return (<Grid item key={item}></Grid>)
               }
                     })}
             </Grid>
