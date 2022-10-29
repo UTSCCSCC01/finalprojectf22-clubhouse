@@ -1,6 +1,6 @@
 import React from "react";
 import MultiActionAreaCard from "./EventCard.jsx";
-
+import EventCard from "./StudentEventCard.jsx";
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Fab from '@mui/material/Fab'
@@ -99,7 +99,7 @@ function ClubAdminViewProfile(props) {
       <h2  style={{ textAlign: "center" }}>{props.values.clubName}</h2>
 
           
-          <div color="#FFE498" className="viewdesc" style = {{float: "right", width:"60%", margin:"5px", display: "inline-block", padding:"5px"}}>
+          <div color="#FFE498" className="viewdesc" style = {{float: "right", width:"55%", margin:"5px", display: "inline-block", padding:"5px", marginTop:"50px", marginRight:"0px"}}>
         
         <p style={{paddingLeft:"5px"}}>{props.values.description}</p>
         </div>
@@ -126,7 +126,7 @@ function ClubAdminViewProfile(props) {
       <b>Yay! You have seen it all</b>
     </p> }>
         {items.map((item) => {
-            return <MultiActionAreaCard key={item._id} eName={item.eventName} eDesc={item.eventDesc} eJoin={item.eventJoin}/>
+            return <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
         }
         ) }
       </InfiniteScroll>

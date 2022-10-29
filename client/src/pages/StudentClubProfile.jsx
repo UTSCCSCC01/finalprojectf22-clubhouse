@@ -1,6 +1,6 @@
 import React from "react";
 import MultiActionAreaCard from "./EventCard.jsx";
-
+import EventCard from "./StudentEventCard.jsx";
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Fab from '@mui/material/Fab'
@@ -137,7 +137,7 @@ function StudentClubProfile(props) {
       <b>Yay! You have seen it all</b>
     </p> }>
         {items.map((item) => {
-            return <MultiActionAreaCard key={item._id} eName={item.eventName} eDesc={item.eventDesc} eJoin={item.eventJoin}/>
+            return  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
         }
         ) }
       </InfiniteScroll>
