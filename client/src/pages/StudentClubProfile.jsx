@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Fab from '@mui/material/Fab'
 import EditIcon from '@mui/icons-material/Edit';
 import { Clear } from "@mui/icons-material";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Skeleton } from "@mui/material";
 import { Stack } from "@mui/system";
 
 /**
@@ -20,6 +20,7 @@ function StudentClubProfile(props) {
   const [items, setItems ] = useState([]);
   const [page, setPage] = useState(2);
   const [clubName, setClubName] = useState(props.clubName);
+  const [noitem, setNoitem] = useState(false);
     /**
  * <Gets page 1 of events from the database>
  */
@@ -28,6 +29,10 @@ function StudentClubProfile(props) {
   const res = await fetch(url+"?page=1"+"&clname="+clubName);
     const data = await res.json();
     setItems(data);
+    if (data.length <=0 ){
+      setisMore(false);
+      setNoitem(true)
+    }
   };
   
     getevents();
@@ -132,10 +137,25 @@ function StudentClubProfile(props) {
      hasMore={isMore}
      scrollableTarget="scrollableDiv"
       loader={<h4>Loading...</h4>}
-      endMessage={
-    <p style={{ textAlign: 'center' }}>
-      <b>Yay! You have seen it all</b>
-    </p> }>
+      endMessage={ noitem ? (
+        <div>
+    <p style={{ textAlign: 'center', width:'300'}}>
+      <b> No more events!  </b>
+    </p> 
+    <Stack spacing={1}>
+      {/* For variant="text", adjust the height via font-size */}
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+
+      {/* For other variants, adjust the size with `width` and `height` */}
+      <Skeleton sx={{ bgcolor: '#7ba4d9' }} variant="rounded" width={350} height={200} />
+      <Skeleton sx={{ bgcolor: '#7ba4d9' }} variant="rounded" width={350} height={60} />
+      <Skeleton sx={{ bgcolor: '#7ba4d9' }} variant="rounded" width={350} height={60} />
+    </Stack>
+     </div>
+      ):(<p style={{ textAlign: 'center', width:'300'}}>
+      <b> No more events!  </b>
+    </p> )
+  }>
         {items.map((item) => {
             return  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
         }
