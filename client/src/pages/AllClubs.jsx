@@ -119,11 +119,12 @@ const conTainsS = (arrayTag) => {
 
   return (
     <div>
-        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
-            <Container maxWidth="lg" >
+        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 2}}>         
+            <Container maxWidth="lg" fixec>
               <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  UTSC Clubs</Typography>
+              <Grid maxWidth="lg" align="center">
                 <TextField
-                sx={{m: 2, width: 150, marginLeft: '930px' }}
+                sx={{m: 1, width: 450}}
                   id="outlined-start-adornment"
                   variant="outlined"
                   label="Search"
@@ -134,7 +135,7 @@ const conTainsS = (arrayTag) => {
                     endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
                 }}
               ></TextField>
-                  <FormControl sx={{ m: 2, width: 150, marginLeft: '930px' }} size="small">
+              <FormControl sx={{ m: 1, width: 150 }} size="small">
                     <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                     <Select
                       labelId="multiple-checkbox-label"
@@ -154,10 +155,11 @@ const conTainsS = (arrayTag) => {
                       ))}
                     </Select>
                   </FormControl>
+                </Grid>
               </Container>     
         </Box>
-        <Container sx={{ py: 4}} maxWidth="lg">
-            <Grid container spacing={3}>
+        <Container maxWidth="lg">
+            <Grid container spacing={2}>
             {items.map((item) => {
               if ( (search==="" && Object.keys(tagName).length == 0) || (search!=="" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item)) ){
                 return (<Grid item key={item}>

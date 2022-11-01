@@ -42,7 +42,7 @@ export default function AllClubsCard(props) {
     };
 
   return (
-    <Card sx={{ maxWidth: 345 }} >
+    <Card sx={{ width: 370 }} raised >
       <CardMedia
                 component="img"
                 height="250"
