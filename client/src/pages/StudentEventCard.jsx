@@ -15,6 +15,7 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+import { getCookie } from '../libraries/cookieDAO'
 
 /**
  * Display fetched information in a card
@@ -53,12 +54,12 @@ export default function StudentEventCard(props) {
     };
 
   return (
-    <Card sx={{ maxWidth: 345 }} >
+    <Card  raised sx={{ width: 370 }} >
       <CardMedia
                 component="img"
                 height="250"
                 image={props.eImage} alt="UTSC"/>
-      <CardContent sx={{ flexGrow: 1, minWidth: 350 }}>
+      <CardContent sx={{ width: 370 }}>
                 <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>  
                 <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
                 <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>

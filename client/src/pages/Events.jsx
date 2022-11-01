@@ -99,6 +99,10 @@ const conTainsS = (arrayTag) => {
       return contains;
 };
 
+const MapFilter = (item) => {
+  return (search==="" && Object.keys(tagName).length == 0) || (filter=="Categories" && conTains(item)) || (search!=="" && conTainsS(item)) || (conTainsS(item) && !conTainsS(item));
+};
+
   /**
    * Fetch and set data from the database
    * every time the value of filter changes. 
@@ -142,22 +146,23 @@ const conTainsS = (arrayTag) => {
 
   return (
     <div>
-        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
-            <Container maxWidth="lg" >
+        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 2 }}>         
+            <Container maxWidth="lg" fixed>
               <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
-              <TextField
-              sx={{ m: 1, width: 150, marginLeft: '930px'}}
-                  id="outlined-start-adornment"
-                  variant="outlined"
-                  label="Search"
-                  size="small"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
-                }}
-              ></TextField>
-              <FormControl sx ={{ m: 1, width: 150, marginLeft: '930px'}} variant="outlined" size="small">
+              <Grid maxWidth="lg" align="center"> 
+                  <TextField
+                  sx={{ m: 1, width: 350}}
+                      id="outlined-start-adornment"
+                      variant="outlined"
+                      label="Search"
+                      size="small"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      InputProps={{
+                        endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
+                    }}
+                  ></TextField>
+                  <FormControl sx ={{ m: 1, width: 150}} variant="outlined" size="small">
                   <InputLabel id="simple-select-label" >Sort by</InputLabel>
                   <Select
                       labelId="simple-select-label"
@@ -172,7 +177,7 @@ const conTainsS = (arrayTag) => {
                       <MenuItem value={"Categories"}>Categories</MenuItem>
                   </Select>
                   </FormControl>
-                  <FormControl sx={{ m: 1, width: 150, marginLeft: '930px' }} size="small">
+                  <FormControl sx={{ m: 1, width: 150 }} size="small">
                     <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                     <Select disabled={filter!=="Categories" ? true : false}
                       labelId="multiple-checkbox-label"
@@ -192,10 +197,12 @@ const conTainsS = (arrayTag) => {
                       ))}
                     </Select>
                   </FormControl>
+               </Grid>
               </Container>     
         </Box>
-        <Container sx={{ py: 4}} maxWidth="lg">
-            <Grid container spacing={3}>
+        
+        <Container maxWidth="lg" >
+            <Grid container spacing={2} >
             {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => {
               if ( (search==="" && Object.keys(tagName).length == 0) || (filter=="Categories" && conTains(item)) || (search!=="" && conTainsS(item)) || (conTainsS(item) && !conTainsS(item)) ){
                 return (<Grid item key={item}>
@@ -203,11 +210,13 @@ const conTainsS = (arrayTag) => {
                  </Grid>)
               }
               else{ 
-                return (<Grid item key={item} ></Grid>)
+                return (<Grid item key={item} sx={{width: 0}} ></Grid>)
               }
                     })}
+           
             </Grid>
           </Container>
+          
      </div>
   );
 }
