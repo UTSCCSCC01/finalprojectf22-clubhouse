@@ -3,8 +3,8 @@ const express = require("express");
 
 const loginRoutes = express.Router();
 
-const dbo = require("../db/conn");
-const DAO = require("../modules/userDAO");
+const userDAO = require("../modules/userDAO");
+const clubDAO = require("../modules/clubDAO");
 /**
  * @module routes/login
  */
@@ -19,11 +19,15 @@ const DAO = require("../modules/userDAO");
  */
 loginRoutes.route("/login").post(async function (req, res) {
   let valid = true;
-  const user = await DAO.findUser(req.body.email);
+  const user = await userDAO.findUser(req.body.email);
   if (user == null) {
     valid = false;
   } else {
     if (user.password == req.body.password) {
+      if (user.accountType === "club") {
+        const club = await clubDAO.findClub(req.body.email);
+        res.cookie("clubName", club.clubName, {maxAge: 3600000, sameSite: 'none', secure: true});
+      }
       res.cookie("accountType", user.accountType, {maxAge: 3600000, sameSite: 'none', secure: true});
       res.cookie("username", req.body.email, {maxAge: 3600000, sameSite: 'none', secure: true});
     } else {
@@ -38,8 +42,14 @@ loginRoutes.route("/login").post(async function (req, res) {
  */
 loginRoutes.route("/loginstatus").get(function (req, res) {
   var currentuser = req.cookies.username;
+  var accountType = req.cookies.accountType;
   if (currentuser != null) {
-    res.send(req.cookies.username);
+    if (accountType === "club") {
+      var clubName = req.cookies.clubName;
+      res.json({"username":req.cookies.username, "accountType":accountType, "clubName":clubName});
+    } else {
+      res.json({"username":req.cookies.username, "accountType":accountType});
+    }
   } else {
     res.send(false);
   }
@@ -50,7 +60,9 @@ loginRoutes.route("/loginstatus").get(function (req, res) {
  * @name /logout
  */
 loginRoutes.route("/logout").get(function (req, res) {
-  res.clearCookie("username", {})
+  res.clearCookie("username", {});
+  res.clearCookie("accountType", {});
+  res.clearCookie("clubName", {});
   res.end();
 });
 
