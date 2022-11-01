@@ -28,7 +28,7 @@ const NewAnnouncement = () => {
         e.preventDefault();
 
         const clubName = "ClubHouse";
-        const time = dayjs();
+        const time = dayjs().unix(); // time is represented as seconds since Epoch
         const newAnnouncement = { clubName, subject, message, recipients, time };
 
         fetch('http://localhost:5001/announcements/new', {
