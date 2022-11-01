@@ -5,6 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { useNavigate } from 'react-router';
 import dayjs from "dayjs";
+import { getCookie } from '../libraries/cookieDAO'
 
 /**
  * Component for displaying a new announcements form
@@ -27,8 +28,8 @@ const NewAnnouncement = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const clubName = "ClubHouse";
-        const time = dayjs();
+        const clubName = getCookie("clubName");
+        const time = dayjs().unix(); // time is represented as seconds since Epoch
         const newAnnouncement = { clubName, subject, message, recipients, time };
 
         fetch('http://localhost:5001/announcements/new', {
