@@ -12,6 +12,7 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { makeStyles } from '@material-ui/core';
 import TagsInput from "./TagsInput.jsx"
+import { getCookie } from '../libraries/cookieDAO'
 
 const useStyles = makeStyles({
     timepicker: {
@@ -104,7 +105,7 @@ const EventForm = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const clubName = "ClubHouse";
+        const clubName = getCookie("clubName");
         const newEvent = { clubName, eventName, eventImage, eventLoc, eventDesc, eventStartTime, eventEndTime, eventTags, eventAttendees };
 
         fetch('http://localhost:5001/events/create', {
