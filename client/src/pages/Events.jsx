@@ -17,6 +17,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 
+
 /**
  * Fetch data from the database, depending on the chosen sorting filter. Retrieve only future events by sorting their dates. 
  * @component
@@ -32,6 +33,8 @@ function Events(props) {
       },
     },
   };
+
+  
 
   const [tags, setTags ] = useState([]);
   const [tagName, setTagName] = React.useState([]);
@@ -97,10 +100,6 @@ const conTainsS = (arrayTag) => {
           }
       })
       return contains;
-};
-
-const MapFilter = (item) => {
-  return (search==="" && Object.keys(tagName).length == 0) || (filter=="Categories" && conTains(item)) || (search!=="" && conTainsS(item)) || (conTainsS(item) && !conTainsS(item));
 };
 
   /**
@@ -206,7 +205,7 @@ const MapFilter = (item) => {
             {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => {
               if ( (search==="" && Object.keys(tagName).length == 0) || (filter=="Categories" && conTains(item)) || (search!=="" && conTainsS(item)) || (conTainsS(item) && !conTainsS(item)) ){
                 return (<Grid item key={item}>
-                  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
+                  <EventCard key={item._id} eKey = {item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
                  </Grid>)
               }
               else{ 

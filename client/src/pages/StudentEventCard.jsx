@@ -16,7 +16,14 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { getCookie } from '../libraries/cookieDAO'
-
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import CloseIcon from '@mui/icons-material/Close';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import PropTypes from 'prop-types';
 /**
  * Display fetched information in a card
  * Reformat eventStartTime and eventEndTime. 
@@ -35,18 +42,120 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
+
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
+
 export default function StudentEventCard(props) {
 
+
+
     const [cName, setCname] = useState('');
+    const [key, setKey] = useState('');
     const [eDate, setEdate] = useState('');
     const [eName, setEname] = useState('');
     const [eTags, setEtags] = useState('');
     const [eDesc, setEdesc] = useState('');
     const [expanded, setExpanded] = React.useState(false);
     const [OnOff, setOnOff] = useState(false);
+    const user = getCookie("username");
+
+    //user = user
+    //eKey = eventID
+
+    const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    setOnOff(!OnOff);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleClick() {
     setOnOff(!OnOff);
+    if(OnOff) {
+      //cancel
+      console.log(props.eKey);
+      
+     
+      // fetch('http://127.0.0.1:5001/events/' + props.eKey + '/remove', {
+      //     method: 'PATCH', // or 'PUT'
+      //     headers: {
+      //     'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({'eventAttendees':user}),
+      //     })
+      //     .then(() => {
+      //     })
+      //     .catch((error) => { 
+      //       console.error('Error:', error);
+      //     });
+    }
+    else {
+      //sign up
+      console.log(props.eKey);
+      
+      // fetch('http://localhost:5001/events/' + props.eKey, {
+      //       method: 'PUT',
+      //       headers: { "Content-Type": "application/json" },
+      //       body: JSON.stringify({eventAttendees: user})
+      //   }).then(() => {
+      //     console.log("then");
+
+      //   }).catch((err) => {
+      //       console.log(err);
+      //   })
+
+      // fetch('http://127.0.0.1:5001/events/' + props.eKey + '/add', {
+      //     method: 'PATCH', // or 'PUT'
+      //     headers: {
+      //     'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({'eventAttendees':user}),
+      //     })
+      //     .then(() => {
+      //     })
+      //     .catch((error) => { 
+      //       console.error('Error:', error);
+      //     });
+      
+    }
   }
 
     const handleExpandClick = () => {
@@ -77,8 +186,25 @@ export default function StudentEventCard(props) {
         >
           <RsvpIcon color="primary" sx={{ fontSize: 40 }}>{buttonText}</RsvpIcon>
         </IconButton> */}
-        <Button onClick={handleClick}  variant={OnOff ? "outlined": "contained"}
+        <Button onClick={handleClickOpen}  variant={OnOff ? "outlined": "contained"}
         sx={{ marginBottom: 2, marginLeft: 2 }}>{OnOff ? 'cancel': 'sign up'}</Button>
+        <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogContent dividers>
+          <Typography gutterBottom>
+          {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}
+            
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            Close
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
