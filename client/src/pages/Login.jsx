@@ -60,8 +60,10 @@ class Login extends Component {
         if (v.valid) {
           if (v.accountType === "club") {
             location.href = "http://localhost:3000/clubhome";
-          } else {
+          } else if (v.accountType === "student") {
             location.href = "http://localhost:3000/home";
+          } else {
+            location.href = "http://localhost:3000/adminhome";
           }
         } else {
           alert("Incorrect Password!")
