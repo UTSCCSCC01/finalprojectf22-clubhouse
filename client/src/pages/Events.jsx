@@ -41,6 +41,10 @@ function Events(props) {
   const [search, setSearch ] = useState("");
 
   let containsS = false;
+  /**
+   * Check whether arrayTag includes any of clubTags
+   * @param {array} arrayTag 
+   */
 const conTainsS = (arrayTag) => {
   containsS = false;
   arrayTag.eventTags.forEach((clubTAG) => {

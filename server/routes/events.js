@@ -80,8 +80,8 @@ eventRoutes.route("/events/create").post(function (req, response) {
   });
 });
 
-/** This section will help you update a record by id.
- *  @name /events/:id
+/** This section will help you update a record by id - it adds a user email to the eventAttendees list
+ *  @name /events/add/:id
  */
 eventRoutes.route("/events/add/:id").patch(function (req, response) {
   let db_connect = dbo.getDb();
@@ -99,7 +99,9 @@ eventRoutes.route("/events/add/:id").patch(function (req, response) {
       response.json(res);
     });
 });
-
+/** This section will help you update a record by id - it removes a user email from the eventAttendees list
+ *  @name /events/remove/:id
+ */
 eventRoutes.route("/events/remove/:id").patch(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };

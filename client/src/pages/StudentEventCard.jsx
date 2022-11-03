@@ -22,12 +22,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import PropTypes from 'prop-types';
-/**
- * Display fetched information in a card
- * Reformat eventStartTime and eventEndTime. 
- * @param {*} props 
- * @component
- */
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -78,6 +73,12 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
+/**
+ * Display fetched information in a card
+ * Reformat eventStartTime and eventEndTime. 
+ * @param {*} props 
+ * @component
+ */
 export default function StudentEventCard(props) {
 
 
@@ -98,7 +99,6 @@ export default function StudentEventCard(props) {
     setOpen(true);
     setOnOff(!OnOff);
     if(OnOff){
-      console.log("onoff");
       fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
         method: 'PATCH', // or 'PUT'
         headers: {
@@ -113,7 +113,6 @@ export default function StudentEventCard(props) {
         });
     }
     else{
-      console.log("!onoff");
       fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
         method: 'PATCH', // or 'PUT'
         headers: {
