@@ -57,6 +57,7 @@ announcementRoutes.route("/announcements/new").post(
     let db_connect = dbo.getDb();
     let myobj = {
       clubName: req.body.clubName,
+      clubEmail: req.body.clubEmail,
       subject: req.body.subject,
       message: req.body.message,
       recipients: req.body.recipients,

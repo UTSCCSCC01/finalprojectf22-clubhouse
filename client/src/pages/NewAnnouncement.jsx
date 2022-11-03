@@ -29,8 +29,9 @@ const NewAnnouncement = () => {
         e.preventDefault();
 
         const clubName = getCookie("clubName");
+        const clubEmail = getCookie("username");
         const time = dayjs().unix(); // time is represented as seconds since Epoch
-        const newAnnouncement = { clubName, subject, message, recipients, time };
+        const newAnnouncement = { clubName, subject, message, recipients, time, clubEmail };
 
         fetch('http://localhost:5001/announcements/new', {
             method: 'POST',
