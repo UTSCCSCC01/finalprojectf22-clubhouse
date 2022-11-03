@@ -16,8 +16,6 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { getCookie } from '../libraries/cookieDAO'
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import CloseIcon from '@mui/icons-material/Close';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -94,14 +92,41 @@ export default function StudentEventCard(props) {
     const [OnOff, setOnOff] = useState(false);
     const user = getCookie("username");
 
-    //user = user
-    //eKey = eventID
-
     const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
     setOnOff(!OnOff);
+    if(OnOff){
+      console.log("onoff");
+      fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
+        method: 'PATCH', // or 'PUT'
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({'eventAttendees':user}),
+        })
+        .then(() => {
+        })
+        .catch((error) => { 
+          console.error('Error:', error);
+        });
+    }
+    else{
+      console.log("!onoff");
+      fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
+        method: 'PATCH', // or 'PUT'
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({'eventAttendees':user}),
+        })
+        .then(() => {
+        })
+        .catch((error) => { 
+          console.error('Error:', error);
+        });
+    }
   };
   const handleClose = () => {
     setOpen(false);
@@ -109,53 +134,6 @@ export default function StudentEventCard(props) {
 
   function handleClick() {
     setOnOff(!OnOff);
-    if(OnOff) {
-      //cancel
-      console.log(props.eKey);
-      
-     
-      // fetch('http://127.0.0.1:5001/events/' + props.eKey + '/remove', {
-      //     method: 'PATCH', // or 'PUT'
-      //     headers: {
-      //     'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({'eventAttendees':user}),
-      //     })
-      //     .then(() => {
-      //     })
-      //     .catch((error) => { 
-      //       console.error('Error:', error);
-      //     });
-    }
-    else {
-      //sign up
-      console.log(props.eKey);
-      
-      // fetch('http://localhost:5001/events/' + props.eKey, {
-      //       method: 'PUT',
-      //       headers: { "Content-Type": "application/json" },
-      //       body: JSON.stringify({eventAttendees: user})
-      //   }).then(() => {
-      //     console.log("then");
-
-      //   }).catch((err) => {
-      //       console.log(err);
-      //   })
-
-      // fetch('http://127.0.0.1:5001/events/' + props.eKey + '/add', {
-      //     method: 'PATCH', // or 'PUT'
-      //     headers: {
-      //     'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({'eventAttendees':user}),
-      //     })
-      //     .then(() => {
-      //     })
-      //     .catch((error) => { 
-      //       console.error('Error:', error);
-      //     });
-      
-    }
   }
 
     const handleExpandClick = () => {
@@ -181,11 +159,6 @@ export default function StudentEventCard(props) {
             </CardContent>
 
       <CardActions disableSpacing>
-        {/* <IconButton aria-label="RSVP" onClick={handleClick} 
-        // href={props.eJoin}
-        >
-          <RsvpIcon color="primary" sx={{ fontSize: 40 }}>{buttonText}</RsvpIcon>
-        </IconButton> */}
         <Button onClick={handleClickOpen}  variant={OnOff ? "outlined": "contained"}
         sx={{ marginBottom: 2, marginLeft: 2 }}>{OnOff ? 'cancel': 'sign up'}</Button>
         <BootstrapDialog

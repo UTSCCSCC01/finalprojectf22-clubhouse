@@ -10,6 +10,7 @@ const dbo = require("../db/conn");
  
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
+
  
 /**
  * @module routes/events
@@ -82,7 +83,7 @@ eventRoutes.route("/events/create").post(function (req, response) {
 /** This section will help you update a record by id.
  *  @name /events/:id
  */
-eventRoutes.route("/events/:id/add").patch(function (req, response) {
+eventRoutes.route("/events/add/:id").patch(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
@@ -99,7 +100,7 @@ eventRoutes.route("/events/:id/add").patch(function (req, response) {
     });
 });
 
-eventRoutes.route("/events/:id/remove").patch(function (req, response) {
+eventRoutes.route("/events/remove/:id").patch(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
