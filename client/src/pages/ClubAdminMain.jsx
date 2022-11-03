@@ -3,7 +3,7 @@ import { Container, Stack, Typography, Grid, Divider,Box, Dialog, DialogTitle,Di
 import { useState, useEffect } from 'react';
 import { margin } from '@mui/system';
 import PotentialMemCard from './PotentialMemCard.jsx';
-
+import { getCookie } from '../libraries/cookieDAO'
 /**
  * ClubAdminMain
  * @component
@@ -13,21 +13,19 @@ function ClubAdminMain() {
 
     const [potentialMembers, setPotentialMembers] = useState([]);
 
+    const clubName = getCookie("clubName");
     /**
    * Fetch and set the members of the club from the database (club-members collection)
    * 
    */
     useEffect(  ()  => {
-          const  fetchmembers = async () => {
-            const res = await fetch("http://127.0.0.1:5001/club/members");
-          const data = await res.json();
-          const a=[];
-          for (let index = 0; index < data.length; index++) {
-             a[index] = data[index].userName;
+        const  fetchmembers = async () => {
+            console.log(clubName);
+            const clubName = getCookie("clubName");
+            const res = await fetch("http://127.0.0.1:5001/club/members/" + clubName);
+            const data = await res.json();
+            setMembers(data);
             
-          }
-          setMembers(data);
-          console.log(data);
           
         } 
         fetchmembers();
@@ -41,9 +39,10 @@ function ClubAdminMain() {
    */
         useEffect(  ()  => {
             const  fetchpotmembers = async () => {
-                const res = await fetch("http://127.0.0.1:5001/club/potentialMembers");
+                const res = await fetch("http://127.0.0.1:5001/club/potentialMembers/" + clubName);
                 const data = await res.json();
                 setPotentialMembers(data);
+                console.log(data);
               }
       fetchpotmembers();
 
@@ -117,7 +116,7 @@ setMembers(members.filter((mem) => { return mem._id != id; }));
     return (
        
         <Grid>
-        <Typography style={{marginTop:'90px', textAlign:'center'}} variant="h3">Welcome CLUBNAME</Typography>
+        <Typography style={{marginTop:'90px', textAlign:'center'}} variant="h3">{clubName}</Typography>
         
         <Grid container rowSpacing={3} margin={2} padding={3} columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
         
