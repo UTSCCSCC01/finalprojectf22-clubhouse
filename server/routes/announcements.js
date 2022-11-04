@@ -1,6 +1,8 @@
 const express = require("express");
 const announcementRoutes = express.Router();
 const dbo = require("../db/conn");
+const membershipDAO = require("../modules/membershipDAO");
+const emailWrapper = require("../modules/emailWrapper")
 const ObjectId = require("mongodb").ObjectId;
 
 /**
@@ -50,10 +52,7 @@ announcementRoutes.route("/announcements/:id").get(
      * @name /announcements/new
      */
 announcementRoutes.route("/announcements/new").post(
-
-  
-
-  function (req, response) {
+  async function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
       clubName: req.body.clubName,
@@ -63,6 +62,22 @@ announcementRoutes.route("/announcements/new").post(
       recipients: req.body.recipients,
       time: req.body.time,
     };
+
+    let members = await membershipDAO.getMembersByClub(req.body.clubEmail);
+    
+    
+
+    await members.forEach(async element => {
+      let emailCfg = {
+        from: "utscclubhouse@gmail.com",
+        to: element.email,
+        subject: "Notification from " + element.clubName + ": " + req.body.subject,
+        text: req.body.message
+      }
+
+      await emailWrapper.sendEmail(emailCfg);
+    });
+
     db_connect.collection("announcements").insertOne(myobj, function (err, res) {
       if (err) throw err;
       response.json(res);
