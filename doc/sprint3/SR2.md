@@ -6,7 +6,7 @@ Dhruv, Arai, Noah, Priyank, Tharuth, Amy, Faraz
 
 ## Unfinished tasks
 
-N/A
+Adding on-click listeners wherever needed/applicable.
 
 ## What are practices that you should continue during next sprint?
 

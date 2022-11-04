@@ -5,6 +5,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
+import { getCookie } from '../libraries/cookieDAO'
 /**
  * ClubAdminEditProfile
  * @component
@@ -12,6 +13,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 function ClubAdminEditProfile(props) {
   const url = 'http://127.0.0.1:5001/club/events';
   
+  const clubName = getCookie("clubName");
   const [isMore,setisMore] = useState(true);
   const [items, setItems ] = useState([]);
   
@@ -21,7 +23,7 @@ function ClubAdminEditProfile(props) {
  */
   useEffect(() => {
   const getevents = async ()=>{
-  const res = await fetch(url+"?page=1");
+  const res = await fetch(url+"?page=1"+ "&clubName=" + clubName);
     const data = await res.json();
     setItems(data);
   };
@@ -52,7 +54,7 @@ function ClubAdminEditProfile(props) {
  * @returns  {Promise<Object>}        returns the events depending on the page number from the database
  */
     const fetchData = async() => {
-     const res = await fetch(url+'?page='+page);
+     const res = await fetch(url+'?page='+page+"&clubName="+clubName);
       const data = await res.json();
       
       return data;
@@ -80,12 +82,14 @@ function ClubAdminEditProfile(props) {
  */
   useEffect(() => {
   const fetchImage = async()=>{
-    const res = await fetch("http://127.0.0.1:5001/club/profileimg");
+    const res = await fetch("http://127.0.0.1:5001/club/profileimg/"+clubName);
     const data = await res.json();
     
     setImage(data);
     
   }
+
+  fetchImage();
 });
 /**
  * <trigger for when image upload is unsuccesful. Sets Open to true>
@@ -125,7 +129,7 @@ const handleClose = () => {
       setImage(lins);
       console.log(lins);
       
-      fetch('http://127.0.0.1:5001/club/picupdate', {
+      fetch('http://127.0.0.1:5001/club/picupdate/'+ clubName, {
 method: 'PATCH', // or 'PUT'
 headers: {
 'Content-Type': 'application/json',
@@ -147,6 +151,16 @@ console.error('Error:', error);
     };
   }
 const [open, setOpen] = useState(false);
+
+const onSave = () => {
+  props.editDone(props.values._id);
+  
+};
+
+ function handleSubmit(event) {
+  event.preventDefault();
+}
+
   return (
     <div class="mui-container-fluid" className="ClubAdminProfilePage">
       <h1 style={{ textAlign: "center" }}> Profile</h1>
@@ -184,7 +198,7 @@ const [open, setOpen] = useState(false);
       <div className="adminchild" >
       <div className="info">
         
-        <form>
+        <form onSubmit={handleSubmit}>
           
           
           
@@ -192,10 +206,10 @@ const [open, setOpen] = useState(false);
             
             
             <textarea
-            name="description"
+            name="clubDesc"
             onChange={props.onChange}
             className="clubEditDecription"
-            value={props.values.description}
+            value={props.values.clubDesc}
             placeholder="Description of Club..."
           ></textarea>
             <div className="contactinfo">
@@ -215,11 +229,10 @@ const [open, setOpen] = useState(false);
               //  style={{width: "90px", margin:"5px"}}
                sx={style}
                style={{display: "inline-block", margin:"5px"}}
-                name="phoneNumber"
+                name="clubPhone"
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*'}}
                 onChange={props.onChange}
-   
-                value={props.values.phoneNumber}
+                value={props.values.clubPhone}
                 placeholder="Phone Number"
               />
               </p>
@@ -227,7 +240,7 @@ const [open, setOpen] = useState(false);
                <button
             className="profileDoneButton"
             type="submit"
-            onClick={props.editDone}
+            onClick={onSave}
           >
             Done<span role="img">✅</span>
           </button>
@@ -239,8 +252,9 @@ const [open, setOpen] = useState(false);
       </div>
       <div className="cardcont">
       <h2 style={{ textAlign: 'center' }}>My Events</h2>
-      <div className="evenCard">
+      <div id="scdiv2" className="evenCard">
       <InfiniteScroll  
+      scrollableTarget="scdiv2"
       dataLength={items.length} //This is important field to render the next data
       next={fetchd}
      hasMore={isMore}
