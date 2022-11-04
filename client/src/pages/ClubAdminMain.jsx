@@ -21,12 +21,9 @@ function ClubAdminMain() {
     useEffect(  ()  => {
         const  fetchmembers = async () => {
             console.log(clubName);
-            const clubName = getCookie("clubName");
             const res = await fetch("http://127.0.0.1:5001/club/members/" + clubName);
             const data = await res.json();
             setMembers(data);
-            
-          
         } 
         fetchmembers();
       },[] );
@@ -37,12 +34,12 @@ function ClubAdminMain() {
    * Fetch and set the members applying to the club from the database (clubApplicants/potentialMembers collection)
    * 
    */
-        useEffect(  ()  => {
-            const  fetchpotmembers = async () => {
+        useEffect( ()  => {
+            const fetchpotmembers = async () => {
                 const res = await fetch("http://127.0.0.1:5001/club/potentialMembers/" + clubName);
                 const data = await res.json();
                 setPotentialMembers(data);
-                console.log(data);
+                console.log(potentialMembers);
               }
       fetchpotmembers();
 

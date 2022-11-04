@@ -5,7 +5,7 @@ import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Fab from '@mui/material/Fab'
 import EditIcon from '@mui/icons-material/Edit';
-
+import { getCookie } from '../libraries/cookieDAO'
 /**
  * ClubAdminViewProfile
  * @component
@@ -13,12 +13,16 @@ import EditIcon from '@mui/icons-material/Edit';
 function ClubAdminViewProfile(props) {
   const url = 'http://127.0.0.1:5001/club/events';
   
+  const clubName = getCookie("clubName");
+  // console.log(props.values);
   const [isMore,setisMore] = useState(true);
   const [items, setItems ] = useState([]);
   const [page, setPage] = useState(2);
     /**
  * <Gets page 1 of events from the database>
  */
+
+  
   useEffect(() => {
   const getevents = async ()=>{
   const res = await fetch(url+"?page=1");
@@ -63,7 +67,7 @@ function ClubAdminViewProfile(props) {
  */
     useEffect(() => {
       const fetchImage = async()=>{
-        const res = await fetch("http://127.0.0.1:5001/club/profileimg");
+        const res = await fetch("http://127.0.0.1:5001/club/profileimg/" + clubName);
         const data = await res.json();
         
         setImage(data);
@@ -101,13 +105,13 @@ function ClubAdminViewProfile(props) {
           
           <div color="#FFE498" className="viewdesc" style = {{float: "right", width:"60%", margin:"5px", display: "inline-block", padding:"5px"}}>
         
-        <p style={{paddingLeft:"5px"}}>{props.values.description}</p>
+        <p style={{paddingLeft:"5px"}}>{props.values.clubDesc}</p>
         </div>
 
         <div className="contactinfo">
         <h3> Contact Info:</h3>
           <p > Email: {props.values.email}</p>
-          <p> Phone Number: {props.values.phoneNumber} </p>
+          <p> Phone Number: {props.values.clubPhone} </p>
           </div>
       </div>
 
