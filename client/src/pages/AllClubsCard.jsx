@@ -37,14 +37,23 @@ export default function AllClubsCard(props) {
     const [cEmail, setCemail] = useState('');
 
     const [expanded, setExpanded] = React.useState(false);
-
+/**
+   * setting expanded to true when clicked on image
+   * 
+   */
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
     const [open, setOpen] = React.useState(false);
+    /**
+   * Set open to false
+   */
     const handleClose = () => {
       setOpen(false);
     };
+    /**
+   * toggle open  
+   */
     const handleToggle = () => {
       setOpen(!open);
     };

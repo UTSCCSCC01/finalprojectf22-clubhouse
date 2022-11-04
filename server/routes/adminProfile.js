@@ -60,7 +60,7 @@ adminPofileRoutes.route("/club/profileimg").get(function (req, res) {
   var pageNumber = (req.query.page == null) ? 1 : req.query.page;
   var startFrom = (pageNumber-1) * perpage;
 
-console.log(req.query);
+
   
   let myquery = {clubName: req.query.clname};
   
