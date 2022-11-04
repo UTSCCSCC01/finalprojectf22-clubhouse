@@ -13,6 +13,10 @@ import dateFormat from 'dateformat';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
+
 
 /**
  * Fetch data from the database, depending on the chosen sorting filter. Retrieve only future events by sorting their dates. 
@@ -30,8 +34,27 @@ function Events(props) {
     },
   };
 
+  
+
   const [tags, setTags ] = useState([]);
   const [tagName, setTagName] = React.useState([]);
+  const [search, setSearch ] = useState("");
+
+  let containsS = false;
+  /**
+   * Check whether arrayTag includes any of clubTags
+   * @param {array} arrayTag 
+   */
+const conTainsS = (arrayTag) => {
+  containsS = false;
+  arrayTag.eventTags.forEach((clubTAG) => {
+    if(clubTAG.toLowerCase().includes(search)){
+      containsS = true;
+      return containsS;
+    }
+  })
+  return containsS;
+};
 
   /**
    * Set multiselect component values. 
@@ -126,10 +149,23 @@ function Events(props) {
 
   return (
     <div>
-        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6}}>         
-            <Container maxWidth="lg" >
+        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 2 }}>         
+            <Container maxWidth="lg" fixed>
               <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  Upcoming Events</Typography>
-              <FormControl sx ={{ minWidth: 120, marginLeft: '940px'}} variant="outlined" size="small">
+              <Grid maxWidth="lg" align="center"> 
+                  <TextField
+                  sx={{ m: 1, width: 350}}
+                      id="outlined-start-adornment"
+                      variant="outlined"
+                      label="Search"
+                      size="small"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      InputProps={{
+                        endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
+                    }}
+                  ></TextField>
+                  <FormControl sx ={{ m: 1, width: 150}} variant="outlined" size="small">
                   <InputLabel id="simple-select-label" >Sort by</InputLabel>
                   <Select
                       labelId="simple-select-label"
@@ -144,7 +180,7 @@ function Events(props) {
                       <MenuItem value={"Categories"}>Categories</MenuItem>
                   </Select>
                   </FormControl>
-                  <FormControl sx={{ m: 2, width: 150, marginLeft: '920px' }} size="small">
+                  <FormControl sx={{ m: 1, width: 150 }} size="small">
                     <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
                     <Select disabled={filter!=="Categories" ? true : false}
                       labelId="multiple-checkbox-label"
@@ -164,38 +200,26 @@ function Events(props) {
                       ))}
                     </Select>
                   </FormControl>
+               </Grid>
               </Container>     
         </Box>
-        <Container sx={{ py: 4}} maxWidth="lg">
-            <Grid container spacing={3}>
+        
+        <Container maxWidth="lg" >
+            <Grid container spacing={2} >
             {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => {
-              if (Object.keys(tagName).length == 0){
+              if ( (search==="" && Object.keys(tagName).length == 0) || (filter=="Categories" && conTains(item)) || (search!=="" && conTainsS(item)) || (conTainsS(item) && !conTainsS(item)) ){
                 return (<Grid item key={item}>
-                  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
+                  <EventCard key={item._id} eKey = {item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
                  </Grid>)
               }
-              
-              else if (filter=="Categories" && conTains(item)) {
-                
-                    return (<Grid item key={item}>
-                             <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
-                            </Grid>)
-              }
-              else if ( !(filter=="Categories" && !conTains(item)) && filter!="Categories"){
-                return (<Grid item key={item} >
-                  {/* <Grid item key={item} xs={12} sm={6} md={4}> */}
-                  <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
-                 </Grid>)
-              }
-              else{
-                return (
-                <Grid item key={item} >
-                 </Grid>
-                )
+              else{ 
+                return (<Grid item key={item} sx={{width: 0}} ></Grid>)
               }
                     })}
+           
             </Grid>
           </Container>
+          
      </div>
   );
 }

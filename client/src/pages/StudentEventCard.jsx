@@ -15,13 +15,14 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+import { getCookie } from '../libraries/cookieDAO'
+import CloseIcon from '@mui/icons-material/Close';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import PropTypes from 'prop-types';
 
-/**
- * Display fetched information in a card
- * Reformat eventStartTime and eventEndTime. 
- * @param {*} props 
- * @component
- */
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,15 +35,101 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
+
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
+
+/**
+ * Display fetched information in a card
+ * Reformat eventStartTime and eventEndTime. 
+ * @param {*} props 
+ * @component
+ */
 export default function StudentEventCard(props) {
 
+
+
     const [cName, setCname] = useState('');
+    const [key, setKey] = useState('');
     const [eDate, setEdate] = useState('');
     const [eName, setEname] = useState('');
     const [eTags, setEtags] = useState('');
     const [eDesc, setEdesc] = useState('');
     const [expanded, setExpanded] = React.useState(false);
     const [OnOff, setOnOff] = useState(false);
+    const user = getCookie("username");
+
+    const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    setOnOff(!OnOff);
+    if(OnOff){
+      fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
+        method: 'PATCH', // or 'PUT'
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({'eventAttendees':user}),
+        })
+        .then(() => {
+        })
+        .catch((error) => { 
+          console.error('Error:', error);
+        });
+    }
+    else{
+      fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
+        method: 'PATCH', // or 'PUT'
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({'eventAttendees':user}),
+        })
+        .then(() => {
+        })
+        .catch((error) => { 
+          console.error('Error:', error);
+        });
+    }
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleClick() {
     setOnOff(!OnOff);
@@ -53,12 +140,12 @@ export default function StudentEventCard(props) {
     };
 
   return (
-    <Card sx={{ maxWidth: 345 }} >
+    <Card  raised sx={{ width: 370 }} >
       <CardMedia
                 component="img"
                 height="250"
                 image={props.eImage} alt="UTSC"/>
-      <CardContent sx={{ flexGrow: 1, minWidth: 350 }}>
+      <CardContent sx={{ width: 370 }}>
                 <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>  
                 <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
                 <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
@@ -71,13 +158,25 @@ export default function StudentEventCard(props) {
             </CardContent>
 
       <CardActions disableSpacing>
-        {/* <IconButton aria-label="RSVP" onClick={handleClick} 
-        // href={props.eJoin}
-        >
-          <RsvpIcon color="primary" sx={{ fontSize: 40 }}>{buttonText}</RsvpIcon>
-        </IconButton> */}
-        <Button onClick={handleClick}  variant={OnOff ? "outlined": "contained"}
+        <Button onClick={handleClickOpen}  variant={OnOff ? "outlined": "contained"}
         sx={{ marginBottom: 2, marginLeft: 2 }}>{OnOff ? 'cancel': 'sign up'}</Button>
+        <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogContent dividers>
+          <Typography gutterBottom>
+          {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}
+            
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            Close
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
