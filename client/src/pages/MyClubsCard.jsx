@@ -19,29 +19,18 @@ import '../styles.css';
 function MyClubsCard(props) {
   
     const [cName, setCname] = useState('');
-    const [cDesc, setCdesc] = useState('');
-    const [cPhone, setCphone] = useState('');
-    const [cEmail, setCemail] = useState('');
   
   return (
     <>
 
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardActionArea>
-            <CardMedia
-                component="img"
-                height="250"
-                image={props.eImage} alt="Clubs"/>
             <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h7" component="h2">{props.ePosition} </Typography>  
-                <Typography >{props.cName} </Typography> 
-                <Typography >{props.eMail} </Typography> 
+                <Typography gutterBottom variant="h7" component="h2">{props.cName} </Typography>  
             </CardContent>
         </CardActionArea>
             <CardActions>
                 <Button size="small">View Club</Button>
-                <Button size="small">View Events</Button>
-                <Button size="small">View Postings</Button>
             </CardActions>
     </Card>
     </>
