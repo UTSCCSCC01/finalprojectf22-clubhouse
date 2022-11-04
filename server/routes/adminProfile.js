@@ -12,8 +12,14 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
  
- 
-// This section will help you get a club by email.
+ /**
+ * @module routes/adminProfile
+ */
+
+ /**
+ * Retrives the club information for the corresponding clubName
+ * @name /club/members/:clubName
+ */
 adminPofileRoutes.route("/club/profile/:clubName").get(function (req, res) {
  let db_connect = dbo.getDb("main");
  let myquery = { clubName : req.params.clubName };
@@ -26,6 +32,10 @@ adminPofileRoutes.route("/club/profile/:clubName").get(function (req, res) {
    });
 });
 
+ /**
+ * Retrives the club profile picture for the corresponding clubName from the clubs collection
+ * @name /club/profileimg/:clubName
+ */
 adminPofileRoutes.route("/club/profileimg/:clubName").get(function (req, res) {
   let db_connect = dbo.getDb("main");
   let myquery = { clubName : req.params.clubName };
@@ -36,7 +46,11 @@ adminPofileRoutes.route("/club/profileimg/:clubName").get(function (req, res) {
       res.json(result.image);
     });
  });
- //update--------
+
+ /**
+ * Updates the club profile picture for the corresponding clubName in the clubs collection
+ * @name /club/picupdate/:clubName
+ */
  adminPofileRoutes.route("/club/picupdate/:clubName").patch(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { clubName : req.params.clubName };
@@ -54,6 +68,10 @@ adminPofileRoutes.route("/club/profileimg/:clubName").get(function (req, res) {
     });
  });
 
+  /**
+ * Updates the club information for the corresponding clubName in the clubs collection
+ * @name /club/profile/:id
+ */
  adminPofileRoutes.route("/club/profile/:id").patch(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
@@ -69,11 +87,15 @@ adminPofileRoutes.route("/club/profileimg/:clubName").get(function (req, res) {
     .collection("clubs")
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log("1 document updated");
+      // console.log("1 document updated");
       response.json(res);
     });
  });
 
+  /**
+ * Retrives the events hosted by that club from the events database
+ * @name /club/events
+ */
  adminPofileRoutes.route("/club/events").get(function (req, res) {
   let db_connect = dbo.getDb("main");
   var perpage = 3;
@@ -96,9 +118,5 @@ adminPofileRoutes.route("/club/profileimg/:clubName").get(function (req, res) {
  });
  
 
-
-
-
- 
 
 module.exports = adminPofileRoutes;

@@ -11,8 +11,8 @@ const ObjectId = require("mongodb").ObjectId;
  */
 
 /**
- * Retrives all club members from the club-members collection in the main database
- * @name /club/members
+ * Retrives all club members of the club from the club-members collection in the main database
+ * @name /club/members/:clubName
  */
 clubMainRoutes.route("/club/members/:clubName").get(async function (req, res) {
     let db_connect = dbo.getDb("main");
@@ -27,6 +27,10 @@ clubMainRoutes.route("/club/members/:clubName").get(async function (req, res) {
      
    });
 
+   /**
+ * Deletes a club member with the given id from the club-members collection in the main database
+ * @name /club/members/:id
+ */
    clubMainRoutes.route("/club/members/:id").delete(function (req, res) {
     let db_connect = dbo.getDb("main");
     let myquery = { _id: ObjectId(req.params.id)  };
@@ -40,7 +44,7 @@ clubMainRoutes.route("/club/members/:clubName").get(async function (req, res) {
 
    /**
  * Retrives all users applying to join the club from the clubApplicants collection in the main database
- * @name /club/potentialMembers
+ * @name /club/potentialMembers/:clubName
  */
    clubMainRoutes.route("/club/potentialMembers/:clubName").get(function (req, res) {
     let db_connect = dbo.getDb("main");
