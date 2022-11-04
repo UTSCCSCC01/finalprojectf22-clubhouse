@@ -9,7 +9,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:5001/record").then( response => response.text()).then(body => this.setState({data: JSON.parse(body)})); // setState remounts the comp
+    //fetch("http://127.0.0.1:5001/record").then( response => response.text()).then(body => this.setState({data: JSON.parse(body)})); // setState remounts the comp
   }
 
   render() {

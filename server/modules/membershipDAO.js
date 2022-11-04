@@ -58,3 +58,37 @@ module.exports.findPotentialMember = function(email, clubEmail) {
         });
     });
 }
+
+module.exports.getMembersByClub = function(clubEmail) {
+    let db_connect = dbo.getDb();
+
+    let searchObj = {
+        clubEmail
+    }
+
+    return new Promise((res, rej) => {
+        db_connect
+        .collection("club-members")
+        .find(searchObj).toArray(function (err, result) {
+            if (err) rej(err);
+            res(result);
+        });
+    });
+}
+
+module.exports.getClubsByMember = function(email) {
+    let db_connect = dbo.getDb();
+
+    let searchObj = {
+        email
+    }
+
+    return new Promise((res, rej) => {
+        db_connect
+        .collection("club-members")
+        .find(searchObj).toArray(function (err, result) {
+            if (err) rej(err);
+            res(result);
+        });
+    });
+}

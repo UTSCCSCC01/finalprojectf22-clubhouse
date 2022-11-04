@@ -20,6 +20,7 @@ app.use(require("./routes/adminProfile"));
 app.use(require("./routes/clubMain"));
 app.use(require("./routes/membership"));
 app.use(require("./routes/tags"))
+app.use(require("./routes/notification"));
 app.use(require("./routes/myClubs"))
 app.use(require("./routes/newClubRequest"))
 
