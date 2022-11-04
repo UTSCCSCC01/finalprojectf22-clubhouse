@@ -10,6 +10,10 @@ const notDAO = require("../modules/notificationDAO");
  * @module routes/notification
  */
 
+/**
+ * Get notifications for a given user and after timestamp
+ * @name /notif/get
+ */
 notifRoutes.route("/notif/get").post(async function (req, res) {
     let email = req.body.email;
     let timespan = req.body.timespan;

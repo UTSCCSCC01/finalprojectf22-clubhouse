@@ -48,7 +48,7 @@ announcementRoutes.route("/announcements/:id").get(
   });
 
 /**
-     * Endpoint that creates a new announcement
+     * Endpoint that creates a new announcement. Also sends out an email notification
      * @name /announcements/new
      */
 announcementRoutes.route("/announcements/new").post(

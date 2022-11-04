@@ -2,6 +2,11 @@ import React from 'react';
 import { Menu, Button } from '@mui/material';
 import AnnouncementCard from './AnnouncementCard.jsx';
 
+/**
+ * Notification menu
+ * @component
+ */
+
 class NotificationMenu extends React.Component {
     constructor(props) {
         super(props);

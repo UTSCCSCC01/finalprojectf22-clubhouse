@@ -4,6 +4,11 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
+/**
+ * Card for displaying announcements
+ * @component
+ */
+
 const AnnouncementCard = props => {
     const a = props.announcement;
 
