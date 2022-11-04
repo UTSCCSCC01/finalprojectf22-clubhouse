@@ -72,8 +72,7 @@
 
 16. As a student, I want to see a list of clubs I'm following/a member of so I can keep track of them.
 * COS: 8 points
-    * Students are able to view their followed/joined clubs so they can make the necessary modifications they desire
-        * I.e. unfollow, change notifications preferences, check out a specific club event, etc
+    * Students are able to view their followed/joined clubs
 
 ### Low:
 
