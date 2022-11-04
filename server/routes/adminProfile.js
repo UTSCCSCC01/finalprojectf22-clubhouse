@@ -12,21 +12,33 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
  
- 
-// This section will help you get a club by email.
-adminPofileRoutes.route("/club").get(function (req, res) {
+ /**
+ * @module routes/adminProfile
+ */
+
+ /**
+ * Retrives the club information for the corresponding clubName
+ * @name /club/members/:clubName
+ */
+adminPofileRoutes.route("/club/profile/:clubName").get(function (req, res) {
  let db_connect = dbo.getDb("main");
- let myquery = { email: 'test@mail.utoronto.ca' };
+ let myquery = { clubName : req.params.clubName };
+//  console.log(myquery);
  db_connect
    .collection("clubs")
-   .findOne(myquery,function (err, result) {
+   .findOne(myquery, function (err, result) {
      if (err) throw err;
      res.json(result);
    });
 });
-adminPofileRoutes.route("/club/profileimg").get(function (req, res) {
+
+ /**
+ * Retrives the club profile picture for the corresponding clubName from the clubs collection
+ * @name /club/profileimg/:clubName
+ */
+adminPofileRoutes.route("/club/profileimg/:clubName").get(function (req, res) {
   let db_connect = dbo.getDb("main");
-  let myquery = { email: 'test@mail.utoronto.ca' };
+  let myquery = { clubName : req.params.clubName };
   db_connect
     .collection("clubs")
     .findOne(myquery,function (err, result) {
@@ -34,10 +46,14 @@ adminPofileRoutes.route("/club/profileimg").get(function (req, res) {
       res.json(result.image);
     });
  });
- //update--------
- adminPofileRoutes.route("/club/picupdate").patch(function (req, response) {
+
+ /**
+ * Updates the club profile picture for the corresponding clubName in the clubs collection
+ * @name /club/picupdate/:clubName
+ */
+ adminPofileRoutes.route("/club/picupdate/:clubName").patch(function (req, response) {
   let db_connect = dbo.getDb();
-  let myquery = { email:'test@mail.utoronto.ca'};
+  let myquery = { clubName : req.params.clubName };
   let newvalues = {
     $set: {
       image: req.body.image,
@@ -52,6 +68,34 @@ adminPofileRoutes.route("/club/profileimg").get(function (req, res) {
     });
  });
 
+  /**
+ * Updates the club information for the corresponding clubName in the clubs collection
+ * @name /club/profile/:id
+ */
+ adminPofileRoutes.route("/club/profile/:id").patch(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  console.log(myquery);
+  let newvalues = {
+    $set: {
+      clubDesc: req.body.clubDesc,
+      clubPhone: req.body.clubPhone,
+      email: req.body.email,
+    },
+  };
+  db_connect
+    .collection("clubs")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      // console.log("1 document updated");
+      response.json(res);
+    });
+ });
+
+  /**
+ * Retrives the events hosted by that club from the events database
+ * @name /club/events
+ */
  adminPofileRoutes.route("/club/events").get(function (req, res) {
   let db_connect = dbo.getDb("main");
   var perpage = 3;
@@ -62,11 +106,9 @@ adminPofileRoutes.route("/club/profileimg").get(function (req, res) {
 
 
   
-  let myquery = {clubName:'Sports'};
+  let myquery = {clubName: req.query.clubName};
   
-  
-  
-  
+
   db_connect
     .collection("events")
     .find(myquery).sort({"id": -1 }).skip(startFrom).limit(perpage)
@@ -77,9 +119,5 @@ adminPofileRoutes.route("/club/profileimg").get(function (req, res) {
  });
  
 
-
-
-
- 
 
 module.exports = adminPofileRoutes;

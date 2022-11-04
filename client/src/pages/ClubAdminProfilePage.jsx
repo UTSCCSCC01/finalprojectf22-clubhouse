@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { useEffect,useState } from 'react';
 import ClubAdminViewProfile from "./ClubAdminViewProfile.jsx";
 import ClubAdminEditProfile from "./ClubAdminEditProfile.jsx";
 import '../styles.css';
+import { getCookie } from '../libraries/cookieDAO'
+
 /**
  * ClubAdminProfilePage
  * @component
  */
 function ClubAdminProfilePage(props) {
+
   const currentvalues = {
     
     clubName: props.clubName,
@@ -15,13 +19,30 @@ function ClubAdminProfilePage(props) {
     email: props.email
   };
  
+  
 
-  const [profileInfo, setProfileInfo] = useState(currentvalues);
+  const [profileInfo, setProfileInfo] = useState({});
   const [editMode, setEditMode] = useState(false);
+
+  
+  const clubName = getCookie("clubName");
+  useEffect( ()  => {
+    const fetchpotmembers = async () => {
+        const res = await fetch("http://127.0.0.1:5001/club/profile/" + clubName);
+        const data = await res.json();
+        setProfileInfo(data);
+        // console.log(data);
+      }
+fetchpotmembers();
+
+}, []);
   /**
  * <sets the edit mode to true when button clicked>
 
+  
  */
+
+
   function editHandleClick() {
     setEditMode(true);
   }
@@ -43,8 +64,23 @@ function ClubAdminProfilePage(props) {
   /**
  * <sets the edit mode to false>
  */
-  function doneEditing() {
-    setEditMode(false);
+  function doneEditing(id) {
+
+    const updateProfile = async () => {
+      fetch('http://localhost:5001/club/profile/' + id, {
+        method: 'PATCH',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(profileInfo)
+    }).then(() => {
+      setEditMode(false);
+    }).catch((err) => {
+        console.log(err);
+    })
+
+}
+
+updateProfile();
+ 
   }
 
 

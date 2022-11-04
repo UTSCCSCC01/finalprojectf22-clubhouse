@@ -97,4 +97,17 @@ clubRoutes.route("/clubs/del/:id").delete((req, response) => {
   });
 });
 
+/** This section will help you get a single record by id
+ *  @name /clubs/:clubname
+ */
+clubRoutes.route("/clubs/:clubname").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { clubName: ObjectId(req.params.clubname) };
+  db_connect
+    .collection("clubs")
+    .findOne(myquery, function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
 module.exports = clubRoutes;
