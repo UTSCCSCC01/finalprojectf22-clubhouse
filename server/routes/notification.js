@@ -18,7 +18,7 @@ notifRoutes.route("/notif/get").post(async function (req, res) {
 
     clubEmailList = clubs.map(v => v.clubEmail); // Go from objects to strings
 
-    console.log(clubEmailList);
+    //console.log(clubEmailList);
 
     let notifs = await notDAO.getNotifications(dayjs().unix() - timespan, clubEmailList);
 
