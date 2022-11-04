@@ -25,4 +25,8 @@ notifRoutes.route("/notif/get").post(async function (req, res) {
     res.json(notifs);
 })
 
+notifRoutes.route("/notif/emailstatus").get(async function (req, res) {
+    
+})
+
 module.exports = notifRoutes;

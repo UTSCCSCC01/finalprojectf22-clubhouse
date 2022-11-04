@@ -1,7 +1,5 @@
 import React from 'react';
-import { Menu, MenuItem, Button } from '@mui/material';
-import { getCookie } from '../libraries/cookieDAO'
-import config from  '../../config.json'
+import { Menu, Button } from '@mui/material';
 import AnnouncementCard from './AnnouncementCard.jsx';
 
 class NotificationMenu extends React.Component {
@@ -17,6 +15,9 @@ class NotificationMenu extends React.Component {
                 {this.props.notifs.map(v => (
                     <AnnouncementCard announcement={v} />
                 ))}
+                <Button sx={{width: "100%"}}>
+                    Unregister from emails
+                </Button>
             </Menu>
         )
     }
