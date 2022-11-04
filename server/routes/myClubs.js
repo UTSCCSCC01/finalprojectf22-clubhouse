@@ -13,7 +13,7 @@ const ObjectId = require("mongodb").ObjectId;
  * Retrives all club members of the club from the club-members collection in the main database
  * @name /club/members/:clubName
  */
-myClubsRoutes.route("/club/members/:clubName").get(async function (req, res) {
+ MyClubsRoutes.route("/club/members/:clubName").get(async function (req, res) {
     let db_connect = dbo.getDb("main");
     let myquery = { clubName: req.params.clubName };
     // let myquery={};
@@ -30,7 +30,7 @@ myClubsRoutes.route("/club/members/:clubName").get(async function (req, res) {
  * Retrives all club members of the club from the club-members collection in the main database
  * @name /club/members/:email
  */
- myClubsRoutes.route("/club/members/:email").get(async function (req, res) {
+ MyClubsRoutes.route("/club/myclubs/:email").get(async function (req, res) {
     let db_connect = dbo.getDb("main");
     let myquery = { email: req.params.email };
     // let myquery={};
@@ -43,4 +43,4 @@ myClubsRoutes.route("/club/members/:clubName").get(async function (req, res) {
      
    });
 
-module.exports = myClubsRoutes;
+module.exports = MyClubsRoutes;

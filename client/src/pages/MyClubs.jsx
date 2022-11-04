@@ -18,20 +18,20 @@ import '../styles.css';
 function MyClubs() {
 
   const [clubs, setClubs] = useState([]);
-  const email = getCookie("email");
+  const email = getCookie("username");
 
    /**
    * Fetch and set the members of the club from the database (club-members collection)
    * 
    */
     useEffect(  ()  => {
-      const  fetchclubs = async () => {
+      const fetchclubs = async () => {
           console.log(email);
-          const res = await fetch("http://127.0.0.1:5001/club/members/" + email);
+          const res = await fetch("http://127.0.0.1:5001/club/myclubs/" + email);
           const data = await res.json();
           setClubs(data);
       } 
-      fetchmembers();
+      fetchclubs();
     },[] );
 
   /**
@@ -39,7 +39,7 @@ function MyClubs() {
    * @param {Clubs} clubs - information containing basic club registration
    */
   
-  displayClubInfo = (clubs) => {
+  const displayClubInfo = (clubs) => {
     if (!clubs.length) return null;
     return clubs.map((club, index) => (
       <Grid item key={index} xs={12} sm={6} md={4}>
@@ -52,7 +52,7 @@ function MyClubs() {
     <Container sx={{ py: 4, px: 4}} maxWidth="lg">
       <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse Followed Clubs</Typography>
       <Grid container spacing={3}>
-        {this.displayClubInfo(this.state.clubs)}
+        {displayClubInfo(clubs)}
       </Grid>
     </Container>
   )
