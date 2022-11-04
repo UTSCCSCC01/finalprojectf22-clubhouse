@@ -61,7 +61,9 @@ Finish User stories MIN-27, MIN-24, MIN-17, MIN-29, MIN-15, MIN-21, MIN-16
     - Students are able to view their followed/joined clubs so they can make the necessary modifications they desire
      -  I.e. unfollow, change notifications preferences, check out a specific club event, etc
 - Subtasks:  
-    - 
+    - Implement new route to view all student-club relationships
+    - Implement UI and front-end to view all clubs for the logeed-in student
+    - Make sure the cookie to check log-in status works, or else page will not work as intended
 
 6. **MIN-17:**
 - Priority: medium
@@ -72,12 +74,12 @@ Finish User stories MIN-27, MIN-24, MIN-17, MIN-29, MIN-15, MIN-21, MIN-16
     - Make sure notifications sent by any of the clubs that are followed/joined are received by the student
     - Make sure once a student has unjoin/unfollowed, they no longer receive notifications
 - Subtasks:  
-    - Make Form
-    - Style Form + UI
-    - Implement and Route Form to Page
-    - Make new Page to see Listings
-    - Style Page
-    - Pull listings from Database into new Page
+    - Send an email on announcement creation
+    - Create notification drawer component
+    - /notif/get endpoint
+    - follow button
+    - unfollow functionality
+    - following endpoints
 
 7. **MIN-24:**
 - Priority: low
@@ -107,6 +109,9 @@ Finish User stories MIN-27, MIN-24, MIN-17, MIN-29, MIN-15, MIN-21, MIN-16
     - When a student clicks on a club profile, they should be redirected to the club profile
     - On the profile, the student should be able to see their contact information, club description, events, etc.
 - Subtasks:  
+    - Finished UI
+    - make it fetch the correct information
+    - add js docs
 
 
 ## Spikes 
