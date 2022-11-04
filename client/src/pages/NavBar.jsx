@@ -19,7 +19,7 @@ import { getCookie } from '../libraries/cookieDAO.js';
       this.state = {
         menuAnchorEl: null,
         value: 0,
-        notifs: null
+        notifs: []
       }
 
       this.menuHandler = function(e) {
@@ -62,7 +62,7 @@ import { getCookie } from '../libraries/cookieDAO.js';
                   <Button sx={{ marginLeft: 'auto' }} variant="contained" onClick={this.menuHandler}><NotificationsActiveIcon /></Button>
                   <NotificationMenu anchorEl={this.state.menuAnchorEl} onClose={this.menuHandler} notifs={this.state.notifs}/>
                   <Button sx={{ marginLeft: '10px' }} variant="contained"><NavLink to={"/login"}>Login</NavLink></Button>
-                  <Button sx={{ marginLeft: '10px' }} variant="contained">Sign up</Button>
+                  <Button sx={{ marginLeft: '10px' }} variant="contained"><NavLink to={"/register"}>Register</NavLink></Button>
             </Toolbar>
         </AppBar>
       )
