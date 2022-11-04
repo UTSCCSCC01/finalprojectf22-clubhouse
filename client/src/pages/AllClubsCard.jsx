@@ -58,11 +58,13 @@ export default function AllClubsCard(props) {
       setOpen(!open);
     };
   return (
+
     <Card sx={{ maxWidth: 345 }} >
       <Dialog fullScreen open={open} onClose={handleClose}
         >    <StudentClubProfile close={handleClose} img={props.cImage} phoneNumber={props.cPhone} clubName ={props.cName} email={props.cEmail} description={props.cDesc}  ></StudentClubProfile>
       </Dialog>
       <CardActionArea onClick={handleToggle}>
+
       <CardMedia
                 component="img"
                 height="250"
