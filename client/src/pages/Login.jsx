@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { TextField, Container, Typography, Grid, Button } from '@material-ui/core'
 
 import '../styles.css';
 
@@ -62,8 +60,10 @@ class Login extends Component {
         if (v.valid) {
           if (v.accountType === "club") {
             location.href = "http://localhost:3000/clubhome";
-          } else {
+          } else if (v.accountType === "student") {
             location.href = "http://localhost:3000/home";
+          } else {
+            location.href = "http://localhost:3000/adminhome";
           }
         } else {
           alert("Incorrect Password!")
@@ -74,15 +74,21 @@ class Login extends Component {
   render() {
     return (
       <div>
-      <h2>Login</h2>
+      <Typography style={{paddingTop: "200px", paddingBottom: 20}} variant="h2" align="center">Login</Typography>
       <form onSubmit={this.submit}>
-        <div>
-        <TextField className="loginInput" id="outlined-basic" type="text" name="email" value={this.state.email} onChange={this.change} label="Email" variant="outlined" />
-        </div>
-        <div>
-        <TextField className="loginInput" id="outlined-basic" type="password" name="password" value={this.state.password} onChange={this.change} label="Password" variant="outlined" />
-        </div>
-        <Button type="submit" variant="contained">Login</Button>
+      <Container>
+      <Grid container direction="column" style={{textAlign: "center"}}>
+            <Grid item style={{paddingBottom: 20}}>
+            <TextField style={{width:300}} className="loginInput" id="outlined-basic" type="text" name="email" value={this.state.email} onChange={this.change} label="Email" variant="outlined" />
+            </Grid>
+            <Grid item>
+            <TextField style={{width:300}} className="loginInput" id="outlined-basic" type="password" name="password" value={this.state.password} onChange={this.change} label="Password" variant="outlined" />
+            </Grid>
+            <Grid item>
+            <Button variant="contained"  color="primary" style={{width: 300, marginTop: 25}} type="submit">Login</Button>
+            </Grid>
+      </Grid>
+      </Container>
       </form>
       </div>
     );
