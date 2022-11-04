@@ -163,7 +163,7 @@ const conTainsS = (arrayTag) => {
             {items.map((item) => {
               if ( (search==="" && Object.keys(tagName).length == 0) || (search!=="" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item)) ){
                 return (<Grid item key={item}>
-                  <AllClubsCard key={item._id} cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
+                  <AllClubsCard key={item._id}  cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
                  </Grid>)
               }
               else{

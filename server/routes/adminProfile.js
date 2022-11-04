@@ -62,7 +62,7 @@ adminPofileRoutes.route("/club/profileimg").get(function (req, res) {
 
 
   
-  let myquery = {clubName:'Sports'};
+  let myquery = {clubName: req.query.clname};
   
   
   
