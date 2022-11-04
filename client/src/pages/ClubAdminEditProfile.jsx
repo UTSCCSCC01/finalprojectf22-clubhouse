@@ -239,8 +239,9 @@ const [open, setOpen] = useState(false);
       </div>
       <div className="cardcont">
       <h2 style={{ textAlign: 'center' }}>My Events</h2>
-      <div className="evenCard">
+      <div id="scdiv2" className="evenCard">
       <InfiniteScroll  
+      scrollableTarget="scdiv2"
       dataLength={items.length} //This is important field to render the next data
       next={fetchd}
      hasMore={isMore}
