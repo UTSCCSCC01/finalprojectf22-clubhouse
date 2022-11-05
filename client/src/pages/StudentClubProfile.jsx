@@ -26,7 +26,7 @@ function StudentClubProfile(props) {
  */
   useEffect(() => {
   const getevents = async ()=>{
-  const res = await fetch(url+"?page=1"+"&clname="+clubName);
+  const res = await fetch(url+"?page=1"+"&clubName="+clubName);
     const data = await res.json();
     setItems(data);
     if (data.length <=0 ){
