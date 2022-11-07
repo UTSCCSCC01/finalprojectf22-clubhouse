@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import { Typography } from '@mui/material';
 import MyClubs from './MyClubs.jsx';
+import MyEvents from './MyEvents.jsx';
 
 
 
@@ -64,10 +65,9 @@ const [value, setValue] = React.useState(0);
   
 
   return (
-    <Box sx={{ width: '100%' }}>
-        <Typography marginTop={10}>heloo</Typography>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+    <Box sx={{ width: '90%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "320px", marginLeft:"50px", marginTop:"100px"}}>
+        <Tabs value={value} onChange={handleChange} >
           <Tab label="My Clubs" {...a11yProps(0)} />
           <Tab label="My Events" {...a11yProps(1)} />
           <Tab label="Settings" {...a11yProps(2)} />
@@ -77,7 +77,7 @@ const [value, setValue] = React.useState(0);
         <MyClubs></MyClubs>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <MyEvents></MyEvents>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

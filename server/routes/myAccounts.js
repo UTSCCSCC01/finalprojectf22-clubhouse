@@ -20,17 +20,18 @@ const ObjectId = require("mongodb").ObjectId;
  * Retrives the club information for the corresponding clubName
  * @name /club/members/:clubName
  */
-  MyAccountsRoutes.route("/club/profile/:clubName").get(function (req, res) {
- let db_connect = dbo.getDb("main");
- let myquery = { clubName : req.params.clubName };
-//  console.log(myquery);
- db_connect
-   .collection("clubs")
-   .findOne(myquery, function (err, result) {
-     if (err) throw err;
-     res.json(result);
+  MyAccountsRoutes.route("/club/myevents/:email").get(async function (req, res) {
+    let db_connect = dbo.getDb("main");
+    let myquery = { eventAttendees: req.params.email };
+    // let myquery={};
+    db_connect
+      .collection("events")
+      .find(myquery).toArray(function (err, result) {
+        if (err) throw err;
+        res.json(result);
+      });
+     
    });
-});
 
  
 
