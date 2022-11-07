@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppBar, Tabs, Tab, Toolbar, Button, Box} from '@mui/material'
+import { AppBar, Tabs, Tab, Toolbar, Button, Box, Grid} from '@mui/material'
 import NotificationMenu from '../components/NotificationMenu.jsx';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import config from  '../../config.json'
@@ -48,7 +48,7 @@ import { getCookie } from '../libraries/cookieDAO.js';
       fetch(config.api_url + "notif/get", fetchOptions).then(res => res.json()).then(res => this.setState({notifs: res}));
     }
 
-    render() {
+    asStudent = () => {
       return (
         <AppBar sx={{ background: '#002A5C' }}>
             <Toolbar>
@@ -65,6 +65,47 @@ import { getCookie } from '../libraries/cookieDAO.js';
                   <Button sx={{ marginLeft: '10px' }} variant="contained"><NavLink to={"/register"}>Register</NavLink></Button>
             </Toolbar>
         </AppBar>
+      )
+    }
+
+    asClub = () => {
+
+    }
+
+    asAdmin = () => {
+    }
+
+    notLoggedIn = () => {
+      return (
+        <AppBar sx={{ background: '#002A5C' }}>
+            <Toolbar>
+            <Grid container direction='row' justifyContent="flex-end" alignItems="center" >
+                <Grid item xs={4.75}>
+                <Tabs textColor="inherit" value={this.state.value} onChange={(e, value) => setState({value})} indicatorColor="primary">
+                    <Tab label="Clubs"></Tab>
+                    <Tab label="Events"></Tab>
+                </Tabs>
+                </Grid>
+                <Grid item xs={2}>
+                <Grid container direction='row' justifyContent="flex-end" alignItems="center" spacing ={2} >
+                <Grid item>
+                  <Button  textColor="inherit" variant="contained" href ={"/login"}>Login</Button>
+                  </Grid>
+                  <Grid item>
+                  <Button textColor="inherit" variant="contained" href ={"/register"}>Register</Button>
+                  </Grid>
+                  </Grid>
+                  </Grid>
+                  </Grid>
+            </Toolbar>
+        </AppBar>
+      )
+    }
+    
+
+    render() {
+      return (
+        this.notLoggedIn()
       )
     }
   }
