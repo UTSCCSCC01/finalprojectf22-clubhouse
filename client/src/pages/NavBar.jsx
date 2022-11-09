@@ -119,6 +119,11 @@ useRouteMatch = (patterns) => {
 }
 
     asStudent = () => {
+
+      if(window.location.href=="http://localhost:3000/testlogin"){
+        location.href = "http://localhost:3000/allclubs";
+      }
+
       const routes = ['/allclubs', '/events', '/positions','/MyAccount'];
       const index = this.useRouteMatch(routes);
       
@@ -145,6 +150,11 @@ useRouteMatch = (patterns) => {
     }
 
     asClub = () => {
+
+      if(window.location.href=="http://localhost:3000/testlogin"){
+        location.href = "http://localhost:3000/clubMain";
+      }
+
       const routes = ['/clubMain', '/new-announcement', '/create-event','/club-admin-profile'];
       const index = this.useRouteMatch(routes);
       
@@ -170,6 +180,11 @@ useRouteMatch = (patterns) => {
     
 
     asAdmin = () => {
+
+      if(window.location.href=="http://localhost:3000/testlogin"){
+        location.href = "http://localhost:3000/manageClubs";
+      }
+
       const routes = ['/manageClubs', '/clubRequests'];
       const index = this.useRouteMatch(routes);
       
@@ -192,6 +207,8 @@ useRouteMatch = (patterns) => {
 
     notLoggedIn = () => {
 
+      
+     
       const routes = [ '/allclubs', '/events'];
       const index = this.useRouteMatch(routes);
       
@@ -202,8 +219,8 @@ useRouteMatch = (patterns) => {
             <Grid container direction='row' justifyContent="flex-end" alignItems="center" >
                 <Grid item xs={4.75}>
                 <Tabs textColor="inherit" onChange={this.handleChange} value={this.state.value} indicatorColor="primary">
-                    <Tab label="Clubs" href='/allclubs'></Tab>
-                    <Tab label="Events" href='/events'></Tab>
+                    <Tab label="Clubs" href={routes[0]}></Tab>
+                    <Tab label="Events" href={routes[1]}></Tab>
                 </Tabs>
                 </Grid>
                 <Grid item xs={2}>
