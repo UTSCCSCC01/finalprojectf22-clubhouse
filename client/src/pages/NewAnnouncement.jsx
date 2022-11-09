@@ -47,7 +47,7 @@ const NewAnnouncement = () => {
 
     return (
         <Box
-            gap={3}
+            gap={3.5}
             width="600px"
             display="flex"
             flexDirection="column"
@@ -55,7 +55,7 @@ const NewAnnouncement = () => {
             alignItems="center"
             margin="120px auto 120px auto"
         >
-            <Typography fontWeight={500} variant="h4" color="primary">New Announcement</Typography>
+            <Typography variant="h2" >New Announcement</Typography>
 
             <TextField
                 fullWidth
@@ -69,7 +69,7 @@ const NewAnnouncement = () => {
                 fullWidth
                 multiline
                 variant="outlined"
-                minRows={3}
+                minRows={4}
                 required
                 onChange={(e) => setMessage(e.target.value)}
                 label="Message"

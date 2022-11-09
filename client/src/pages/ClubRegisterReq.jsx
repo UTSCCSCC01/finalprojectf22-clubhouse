@@ -87,11 +87,11 @@ const ClubRegisterReq = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            width: "550px",
-            margin: "100px auto 48px auto"
+            width: "600px",
+            margin: "120px auto 64px auto"
         }}>
-            <Typography variant="h4" color="primary">
-                Club Registration Request Form
+            <Typography variant="h2" textAlign="center">
+                Club Registration
             </Typography>
 
             <TextField
