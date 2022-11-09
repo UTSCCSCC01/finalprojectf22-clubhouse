@@ -54,5 +54,18 @@ const clubDAO = require("../modules/clubDAO");
     });
 });
 
+/** This section will help you delete a record
+ *  @name /clubrequestdel/:id
+ */
+newClubRequestRoutes.route("/clubrequestdel/:id").delete((req, response) => {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId(req.params.id) };
+    db_connect.collection("club-registration-requests").deleteOne(myquery, function (err, obj) {
+      if (err) throw err;
+      console.log("1 document deleted");
+      response.json(obj);
+    });
+  });
+
 
 module.exports = newClubRequestRoutes;

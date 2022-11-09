@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { CardActions, Box, Button, Card, CardContent, Typography, Collapse, IconButton, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog} from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import EventTag from "./EventTag.jsx"
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -23,25 +24,31 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function ClubRequestCard(props) {
+  const [password, setPassword] = useState('');
+
+  const generatePassword = () => {
+    // Create a random password
+    const randomPassword =
+      Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+      console.log("password" + randomPassword);
+  
+    // Set the generated password as state
+    setPassword(randomPassword);
+  };
+
+  
+    console.log("password is" + password);
+    
+    const navigate = useNavigate();
     const [expanded, setExpanded] = React.useState(false);
 
-    const clubName = props.clubName;
-    const clubPhone = props.clubPhone;
-    const clubEmail = props.clubEmail;
-    const clubDesc = props.clubDesc;
-    const image = "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png";
-    const clubTags = props.clubTags;
-    const newClub = { clubEmail, clubName, clubPhone, clubDesc, image, clubTags};
-    console.log(newClub);
-
-        
-    
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     const [open, setOpen] = React.useState(false);
     const [openDeny, setOpenDeny] = React.useState(false);
+    const [openDenyConfirm, setOpenDenyConfirm] = React.useState(false);
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -51,23 +58,17 @@ export default function ClubRequestCard(props) {
       setOpenDeny(true);
     };
 
-    const handleClose = () => {
+    const handleClose = (props) => {
       setOpen(false);
-      fetch('http://localhost:5001/clubs/create', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newClub)
-        }).then(() => {
-
-        }).catch((err) => {
-            console.log(err);
-        })
-        navigate("/club-signup-confirmation");
-
     };
 
     const handleCloseDeny = () => {
       setOpenDeny(false);
+    };
+
+    const handleCloseDenyConfirm = () => {
+      setOpenDeny(false);
+      setOpenDenyConfirm(false);
     };
 
   return (
@@ -85,37 +86,94 @@ export default function ClubRequestCard(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">
-              {"You would like to approve the registration request?"}
+            <DialogTitle id="alert-dialog-title" fontSize="17px">
+              {"Would you like to confirm the club's registration approval? If yes, the following email will be sent to the club."}
             </DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Let Google help apps determine location. This means sending anonymous
-                location data to Google, even when no apps are running.
+              <DialogContentText id="alert-dialog-description" dividers>
+                <Typography gutterBottom>
+                  Dear {props.cName},
+                </Typography>
+                <Typography gutterBottom paragraph>
+                We wish to inform you that your registration request has been approved. 
+                Please check your inbox for your temporary login credentials. 
+                </Typography>
+                <Typography gutterBottom>
+                Best, 
+                </Typography>
+                <Typography>
+                SCSU 
+                </Typography>
+
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} autoFocus>Approve and send an approval email</Button>
+              <Button onClick={handleClose}>Cancel</Button>
+              
+              <Button onClick={() => {
+                setOpen(false);
+                const clubName = props.cName;
+                const clubPhone = props.cPhone;
+                const email = props.cEmail;
+                const clubDesc = props.cDesc;
+                const image = "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png";
+                const clubTags = props.cTags;
+                const newClub = { email, clubName, clubPhone, clubDesc, image, clubTags};
+                console.log(newClub);
+                fetch('http://localhost:5001/clubs/create', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newClub)
+                }).then(() => {
+
+                }).catch((err) => {
+                    console.log(err);
+                })
+                
+                fetch('http://localhost:5001/clubrequestdel/' + props.cKey, {method: 'DELETE'}).then(() => {
+
+                }).catch((err) => {
+                    console.log(err);
+                })
+
+
+
+
+                navigate("/SCSUConfirmation");
+              }} autoFocus  > Confirm</Button>
             </DialogActions>
           </Dialog>
-         <Button variant="contained" size="small" onClick={handleClickOpenDeny}>Deny</Button>
+         <Button variant={openDenyConfirm ? "outlined": "contained"} size="small" onClick={handleClickOpenDeny}
+         disabled={openDenyConfirm ? true : false}>{openDenyConfirm ? "Rejected" : "Reject"}</Button>
          <Dialog
             open={openDeny}
             onClose={handleCloseDeny}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">
-              {"You would like to approve the registration request?"}
+            <DialogTitle id="alert-dialog-title" fontSize="17px">
+              {"Would you like to confirm the club's registration rejection? If yes, the following email will be sent to the club."}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Let Google help apps determine location. This means sending anonymous
-                location data to Google, even when no apps are running.
+              <Typography gutterBottom>
+                  Dear {props.cName},
+                </Typography>
+                <Typography gutterBottom paragraph>
+                We wish to inform you that your registration request has been rejected. 
+                Please check your inbox for more information. 
+                </Typography>
+                <Typography gutterBottom>
+                Best, 
+                </Typography>
+                <Typography>
+                SCSU 
+                </Typography>
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseDeny} autoFocus>Deny the request email</Button>
+              <Button onClick={handleCloseDeny} >Cancel</Button>
+              <Button onClick={handleCloseDenyConfirm} autoFocus >Confirm</Button>
             </DialogActions>
           </Dialog>
        </CardActions>
