@@ -146,7 +146,7 @@ export default function StudentEventCard(props) {
         height="250"
         image={props.eImage} alt="UTSC" />
       <CardContent sx={{ width: 370 }}>
-        <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>
+        <Typography gutterBottom variant="h5" component="h2">{props.eName} by {props.cName} </Typography>
         <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
         <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
         <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>
