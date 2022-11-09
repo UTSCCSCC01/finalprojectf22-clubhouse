@@ -78,7 +78,7 @@ export default function AllClubsCard(props) {
             <EventTag data={tag} />
           ))}
         </Box> */}
-        
+
       </CardContent>
 
       <CardActions disableSpacing>
@@ -94,7 +94,7 @@ export default function AllClubsCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{props.cDesc}</Typography>
+          <Typography padding={1} paragraph>{props.cDesc}</Typography>
         </CardContent>
       </Collapse>
     </Card>

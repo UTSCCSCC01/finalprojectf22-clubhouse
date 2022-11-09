@@ -156,12 +156,12 @@ export default function StudentEventCard(props) {
             <EventTag data={tag} />
           ))}
         </Box> */}
-        
+
       </CardContent>
 
       <CardActions disableSpacing>
         <Button onClick={handleClickOpen} variant={OnOff ? "outlined" : "contained"}
-          sx={{ marginBottom: 2, marginLeft: 2 }}>{OnOff ? 'cancel' : 'sign up'}</Button>
+          sx={{ marginBottom: 1.5, marginLeft: 1.5 }}>{OnOff ? 'cancel' : 'sign up'}</Button>
         <BootstrapDialog
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
@@ -190,7 +190,7 @@ export default function StudentEventCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{props.eDesc}</Typography>
+          <Typography padding={1} paragraph>{props.eDesc}</Typography>
         </CardContent>
       </Collapse>
     </Card>
