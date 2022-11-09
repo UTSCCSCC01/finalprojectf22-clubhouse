@@ -1,6 +1,6 @@
 import React from "react";
 import AllClubsCard from "./AllClubsCard.jsx";
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -22,9 +22,9 @@ import SearchIcon from '@mui/icons-material/Search';
  * @component
  */
 function AllClubs(props) {
-  
-  const [search, setSearch ] = useState("");
- 
+
+  const [search, setSearch] = useState("");
+
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -32,9 +32,11 @@ function AllClubs(props) {
       style: {
         maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
         width: 250,
-      },},};
+      },
+    },
+  };
 
-  const [tags, setTags ] = useState([]);
+  const [tags, setTags] = useState([]);
   const [tagName, setTagName] = React.useState([]);
 
   /**
@@ -47,16 +49,20 @@ function AllClubs(props) {
     } = event;
     setTagName(
       typeof value === 'string' ? value.split(',') : value,
-    );};
+    );
+  };
 
-  const [items, setItems ] = useState([]);
+  const [items, setItems] = useState([]);
   const TagMapped = [];
-  for (var key in tags){
-    for (var key2 in tags[key]){
-        if (key2==="clubTags"){
-          for (var tagKey in tags[key][key2]){
-            TagMapped.push(tags[key][key2][tagKey]);
-          }}}}
+  for (var key in tags) {
+    for (var key2 in tags[key]) {
+      if (key2 === "clubTags") {
+        for (var tagKey in tags[key][key2]) {
+          TagMapped.push(tags[key][key2][tagKey]);
+        }
+      }
+    }
+  }
 
   let contains = false;
   /**
@@ -94,85 +100,86 @@ const conTainsS = (arrayTag) => {
    * every time the value of tagName changes. 
    */
   useEffect(() => {
-    const getclubs = async ()=>{
+    const getclubs = async () => {
       const res = await fetch('http://127.0.0.1:5001/clubs');
       const data = await res.json();
-      setItems(data); 
+      setItems(data);
     };
     getclubs();
   }, [tagName]);
-  
+
   /**
    * Fetch and set tags from the database
    */
   useEffect(() => {
-    const gettags = async ()=>{
+    const gettags = async () => {
       /**
        * Fetch event tags from the database and set them to multiselect component
        */
       const resTags = await fetch('http://127.0.0.1:5001/clubtags');
       const dataTags = await resTags.json();
-      setTags(dataTags);  
+      setTags(dataTags);
     };
     gettags();
-  },[]);
+  }, []);
 
   return (
     <div>
-        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 2}}>         
-            <Container maxWidth="lg" fixec>
-              <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  UTSC Clubs</Typography>
-              <Grid maxWidth="lg" align="center">
-                <TextField
-                sx={{m: 1, width: 450}}
-                  id="outlined-start-adornment"
-                  variant="outlined"
-                  label="Search"
-                  size="small"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
-                }}
-              ></TextField>
-              <FormControl sx={{ m: 1, width: 150 }} size="small">
-                    <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
-                    <Select
-                      labelId="multiple-checkbox-label"
-                      id="multiple-checkbox"
-                      multiple
-                      value={tagName}
-                      onChange={handleChangeTag}
-                      input={<OutlinedInput label="Tag" />}
-                      renderValue={(selected) => selected.join(', ')}
-                      MenuProps={MenuProps}
-                    >
-                      {TagMapped.map((tag) => (
-                        <MenuItem key={tag} value={tag}>
-                          <Checkbox checked={tagName.indexOf(tag) > -1} />
-                          <ListItemText primary={tag} />
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Container>     
-        </Box>
-        <Container maxWidth="lg">
-            <Grid container spacing={2}>
-            {items.map((item) => {
-              if ( (search==="" && Object.keys(tagName).length == 0) || (search!=="" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item)) ){
-                return (<Grid item key={item}>
-                  <AllClubsCard key={item._id}  cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
-                 </Grid>)
-              }
-              else{
-                return (<Grid item key={item}></Grid>)
-              }
-                    })}
-            </Grid>
-          </Container>
-     </div>
+      <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 2 }}>
+        <Container maxWidth="lg" fixec>
+          <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  UTSC Clubs</Typography>
+          <Grid maxWidth="lg" align="center">
+            <TextField
+              sx={{ m: 1, width: 450 }}
+              id="outlined-start-adornment"
+              variant="outlined"
+              label="Search"
+              size="small"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              InputProps={{
+                endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
+              }}
+            ></TextField>
+            <FormControl sx={{ m: 1, width: 150 }} size="small">
+              <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
+              <Select
+                labelId="multiple-checkbox-label"
+                id="multiple-checkbox"
+                multiple
+                value={tagName}
+                onChange={handleChangeTag}
+                input={<OutlinedInput label="Tag" />}
+                renderValue={(selected) => selected.join(', ')}
+                MenuProps={MenuProps}
+              >
+                {TagMapped.map((tag) => (
+                  <MenuItem key={tag} value={tag}>
+                    <Checkbox checked={tagName.indexOf(tag) > -1} />
+                    <ListItemText primary={tag} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Container>
+      </Box>
+      <Container maxWidth="lg">
+        <Grid container>
+          {items.map((item) => {
+            if ((search === "" && Object.keys(tagName).length == 0) || (search !== "" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item))) {
+              return (
+                <Grid sx={{ m: 2 }} item key={item}>
+                  <AllClubsCard key={item._id} cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image} cTags={item.clubTags} />
+                </Grid>)
+            }
+            else {
+              return (<Grid item key={item}></Grid>)
+            }
+          })}
+        </Grid>
+      </Container>
+    </div>
   );
 }
 export default AllClubs;

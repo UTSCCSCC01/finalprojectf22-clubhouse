@@ -24,7 +24,7 @@ class ClubApplyButton extends React.Component {
 
     render() {
         return (
-            <Button variant='contained' disabled={this.state.disabled} size={this.props.size ? this.props.size : 'medium'} endIcon={<CallMade />} onClick={this.applyForClub}>{this.state.text}</Button>
+            <Button sx={{m: 1}} variant='contained' disabled={this.state.disabled} size={this.props.size ? this.props.size : 'medium'} endIcon={<CallMade />} onClick={this.applyForClub}>{this.state.text}</Button>
         )
     }
 

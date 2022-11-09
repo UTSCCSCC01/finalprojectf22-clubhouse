@@ -5,7 +5,6 @@ import { Box, Typography } from '@mui/material'
  * Component for displaying a single tag
  * @component
  * @param {String} data The text of the tag
- * @param {Function} handleDelete A function that deletes this tag from an array of tags
  */
 const EventTag = ({ data}) => {
     return (
@@ -13,7 +12,7 @@ const EventTag = ({ data}) => {
         <Box display="inline-flex" sx={{
             background: "#eeeeee",
             borderRadius: "20px",
-            margin: "4px",
+            margin: "4px 12px 4px 0",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
