@@ -41,7 +41,7 @@ function LinkTab(props) {
         menuAnchorEl: null,
         value: 0,
         notifs: [],
-        account: ""
+        account: getCookie("accountType")
       }
 
       this.menuHandler = function(e) {
@@ -56,7 +56,7 @@ function LinkTab(props) {
     }
 
     componentDidMount() {
-      this.state.account = getCookie("accountType");
+      // this.state.account = getCookie("accountType");
       const notifBody = {
         timespan: 604800, // 1 week
         email: getCookie("username")
@@ -119,7 +119,7 @@ useRouteMatch = (patterns) => {
 }
 
     asStudent = () => {
-      const routes = [ '/home', '/allclubs', '/events', '/positions','/MyAccount'];
+      const routes = ['/allclubs', '/events', '/positions','/MyAccount'];
       const index = this.useRouteMatch(routes);
       
       this.state.value = (index!=null) ? index : 0;
@@ -130,12 +130,11 @@ useRouteMatch = (patterns) => {
             <Toolbar>
                 <Tabs sx = {{ marginLeft: 'auto' }}  textColor="inherit" value={this.state.value} onChange={this.handleChange} indicatorColor="primary">
 
-                    <Tab label="Home" value={0} href={routes[0]}/>
-                    <Tab label="Clubs" value={1} href={routes[1]}/>
-                    <Tab label="Events" value={2} href={routes[2]}/>
-                    <Tab label="Job Postings" value={3} href={routes[3]}/>
+                    <Tab label="Clubs" value={0} href={routes[0]}/>
+                    <Tab label="Events" value={1} href={routes[1]}/>
+                    <Tab label="Job Postings" value={2} href={routes[2]}/>
                     {/* <LinkTab label="Job Postings" href='/positions'/> */}
-                    <Tab label="My Account" value={4} href={routes[4]} />
+                    <Tab label="My Account" value={3} href={routes[3]} />
                 </Tabs>
                   <Button sx={{ marginLeft: 'auto' }} variant="contained" onClick={this.menuHandler}><NotificationsActiveIcon /></Button>
                   <NotificationMenu anchorEl={this.state.menuAnchorEl} onClose={this.menuHandler} notifs={this.state.notifs}/>
