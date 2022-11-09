@@ -156,7 +156,6 @@ const ClubRegisterReq = () => {
                     endIcon={<DeleteForeverOutlinedIcon />}
                 >Clear</Button>
                 <Button
-
                     onClick={onSubmit}
                     type="submit"
                     variant="contained"

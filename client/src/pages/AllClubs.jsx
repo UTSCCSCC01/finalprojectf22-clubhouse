@@ -131,7 +131,7 @@ function AllClubs(props) {
     <div>
       <Box sx={{ bgcolor: 'background.paper', mt: "120px", mb: "12px" }}>
         <Container maxWidth="lg" fixec>
-          <Typography gutterBottom component="h1" variant="h2" align="center" color="text.primary">UTSC Clubs</Typography>
+          <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>UTSC Clubs</Typography>
           <Grid maxWidth="lg" align="center">
             <TextField
               sx={{ m: 1.5, width: 500 }}
@@ -173,7 +173,7 @@ function AllClubs(props) {
           {items.map((item) => {
             if ((search === "" && Object.keys(tagName).length == 0) || (search !== "" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item))) {
               return (
-                <Grid sx={{ m: 2 }} item key={item}>
+                <Grid sx={{ m: 1.5 }} item key={item}>
                   <AllClubsCard key={item._id} cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image} cTags={item.clubTags} />
                 </Grid>)
             }

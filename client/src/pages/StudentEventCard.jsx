@@ -140,7 +140,7 @@ export default function StudentEventCard(props) {
     };
 
   return (
-    <Card  raised sx={{ width: 370 }} >
+    <Card  raised sx={{ width: 350 }} >
       <CardMedia
                 component="img"
                 height="250"

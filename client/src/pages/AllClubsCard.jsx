@@ -59,7 +59,7 @@ export default function AllClubsCard(props) {
   };
   return (
 
-    <Card sx={{ maxWidth: 350 }} >
+    <Card raised sx={{ maxWidth: 350 }} >
       <Dialog fullScreen open={open} onClose={handleClose}>
         <StudentClubProfile close={handleClose} img={props.cImage} phoneNumber={props.cPhone} clubName={props.cName} email={props.cEmail} description={props.cDesc}  ></StudentClubProfile>
       </Dialog>
