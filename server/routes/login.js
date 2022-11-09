@@ -2,6 +2,8 @@ const { DoneAllOutlined } = require("@mui/icons-material");
 const express = require("express");
 
 const loginRoutes = express.Router();
+const dbo = require("../db/conn");
+const ObjectId = require("mongodb").ObjectId;
 
 const userDAO = require("../modules/userDAO");
 const clubDAO = require("../modules/clubDAO");
@@ -60,7 +62,7 @@ loginRoutes.route("/loginstatus").get(function (req, res) {
 loginRoutes.route("/logincreate").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    name: req.body.clubName,
+    name: req.body.name,
     password: req.body.password,
     email: req.body.email,
     accountType: req.body.accountType,

@@ -24,6 +24,7 @@ const ExpandMore = styled((props) => {
  * @component
  */
 export default function ClubRequestCard(props) {
+
   const [password, setPassword] = useState('');
   
   /**
@@ -64,6 +65,15 @@ export default function ClubRequestCard(props) {
     const handleCloseDeny = () => {
       setOpenDeny(false);
     };
+
+    // var nodemailer = require('nodemailer');
+    // var transporter = nodemailer.createTransport({
+    //     service: 'gmail',
+    //     auth: {
+    //         user: 'utscclubhouse@gmail.com',
+    //         pass: process.env.EMAIL_PASS
+    //     }
+    // });
 
   return (
     <Card sx={{ width: 800 }} raised >
@@ -139,22 +149,19 @@ export default function ClubRequestCard(props) {
                 })
 
                 //add login credentials to the users db
-                // const name = props.cName;
-                // const accountType = 'club';
-                // const newClubLogin = { email, password, name, accountType};
-                // console.log(newClubLogin);
-                // fetch('http://localhost:5001/logincreate', {
-                // method: 'POST',
-                // headers: { "Content-Type": "application/json" },
-                // body: JSON.stringify(newClubLogin)
-                // }).then(() => {
+                const name = props.cName;
+                const accountType = 'club';
+                const newClubLogin = { email, password, name, accountType};
+                console.log(newClubLogin);
+                fetch('http://localhost:5001/logincreate', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newClubLogin)
+                }).then(() => {
 
-                // }).catch((err) => {
-                //     console.log(err);
-                // })
-
-
-
+                }).catch((err) => {
+                    console.log(err);
+                })
 
                 navigate("/SCSUConfirmation");
               }} autoFocus  > Confirm</Button>
@@ -190,6 +197,32 @@ export default function ClubRequestCard(props) {
               <Button onClick={handleCloseDeny} >Cancel</Button>
               <Button onClick={()=>{
                 setOpenDeny(false);
+
+                // var nodemailer = require('nodemailer');
+                // var transporter = nodemailer.createTransport({
+                //   service: 'gmail',
+                //   auth: {
+                //     user: 'utscclubhouse@gmail.com',
+                //     pass: process.env.EMAIL_PASS
+                //   }
+                // });
+                
+                // var mailOptions = {
+                //   from: 'utscclubhouse@gmail.com',
+                //   to: props.cEmail,
+                //   subject: 'Your club registration request',
+                //   text: 'Dear '+ props.cName + ', We wish to inform you that your registration request has been rejected. Best, SCSU' 
+                // };
+                
+                // transporter.sendMail(mailOptions, function(error, info){
+                //   if (error) {
+                //     console.log(error);
+                //   } else {
+                //     console.log('Email sent: ' + info.response);
+                //   }
+                // });
+
+                //delete the club from the club-requests database
                 fetch('http://localhost:5001/clubrequestdel/' + props.cKey, {method: 'DELETE'}).then(() => {
 
                 }).catch((err) => {
