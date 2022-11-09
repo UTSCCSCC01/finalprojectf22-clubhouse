@@ -25,6 +25,7 @@ import NewAnnouncement from './pages/NewAnnouncement.jsx';
 import MyClubs from './pages/MyClubs.jsx';
 import ClubRegisterReq from './pages/ClubRegisterReq.jsx';
 import NewClubReqConfirmation from './pages/NewClubReqConfirmation.jsx';
+import SCSUclubreview from './pages/SCSUclubreview.jsx';
 
 ReactDOM.render(
   (
@@ -42,6 +43,7 @@ ReactDOM.render(
         <Route path="/clubs" element={<Clubs />} />
         <Route path="/club-register" element={<ClubRegisterReq />} />
         <Route path="/club-signup-confirmation" element={<NewClubReqConfirmation />} />
+        <Route path="/SCSUclubreview" element={<SCSUclubreview />} />
 
         <Route exact path="/clubs" element={<Clubs />} />
         <Route  path="/clubMain" element={<ClubAdminMain/>} />

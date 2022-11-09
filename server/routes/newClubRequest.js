@@ -13,7 +13,7 @@ const clubDAO = require("../modules/clubDAO");
 /** This section will help you get a list of all the club signup requests.
  *  @name /clubs/register-request
  */
- newClubRequestRoutes.route("/clubs/register-request").get(function (req, res) {
+ newClubRequestRoutes.route("/register-request").get(function (req, res) {
     let db_connect = dbo.getDb("main");
     db_connect
         .collection("club-registration-requests")

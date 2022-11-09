@@ -49,11 +49,12 @@ clubRoutes.route("/clubs/:id").get(function (req, res) {
 clubRoutes.route("/clubs/create").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-
     clubName: req.body.clubName,
     clubDesc: req.body.clubDesc,
     clubPhone: req.body.clubPhone,
     email: req.body.email,
+    image: req.body.image,
+    clubTags: req.body.clubTags,
   };
   db_connect.collection("clubs").insertOne(myobj, function (err, res) {
     if (err) throw err;
