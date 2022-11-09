@@ -129,23 +129,23 @@ function AllClubs(props) {
 
   return (
     <div>
-      <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 2 }}>
+      <Box sx={{ bgcolor: 'background.paper', mt: "120px", mb: "12px" }}>
         <Container maxWidth="lg" fixec>
-          <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>  UTSC Clubs</Typography>
+          <Typography gutterBottom component="h1" variant="h2" align="center" color="text.primary">UTSC Clubs</Typography>
           <Grid maxWidth="lg" align="center">
             <TextField
-              sx={{ m: 1, width: 450 }}
+              sx={{ m: 1.5, width: 500 }}
               id="outlined-start-adornment"
               variant="outlined"
               label="Search"
-              size="small"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               InputProps={{
                 endAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
               }}
             ></TextField>
-            <FormControl sx={{ m: 1, width: 150 }} size="small">
+            <FormControl
+              sx={{ m: 1.5, width: 250 }} >
               <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
               <Select
                 labelId="multiple-checkbox-label"
