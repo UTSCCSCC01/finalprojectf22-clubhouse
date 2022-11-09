@@ -70,30 +70,34 @@ function AllClubs(props) {
    * @param {array} arrayTag 
    */
   const conTains = (arrayTag) => {
-      contains = false;
-      tagName.forEach((checkedTag) => {
-          if ((arrayTag.clubTags).includes(checkedTag)){
-              contains = true;
-              return contains; 
-          }
-      })
-      return contains;
-};
-let containsS = false;
-/**
-   * Check whether arrayTag includes any of search string
-   * @param {array} arrayTag 
-   */
-const conTainsS = (arrayTag) => {
-  containsS = false;
-  arrayTag.clubTags.forEach((clubTAG) => {
-    if(clubTAG.toLowerCase().includes(search)){
+    contains = false;
+    tagName.forEach((checkedTag) => {
+      if ((arrayTag.clubTags).includes(checkedTag)) {
+        contains = true;
+        return contains;
+      }
+    })
+    return contains;
+  };
+  let containsS = false;
+  /**
+     * Check whether the club object matches the search string
+     * @param {array} arrayTag 
+     */
+  const conTainsS = (arrayTag) => {
+    containsS = false;
+    if (arrayTag.clubName.toLowerCase().includes(search.toLowerCase()) || arrayTag.clubDesc.toLowerCase().includes(search.toLowerCase())) {
       containsS = true;
       return containsS;
     }
-  })
-  return containsS;
-};
+    arrayTag.clubTags.forEach((clubTAG) => {
+      if (clubTAG.toLowerCase().includes(search.toLowerCase())) {
+        containsS = true;
+        return containsS;
+      }
+    })
+    return containsS;
+  };
 
   /**
    * Fetch and set data from the database
