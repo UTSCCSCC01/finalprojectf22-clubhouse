@@ -72,11 +72,13 @@ export default function AllClubsCard(props) {
       </CardActionArea>
       <CardContent sx={{ flexGrow: 1, minWidth: 350, paddingBottom: 0 }}>
         <Typography variant="h5" component="h2">{props.cName}</Typography>
-        <Box display="inline-flex" flexWrap="wrap" mt="10px">
+
+        {/* <Box display="inline-flex" flexWrap="wrap" mt="10px">
           {(props.cTags).map((tag) => (
             <EventTag data={tag} />
           ))}
-        </Box>
+        </Box> */}
+        
       </CardContent>
 
       <CardActions disableSpacing>
