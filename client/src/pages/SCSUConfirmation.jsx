@@ -31,7 +31,7 @@ const SCSUConfirmation = () => {
             }}>
             
                 <Typography align="center" variant="h5">
-                    Approved! 
+                    Confirmed! 
                 </Typography>
                 
                 <CheckCircleIcon sx={{ fontSize: "80"}} color="success" />

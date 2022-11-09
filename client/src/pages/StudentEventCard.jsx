@@ -81,14 +81,6 @@ BootstrapDialogTitle.propTypes = {
  */
 export default function StudentEventCard(props) {
 
-
-
-    // const [cName, setCname] = useState('');
-    // const [key, setKey] = useState('');
-    // const [eDate, setEdate] = useState('');
-    // const [eName, setEname] = useState('');
-    // const [eTags, setEtags] = useState('');
-    // const [eDesc, setEdesc] = useState('');
     const [expanded, setExpanded] = React.useState(false);
     const [OnOff, setOnOff] = useState(false);
     const user = getCookie("username");

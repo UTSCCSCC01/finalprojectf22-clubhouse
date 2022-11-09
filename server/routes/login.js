@@ -54,6 +54,22 @@ loginRoutes.route("/loginstatus").get(function (req, res) {
     res.send(false);
   }
 });
+/** This section will help you create a new record.
+ *  @name /logincreate
+ */
+loginRoutes.route("/logincreate").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    name: req.body.clubName,
+    password: req.body.password,
+    email: req.body.email,
+    accountType: req.body.accountType,
+  };
+  db_connect.collection("users").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
 
 /**
  * Logs the user out by clearing cookie.

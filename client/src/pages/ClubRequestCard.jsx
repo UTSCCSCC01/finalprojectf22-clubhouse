@@ -1,16 +1,11 @@
 import * as React from 'react';
 import { CardActions, Box, Button, Card, CardContent, Typography, Collapse, IconButton, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog} from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import EventTag from "./EventTag.jsx"
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-/**
- * Display fetched information in a card
- * @param {*} props 
- * @component
- */
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -23,21 +18,25 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+/**
+ * Display fetched information in a card
+ * @param {*} props 
+ * @component
+ */
 export default function ClubRequestCard(props) {
   const [password, setPassword] = useState('');
-
-  const generatePassword = () => {
-    // Create a random password
-    const randomPassword =
+  
+  /**
+   * generate a random password and set it to variable password
+   */
+  useEffect(() => {
+    const generatePassword = async ()=>{
+      const randomPassword =
       Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
-      console.log("password" + randomPassword);
-  
-    // Set the generated password as state
-    setPassword(randomPassword);
-  };
-
-  
-    console.log("password is" + password);
+      setPassword(randomPassword);
+      };
+      generatePassword();
+    },[]);
     
     const navigate = useNavigate();
     const [expanded, setExpanded] = React.useState(false);
@@ -66,11 +65,6 @@ export default function ClubRequestCard(props) {
       setOpenDeny(false);
     };
 
-    const handleCloseDenyConfirm = () => {
-      setOpenDeny(false);
-      setOpenDenyConfirm(false);
-    };
-
   return (
     <Card sx={{ width: 800 }} raised >
     <Box display="flex">
@@ -90,13 +84,19 @@ export default function ClubRequestCard(props) {
               {"Would you like to confirm the club's registration approval? If yes, the following email will be sent to the club."}
             </DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-description" dividers>
+              <DialogContentText id="alert-dialog-description" >
                 <Typography gutterBottom>
                   Dear {props.cName},
                 </Typography>
                 <Typography gutterBottom paragraph>
                 We wish to inform you that your registration request has been approved. 
-                Please check your inbox for your temporary login credentials. 
+                Please use the following credentials to log in and reset your password.  
+                </Typography>
+                <Typography  color="primary">
+                email: {props.cEmail}
+                </Typography>
+                <Typography  gutterBottom color="primary">
+                password: {password}  
                 </Typography>
                 <Typography gutterBottom>
                 Best, 
@@ -112,6 +112,7 @@ export default function ClubRequestCard(props) {
               
               <Button onClick={() => {
                 setOpen(false);
+                //create a club and add it to the db
                 const clubName = props.cName;
                 const clubPhone = props.cPhone;
                 const email = props.cEmail;
@@ -130,11 +131,27 @@ export default function ClubRequestCard(props) {
                     console.log(err);
                 })
                 
+                //delete the club from the clubrequests db
                 fetch('http://localhost:5001/clubrequestdel/' + props.cKey, {method: 'DELETE'}).then(() => {
 
                 }).catch((err) => {
                     console.log(err);
                 })
+
+                //add login credentials to the users db
+                // const name = props.cName;
+                // const accountType = 'club';
+                // const newClubLogin = { email, password, name, accountType};
+                // console.log(newClubLogin);
+                // fetch('http://localhost:5001/logincreate', {
+                // method: 'POST',
+                // headers: { "Content-Type": "application/json" },
+                // body: JSON.stringify(newClubLogin)
+                // }).then(() => {
+
+                // }).catch((err) => {
+                //     console.log(err);
+                // })
 
 
 
@@ -143,15 +160,14 @@ export default function ClubRequestCard(props) {
               }} autoFocus  > Confirm</Button>
             </DialogActions>
           </Dialog>
-         <Button variant={openDenyConfirm ? "outlined": "contained"} size="small" onClick={handleClickOpenDeny}
-         disabled={openDenyConfirm ? true : false}>{openDenyConfirm ? "Rejected" : "Reject"}</Button>
+         <Button variant={openDenyConfirm ? "outlined": "contained"} size="small" onClick={handleClickOpenDeny}>{openDenyConfirm ? "Rejected" : "Reject"}</Button>
          <Dialog
             open={openDeny}
             onClose={handleCloseDeny}
-            aria-labelledby="alert-dialog-title"
+            aria-labelledby="alert-dialog-title2"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title" fontSize="17px">
+            <DialogTitle id="alert-dialog-title2" fontSize="17px">
               {"Would you like to confirm the club's registration rejection? If yes, the following email will be sent to the club."}
             </DialogTitle>
             <DialogContent>
@@ -161,7 +177,6 @@ export default function ClubRequestCard(props) {
                 </Typography>
                 <Typography gutterBottom paragraph>
                 We wish to inform you that your registration request has been rejected. 
-                Please check your inbox for more information. 
                 </Typography>
                 <Typography gutterBottom>
                 Best, 
@@ -173,7 +188,15 @@ export default function ClubRequestCard(props) {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseDeny} >Cancel</Button>
-              <Button onClick={handleCloseDenyConfirm} autoFocus >Confirm</Button>
+              <Button onClick={()=>{
+                setOpenDeny(false);
+                fetch('http://localhost:5001/clubrequestdel/' + props.cKey, {method: 'DELETE'}).then(() => {
+
+                }).catch((err) => {
+                    console.log(err);
+                })
+                navigate("/SCSUConfirmation");
+              }} autoFocus >Confirm</Button>
             </DialogActions>
           </Dialog>
        </CardActions>
