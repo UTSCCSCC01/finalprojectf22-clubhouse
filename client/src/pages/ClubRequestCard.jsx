@@ -91,7 +91,7 @@ export default function ClubRequestCard(props) {
             aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-title" fontSize="17px">
-              {"Would you like to confirm the club's registration approval? If yes, the following email will be sent to the club."}
+              {"The following approval email will be sent to the club."}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description" >
@@ -172,13 +172,13 @@ export default function ClubRequestCard(props) {
             open={openDeny}
             onClose={handleCloseDeny}
             aria-labelledby="alert-dialog-title2"
-            aria-describedby="alert-dialog-description"
+            aria-describedby="alert-dialog-description2"
           >
             <DialogTitle id="alert-dialog-title2" fontSize="17px">
-              {"Would you like to confirm the club's registration rejection? If yes, the following email will be sent to the club."}
+              {"The following rejection email will be sent to the club."}
             </DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-description">
+              <DialogContentText id="alert-dialog-description2">
               <Typography gutterBottom>
                   Dear {props.cName},
                 </Typography>
