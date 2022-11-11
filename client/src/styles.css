@@ -37,11 +37,12 @@ border-radius: 10 rem;
   display: none;
 }
 .cons{
-  height: 320px;
+  border: 2px solid #b3b3b3;
+  height: 315px;
   margin: auto 5px;
-  padding-top: 2rem;
-  border-radius: 20px;
-  background-color: #002A5C;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #ededed;
   overflow-y: scroll;
 }
 .memberscard{
