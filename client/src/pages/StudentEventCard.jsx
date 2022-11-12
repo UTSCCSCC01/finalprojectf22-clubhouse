@@ -81,51 +81,51 @@ BootstrapDialogTitle.propTypes = {
  */
 export default function StudentEventCard(props) {
 
-
-
-    const [cName, setCname] = useState('');
-    const [key, setKey] = useState('');
-    const [eDate, setEdate] = useState('');
-    const [eName, setEname] = useState('');
-    const [eTags, setEtags] = useState('');
-    const [eDesc, setEdesc] = useState('');
     const [expanded, setExpanded] = React.useState(false);
     const [OnOff, setOnOff] = useState(false);
     const user = getCookie("username");
 
     const [open, setOpen] = React.useState(false);
+    const [error, setError] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
     setOnOff(!OnOff);
-    if(OnOff){
-      fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
-        method: 'PATCH', // or 'PUT'
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({'eventAttendees':user}),
-        })
-        .then(() => {
-        })
-        .catch((error) => { 
-          console.error('Error:', error);
-        });
+
+    if(user!==undefined){
+      if(OnOff){
+        fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
+          method: 'PATCH', // or 'PUT'
+          headers: {
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({'eventAttendees':user}),
+          })
+          .then(() => {
+          })
+          .catch((error) => { 
+            console.error('Error:', error);
+          });
+      }
+      else{
+          fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
+          method: 'PATCH',
+          headers: {
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({'eventAttendees':user}),
+          })
+          .then(() => {
+          })
+          .catch((error) => { 
+            console.error('Error:', error);
+          });
+      }
     }
     else{
-      fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
-        method: 'PATCH', // or 'PUT'
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({'eventAttendees':user}),
-        })
-        .then(() => {
-        })
-        .catch((error) => { 
-          console.error('Error:', error);
-        });
+      setError(true);
     }
+    
   };
   const handleClose = () => {
     setOpen(false);
@@ -168,6 +168,7 @@ export default function StudentEventCard(props) {
         <DialogContent dividers>
           <Typography gutterBottom>
           {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}
+          {/* {error ? 'You are not logged in! Please log in first': 'error'} */}
             
           </Typography>
         </DialogContent>
