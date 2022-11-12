@@ -25,6 +25,7 @@ import NewAnnouncement from './pages/NewAnnouncement.jsx';
 import MyClubs from './pages/MyClubs.jsx';
 import ClubRegisterReq from './pages/ClubRegisterReq.jsx';
 import NewClubReqConfirmation from './pages/NewClubReqConfirmation.jsx';
+import EmailSettingsPage from './pages/EmailSettingsPage.jsx';
 
 ReactDOM.render(
   (
@@ -55,6 +56,7 @@ ReactDOM.render(
         <Route exact path="/create-position" element={<PositionCreate />} />
         <Route path="/positions" element={<Positions />} />
         <Route path="/my-clubs" element={<MyClubs />} />
+        <Route path="/settings" element={<EmailSettingsPage />} />
       </Routes>
     </Router>
   ),
