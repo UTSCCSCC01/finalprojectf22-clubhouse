@@ -54,7 +54,7 @@ class Positions extends Component{
     if (!positions.length) return null;
     return positions.map((position, index) => (
       
-      <Grid item key={index} xs={12} sm={6} md={4}>
+      <Grid item sx={{ m: 2 }} key={index}>
         <PositionCard key={index} eImage={position.clubImage} ePosition={position.jobPosition} cName={position.clubName} eMail={position.email}></PositionCard>
       </Grid>
     ));
@@ -64,9 +64,9 @@ class Positions extends Component{
     console.log('State: ', this.state);
     return(
 
-      <Container sx={{ py: 4 }} maxWidth="md">
-        <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse Job Listings</Typography>
-      <Grid container spacing={5}>
+      <Container sx={{m: "120px auto 40px auto"}} maxWidth="lg">
+        <Typography  gutterBottom variant="h2" align="center">Browse Job Listings</Typography>
+      <Grid container>
           {this.displayPositionInfo(this.state.positions)}
       </Grid>
       </Container>

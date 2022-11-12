@@ -26,7 +26,7 @@ function PositionCard(props) {
   return (
     <>
 
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Card raised sx={{ width: 350, height: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardActionArea>
             <CardMedia
                 component="img"

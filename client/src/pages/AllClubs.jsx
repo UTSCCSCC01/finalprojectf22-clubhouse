@@ -173,7 +173,7 @@ function AllClubs(props) {
           {items.map((item) => {
             if ((search === "" && Object.keys(tagName).length == 0) || (search !== "" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item))) {
               return (
-                <Grid sx={{ m: 1.5 }} item key={item}>
+                <Grid sx={{ m: 2 }} item key={item}>
                   <AllClubsCard key={item._id} cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image} cTags={item.clubTags} />
                 </Grid>)
             }
