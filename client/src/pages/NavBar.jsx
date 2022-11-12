@@ -155,7 +155,7 @@ useRouteMatch = (patterns) => {
         location.href = "http://localhost:3000/clubMain";
       }
 
-      const routes = ['/clubMain', '/new-announcement', '/create-event','/club-admin-profile'];
+      const routes = ['/clubMain', '/new-announcement', '/create-event','/create-position','/club-admin-profile'];
       const index = this.useRouteMatch(routes);
       
       this.state.value = (index!=null) ? index : 0;
@@ -169,7 +169,8 @@ useRouteMatch = (patterns) => {
                     <Tab label="Home" value={0} href={routes[0]}/>
                     <Tab label="Make an Accouncement" value={1} href={routes[1]}/>
                     <Tab label="Create an Event" value={2} href={routes[2]}/>
-                    <Tab label="Profile" value={3} href={routes[3]}/>
+                    <Tab label="Create a Position" value={3} href={routes[3]}/>
+                    <Tab label="Profile" value={4} href={routes[4]}/>
                    
                 </Tabs>
                   <Button sx={{ marginLeft: 'auto' }} variant="contained" onClick={this.handleLogout}> Logout</Button>

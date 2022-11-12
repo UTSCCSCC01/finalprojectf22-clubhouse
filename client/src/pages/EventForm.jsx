@@ -113,11 +113,11 @@ const EventForm = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newEvent)
         }).then(() => {
-
+           
         }).catch((err) => {
             console.log(err);
         })
-        navigate("/"); // change path
+        
     };
 
     return (
