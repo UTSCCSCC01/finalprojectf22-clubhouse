@@ -19,10 +19,11 @@ app.use(require("./routes/positions"));
 app.use(require("./routes/adminProfile"));
 app.use(require("./routes/clubMain"));
 app.use(require("./routes/membership"));
-app.use(require("./routes/tags"))
+app.use(require("./routes/tags"));
 app.use(require("./routes/notification"));
-app.use(require("./routes/myClubs"))
-app.use(require("./routes/newClubRequest"))
+app.use(require("./routes/myClubs"));
+app.use(require("./routes/newClubRequest"));
+app.use(require("./routes/settings"));
 
 // get driver connection
 const dbo = require("./db/conn");

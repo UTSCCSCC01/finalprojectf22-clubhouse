@@ -1,12 +1,13 @@
-import { Checkbox, Paper, Typography } from "@mui/material"
+import { Checkbox, FormControl, FormControlLabel, Paper, Typography } from "@mui/material"
 import React from "react"
 
 const EmailSetting = props => {
     return (
-        <Paper>
-            <Typography>{props.children}</Typography>
-            <Checkbox checked={props.checked} sx={{marginLeft: 'auto'}} onChange={props.onChange}></Checkbox>
-        </Paper>
+        <React.Fragment>
+            <FormControlLabel control={<Checkbox checked={props.checked} onChange={props.onChange} />} label={props.clubName} />
+            <br></br>
+        </React.Fragment>
+        
     )
 }
 
