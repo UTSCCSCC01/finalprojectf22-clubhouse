@@ -25,6 +25,7 @@ import NewAnnouncement from './pages/NewAnnouncement.jsx';
 import MyClubs from './pages/MyClubs.jsx';
 import ClubRegisterReq from './pages/ClubRegisterReq.jsx';
 import NewClubReqConfirmation from './pages/NewClubReqConfirmation.jsx';
+import MyAccounts from './pages/MyAccounts.jsx';
 
 ReactDOM.render(
   (
@@ -49,6 +50,7 @@ ReactDOM.render(
         <Route exact path="/create-event" element={<CreateEvent />} />
         <Route exact path="/new-announcement" element={<NewAnnouncement />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/MyAccount" element={<MyAccounts />} />
         <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/events" element={<Events />} />
