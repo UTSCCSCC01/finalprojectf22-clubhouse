@@ -91,13 +91,7 @@ export default function ClubRequestCard(props) {
                 </Typography>
                 <Typography gutterBottom paragraph>
                 We wish to inform you that your registration request has been approved. 
-                You can use the following credentials to log in.  
-                </Typography>
-                <Typography  color="primary">
-                email: {props.cEmail}
-                </Typography>
-                <Typography  gutterBottom color="primary">
-                password: {props.cPass}  
+                Use this link: http://localhost:3000/login to log in.
                 </Typography>
                 <Typography gutterBottom>
                 Best, 
@@ -118,10 +112,10 @@ export default function ClubRequestCard(props) {
                 const clubPhone = props.cPhone;
                 const email = props.cEmail;
                 const clubDesc = props.cDesc;
+                const password = props.cPass;
                 const image = "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png";
                 const clubTags = props.cTags;
-                const text = "Dear " + props.cName + ", \n\n" + "We wish to inform you that your registration request has been approved.  You can use the following credentials to log in.\n\n" + "email: " + props.cEmail + "\n" + "password: " + password + "\n\n" + 
-                "Best, \nSCSU";
+                const text = "Dear " + props.cName + ", \n\n" + "We wish to inform you that your registration request has been approved.  Use this link: http://localhost:3000/login to log in. \n\n" + "Best, \nSCSU";
                 const newClub = { email, clubName, clubPhone, clubDesc, image, clubTags, text};
                 fetch('http://localhost:5001/clubs/create', {
                 method: 'POST',
@@ -142,7 +136,6 @@ export default function ClubRequestCard(props) {
 
                 //add login credentials to the users db
                 const name = props.cName;
-                const password = props.cPass;
                 const accountType = 'club';
                 const newClubLogin = { email, password, name, accountType};
                 console.log(newClubLogin);
@@ -192,11 +185,20 @@ export default function ClubRequestCard(props) {
                 setOpenDeny(false);
 
                 //delete the club from the club-requests database
-                const text = "Dear " + props.cName + ", \n\n We wish to inform you that your registration request has been rejected. \n\n Best, \nSCSU"
+                const text = "Dear " + props.cName + ", \n\nWe wish to inform you that your registration request has been rejected. \n\nBest, \nSCSU"
                 const email = props.cEmail;
-                console.log(email);
                 const del = {text, email}
-                fetch('http://localhost:5001/clubrequestdel/' + props.cKey, {method: 'DELETE', 'body': JSON.stringify(del)}).then(() => {
+                // , 'body': JSON.stringify(del)
+                fetch('http://localhost:5001/clubrequestdelemail/' + props.cKey, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(del)
+                }).then(() => {
+
+                }).catch((err) => {
+                    console.log(err);
+                })
+                fetch('http://localhost:5001/clubrequestdel/' + props.cKey, {method: 'DELETE'}).then(() => {
 
                 }).catch((err) => {
                     console.log(err);

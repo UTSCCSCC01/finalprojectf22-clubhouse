@@ -80,32 +80,21 @@ BootstrapDialogTitle.propTypes = {
  * @component
  */
 export default function StudentEventCard(props) {
-
     const [expanded, setExpanded] = React.useState(false);
+    // const [OnOff, setOnOff] = useState(() => () => (props.eAttendees).includes(user));
     const [OnOff, setOnOff] = useState(false);
     const user = getCookie("username");
-
     const [open, setOpen] = React.useState(false);
-    const [attendees, setAttendees ] = useState([]);
     const [error, setError] = React.useState(false);
+    
+    // console.log((props.eAttendees).includes(user));
 
-    const checkRegistration = async () => {
-      useEffect(() => {
-        const getoneevent = async ()=>{
-          const res = await fetch('http://127.0.0.1:5001/events/' + props.eKey);
-          const data = await res.json();
-          setAttendees(data);  
-        };
-        getoneevent();
-      },[]);
-      return (attendees.eventAttendees).includes(user);
-    }
-    // checkRegistration();
+    // console.log(OnOff);
+
     
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(!open);
     setOnOff(!OnOff);
-
     if(user!==undefined){
       if(OnOff){
         fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {

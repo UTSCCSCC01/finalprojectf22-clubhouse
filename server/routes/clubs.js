@@ -47,7 +47,7 @@ clubRoutes.route("/clubs/:id").get(function (req, res) {
 /** This section will help you create a new record.
  *  @name /clubs/create
  */
-clubRoutes.route("/clubs/create").post( async function (req, response) {
+clubRoutes.route("/clubs/create").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     clubName: req.body.clubName,
@@ -65,7 +65,7 @@ clubRoutes.route("/clubs/create").post( async function (req, response) {
     text: req.body.text,
   }
 
-  stat = await EmlWrp.sendEmail(emailCfg);
+  EmlWrp.sendEmail(emailCfg);
 
   db_connect.collection("clubs").insertOne(myobj, function (err, res) {
     if (err) throw err;
