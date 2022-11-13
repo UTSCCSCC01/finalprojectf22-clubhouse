@@ -17,28 +17,50 @@ import '../styles.css';
  */
 
 function SCSUClubCard(props) {
-  
-  const [cName, setCname] = useState('');
-  const [cPhone, setCphone] = useState('');
-  const [cEmail, setCemail] = useState('');
 
+  const [open, setOpen] = React.useState(false);
+  const [openDeny, setOpenDeny] = React.useState(false);
+  const [openDenyConfirm, setOpenDenyConfirm] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClickOpenDeny = () => {
+    setOpenDeny(true);
+  };
+
+  const handleClose = (props) => {
+    setOpen(false);
+  };
+
+  const handleCloseDeny = () => {
+    setOpenDeny(false);
+  };
 
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <CardActionArea>
-            <CardMedia
-                component="img"
-                height="250"
-                image={props.eImage} alt="Clubs"/>
-            <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h7" component="h2">{props.cName} </Typography> 
-                <Typography >{props.cPhone} </Typography> 
-                <Typography >{props.cEmail} </Typography> 
-            </CardContent>
-        </CardActionArea>
-            <CardActions>
-                <Button size="small">Delete Club</Button>
-            </CardActions>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="250"
+          image={props.eImage} alt="Clubs"/>
+        <CardContent sx={{ flexGrow: 1 }}>
+          <Typography gutterBottom variant="h7" component="h2">{props.cName} </Typography> 
+          <Typography >{props.cPhone} </Typography> 
+          <Typography >{props.cEmail} </Typography> 
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button onClick={() => {
+          setOpen(false);
+          fetch('http://localhost:5001/clubs/del/' + props.cKey, {method: 'DELETE'}).then(() => {
+          }).catch((err) => {
+            console.log(err);
+          })
+          }       
+        } color="error" variant="contained" size="large">Delete Club</Button>
+      </CardActions>
     </Card>
   );
 }
