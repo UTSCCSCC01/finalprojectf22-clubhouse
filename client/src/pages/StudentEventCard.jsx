@@ -91,7 +91,9 @@ export default function StudentEventCard(props) {
 
     // console.log(OnOff);
 
-    
+  /**
+   * Remove or add a user to the eventAttendees list
+   */
   const handleClickOpen = () => {
     setOpen(!open);
     setOnOff(!OnOff);
