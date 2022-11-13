@@ -42,7 +42,7 @@ function SCSUclubreview(props){
                     {items.map((item) => {
                         return (
                             <Grid item key={item}>
-                                <ClubRequestCard key={item._id} cKey = {item._id} cName={item.clubName} cEmail={item.clubEmail} cPhone={item.clubPhone} cTags={item.clubTags} cDesc={item.clubDesc}/>
+                                <ClubRequestCard key={item._id} cKey = {item._id} cName={item.clubName} cEmail={item.clubEmail} cPhone={item.clubPhone} cTags={item.clubTags} cDesc={item.clubDesc} cPass = {item.password}/>
                             </Grid>)
                     })}
                 </Grid>

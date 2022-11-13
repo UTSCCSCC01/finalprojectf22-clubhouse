@@ -8,7 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import TimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardActions, Box} from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EventTag from "./EventTag.jsx"
 import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
@@ -86,8 +86,22 @@ export default function StudentEventCard(props) {
     const user = getCookie("username");
 
     const [open, setOpen] = React.useState(false);
+    const [attendees, setAttendees ] = useState([]);
     const [error, setError] = React.useState(false);
 
+    const checkRegistration = async () => {
+      useEffect(() => {
+        const getoneevent = async ()=>{
+          const res = await fetch('http://127.0.0.1:5001/events/' + props.eKey);
+          const data = await res.json();
+          setAttendees(data);  
+        };
+        getoneevent();
+      },[]);
+      return (attendees.eventAttendees).includes(user);
+    }
+    // checkRegistration();
+    
   const handleClickOpen = () => {
     setOpen(true);
     setOnOff(!OnOff);
@@ -95,7 +109,7 @@ export default function StudentEventCard(props) {
     if(user!==undefined){
       if(OnOff){
         fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
-          method: 'PATCH', // or 'PUT'
+          method: 'PATCH',
           headers: {
           'Content-Type': 'application/json',
           },
@@ -140,6 +154,7 @@ export default function StudentEventCard(props) {
     };
 
   return (
+    
     <Card  raised sx={{ width: 370 }} >
       <CardMedia
                 component="img"
