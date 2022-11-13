@@ -11,7 +11,9 @@ import MyEvents from './MyEvents.jsx';
 
 
 
-
+/**
+ * MUI tabs managing function.
+ */
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -53,7 +55,9 @@ function TabPanel(props) {
 function MyAccounts(props) {
 
 const [value, setValue] = React.useState(0);
-
+/**
+ * CHanges the value depending on what tab was clicked
+ */
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

@@ -24,7 +24,7 @@ function MyEvents() {
   const email = getCookie("username");
 
    /**
-   * Fetch and set the members of the club from the database (club-members collection)
+   * Fetch and set the members of the events from the database 
    * 
    */
     useEffect(  ()  => {
@@ -38,8 +38,8 @@ function MyEvents() {
     },[] );
 
   /**
-   * Used to display club info from the db
-   * @param {events} events - information containing basic club registration
+   * Used to display event info from the db
+   * @param {events} events - 
    */
   
   const displayClubInfo = (events) => {
