@@ -19,7 +19,6 @@ class Login extends Component {
     this.change = this.change.bind(this);
   }
 
-
   componentDidMount() {
     fetch("http://localhost:5001/loginstatus", {
       method: 'get',
