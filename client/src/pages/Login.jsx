@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextField, Container, Typography, Grid, Button } from '@material-ui/core'
-
+import Auth from '../components/AuthCheck.jsx';
 import '../styles.css';
 
 /**
@@ -20,15 +20,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:5001/loginstatus", {
-      method: 'get',
-      credentials: 'include'
-    }).then(response => response.text())
-    .then(data => {
-      if (data != "false") {
-        location.href = "http://localhost:3000/testlogin"; //redirect if already logged in
-      }
-    });
+    Auth({student: "/home", club: "/clubhome", admin: "/adminhome"});
   }
   /**
    * Updates state when the login form is modified.
