@@ -46,7 +46,7 @@ function MyEvents() {
     if (!events.length) return null;
     return events.map((club, index) => (
       <Grid item key={index} xs={12} sm={6} md={4}>
-        <EventCard key={club._id} eKey = {club._id} cName={club.clubName} eName={club.eventName} eDate={club.eventDate} eJoin={club.eventJoin} eImage={club.eventImage} eStartTime={club.eventStartTime} eEndTime={club.eventEndTime} eLoc={club.eventLoc} eTags={club.eventTags} eDesc={club.eventDesc}/>
+        <EventCard key={club._id} eKey = {club._id} cName={club.clubName} eName={club.eventName} eDate={club.eventDate} eJoin={club.eventJoin} eImage={club.eventImage} eStartTime={club.eventStartTime} eEndTime={club.eventEndTime} eLoc={club.eventLoc} eTags={club.eventTags} eDesc={club.eventDesc} eAttendees={club.eventAttendees}/>
       </Grid>
     ));
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import MultiActionAreaCard from "./EventCard.jsx";
 import EventCard from "./EventCard.jsx";
 import { useEffect, useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";

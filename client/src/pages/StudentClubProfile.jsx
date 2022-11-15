@@ -1,11 +1,11 @@
 import React from "react";
-import { useEffect, useState } from 'react';
+import EventCard from "./EventCard.jsx";
+import { useEffect,useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Fab from '@mui/material/Fab'
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Skeleton } from "@mui/material";
-import EventCard from "./EventCard.jsx";
 import { IconButton, Box, CardMedia, Typography, Card, CardContent, Stack, Paper, Grid } from '@mui/material/'
 import dateFormat from 'dateformat';
 
