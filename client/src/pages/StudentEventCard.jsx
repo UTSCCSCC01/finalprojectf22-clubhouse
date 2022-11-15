@@ -89,8 +89,8 @@ export default function StudentEventCard(props) {
      * set OnOff every time eAttendees changes
      */
     useEffect(() => {
-      setOnOff((props.eAttendees).includes(user));
-    }, [(props.eAttendees)])
+      setOnOff(props.eAttendees.includes(user));
+    }, [props.eAttendees])
 
   /**
    * Remove or add a user to the eventAttendees list
