@@ -71,13 +71,9 @@ export default function AllClubsCard(props) {
           image={props.cImage} alt="UTSC" />
       </CardActionArea>
       <CardContent sx={{ flexGrow: 1, minWidth: 350, paddingBottom: 0 }}>
-        <Typography variant="h5" component="h2">{props.cName}</Typography>
-
-        {/* <Box display="inline-flex" flexWrap="wrap" mt="10px">
-          {(props.cTags).map((tag) => (
-            <EventTag data={tag} />
-          ))}
-        </Box> */}
+        <Typography variant="h5" component="h2" gutterBottom>{props.cName}</Typography>
+        <Typography>{props.cEmail}</Typography>
+        <Typography>{props.cPhone}</Typography>
 
       </CardContent>
 
@@ -94,7 +90,12 @@ export default function AllClubsCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography padding={1} paragraph>{props.cDesc}</Typography>
+          <Typography sx={{m: "0 4px 0 4px"}} paragraph>{props.cDesc}</Typography>
+          <Box display="inline-flex" flexWrap="wrap" mt="20px">
+            {(props.cTags).map((tag) => (
+              <EventTag data={tag} />
+            ))}
+          </Box>
         </CardContent>
       </Collapse>
     </Card>

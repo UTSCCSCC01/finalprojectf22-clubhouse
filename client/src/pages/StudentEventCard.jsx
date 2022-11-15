@@ -148,14 +148,8 @@ export default function StudentEventCard(props) {
       <CardContent sx={{ width: 370 }}>
         <Typography gutterBottom variant="h5" component="h2">{props.eName} by {props.cName} </Typography>
         <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
-        <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
+        <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")}</Typography>
         <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>
-
-        {/* <Box display="inline-flex" flexWrap="wrap" mt="20px">
-          {(props.eTags).map((tag) => (
-            <EventTag data={tag} />
-          ))}
-        </Box> */}
 
       </CardContent>
 
@@ -190,7 +184,13 @@ export default function StudentEventCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography padding={1} paragraph>{props.eDesc}</Typography>
+          <Typography sx={{m: "0 4px 0 4px"}} paragraph>{props.eDesc}</Typography>
+
+          <Box display="inline-flex" flexWrap="wrap" mt="20px">
+            {(props.eTags).map((tag) => (
+              <EventTag data={tag} />
+            ))}
+          </Box>
         </CardContent>
       </Collapse>
     </Card>
