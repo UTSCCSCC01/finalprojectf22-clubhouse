@@ -7,8 +7,8 @@ import dateFormat from 'dateformat';
 import EventIcon from '@mui/icons-material/Event';
 import TimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { CardActions, Box } from '@mui/material';
-import { useState } from 'react';
+import { CardActions, Box} from '@mui/material';
+import { useState, useEffect } from 'react';
 import EventTag from "./EventTag.jsx"
 import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
@@ -80,52 +80,58 @@ BootstrapDialogTitle.propTypes = {
  * @component
  */
 export default function StudentEventCard(props) {
+    const [expanded, setExpanded] = React.useState(false);
+    const [OnOff, setOnOff] = useState(false);
+    const user = getCookie("username");
+    const [open, setOpen] = React.useState(false);
 
+    /**
+     * set OnOff every time eAttendees changes
+     */
+    useEffect(() => {
+      setOnOff((props.eAttendees).includes(user));
+    }, [(props.eAttendees)])
 
-
-  const [cName, setCname] = useState('');
-  const [key, setKey] = useState('');
-  const [eDate, setEdate] = useState('');
-  const [eName, setEname] = useState('');
-  const [eTags, setEtags] = useState('');
-  const [eDesc, setEdesc] = useState('');
-  const [expanded, setExpanded] = React.useState(false);
-  const [OnOff, setOnOff] = useState(false);
-  const user = getCookie("username");
-
-  const [open, setOpen] = React.useState(false);
-
+  /**
+   * Remove or add a user to the eventAttendees list
+   */
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(!open);
     setOnOff(!OnOff);
-    if (OnOff) {
-      fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
-        method: 'PATCH', // or 'PUT'
-        headers: {
+    if(user!==undefined){
+      if(OnOff){
+        fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
+          method: 'PATCH',
+          headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'eventAttendees': user }),
-      })
-        .then(() => {
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
-    else {
-      fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
-        method: 'PATCH', // or 'PUT'
-        headers: {
+          },
+          body: JSON.stringify({'eventAttendees':user}),
+          })
+          .then(() => {
+          })
+          .catch((error) => { 
+            console.error('Error:', error);
+          });
+      }
+      else{
+          fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
+          method: 'PATCH',
+          headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'eventAttendees': user }),
-      })
-        .then(() => {
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+          },
+          body: JSON.stringify({'eventAttendees':user}),
+          })
+          .then(() => {
+          })
+          .catch((error) => { 
+            console.error('Error:', error);
+          });
+      }
     }
+    else{
+      setError(true);
+    }
+    
   };
   const handleClose = () => {
     setOpen(false);

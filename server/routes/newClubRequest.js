@@ -5,6 +5,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 const userDAO = require("../modules/userDAO");
 const clubDAO = require("../modules/clubDAO");
+const EmlWrp = require("../modules/emailWrapper");
  
 /**
  * @module routes/newClubRequest
@@ -13,7 +14,7 @@ const clubDAO = require("../modules/clubDAO");
 /** This section will help you get a list of all the club signup requests.
  *  @name /clubs/register-request
  */
- newClubRequestRoutes.route("/clubs/register-request").get(function (req, res) {
+ newClubRequestRoutes.route("/register-request").get(function (req, res) {
     let db_connect = dbo.getDb("main");
     db_connect
         .collection("club-registration-requests")
@@ -45,6 +46,7 @@ const clubDAO = require("../modules/clubDAO");
         clubPhone: req.body.phone,
         clubTags: req.body.tags,
         clubDesc: req.body.desc,
+        password: req.body.password,
 
     };
 
@@ -53,6 +55,36 @@ const clubDAO = require("../modules/clubDAO");
         response.json(res);
     });
 });
+/** This section will help you delete a record
+ *  @name /clubrequestdel/:id
+ */
+newClubRequestRoutes.route("/clubrequestdel/:id").delete( function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+
+  db_connect.collection("club-registration-requests").deleteOne(myquery, function (err, obj) {
+    if (err) throw err;
+    console.log("1 document deleted");
+    response.json(obj);
+  });
+});
+
+/**
+ * This section will help you send a rejection email
+ */
+newClubRequestRoutes.route("/clubrequestdelemail/:id").post( function (req, response) {
+    let emailCfg = {
+        from: "utscclubhouse@gmail.com",
+        to: req.body.email,
+        subject: "Your club registration request",
+        text: req.body.text,
+      }
+      console.log(req.body.email);
+      console.log(req.body.text);
+    
+      EmlWrp.sendEmail(emailCfg);
+  });
+
 
 
 module.exports = newClubRequestRoutes;

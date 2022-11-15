@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { getCookie } from "../libraries/cookieDAO.js";
-
+import AllClubsCard from "./AllClubsCard.jsx";
 import '../styles.css';
 
 /**
@@ -18,6 +18,15 @@ import '../styles.css';
 function MyClubs() {
 
   const [clubs, setClubs] = useState([]);
+  const [clubs2, setClubs2] = useState([]);
+  useEffect(() => {
+    const getclubs = async ()=>{
+      const res = await fetch('http://127.0.0.1:5001/clubs');
+      const data = await res.json();
+      setClubs2(data); 
+    };
+    getclubs();
+  }, []);
   const email = getCookie("username");
 
    /**
@@ -29,30 +38,39 @@ function MyClubs() {
           console.log(email);
           const res = await fetch("http://127.0.0.1:5001/club/myclubs/" + email);
           const data = await res.json();
+          
           setClubs(data);
       } 
       fetchclubs();
     },[] );
+
+  
+    
 
   /**
    * Used to display club info from the db
    * @param {Clubs} clubs - information containing basic club registration
    */
   
-  const displayClubInfo = (clubs) => {
-    if (!clubs.length) return null;
-    return clubs.map((club, index) => (
-      <Grid item key={index} xs={12} sm={6} md={4}>
-        <MyClubsCard key={index} cName={club.clubName}></MyClubsCard>
-      </Grid>
-    ));
-  }
+
+  
 
   return(
     <Container sx={{ py: 4, px: 4}} maxWidth="lg">
-      <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse Followed Clubs</Typography>
       <Grid container spacing={3}>
-        {displayClubInfo(clubs)}
+      { clubs2.map((item) => {
+      for (const a of clubs) {
+        if ( a.clubName === item.clubName ){
+          return (<Grid item key={item}>
+            <AllClubsCard key={item._id}  cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
+           </Grid>)
+        }
+        else{
+          return (<Grid item key={item}></Grid>)
+        }
+      }
+      
+            })}
       </Grid>
     </Container>
   )

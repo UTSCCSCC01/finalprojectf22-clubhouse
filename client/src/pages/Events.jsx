@@ -134,7 +134,7 @@ function Events(props) {
 
     return false;
   }
-  
+
   /**
    * Fetch and set data from the database
    * every time the value of filter changes. 
@@ -181,7 +181,7 @@ function Events(props) {
       <Box sx={{ bgcolor: 'background.paper', mt: "120px", mb: "12px" }}>
         <Container maxWidth="lg" fixed>
           <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>Upcoming Events</Typography>
-          <Box sx={{display: "flex", m: 1}}>
+          <Box sx={{ display: "flex", m: 1 }}>
             <TextField
               sx={{ m: 1.5, flexGrow: 2 }}
               id="outlined-start-adornment"
@@ -236,7 +236,7 @@ function Events(props) {
           {items && items.filter(item => item.eventStartTime >= dateFormat(now, "isoDateTime")).map((item) => {
             if (matchesQuery(item)) {
               return (<Grid sx={{ m: 2 }} item key={item}>
-                <EventCard key={item._id} eKey={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} />
+                <EventCard key={item._id} eKey={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} eAttendees={item.eventAttendees} />
               </Grid>)
             }
             else {

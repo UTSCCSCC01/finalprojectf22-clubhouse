@@ -2,9 +2,12 @@ const { DoneAllOutlined } = require("@mui/icons-material");
 const express = require("express");
 
 const loginRoutes = express.Router();
+const dbo = require("../db/conn");
+const ObjectId = require("mongodb").ObjectId;
 
 const userDAO = require("../modules/userDAO");
 const clubDAO = require("../modules/clubDAO");
+const EmlWrp = require("../modules/emailWrapper");
 /**
  * @module routes/login
  */
@@ -53,6 +56,34 @@ loginRoutes.route("/loginstatus").get(function (req, res) {
   } else {
     res.send(false);
   }
+});
+/** This section will help you create a new record.
+ *  @name /logincreate
+ */
+loginRoutes.route("/logincreate").post(async function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    name: req.body.name,
+    password: req.body.password,
+    email: req.body.email,
+    accountType: req.body.accountType,
+  };
+
+  // let emailCfg = {
+  //   from: "utscclubhouse@gmail.com",
+  //   to: req.body.email,
+  //   subject: "Your club registration request",
+  //   text: 'Dear '+ req.body.name + ', We wish to inform you that your registration request has been approved. Please use the following credentials to log in and reset your password. email: ' + req.body.email + 'password: ' + req.body.password + '. Best, SCSU'
+  // };
+
+  // stat = await Promise.all([
+  //   EmlWrp.sendEmail(emailCfg)
+  // ]);
+
+  db_connect.collection("users").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
 });
 
 /**
