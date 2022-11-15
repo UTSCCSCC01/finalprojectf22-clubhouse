@@ -23,56 +23,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import PropTypes from 'prop-types';
 
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-}));
-
-function BootstrapDialogTitle(props) {
-  const { children, onClose, ...other } = props;
-
-  return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-      {children}
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </DialogTitle>
-  );
-}
-
-BootstrapDialogTitle.propTypes = {
-  children: PropTypes.node,
-  onClose: PropTypes.func.isRequired,
-};
-
 /**
  * Display fetched information in a card
  * Reformat eventStartTime and eventEndTime. 
@@ -81,8 +31,6 @@ BootstrapDialogTitle.propTypes = {
  */
 export default function EventCard(props) {
 
-  const [expanded, setExpanded] = React.useState(false);
-  const [OnOff, setOnOff] = useState(false);
   const user = getCookie("username");
 
   const [open, setOpen] = React.useState(false);
@@ -100,40 +48,23 @@ export default function EventCard(props) {
   };
 
   return (
-    <Card raised sx={{ width: 350 }} >
+    <Card raised sx={{m: "8px auto 24px auto", width: "95%", display: "flex"}} >
       <CardMedia
         component="img"
-        height="250"
+        sx={{width: "250px"}}
         image={props.eImage} alt="event image" />
-      <CardContent sx={{ width: 370 }}>
+      <CardContent sx={{ m: 2, width: "100%" }}>
         <Typography gutterBottom variant="h5" component="h2">{props.eName}</Typography>
         <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
         <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")}</Typography>
-        <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>
-
+        <Typography><LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>
+        <Typography sx={{ m: "20px 4px 0 4px" }} paragraph>{props.eDesc}</Typography>
+        <Box display="inline-flex" flexWrap="wrap" mt="20px">
+          {(props.eTags).map((tag) => (
+            <EventTag data={tag} />
+          ))}
+        </Box>
       </CardContent>
-
-      <CardActions disableSpacing>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="more info"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography sx={{m: "0 4px 0 4px"}} paragraph>{props.eDesc}</Typography>
-
-          <Box display="inline-flex" flexWrap="wrap" mt="20px">
-            {(props.eTags).map((tag) => (
-              <EventTag data={tag} />
-            ))}
-          </Box>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }

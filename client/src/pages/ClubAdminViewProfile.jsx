@@ -3,7 +3,7 @@ import MultiActionAreaCard from "./EventCard.jsx";
 import EventCard from "./EventCard.jsx";
 import { useEffect, useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
-import { IconButton, Box, CardMedia, Typography,Card, CardContent, Stack, Container, Grid } from '@mui/material/'
+import { IconButton, Box, CardMedia, Typography, Card, CardContent, Stack, Paper, Grid } from '@mui/material/'
 import EditIcon from '@mui/icons-material/Edit';
 import { getCookie } from '../libraries/cookieDAO'
 import dateFormat from 'dateformat';
@@ -88,20 +88,20 @@ function ClubAdminViewProfile(props) {
   return (
 
     <Stack mt="120px" mb="60px" ml="auto" mr="auto" alignItems="center" width="80%" minWidth="700px" maxWidth="1115px">
-      <Card sx={{ mb: "40px", width: "100%" }} raised>
+      <Card sx={{ mb: "40px", width: "100%" }}>
         <CardMedia
           component="img"
-          sx={{width: "100%", maxWidth: "100%", maxHeight: 250, objectFit: "contain"}}
+          sx={{ width: "100%", maxWidth: "100%", maxHeight: 250, objectFit: "contain" }}
           image={image} alt="profile-picture" />
 
-        <CardContent sx={{padding: "32px"}}>
+        <CardContent sx={{ padding: "32px" }}>
           <Box display="flex" justifyContent="space-between">
             <Typography flexWrap="wrap" gutterBottom variant="h3">{props.values.clubName}</Typography>
             <Box width="20%" flex={0}>
               <IconButton size="large" onClick={props.onClick}><EditIcon /></IconButton>
             </Box>
           </Box>
-          
+
           <Typography gutterBottom variant="h6">Contact Info</Typography>
           <Typography>Email: {props.values.email}</Typography>
           <Typography gutterBottom>Phone: {props.values.clubPhone ? props.values.clubPhone : "N\\A"}</Typography>
@@ -111,20 +111,39 @@ function ClubAdminViewProfile(props) {
         </CardContent>
       </Card>
 
-      <Box sx={{mt: "24px", width: "100%"}}>
-        <Typography alignSelf="left" variant="h4" mb="24px">My Upcoming Events</Typography>
-        <Grid spacing={4} container>
-          {items && items.filter(item => item.eventStartTime >= dateFormat(now, "isoDateTime")).map((item) => {
-              return (<Grid item key={item}>
-                <EventCard key={item._id} eKey={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} />
-              </Grid>)
+      <Paper elevation={2} sx={{ width: "100%" }}>
+        <Typography sx={{ m: "24px", }} alignSelf="left" variant="h4" mb="24px">My Upcoming Events</Typography>
+
+        <div style={{ width: "100%" }} id="scdiv" className="evenCard">
+
+          <InfiniteScroll
+            style={{ height: "600px" }}
+            dataLength={items.length} //This is important field to render the next data
+            next={fetchd}
+            hasMore={isMore}
+            scrollableTarget="scdiv"
+            loader={<Typography width="92%"
+              textAlign="center"
+              variant="h5"
+              color="gray"
+              sx={{ backgroundColor: "#eeeeee", ml: 2, mr: 3, p: 2, borderRadius: "8px" }}
+            >Loading...</Typography>}
+            endMessage={
+              <Typography width="92%"
+                textAlign="center"
+                variant="h5"
+                color="gray"
+                sx={{ backgroundColor: "#eeeeee", ml: 2, mr: 3, p: 2, borderRadius: "8px" }}
+              >Yay! You have seen it all!</Typography>}>
+            {items.map((item) => {
+              return <EventCard key={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} />
             }
-          )}
+            )}
+          </InfiniteScroll>
+        </div>
+      </Paper>
 
-        </Grid>
-      </Box>
-
-    </Stack>
+    </Stack >
 
   );
 }
