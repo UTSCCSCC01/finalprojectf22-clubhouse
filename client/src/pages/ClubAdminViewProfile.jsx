@@ -91,13 +91,12 @@ function ClubAdminViewProfile(props) {
       <Card sx={{ mb: "40px", width: "100%" }} raised>
         <CardMedia
           component="img"
-          height="250"
-          sx={{ objectFit: "contain" }}
+          sx={{width: "100%", maxWidth: "100%", maxHeight: 250, objectFit: "contain"}}
           image={image} alt="profile-picture" />
 
         <CardContent sx={{padding: "32px"}}>
           <Box display="flex" justifyContent="space-between">
-            <Typography flexWrap="wrap" gutterBottom variant="h4">{props.values.clubName}</Typography>
+            <Typography flexWrap="wrap" gutterBottom variant="h3">{props.values.clubName}</Typography>
             <Box width="20%" flex={0}>
               <IconButton size="large" onClick={props.onClick}><EditIcon /></IconButton>
             </Box>
@@ -107,7 +106,7 @@ function ClubAdminViewProfile(props) {
           <Typography>Email: {props.values.email}</Typography>
           <Typography gutterBottom>Phone: {props.values.clubPhone ? props.values.clubPhone : "N\\A"}</Typography>
 
-          <Typography gutterBottom variant="h6">Description: </Typography>
+          <Typography gutterBottom variant="h6">Description</Typography>
           <Typography>{props.values.clubDesc}</Typography>
         </CardContent>
       </Card>
