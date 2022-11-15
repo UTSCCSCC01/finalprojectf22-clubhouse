@@ -37,7 +37,6 @@ const useStyles = makeStyles({
 
 const EventForm = () => {
 
-    const navigate = useNavigate();
     const classes = useStyles();
 
     // stores the url of the image
@@ -53,13 +52,10 @@ const EventForm = () => {
 
     const [open, setOpen] = useState(false);
     const [submitStatus, setStatus] = useState(""); // "success" or "error"
-
+    
     /**
-     * Update and store the event start time. Update the event 
-     * end time if the start time occurs after the end time.
-     * @param {dayjs} newValue 
+     * Clears the input fields
      */
-
     const clearForm = () => {
         setEventImage("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png");
         setEventName("");
@@ -70,6 +66,11 @@ const EventForm = () => {
         setEventTags([]);
     }
 
+    /**
+     * Update and store the event start time. Update the event 
+     * end time if the start time occurs after the end time.
+     * @param {dayjs} newValue 
+     */
     const handleStartChange = (newValue) => {
         if (newValue.isAfter(eventEndTime)) {
             setEndTime(newValue.add(1, 'h'));

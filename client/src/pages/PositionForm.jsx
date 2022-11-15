@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
 import { TextField, Box, Button, Stack } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import dayjs from 'dayjs';
 import Resizer from "react-image-file-resizer";
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { makeStyles } from '@material-ui/core';
-import TagsInput from "./TagsInput.jsx"
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import { getCookie } from '../libraries/cookieDAO'
 
 const useStyles = makeStyles({
     timepicker: {
@@ -32,15 +30,28 @@ const useStyles = makeStyles({
 
 const PositionForm = () => {
 
-  const navigate = useNavigate();
   const classes = useStyles();
 
   const [clubImage, setclubImage] = useState("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png");
-  const [clubName, setclubName] = useState("");
   const [jobPosition, setjobPosition] = useState("");
   const [jobDescription, setjobDescription] = useState("");
   const [jobRequirements, setjobRequirements] = useState("");
   const [email, setemail] = useState("");
+  const clubName = getCookie("clubName");
+
+  const [open, setOpen] = useState(false);
+  const [submitStatus, setStatus] = useState(""); // "success" or "error"
+
+  /**
+   * Clears the input fields
+   */
+  const clearForm = () => {
+    setclubImage("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png");
+    setjobPosition("");
+    setjobDescription("");
+    setjobRequirements("");
+    setemail("");
+  }
 
   /**
    * Return a resized image.
@@ -77,10 +88,14 @@ const PositionForm = () => {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newPosition)
-      }).then(() => {
-        
+        }).then(() => {
+          setStatus("success");
+          setOpen(true);
+          clearForm();
       }).catch((err) => {
           console.log(err);
+          setStatus("error");
+          setOpen(true);
       })
       
   };
@@ -88,7 +103,7 @@ const PositionForm = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', width: '700px', margin: '16px' }}>
 
-      <Box display="flex" margin="0" width="100%" alignItems="center" gap={4}>
+      <Box display="flex" margin="0" width="100%" gap={4}>
         <Stack gap={0.5} alignItems="center">
           <img src={clubImage}
             alt={clubName}
@@ -99,9 +114,9 @@ const PositionForm = () => {
               objectFit: "cover",
               objectPosition: "center"
             }}
-            height="170px"
-            width="170px" />
-          <Button className={classes.button} startIcon={<PhotoCamera />} variant="text" component="label">
+            height="140px"
+            width="140px" />
+          <Button className={classes.button} size="small" startIcon={<PhotoCamera />} variant="text" component="label">
             Upload
             <input
               onChange={handleImgUpload}
@@ -119,27 +134,19 @@ const PositionForm = () => {
             required
             value={jobPosition}
             onChange={(e) => setjobPosition(e.target.value)} />
-            <TextField
-            sx={{ backgroundColor: "white", marginTop: 3, }}
-            label="Club Name"
+          <TextField
+            sx={{ flex: 'auto', mt: 3, backgroundColor: "white", width: '100%', }}
+            label="Contact Email"
             variant="outlined"
             required
-            value={clubName}
-            onChange={(e) => setclubName(e.target.value)} />
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+          />
         </Stack>
 
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-
-        <TextField
-          sx={{ flex: 'auto', backgroundColor: "white", width: '100%', }}
-          label="Contact Email"
-          variant="outlined"
-          required
-          value={email}
-          onChange={(e) => setemail(e.target.value)}
-        />
 
         <TextField
           sx={{ marginTop: "24px", flex: 'auto', backgroundColor: "white", width: '100%', }}
@@ -167,11 +174,11 @@ const PositionForm = () => {
       <Box sx={{ display: 'flex', justifyContent: "space-between", padding: 0, margin: '24px 0px 24px 0px' }}>
         <Button
           className={classes.button}
-          onClick={() => navigate("/")} // change path
+          onClick={clearForm}
           variant="contained"
           color="secondary"
           endIcon={<DeleteForeverOutlinedIcon />}
-        >Delete</Button>
+        >Clear</Button>
         <Button
           className={classes.button}
             onClick={onSubmit}
@@ -181,6 +188,28 @@ const PositionForm = () => {
             endIcon={<EventAvailableIcon />}
         >Save</Button>
       </Box>
+
+      <Collapse in={open}>
+        <Alert
+          severity={submitStatus}
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
+          {submitStatus === "success" ? "Job posted." : "Unable to post job listing."}
+        </Alert>
+      </Collapse>
+
     </Box>
   );
 }
