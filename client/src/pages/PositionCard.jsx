@@ -42,16 +42,14 @@ function PositionCard(props) {
       }));
 
     return (
-        <>
-
-            <Card raised sx={{ width: 350, height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Card raised sx={{ width: 350 }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
                         height="250"
                         image={props.eImage} alt="Positions" />
-                    <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography gutterBottom variant="h7" component="h2">{props.ePosition} </Typography>
+                    <CardContent>
+                        <Typography gutterBottom variant="h6" component="h2">{props.ePosition} </Typography>
                         <Typography >{props.cName} </Typography>
                         <Typography >{props.eMail} </Typography>
                     </CardContent>
@@ -73,11 +71,10 @@ function PositionCard(props) {
                         <Typography variant="h6">Job Description</Typography>
                         <Typography gutterBottom paragraph>{props.jobDesc}</Typography>
                         <Typography variant="h6">Job Requirements</Typography>
-                        <Typography gutterBottom paragraph>{props.jobReqs}</Typography>
+                        <Typography paragraph>{props.jobReqs}</Typography>
                     </CardContent>
                 </Collapse>
             </Card>
-        </>
     );
 }
 
