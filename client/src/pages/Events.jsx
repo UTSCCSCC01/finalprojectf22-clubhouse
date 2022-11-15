@@ -34,27 +34,9 @@ function Events(props) {
     },
   };
 
-
-
   const [tags, setTags] = useState([]);
   const [tagName, setTagName] = React.useState([]);
   const [search, setSearch] = useState("");
-
-  let containsS = false;
-  /**
-   * Check whether arrayTag includes any of clubTags
-   * @param {array} arrayTag 
-   */
-  const conTainsS = (arrayTag) => {
-    containsS = false;
-    arrayTag.eventTags.forEach((clubTAG) => {
-      if (clubTAG.toLowerCase().includes(search)) {
-        containsS = true;
-        return containsS;
-      }
-    })
-    return containsS;
-  };
 
   /**
    * Set multiselect component values. 
@@ -92,23 +74,67 @@ function Events(props) {
     }
   }
 
-
-  let contains = false;
   /**
-   * Check whether arrayTag includes any of checkedTags
-   * @param {array} arrayTag 
+   * Checks if the tags selected match the event tags
+   * @param {array} eventTags event tags
+   * @returns true if the selected tags matches any of the event tags, false otherwise
    */
-  const conTains = (arrayTag) => {
-    contains = false;
+  const matchesTagQuery = (eventTags) => {
+
+    if (Object.keys(tagName).length == 0) {
+      return true;
+    }
+
+    let tagMatches = false;
+
     tagName.forEach((checkedTag) => {
-      if ((arrayTag.eventTags).includes(checkedTag)) {
-        contains = true;
-        return contains;
+      if (eventTags.includes(checkedTag.toLowerCase())) {
+        tagMatches = true;
       }
     })
-    return contains;
+
+    return tagMatches;
   };
 
+  /**
+   * Check if the search query appears in the event tags
+   * @param {array} eventTags event tags
+   * @returns true if a match is found, false otherwise
+   */
+  const searchMatchesTag = (eventTags) => {
+    let match = false;
+    eventTags.forEach((tag) => {
+      if (tag.toLowerCase().includes(search.toLowerCase())) match = true;
+    })
+    return match;
+  }
+
+  /**
+   * Checks if the search query occurs in a given string
+   * @param {String} str text
+   * @returns true if the search query occurs in the text (not case sensitive), false otherwise
+   */
+  const searchMatches = (str) => {
+    return str.toLowerCase().includes(search.toLowerCase());
+  }
+
+  /**
+   * Checks if the given event matches the search query and filter
+   * @param {*} item event being checked
+   * @returns true if the event name/description/tags or club name matches the search query, false otherwise
+   */
+  const matchesQuery = (item) => {
+
+    // search is empty
+    if (search === "" && Object.keys(tagName).length == 0) return true;
+    // search matches event tags or event name or club name
+    if (matchesTagQuery(item.eventTags) && (searchMatches(item.eventName) || searchMatches(item.clubName) || searchMatches(item.eventDesc) || searchMatchesTag(item.eventTags))) {
+      return true;
+    }
+
+    return false;
+  }
+  
   /**
    * Fetch and set data from the database
    * every time the value of filter changes. 
@@ -155,9 +181,9 @@ function Events(props) {
       <Box sx={{ bgcolor: 'background.paper', mt: "120px", mb: "12px" }}>
         <Container maxWidth="lg" fixed>
           <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>Upcoming Events</Typography>
-          <Grid maxWidth="lg" align="center">
+          <Box sx={{display: "flex", m: 1}}>
             <TextField
-              sx={{ m: 1.5, width: 500 }}
+              sx={{ m: 1.5, flexGrow: 2 }}
               id="outlined-start-adornment"
               variant="outlined"
               label="Search"
@@ -170,21 +196,20 @@ function Events(props) {
             <FormControl sx={{ m: 1.5, width: 250 }} variant="outlined">
               <InputLabel id="simple-select-label" >Sort by</InputLabel>
               <Select
+
                 labelId="simple-select-label"
                 id="simple-select"
                 value={filter}
                 label="Sort by"
                 onChange={handleChange}
               >
-                <MenuItem value={"Empty"}> </MenuItem>
                 <MenuItem value={"Date"}>Date</MenuItem>
                 <MenuItem value={"Clubs"}>Clubs</MenuItem>
-                <MenuItem value={"Categories"}>Categories</MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1.5, width: 250 }}>
               <InputLabel id="multiple-checkbox-label">Categories</InputLabel>
-              <Select disabled={filter !== "Categories" ? true : false}
+              <Select
                 labelId="multiple-checkbox-label"
                 id="multiple-checkbox"
                 multiple
@@ -202,14 +227,14 @@ function Events(props) {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Box>
         </Container>
       </Box>
 
       <Container maxWidth="lg" >
-        <Grid container >
+        <Grid container>
           {items && items.filter(item => item.eventStartTime >= dateFormat(now, "isoDateTime")).map((item) => {
-            if ((search === "" && Object.keys(tagName).length == 0) || (filter == "Categories" && conTains(item)) || (search !== "" && conTainsS(item)) || (conTainsS(item) && !conTainsS(item))) {
+            if (matchesQuery(item)) {
               return (<Grid sx={{ m: 2 }} item key={item}>
                 <EventCard key={item._id} eKey={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} />
               </Grid>)
