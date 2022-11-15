@@ -81,15 +81,16 @@ BootstrapDialogTitle.propTypes = {
  */
 export default function StudentEventCard(props) {
     const [expanded, setExpanded] = React.useState(false);
-    // const [OnOff, setOnOff] = useState(() => () => (props.eAttendees).includes(user));
     const [OnOff, setOnOff] = useState(false);
     const user = getCookie("username");
     const [open, setOpen] = React.useState(false);
-    const [error, setError] = React.useState(false);
-    
-    // console.log((props.eAttendees).includes(user));
 
-    // console.log(OnOff);
+    /**
+     * set OnOff every time eAttendees changes
+     */
+    useEffect(() => {
+      setOnOff((props.eAttendees).includes(user));
+    }, [(props.eAttendees)])
 
   /**
    * Remove or add a user to the eventAttendees list
@@ -173,9 +174,7 @@ export default function StudentEventCard(props) {
       >
         <DialogContent dividers>
           <Typography gutterBottom>
-          {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}
-          {/* {error ? 'You are not logged in! Please log in first': 'error'} */}
-            
+          {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}   
           </Typography>
         </DialogContent>
         <DialogActions>
