@@ -158,7 +158,7 @@ function StudentClubProfile(props) {
               }>
               {items && items.filter(item => item.eventStartTime >= dateFormat(new Date(), "isoDateTime")).map((item) => {
                 return (
-                  <EventCard key={item._id} eKey={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} />
+                  <EventCard key={item._id} eKey={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} eAttendees={item.eventAttendees} />
                 )
               })}
             </InfiniteScroll>
