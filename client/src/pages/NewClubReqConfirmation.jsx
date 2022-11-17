@@ -1,8 +1,13 @@
 import React from "react";
 import { Box, Typography } from "@mui/material"
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Auth from "../components/AuthCheck.jsx";
+import { useEffect } from 'react';
 
 const NewClubReqConfirmation = () => {
+    useEffect( ()  => {
+        Auth({student: "/home", null: "/login", club: "/clubhome"});
+    }, []);
     return (
         <Box sx={{
             height: "100%",

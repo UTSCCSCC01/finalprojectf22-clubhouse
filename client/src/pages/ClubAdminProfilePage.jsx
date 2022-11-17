@@ -4,6 +4,7 @@ import ClubAdminViewProfile from "./ClubAdminViewProfile.jsx";
 import ClubAdminEditProfile from "./ClubAdminEditProfile.jsx";
 import '../styles.css';
 import { getCookie } from '../libraries/cookieDAO'
+import Auth from '../components/AuthCheck.jsx';
 
 /**
  * ClubAdminProfilePage
@@ -27,6 +28,7 @@ function ClubAdminProfilePage(props) {
   
   const clubName = getCookie("clubName");
   useEffect( ()  => {
+    Auth({student: "/home", null: "/login", club: "/clubhome"});
     const fetchpotmembers = async () => {
         const res = await fetch("http://127.0.0.1:5001/club/profile/" + clubName);
         const data = await res.json();

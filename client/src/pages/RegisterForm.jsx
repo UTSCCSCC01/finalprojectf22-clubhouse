@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextField, Container, Typography, Grid, Button } from '@material-ui/core'
 import config from  '../../config.json'
-
+import Auth from '../components/AuthCheck.jsx';
 /**
  * RegisterForm
  * @component
@@ -26,7 +26,9 @@ class RegisterForm extends Component {
       showVerification: false
     };
   }
-
+  componentDidMount() {
+    Auth({student: "/home", club: "/clubhome", admin: "/clubmain"});
+  }
   render() {
     let ee = this.state.eerror !== null;
     let pe = this.state.pwerror !== null;
