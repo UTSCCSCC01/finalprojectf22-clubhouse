@@ -2,10 +2,11 @@ import React from "react";
 import { useNavigate } from 'react-router';
 import { Box, Typography, Button, TextField } from "@mui/material";
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import SendIcon from '@mui/icons-material/Send';
 import TagsInput from "./TagsInput.jsx"
+import Auth from "../components/AuthCheck.jsx";
 
 const ClubRegisterReq = () => {
 
@@ -48,7 +49,9 @@ const ClubRegisterReq = () => {
         return valid;
 
     }
-
+    useEffect( ()  => {
+        Auth({student: "/allclubs", null: "/login", club: "/clubMain"});
+    }, []);
     const onSubmit = async (e) => {
         e.preventDefault();
 

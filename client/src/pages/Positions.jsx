@@ -14,6 +14,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import { PostAddSharp } from "@mui/icons-material";
 import '../styles.css';
+import Auth from '../components/AuthCheck.jsx';
 
 /**
  * A component used for browsing job listings.
@@ -30,6 +31,7 @@ class Positions extends Component{
   };
 
   componentDidMount = async () => {
+    Auth({null: "/login"});
     await this.getPositionInfo();
   };
 
