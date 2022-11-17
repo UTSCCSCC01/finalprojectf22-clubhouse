@@ -210,7 +210,7 @@ const conTainsS = (arrayTag) => {
             {items && items.filter(item=>item.eventStartTime>=dateFormat(now, "isoDateTime")).map((item) => {
               if ( (search==="" && Object.keys(tagName).length == 0) || (filter=="Categories" && conTains(item)) || (search!=="" && conTainsS(item)) || (conTainsS(item) && !conTainsS(item)) ){
                 return (<Grid item key={item}>
-                  <EventCard key={item._id} eKey = {item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc}/>
+                  <EventCard key={item._id} eKey = {item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} eAttendees={item.eventAttendees}/>
                  </Grid>)
               }
               else{ 
