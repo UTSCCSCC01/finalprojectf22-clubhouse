@@ -170,12 +170,12 @@ function ClubAdminEditProfile(props) {
   return (
 
     <Stack mt="120px" mb="60px" ml="auto" mr="auto" alignItems="center" width="80%" minWidth="700px" maxWidth="1115px">
-      <Card sx={{ mb: "40px", width: "100%" }}>
+      <Card sx={{ display: "flex", alignItems: "center", mb: "40px", width: "100%" }}>
         <ImageList sx={{ mt: 0 }} cols={1}>
-          <ImageListItem key="club profile pic" height="250px">
+          <ImageListItem key="club profile pic" height="300px">
             <img
               src={image}
-              style={{ width: "auto", maxWidth: "100%", maxHeight: 250, objectFit: "contain" }}
+              style={{ maxWidth: 400, minHeight: 100, maxHeight: 300, objectFit: "contain" }}
               alt="profile-picture">
             </img>
             <ImageListItemBar
@@ -196,8 +196,8 @@ function ClubAdminEditProfile(props) {
           </Alert>
         </Snackbar>
 
-        <CardContent sx={{ padding: "32px" }}>
-          <Box display="flex" justifyContent="space-between">
+        <CardContent sx={{ padding: "32px", width: "100%"}}>
+          <Box display="flex">
             <Typography flexWrap="wrap" gutterBottom variant="h3">{props.values.clubName}</Typography>
           </Box>
 

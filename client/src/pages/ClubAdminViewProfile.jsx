@@ -87,13 +87,13 @@ function ClubAdminViewProfile(props) {
   return (
 
     <Stack mt="120px" mb="60px" ml="auto" mr="auto" alignItems="center" width="80%" minWidth="700px" maxWidth="1115px">
-      <Card sx={{ mb: "40px", width: "100%" }}>
+      <Card sx={{ display: "flex", mb: "40px", width: "100%" }}>
         <CardMedia
           component="img"
-          sx={{ width: "100%", maxWidth: "100%", maxHeight: 250, objectFit: "contain" }}
+          sx={{ maxWidth: 300, maxHeight: 300, objectFit: "contain" }}
           image={image} alt="profile-picture" />
 
-        <CardContent sx={{ padding: "32px" }}>
+        <CardContent sx={{ padding: "32px", width: "100%" }}>
           <Box display="flex" justifyContent="space-between">
             <Typography flexWrap="wrap" gutterBottom variant="h3">{props.values.clubName}</Typography>
             <Box width="20%" flex={0}>
