@@ -30,7 +30,7 @@ function MyClubs() {
   const email = getCookie("username");
 
    /**
-   * Fetch and set the members of the club from the database (club-members collection)
+   * Fetch and set the clubs of the logged-in user from the database (club-members collection)
    * 
    */
     useEffect(  ()  => {
