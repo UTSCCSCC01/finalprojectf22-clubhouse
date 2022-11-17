@@ -19,6 +19,7 @@ class Login extends Component {
     this.change = this.change.bind(this);
   }
 
+  
   componentDidMount() {
     Auth({student: "/allclubs", club: "/clubMain", admin: "/SCSUClubs"});
   }
@@ -66,7 +67,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-      <Typography style={{paddingTop: "200px", paddingBottom: 20}} variant="h2" align="center">Login</Typography>
+      <Typography style={{paddingBottom: 20}} variant="h2" align="center">Login</Typography>
       <form onSubmit={this.submit}>
       <Container>
       <Grid container direction="column" style={{textAlign: "center"}}>

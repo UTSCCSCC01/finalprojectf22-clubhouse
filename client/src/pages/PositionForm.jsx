@@ -78,11 +78,11 @@ const PositionForm = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newPosition)
       }).then(() => {
-
+        
       }).catch((err) => {
           console.log(err);
       })
-      navigate("/"); // change path
+      
   };
 
   return (
