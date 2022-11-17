@@ -38,7 +38,6 @@ ReactDOM.render(
       <Navbar />
       {/* Add global elements like navbar outside the switch */}
       <Routes>
-        <Route exact path="/" element={<Home />} />
         <Route exact path={"/club-admin-profile"}
           element={<ClubAdminProfilePage email="email" description="description" phoneNumber="1234567890" clubName="Club Name" />} />
         <Route path="/clubs" element={<Clubs />} />
@@ -60,6 +59,7 @@ ReactDOM.render(
         <Route exact path="/create-position" element={<PositionCreate />} />
         <Route path="/positions" element={<Positions />} />
         <Route path="/my-clubs" element={<MyClubs />} />
+        <Route path="/" element={<AllClubs />} />
       </Routes>
     </Router>
   ),
