@@ -25,19 +25,19 @@ const ExpandMore = styled((props) => {
  */
 export default function ClubRequestCard(props) {
 
-  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('');
   
   /**
    * generate a random password and set it to variable password
    */
-  useEffect(() => {
-    const generatePassword = async ()=>{
-      const randomPassword =
-      Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
-      setPassword(randomPassword);
-      };
-      generatePassword();
-    },[]);
+  // useEffect(() => {
+  //   const generatePassword = async ()=>{
+  //     const randomPassword =
+  //     Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+  //     setPassword(randomPassword);
+  //     };
+  //     generatePassword();
+  //   },[]);
     
     const navigate = useNavigate();
     const [expanded, setExpanded] = React.useState(false);
@@ -66,15 +66,6 @@ export default function ClubRequestCard(props) {
       setOpenDeny(false);
     };
 
-    // var nodemailer = require('nodemailer');
-    // var transporter = nodemailer.createTransport({
-    //     service: 'gmail',
-    //     auth: {
-    //         user: 'utscclubhouse@gmail.com',
-    //         pass: process.env.EMAIL_PASS
-    //     }
-    // });
-
   return (
     <Card sx={{ width: 800 }} raised >
     <Box display="flex">
@@ -100,13 +91,7 @@ export default function ClubRequestCard(props) {
                 </Typography>
                 <Typography gutterBottom paragraph>
                 We wish to inform you that your registration request has been approved. 
-                Please use the following credentials to log in and reset your password.  
-                </Typography>
-                <Typography  color="primary">
-                email: {props.cEmail}
-                </Typography>
-                <Typography  gutterBottom color="primary">
-                password: {password}  
+                Use this link: http://localhost:3000/login to log in.
                 </Typography>
                 <Typography gutterBottom>
                 Best, 
@@ -127,10 +112,11 @@ export default function ClubRequestCard(props) {
                 const clubPhone = props.cPhone;
                 const email = props.cEmail;
                 const clubDesc = props.cDesc;
+                const password = props.cPass;
                 const image = "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png";
                 const clubTags = props.cTags;
-                const newClub = { email, clubName, clubPhone, clubDesc, image, clubTags};
-                console.log(newClub);
+                const text = "Dear " + props.cName + ", \n\n" + "We wish to inform you that your registration request has been approved.  Use this link: http://localhost:3000/login to log in. \n\n" + "Best, \nSCSU";
+                const newClub = { email, clubName, clubPhone, clubDesc, image, clubTags, text};
                 fetch('http://localhost:5001/clubs/create', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
@@ -198,31 +184,20 @@ export default function ClubRequestCard(props) {
               <Button onClick={()=>{
                 setOpenDeny(false);
 
-                // var nodemailer = require('nodemailer');
-                // var transporter = nodemailer.createTransport({
-                //   service: 'gmail',
-                //   auth: {
-                //     user: 'utscclubhouse@gmail.com',
-                //     pass: process.env.EMAIL_PASS
-                //   }
-                // });
-                
-                // var mailOptions = {
-                //   from: 'utscclubhouse@gmail.com',
-                //   to: props.cEmail,
-                //   subject: 'Your club registration request',
-                //   text: 'Dear '+ props.cName + ', We wish to inform you that your registration request has been rejected. Best, SCSU' 
-                // };
-                
-                // transporter.sendMail(mailOptions, function(error, info){
-                //   if (error) {
-                //     console.log(error);
-                //   } else {
-                //     console.log('Email sent: ' + info.response);
-                //   }
-                // });
-
                 //delete the club from the club-requests database
+                const text = "Dear " + props.cName + ", \n\nWe wish to inform you that your registration request has been rejected. \n\nBest, \nSCSU"
+                const email = props.cEmail;
+                const del = {text, email}
+                // , 'body': JSON.stringify(del)
+                fetch('http://localhost:5001/clubrequestdelemail/' + props.cKey, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(del)
+                }).then(() => {
+
+                }).catch((err) => {
+                    console.log(err);
+                })
                 fetch('http://localhost:5001/clubrequestdel/' + props.cKey, {method: 'DELETE'}).then(() => {
 
                 }).catch((err) => {

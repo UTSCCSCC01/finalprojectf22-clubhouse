@@ -10,6 +10,7 @@ const dbo = require("../db/conn");
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
+const EmlWrp = require("../modules/emailWrapper");
 
 /**
  * @module routes/clubs
@@ -56,6 +57,16 @@ clubRoutes.route("/clubs/create").post(function (req, response) {
     image: req.body.image,
     clubTags: req.body.clubTags,
   };
+
+  let emailCfg = {
+    from: "utscclubhouse@gmail.com",
+    to: req.body.email,
+    subject: "Your club registration request",
+    text: req.body.text,
+  }
+
+  EmlWrp.sendEmail(emailCfg);
+
   db_connect.collection("clubs").insertOne(myobj, function (err, res) {
     if (err) throw err;
     response.json(res);

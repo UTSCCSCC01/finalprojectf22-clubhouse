@@ -19,6 +19,7 @@ class Login extends Component {
     this.change = this.change.bind(this);
   }
 
+  
   componentDidMount() {
     fetch("http://localhost:5001/loginstatus", {
       method: 'get',
@@ -59,9 +60,9 @@ class Login extends Component {
         var v = JSON.parse(data);
         if (v.valid) {
           if (v.accountType === "club") {
-            location.href = "http://localhost:3000/clubhome";
+            location.href = "http://localhost:3000/clubMain";
           } else if (v.accountType === "student") {
-            location.href = "http://localhost:3000/home";
+            location.href = "http://localhost:3000/allclubs";
           } else {
             location.href = "http://localhost:3000/adminhome";
           }
@@ -74,7 +75,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-      <Typography style={{paddingTop: "200px", paddingBottom: 20}} variant="h2" align="center">Login</Typography>
+      <Typography style={{paddingBottom: 20}} variant="h2" align="center">Login</Typography>
       <form onSubmit={this.submit}>
       <Container>
       <Grid container direction="column" style={{textAlign: "center"}}>

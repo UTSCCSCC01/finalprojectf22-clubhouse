@@ -8,7 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import TimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardActions, Box} from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EventTag from "./EventTag.jsx"
 import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
@@ -80,22 +80,28 @@ BootstrapDialogTitle.propTypes = {
  * @component
  */
 export default function StudentEventCard(props) {
-
     const [expanded, setExpanded] = React.useState(false);
     const [OnOff, setOnOff] = useState(false);
     const user = getCookie("username");
-
     const [open, setOpen] = React.useState(false);
-    const [error, setError] = React.useState(false);
 
+    /**
+     * set OnOff every time eAttendees changes
+     */
+    useEffect(() => {
+      setOnOff(props.eAttendees.includes(user));
+    }, [props.eAttendees])
+
+  /**
+   * Remove or add a user to the eventAttendees list
+   */
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(!open);
     setOnOff(!OnOff);
-
     if(user!==undefined){
       if(OnOff){
         fetch('http://127.0.0.1:5001/events/remove/' + props.eKey, {
-          method: 'PATCH', // or 'PUT'
+          method: 'PATCH',
           headers: {
           'Content-Type': 'application/json',
           },
@@ -140,6 +146,7 @@ export default function StudentEventCard(props) {
     };
 
   return (
+    
     <Card  raised sx={{ width: 370 }} >
       <CardMedia
                 component="img"
@@ -167,9 +174,7 @@ export default function StudentEventCard(props) {
       >
         <DialogContent dividers>
           <Typography gutterBottom>
-          {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}
-          {/* {error ? 'You are not logged in! Please log in first': 'error'} */}
-            
+          {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}   
           </Typography>
         </DialogContent>
         <DialogActions>

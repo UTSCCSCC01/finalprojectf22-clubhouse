@@ -94,7 +94,7 @@ loginRoutes.route("/logout").get(function (req, res) {
   res.clearCookie("username", {});
   res.clearCookie("accountType", {});
   res.clearCookie("clubName", {});
-  res.end();
+  res.send(true);
 });
 
 module.exports = loginRoutes;
