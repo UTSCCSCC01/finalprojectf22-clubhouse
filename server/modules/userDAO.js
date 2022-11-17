@@ -81,15 +81,39 @@ module.exports.verifyPotentialUser = function (email, code) {
     let db_connect = dbo.getDb();
 
     let userObj = {
-        email: email
+        email: email,
     }
 
     return new Promise( (res, rej) => {
         db_connect.collection("users").findOne(userObj, (err, result) => {
             if (err) {
-                rej(err)
+                rej(err);
             } else {
-                res(result)
+                res(result);
+            }
+        });
+    })
+}
+
+/**
+ * Find a student user in the database
+ * @param {String} email 
+ * @returns {Promise<Object>} Object returned from .findOne() call - the user object itself
+ */
+ module.exports.findUserByAccountType = function (email, accountType='student') {
+    let db_connect = dbo.getDb();
+
+    let userObj = {
+        email: email,
+        accountType: accountType,
+    }
+
+    return new Promise( (res, rej) => {
+        db_connect.collection("users").findOne(userObj, (err, result) => {
+            if (err) {
+                rej(err);
+            } else {
+                res(result);
             }
         });
     })

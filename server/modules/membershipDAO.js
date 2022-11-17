@@ -59,6 +59,11 @@ module.exports.findPotentialMember = function(email, clubEmail) {
     });
 }
 
+/**
+ * Get list of member documents by club email
+ * @param {String} clubEmail Email to search for
+ * @returns {Array<String>} List of members
+ */
 module.exports.getMembersByClub = function(clubEmail) {
     let db_connect = dbo.getDb();
 
@@ -76,6 +81,11 @@ module.exports.getMembersByClub = function(clubEmail) {
     });
 }
 
+/**
+ * Get list of clubs a given student email is a member of
+ * @param {String} email Student email
+ * @returns {Array<String>} List of clubs student is a member of
+ */
 module.exports.getClubsByMember = function(email) {
     let db_connect = dbo.getDb();
 
@@ -90,5 +100,17 @@ module.exports.getClubsByMember = function(email) {
             if (err) rej(err);
             res(result);
         });
+    });
+}
+
+module.exports.updateSettings = function(email, clubEmail, newSetting) {
+    let db_connect = dbo.getDb();
+
+    return db_connect.collection("club-members").updateOne({
+        email,
+        clubEmail
+    },
+    {
+        $set: { emailNotifications: newSetting}
     });
 }
