@@ -10,6 +10,7 @@ import MyClubs from './MyClubs.jsx';
 import MyEvents from './MyEvents.jsx';
 import Auth from '../components/AuthCheck.jsx';
 import { useEffect } from 'react';
+import EmailSettingsPage from './EmailSettingsPage.jsx';
 
 
 /**
@@ -83,7 +84,7 @@ const [value, setValue] = React.useState(0);
         <MyEvents></MyEvents>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <EmailSettingsPage />
       </TabPanel>
     </Box>
   );
