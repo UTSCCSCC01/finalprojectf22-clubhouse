@@ -183,7 +183,7 @@ useRouteMatch = (patterns) => {
     asAdmin = () => {
 
       if(window.location.href=="http://localhost:3000/testlogin"){
-        location.href = "http://localhost:3000/manageClubs";
+        location.href = "http://localhost:3000/SCSUClubs";
       }
 
       const routes = ['/SCSUClubs', '/SCSUclubreview'];

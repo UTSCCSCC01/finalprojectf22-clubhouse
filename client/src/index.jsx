@@ -14,7 +14,6 @@ import Clubs from './pages/Clubs.jsx'
 import AllClubs from './pages/AllClubs.jsx'
 import CreateEvent from './pages/CreateEvent.jsx'
 import LoginPage from './pages/LoginPage.jsx';
-import TestLogin from './pages/TestLogin.jsx';
 import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
@@ -28,6 +27,7 @@ import NewClubReqConfirmation from './pages/NewClubReqConfirmation.jsx';
 import EmailSettingsPage from './pages/EmailSettingsPage.jsx';
 import SCSUclubreview from './pages/SCSUclubreview.jsx';
 import SCSUConfirmation from './pages/SCSUConfirmation.jsx';
+import SCSUClubs from './pages/SCSUClubs.jsx'
 import MyAccounts from './pages/MyAccounts.jsx';
 
 ReactDOM.render(
@@ -48,6 +48,7 @@ ReactDOM.render(
         <Route path="/club-signup-confirmation" element={<NewClubReqConfirmation />} />
         <Route path="/SCSUclubreview" element={<SCSUclubreview />} />
         <Route path="/SCSUConfirmation" element={<SCSUConfirmation />} />
+        <Route path="/SCSUClubs" element={<SCSUClubs />} />
 
         <Route exact path="/clubs" element={<Clubs />} />
         <Route  path="/clubMain" element={<ClubAdminMain/>} />
@@ -56,7 +57,6 @@ ReactDOM.render(
         <Route exact path="/new-announcement" element={<NewAnnouncement />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/MyAccount" element={<MyAccounts />} />
-        <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/events" element={<Events />} />
         <Route exact path="/create-position" element={<PositionCreate />} />

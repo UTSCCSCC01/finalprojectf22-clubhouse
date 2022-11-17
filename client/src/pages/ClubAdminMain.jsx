@@ -3,7 +3,9 @@ import { Container, Stack, Typography, Grid, Divider,Box, Dialog, DialogTitle,Di
 import { useState, useEffect } from 'react';
 import { margin } from '@mui/system';
 import PotentialMemCard from './PotentialMemCard.jsx';
-import { getCookie } from '../libraries/cookieDAO'
+import { getCookie } from '../libraries/cookieDAO';
+import Auth from '../components/AuthCheck.jsx';
+
 /**
  * ClubAdminMain
  * @component
@@ -19,6 +21,7 @@ function ClubAdminMain() {
    * 
    */
     useEffect(  ()  => {
+        Auth({student: "/allclubs", null: "/login", admin: "/SCSUClubs"});
         const  fetchmembers = async () => {
             console.log(clubName);
             const res = await fetch("http://127.0.0.1:5001/club/members/" + clubName);

@@ -28,7 +28,6 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
     * Make sure clubs that are deleted by the system admin are no longer seen by students, thus they can no long join it
     * The club admin of that club cannot no longer sign into their club account
     * All students in that club are removed from the club
-    * Club should receive an email if removed
 - Subtasks:
     - NEED TO ADD
 

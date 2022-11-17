@@ -37,7 +37,11 @@ loginRoutes.route("/login").post(async function (req, res) {
       valid = false;
     }
   }
-  res.json({ "valid": valid, "username": req.body.email, "accountType": user.accountType});
+  if (valid) {
+    res.json({ "valid": valid, "username": req.body.email, "accountType": user.accountType});
+  } else {
+    res.json({ "valid": valid });
+  }
 });
 /**
  * Checks if the user is logged in by checking cookie value.
