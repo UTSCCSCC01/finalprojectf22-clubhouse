@@ -24,7 +24,7 @@ const PositionCreate = () => {
 
   const classes = useStyles();
   useEffect( ()  => {
-    Auth({student: "/home", null: "/login", admin: "/clubmain"});
+    Auth({student: "/allclubs", null: "/login", admin: "/SCSUClubs"});
   }, []);
   return (
       <Container className={classes.container}>

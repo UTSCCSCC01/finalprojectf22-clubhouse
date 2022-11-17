@@ -28,7 +28,7 @@ function ClubAdminProfilePage(props) {
   
   const clubName = getCookie("clubName");
   useEffect( ()  => {
-    Auth({student: "/home", null: "/login", club: "/clubhome"});
+    Auth({student: "/allclubs", null: "/login", club: "/clubMain"});
     const fetchpotmembers = async () => {
         const res = await fetch("http://127.0.0.1:5001/club/profile/" + clubName);
         const data = await res.json();

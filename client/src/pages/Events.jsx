@@ -16,7 +16,7 @@ import Checkbox from '@mui/material/Checkbox';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
-
+import Auth from "../components/AuthCheck.jsx";
 
 /**
  * Fetch data from the database, depending on the chosen sorting filter. Retrieve only future events by sorting their dates. 
@@ -111,6 +111,7 @@ const conTainsS = (arrayTag) => {
    * every time the value of filter changes. 
    */
   useEffect(() => {
+    Auth({"admin": "/SCSUClubs", "club": "/clubMain"});
     const getevents = async ()=>{
       /**
        * Set url depending on the selected sorting type

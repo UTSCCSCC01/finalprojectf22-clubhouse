@@ -20,7 +20,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    Auth({student: "/home", club: "/clubhome", admin: "/adminhome"});
+    Auth({student: "/allclubs", club: "/clubMain", admin: "/SCSUClubs"});
   }
   /**
    * Updates state when the login form is modified.
@@ -51,11 +51,11 @@ class Login extends Component {
         var v = JSON.parse(data);
         if (v.valid) {
           if (v.accountType === "club") {
-            location.href = "http://localhost:3000/clubhome";
+            location.href = "http://localhost:3000/clubMain";
           } else if (v.accountType === "student") {
-            location.href = "http://localhost:3000/home";
+            location.href = "http://localhost:3000/allclubs";
           } else {
-            location.href = "http://localhost:3000/adminhome";
+            location.href = "http://localhost:3000/SCSUClubs";
           }
         } else {
           alert("Incorrect Password!")

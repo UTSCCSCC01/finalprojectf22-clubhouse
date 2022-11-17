@@ -49,7 +49,7 @@ const ClubRegisterReq = () => {
 
     }
     useEffect( ()  => {
-        Auth({student: "/home", null: "/login", club: "/clubhome"});
+        Auth({student: "/allclubs", null: "/login", club: "/clubMain"});
     }, []);
     const onSubmit = async (e) => {
         e.preventDefault();

@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 const NewClubReqConfirmation = () => {
     useEffect( ()  => {
-        Auth({student: "/home", null: "/login", club: "/clubhome"});
+        Auth({student: "/allclubs", null: "/login", club: "/clubMain"});
     }, []);
     return (
         <Box sx={{

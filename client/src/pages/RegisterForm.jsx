@@ -27,7 +27,7 @@ class RegisterForm extends Component {
     };
   }
   componentDidMount() {
-    Auth({student: "/home", club: "/clubhome", admin: "/clubmain"});
+    Auth({student: "/allclubs", club: "/clubMain", admin: "/SCSUClubs"});
   }
   render() {
     let ee = this.state.eerror !== null;
