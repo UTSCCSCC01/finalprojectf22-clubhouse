@@ -186,7 +186,7 @@ useRouteMatch = (patterns) => {
         location.href = "http://localhost:3000/manageClubs";
       }
 
-      const routes = ['/manageClubs', '/clubRequests'];
+      const routes = ['/SCSUClubs', '/SCSUclubreview'];
       const index = this.useRouteMatch(routes);
       
       this.state.value = (index!=null) ? index : 0;
