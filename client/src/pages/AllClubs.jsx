@@ -16,7 +16,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-
+import Auth from "../components/AuthCheck.jsx";
 /**
  * Fetch club data from the database.
  * @component
@@ -104,7 +104,8 @@ function AllClubs(props) {
    * every time the value of tagName changes. 
    */
   useEffect(() => {
-    const getclubs = async () => {
+    Auth({"admin": "/SCSUClubs", "club": "/clubMain"});
+    const getclubs = async ()=>{
       const res = await fetch('http://127.0.0.1:5001/clubs');
       const data = await res.json();
       setItems(data);

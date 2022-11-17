@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Typography, Container, makeStyles } from '@material-ui/core/';
 import PositionForm from "./PositionForm.jsx";
-
+import Auth from "../components/AuthCheck.jsx";
 const useStyles = makeStyles({
   container: {
       display: "flex",
@@ -18,7 +18,9 @@ const useStyles = makeStyles({
 const PositionCreate = () => {
 
   const classes = useStyles();
-
+  useEffect( ()  => {
+    Auth({student: "/allclubs", null: "/login", admin: "/SCSUClubs"});
+  }, []);
   return (
       <Container className={classes.container}>
           <Typography variant="h2" gutterBottom align="center">

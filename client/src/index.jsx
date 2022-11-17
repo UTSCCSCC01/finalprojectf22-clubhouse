@@ -14,7 +14,6 @@ import Clubs from './pages/Clubs.jsx'
 import AllClubs from './pages/AllClubs.jsx'
 import CreateEvent from './pages/CreateEvent.jsx'
 import LoginPage from './pages/LoginPage.jsx';
-import TestLogin from './pages/TestLogin.jsx';
 import Navbar from './pages/NavBar.jsx';
 import Events from './pages/Events.jsx';
 import RegisterForm from './pages/RegisterForm.jsx'
@@ -56,7 +55,6 @@ ReactDOM.render(
         <Route exact path="/new-announcement" element={<NewAnnouncement />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/MyAccount" element={<MyAccounts />} />
-        <Route path="/testlogin" element={<TestLogin />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/events" element={<Events />} />
         <Route exact path="/create-position" element={<PositionCreate />} />

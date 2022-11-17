@@ -2,7 +2,9 @@ import React from 'react';
 import { Container, Stack, Typography, Grid, Divider, Box, Dialog, DialogTitle, DialogContent, DialogContentText, Paper } from '@mui/material';
 import { useState, useEffect } from 'react';
 import PotentialMemCard from './PotentialMemCard.jsx';
-import { getCookie } from '../libraries/cookieDAO'
+import { getCookie } from '../libraries/cookieDAO';
+import Auth from '../components/AuthCheck.jsx';
+
 /**
  * ClubAdminMain
  * @component
@@ -17,8 +19,9 @@ function ClubAdminMain() {
    * Fetch and set the members of the club from the database (club-members collection)
    * 
    */
-    useEffect(() => {
-        const fetchmembers = async () => {
+    useEffect(  ()  => {
+        Auth({student: "/allclubs", null: "/login", admin: "/SCSUClubs"});
+        const  fetchmembers = async () => {
             console.log(clubName);
             const res = await fetch("http://127.0.0.1:5001/club/members/" + clubName);
             const data = await res.json();

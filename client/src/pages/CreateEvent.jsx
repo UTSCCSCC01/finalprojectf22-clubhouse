@@ -1,6 +1,8 @@
 import React from 'react';
 import { Typography, Container, makeStyles } from '@material-ui/core/';
 import EventForm from './EventForm.jsx'
+import Auth from '../components/AuthCheck.jsx';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles({
     container: {
@@ -18,7 +20,9 @@ const useStyles = makeStyles({
 const CreateEvent = () => {
 
     const classes = useStyles();
-
+    useEffect( ()  => {
+        Auth({student: "/allclubs", null: "/login", admin: "/SCSUClubs"});
+    }, []);
     return (
         <Container className={classes.container}>
             <Typography variant="h2" align="center" gutterBottom>
