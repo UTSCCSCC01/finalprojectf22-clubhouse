@@ -18,25 +18,9 @@ import '../styles.css';
 
 function SCSUClubCard(props) {
 
-  const [open, setOpen] = React.useState(false);
-  const [openDeny, setOpenDeny] = React.useState(false);
-  const [openDenyConfirm, setOpenDenyConfirm] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClickOpenDeny = () => {
-    setOpenDeny(true);
-  };
-
-  const handleClose = (props) => {
-    setOpen(false);
-  };
-
-  const handleCloseDeny = () => {
-    setOpenDeny(false);
-  };
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -53,11 +37,11 @@ function SCSUClubCard(props) {
       </CardActionArea>
       <CardActions>
         <Button onClick={() => {
-          setOpen(false);
           fetch('http://localhost:5001/clubs/del/' + props.cKey, {method: 'DELETE'}).then(() => {
           }).catch((err) => {
             console.log(err);
           })
+          refreshPage();
           }       
         } color="error" variant="contained" size="large">Delete Club</Button>
       </CardActions>
