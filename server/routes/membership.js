@@ -28,12 +28,12 @@ routes.route("/applyMember").post(
     }
     
     if (!req.body.name) {
-        let userObj = await userDAO.findUser(req.body.email,"student");
+        let userObj = await userDAO.findUserByAccountType(req.body.email,"student");
         req.body.name = userObj.name
     }
 
     if (!req.body.clubName) {
-        let clubObj = await userDAO.findUser(req.body.clubEmail, "club");
+        let clubObj = await userDAO.findUserByAccountType(req.body.clubEmail, "club");
         req.body.clubName = clubObj.name;
     }
 
