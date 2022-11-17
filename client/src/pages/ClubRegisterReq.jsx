@@ -12,6 +12,7 @@ const ClubRegisterReq = () => {
     const navigate = useNavigate();
 
     const [clubName, setClubName] = useState("");
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [tags, setTags] = useState([]);
@@ -55,7 +56,7 @@ const ClubRegisterReq = () => {
             return;
         }
 
-        const newClub = { clubName, email, phone, tags, desc };
+        const newClub = { clubName, email, phone, tags, desc, password };
 
         console.log(newClub);
 
@@ -100,7 +101,6 @@ const ClubRegisterReq = () => {
                 variant="outlined"
                 fullWidth
                 required
-                error={nameError !== ""}
                 helperText={nameError}
                 value={clubName}
                 onBlur={() => setNameError("")}
@@ -131,6 +131,18 @@ const ClubRegisterReq = () => {
                     onBlur={() => setPhoneError("")}
                     onChange={(value) => setPhone(value)} />
             </Box>
+
+            <TextField
+                sx={{ backgroundColor: "white" }}
+                label="Password"
+                type="password"
+                variant="outlined"
+                fullWidth
+                required
+                value={password}
+                onBlur={() => setNameError("")}
+                onChange={(e) => setPassword(e.target.value)}
+            />
 
             <TagsInput tags={tags} setTags={setTags} />
 
