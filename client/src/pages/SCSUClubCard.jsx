@@ -52,7 +52,7 @@ function SCSUClubCard(props) {
           }).catch((err) => {
             console.log(err);
           });
-          fetch('http://localhost:5001/events/del/' + props.cName, {method: 'DELETE'}).then(() => {
+          fetch('http://localhost:5001/events/' + props.cName, {method: 'DELETE'}).then(() => {
           }).catch((err) => {
             console.log(err);
           });

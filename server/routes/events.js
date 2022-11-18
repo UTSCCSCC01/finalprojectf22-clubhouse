@@ -188,7 +188,7 @@ eventRoutes.route("/events/del/:id").delete((req, response) => {
 /** This section will help you delete a record
  * @name /events/del/:clubName
  */
- eventRoutes.route("/events/del/:clubName").delete((req, response) => {
+ eventRoutes.route("/events/:clubName").delete((req, response) => {
   let db_connect = dbo.getDb("main");
   let myquery = { clubName: req.params.clubName };
   db_connect.collection("events").deleteMany(myquery, function (err, obj) {
