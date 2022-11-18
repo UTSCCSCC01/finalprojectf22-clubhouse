@@ -10,11 +10,11 @@ import '../styles.css';
 class LoginPage extends Component {
   render() {
     return (
-    <div className="loginContainer">
+      <div className="loginContainer">
         <center>
-            <Login />
+          <Login />
         </center>
-    </div>
+      </div>
     );
   }
 }

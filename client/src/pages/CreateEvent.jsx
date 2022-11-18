@@ -1,18 +1,15 @@
 import React from 'react';
 import { Typography, Container, makeStyles } from '@material-ui/core/';
 import EventForm from './EventForm.jsx'
+import Auth from '../components/AuthCheck.jsx';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles({
     container: {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        margin: '100px auto 48px auto',
-    },
-
-    title: {
-        fontWeight: 500,
-        margin: 8,
+        margin: '120px auto 48px auto',
     },
 });
 
@@ -23,10 +20,12 @@ const useStyles = makeStyles({
 const CreateEvent = () => {
 
     const classes = useStyles();
-
+    useEffect( ()  => {
+        Auth({student: "/allclubs", nonauth: "/login", admin: "/SCSUClubs"});
+    }, []);
     return (
         <Container className={classes.container}>
-            <Typography variant="h4" className={classes.title} color="primary" align="center">
+            <Typography variant="h2" align="center" gutterBottom>
                 Create a New Event
             </Typography>
             <EventForm />

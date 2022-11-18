@@ -12,6 +12,11 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { makeStyles } from '@material-ui/core';
 import TagsInput from "./TagsInput.jsx"
+import { getCookie } from '../libraries/cookieDAO'
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const useStyles = makeStyles({
     timepicker: {
@@ -19,7 +24,7 @@ const useStyles = makeStyles({
     },
 
     button: {
-        width: "120px",
+        width: "150px",
         height: "40px",
         fontSize: "17px",
     }
@@ -29,9 +34,9 @@ const useStyles = makeStyles({
  * Component for displaying blank event details form.
  * @component
  */
+
 const EventForm = () => {
 
-    const navigate = useNavigate();
     const classes = useStyles();
 
     // stores the url of the image
@@ -44,6 +49,22 @@ const EventForm = () => {
     const [eventEndTime, setEndTime] = useState(dayjs().add(2, 'h').minute(0));
     const [eventTags, setEventTags] = useState([]);
     const eventAttendees = [];
+
+    const [open, setOpen] = useState(false);
+    const [submitStatus, setStatus] = useState(""); // "success" or "error"
+    
+    /**
+     * Clears the input fields
+     */
+    const clearForm = () => {
+        setEventImage("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png");
+        setEventName("");
+        setEventLoc("");
+        setEventDesc("");
+        setStartTime(dayjs().add(1, 'h').minute(0));
+        setEndTime(dayjs().add(2, 'h').minute(0));
+        setEventTags([]);
+    }
 
     /**
      * Update and store the event start time. Update the event 
@@ -62,6 +83,7 @@ const EventForm = () => {
      * start time if the end time occurs before the start time.
      * @param {dayjs} newValue 
      */
+
     const handleEndChange = (newValue) => {
         if (newValue.isBefore(eventStartTime)) {
             setStartTime(newValue.add(-1, 'h'));
@@ -74,15 +96,17 @@ const EventForm = () => {
      * @param {File} image 
      * @returns {Function} A base64 encoded image
      */
+
     const resizeFile = (image) =>
         new Promise((resolve) => {
-            Resizer.imageFileResizer(image, 400, 400, "JPEG", 90, 0, (uri) => { resolve(uri); }, "base64" );
+            Resizer.imageFileResizer(image, 400, 400, "JPEG", 90, 0, (uri) => { resolve(uri); }, "base64");
         });
 
     /**
      * Update the event image.
      * @param {Event} e 
      */
+
     const handleImgUpload = async (e) => {
 
         const file = e.target.files[0];
@@ -95,10 +119,11 @@ const EventForm = () => {
      * Create the event and redirect to homepage.
      * @param {Event} e 
      */
+
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const clubName = "ClubHouse";
+        const clubName = getCookie("clubName");
         const newEvent = { clubName, eventName, eventImage, eventLoc, eventDesc, eventStartTime, eventEndTime, eventTags, eventAttendees };
 
         fetch('http://localhost:5001/events/create', {
@@ -106,11 +131,16 @@ const EventForm = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newEvent)
         }).then(() => {
-
+            setStatus("success");
+            setOpen(true);
+            clearForm();
+        }, () => {
+            setStatus("error");
+            setOpen(true);
         }).catch((err) => {
             console.log(err);
         })
-        navigate("/"); // change path
+
     };
 
     return (
@@ -216,11 +246,11 @@ const EventForm = () => {
             <Box sx={{ display: 'flex', justifyContent: "space-between", padding: 0, margin: '24px 0px 24px 0px' }}>
                 <Button
                     className={classes.button}
-                    onClick={() => navigate("/")} // change path
+                    onClick={clearForm}
                     variant="contained"
                     color="secondary"
                     endIcon={<DeleteForeverOutlinedIcon />}
-                >Delete</Button>
+                >Clear</Button>
                 <Button
                     className={classes.button}
                     onClick={onSubmit}
@@ -228,8 +258,30 @@ const EventForm = () => {
                     variant="contained"
                     color="primary"
                     endIcon={<EventAvailableIcon />}
-                >Save</Button>
+                >Schedule</Button>
             </Box>
+
+            <Collapse in={open}>
+                <Alert
+                    severity={submitStatus}
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setOpen(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    {submitStatus === "success" ? "Event scheduled." : "Unable to schedule event."}
+                </Alert>
+            </Collapse>
+
         </Box>
     );
 }

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-
+import { TextField, Container, Typography, Grid, Button } from '@material-ui/core'
+import Auth from '../components/AuthCheck.jsx';
 import '../styles.css';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 /**
  * A component storing the Login form.
@@ -14,24 +16,17 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        email: '',
-        password: '',
-      };
+      email: '',
+      password: '',
+      open: false,
+      submitStatus: "error"
+    };
     this.submit = this.submit.bind(this);
     this.change = this.change.bind(this);
   }
 
   componentDidMount() {
-    fetch("http://localhost:5001/loginstatus", {
-      method: 'get',
-      credentials: 'include'
-    }).then(response => response.text())
-    .then(data => {
-      console.log(data);
-      if (data != "false") {
-        location.href = "http://localhost:3000/testlogin";
-      }
-    });
+    Auth({student: "/allclubs", club: "/clubMain", admin: "/SCSUClubs"});
   }
   /**
    * Updates state when the login form is modified.
@@ -48,22 +43,29 @@ class Login extends Component {
    */
   submit(event) {
     event.preventDefault();
-    fetch('http://localhost:5001/login', 
-    {
-      method: 'post',
-      credentials: 'include',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-           "email": this.state.email,
-           "password": this.state.password,
-      })
-    }).then(response => response.text())
+    fetch('http://localhost:5001/login',
+      {
+        method: 'post',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "email": this.state.email,
+          "password": this.state.password,
+        })
+      }).then(response => response.text())
       .then(data => {
         var v = JSON.parse(data);
         if (v.valid) {
-          location.href = "http://localhost:3000/testlogin";
+          if (v.accountType === "club") {
+            location.href = "http://localhost:3000/clubMain";
+          } else if (v.accountType === "student") {
+            location.href = "http://localhost:3000/allclubs";
+          } else {
+            location.href = "http://localhost:3000/SCSUClubs";
+          }
         } else {
-          alert("Incorrect Password!")
+          this.setState({ open: true, submitStatus:  "error"})
+          // alert("Incorrect Password!")
         }
       });
   }
@@ -71,16 +73,42 @@ class Login extends Component {
   render() {
     return (
       <div>
-      <h2>Login</h2>
-      <form onSubmit={this.submit}>
-        <div>
-        <TextField className="loginInput" id="outlined-basic" type="text" name="email" value={this.state.email} onChange={this.change} label="Email" variant="outlined" />
-        </div>
-        <div>
-        <TextField className="loginInput" id="outlined-basic" type="password" name="password" value={this.state.password} onChange={this.change} label="Password" variant="outlined" />
-        </div>
-        <Button type="submit" variant="contained">Login</Button>
-      </form>
+        <Typography style={{ paddingBottom: 20 }} variant="h2" align="center">Login</Typography>
+        <form onSubmit={this.submit}>
+          <Container>
+            <Grid container direction="column" style={{ textAlign: "center" }}>
+              <Grid item style={{ paddingBottom: 20 }}>
+                <TextField style={{ width: 350 }} className="loginInput" id="outlined-basic" type="text" name="email" value={this.state.email} onChange={this.change} label="Email" variant="outlined" />
+              </Grid>
+              <Grid item>
+                <TextField style={{ width: 350 }} className="loginInput" id="outlined-basic" type="password" name="password" value={this.state.password} onChange={this.change} label="Password" variant="outlined" />
+              </Grid>
+              <Grid item>
+                <Button variant="contained" color="primary" style={{ width: 350, marginTop: 25 }} type="submit">Login</Button>
+              </Grid>
+            </Grid>
+            <Collapse sx={{ mt: 3, width: "100%"}} in={this.state.open}>
+                <Alert
+                    severity={this.state.submitStatus}
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                this.setState({open: false});
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    {this.state.submitStatus === "error" && "Incorrect email or password."}
+                </Alert>
+            </Collapse>
+          </Container>
+        </form>
       </div>
     );
   }
