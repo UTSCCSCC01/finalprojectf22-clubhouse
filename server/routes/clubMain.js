@@ -83,6 +83,7 @@ clubMainRoutes.route("/club/members/:clubName").get(async function (req, res) {
       clubEmail: req.body.clubEmail,
       email: req.body.email,
       userName: req.body.userName,
+      emailNotifications: true
      };
     db_connect
       .collection("club-members")

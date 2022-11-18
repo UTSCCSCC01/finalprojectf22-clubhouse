@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextField, Container, Typography, Grid, Button } from '@material-ui/core'
-
+import Auth from '../components/AuthCheck.jsx';
 import '../styles.css';
 
 /**
@@ -21,15 +21,7 @@ class Login extends Component {
 
   
   componentDidMount() {
-    fetch("http://localhost:5001/loginstatus", {
-      method: 'get',
-      credentials: 'include'
-    }).then(response => response.text())
-    .then(data => {
-      if (data != "false") {
-        location.href = "http://localhost:3000/testlogin"; //redirect if already logged in
-      }
-    });
+    Auth({student: "/allclubs", club: "/clubMain", admin: "/SCSUClubs"});
   }
   /**
    * Updates state when the login form is modified.
@@ -64,7 +56,7 @@ class Login extends Component {
           } else if (v.accountType === "student") {
             location.href = "http://localhost:3000/allclubs";
           } else {
-            location.href = "http://localhost:3000/adminhome";
+            location.href = "http://localhost:3000/SCSUClubs";
           }
         } else {
           alert("Incorrect Password!")

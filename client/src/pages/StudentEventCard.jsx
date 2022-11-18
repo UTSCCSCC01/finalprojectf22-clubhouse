@@ -129,6 +129,21 @@ export default function StudentEventCard(props) {
       }
     }
     else{
+      if (getCookie("accountType") != "user"){
+        window.location = "/login";
+      }
+      fetch('http://127.0.0.1:5001/events/add/' + props.eKey, {
+        method: 'PATCH', // or 'PUT'
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({'eventAttendees':user}),
+        })
+        .then(() => {
+        })
+        .catch((error) => { 
+          console.error('Error:', error);
+        });
       setError(true);
     }
     
@@ -165,7 +180,7 @@ export default function StudentEventCard(props) {
             </CardContent>
 
       <CardActions disableSpacing>
-        <Button onClick={handleClickOpen}  variant={OnOff ? "outlined": "contained"}
+        <Button onClick={handleClickOpen} variant={OnOff ? "outlined": "contained"}
         sx={{ marginBottom: 2, marginLeft: 2 }}>{OnOff ? 'cancel': 'sign up'}</Button>
         <BootstrapDialog
         onClose={handleClose}
