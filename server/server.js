@@ -26,6 +26,7 @@ app.use(require("./routes/myClubs"));
 app.use(require("./routes/newClubRequest"));
 app.use(require("./routes/settings"));
 app.use(require("./routes/users"));
+app.use(require("./routes/clubMembers"));
 
 // get driver connection
 const dbo = require("./db/conn");

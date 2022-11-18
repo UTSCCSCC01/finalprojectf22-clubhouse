@@ -3,7 +3,7 @@ const express = require("express");
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
-const userRoutes = express.Router();
+const clubMemberRoutes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
@@ -13,16 +13,16 @@ const ObjectId = require("mongodb").ObjectId;
 const EmlWrp = require("../modules/emailWrapper");
 
 /**
- * @module routes/users
+ * @module routes/clubMembers
  */
 
 /** This section will help you get a list of all the records.
- *  @name /users
+ *  @name /club-members
  */
-userRoutes.route("/users").get(function (req, res) {
+clubMemberRoutes.route("/club-members").get(function (req, res) {
   let db_connect = dbo.getDb("main");
   db_connect
-    .collection("users")
+    .collection("club-members")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -30,31 +30,31 @@ userRoutes.route("/users").get(function (req, res) {
     });
 });
 
-/** This section will help you get a single record by name
- *  @name /users/:name
+/** This section will help you get a single record by id
+ *  @name /club-members/:clubName
  */
-userRoutes.route("/users/:name").get(function (req, res) {
+clubMemberRoutes.route("/club-members/:clubName").get(function (req, res) {
   let db_connect = dbo.getDb();
-  let myquery = { name: req.params.name };
+  let myquery = { clubName: req.params.clubName };
   db_connect
-    .collection("users")
+    .collection("club-members")
     .findOne(myquery, function (err, result) {
       if (err) throw err;
       res.json(result);
     });
 });
 
-/** This section will help you delete a record by name
- * @name /users/del/:name
+/** This section will help you delete a record
+ * @name /club-members/del/:clubName
  */
-userRoutes.route("/users/del/:name").delete((req, response) => {
+clubMemberRoutes.route("/club-members/del/:clubName").delete((req, response) => {
   let db_connect = dbo.getDb("main");
-  let myquery = { name: req.params.name };
-  db_connect.collection("users").deleteOne(myquery, function (err, obj) {
+  let myquery = { clubName: req.params.clubName };
+  db_connect.collection("club-members").deleteMany(myquery, function (err, obj) {
     if (err) throw err;
-    console.log("1 document deleted");
+    console.log("Multiple documents deleted");
     response.json(obj);
   });
 });
 
-module.exports = userRoutes;
+module.exports = clubMemberRoutes;

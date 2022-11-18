@@ -170,5 +170,32 @@ eventRoutes.route("/events/del/:id").delete((req, response) => {
       res.json(result);
     });
  }); 
+
+/** This section will help you get a single record by id
+ *  @name /events/:clubName
+ */
+ eventRoutes.route("/events/:clubName").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { clubName: req.params.clubName };
+  db_connect
+    .collection("events")
+    .findOne(myquery, function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
+/** This section will help you delete a record
+ * @name /events/del/:clubName
+ */
+ eventRoutes.route("/events/del/:clubName").delete((req, response) => {
+  let db_connect = dbo.getDb("main");
+  let myquery = { clubName: req.params.clubName };
+  db_connect.collection("events").deleteMany(myquery, function (err, obj) {
+    if (err) throw err;
+    console.log("Multiple documents deleted");
+    response.json(obj);
+  });
+});
  
 module.exports = eventRoutes;
