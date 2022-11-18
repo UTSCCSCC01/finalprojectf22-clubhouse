@@ -149,7 +149,8 @@ export default function ClubRequestCard(props) {
                     console.log(err);
                 })
 
-                navigate("/SCSUConfirmation");
+                // navigate("/SCSUConfirmation");
+                props.updateList(props.list.filter((club) => club._id !== props.cKey));
               }} autoFocus  > Confirm</Button>
             </DialogActions>
           </Dialog>
@@ -184,7 +185,7 @@ export default function ClubRequestCard(props) {
               <Button onClick={()=>{
                 setOpenDeny(false);
 
-                //delete the club from the club-requests database
+                // //delete the club from the club-requests database
                 const text = "Dear " + props.cName + ", \n\nWe wish to inform you that your registration request has been rejected. \n\nBest, \nSCSU"
                 const email = props.cEmail;
                 const del = {text, email}
@@ -203,7 +204,8 @@ export default function ClubRequestCard(props) {
                 }).catch((err) => {
                     console.log(err);
                 })
-                navigate("/SCSUConfirmation");
+                // navigate("/SCSUConfirmation");
+                props.updateList(props.list.filter((club) => club._id !== props.cKey));
               }} autoFocus >Confirm</Button>
             </DialogActions>
           </Dialog>
