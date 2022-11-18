@@ -12,8 +12,7 @@ import '../styles.css';
  * @component
  * @example
  * return scsuclubs.map((club, index) => (
-      <SCSUClubCard key={index} eImage={club.image} cName={club.clubName} cPhone={club.clubPhone} cEmail={club.email}></SCSUClubCard>
-      ));
+    <SCSUClubCard key={index} cKey={club._id} eImage={club.image} cName={club.clubName} cPhone={club.clubPhone} cEmail={club.email}></SCSUClubCard>      ));
  */
 
 function SCSUClubCard(props) {
@@ -40,7 +39,23 @@ function SCSUClubCard(props) {
           fetch('http://localhost:5001/clubs/del/' + props.cKey, {method: 'DELETE'}).then(() => {
           }).catch((err) => {
             console.log(err);
-          })
+          });
+          fetch('http://localhost:5001/users/del/' + props.cName, {method: 'DELETE'}).then(() => {
+          }).catch((err) => {
+            console.log(err);
+          });
+          fetch('http://localhost:5001/club-members/del/' + props.cName, {method: 'DELETE'}).then(() => {
+          }).catch((err) => {
+            console.log(err);
+          });
+          fetch('http://localhost:5001/positions/del/' + props.cName, {method: 'DELETE'}).then(() => {
+          }).catch((err) => {
+            console.log(err);
+          });
+          fetch('http://localhost:5001/events/' + props.cName, {method: 'DELETE'}).then(() => {
+          }).catch((err) => {
+            console.log(err);
+          });
           refreshPage();
           }       
         } color="error" variant="contained" size="large">Delete Club</Button>
