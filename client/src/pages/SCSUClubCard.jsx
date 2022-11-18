@@ -37,11 +37,16 @@ function SCSUClubCard(props) {
       </CardActionArea>
       <CardActions>
         <Button onClick={() => {
-          fetch('http://localhost:5001/clubs/del/' + props.cKey, {method: 'DELETE'}).then(() => {
+          /*fetch('http://localhost:5001/clubs/del/' + props.cKey, {method: 'DELETE'}).then(() => {
           }).catch((err) => {
             console.log(err);
-          })
-          refreshPage();
+          });*/
+          fetch('http://localhost:5001/users/del/' + props.cNamee, {method: 'DELETE'}).then(() => {
+          }).catch((err) => {
+            console.log(err);
+          });
+          console.log(props.cNamee)
+          //refreshPage();
           }       
         } color="error" variant="contained" size="large">Delete Club</Button>
       </CardActions>

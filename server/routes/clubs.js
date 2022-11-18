@@ -100,7 +100,7 @@ clubRoutes.route("/clubs/:id").post(function (req, response) {
  * @name /clubs/del/:id
  */
 clubRoutes.route("/clubs/del/:id").delete((req, response) => {
-  let db_connect = dbo.getDb("main");
+  let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection("clubs").deleteOne(myquery, function (err, obj) {
     if (err) throw err;

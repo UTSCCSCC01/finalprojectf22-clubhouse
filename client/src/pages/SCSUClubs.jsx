@@ -46,7 +46,7 @@ class SCSUClubs extends Component{
     if (!clubs.length) return null;
     return clubs.map((club, index) => (
       <Grid item key={index} xs={12} sm={6} md={4}>
-        <SCSUClubCard key={index} cKey={club._id} eImage={club.image} cName={club.clubName} cPhone={club.clubPhone} cEmail={club.email}></SCSUClubCard>
+        <SCSUClubCard key={index} cKey={club._id} eImage={club.image} cName={club.clubName} cPhone={club.clubPhone} cEmail={club.email} cNamee={club.clubName}></SCSUClubCard>
       </Grid>
     ));
   }

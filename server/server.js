@@ -22,8 +22,15 @@ app.use(require("./routes/clubMain"));
 app.use(require("./routes/membership"));
 app.use(require("./routes/tags"))
 app.use(require("./routes/notification"));
+<<<<<<< Updated upstream
 app.use(require("./routes/myClubs"))
 app.use(require("./routes/newClubRequest"))
+=======
+app.use(require("./routes/myClubs"));
+app.use(require("./routes/newClubRequest"));
+app.use(require("./routes/settings"));
+app.use(require("./routes/users"));
+>>>>>>> Stashed changes
 
 // get driver connection
 const dbo = require("./db/conn");
