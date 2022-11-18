@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     },
 
     button: {
-        width: "120px",
+        width: "150px",
         height: "40px",
         fontSize: "17px",
     }
@@ -134,10 +134,11 @@ const EventForm = () => {
             setStatus("success");
             setOpen(true);
             clearForm();
-        }).catch((err) => {
-            console.log(err);
+        }, () => {
             setStatus("error");
             setOpen(true);
+        }).catch((err) => {
+            console.log(err);
         })
 
     };
@@ -257,7 +258,7 @@ const EventForm = () => {
                     variant="contained"
                     color="primary"
                     endIcon={<EventAvailableIcon />}
-                >Save</Button>
+                >Schedule</Button>
             </Box>
 
             <Collapse in={open}>

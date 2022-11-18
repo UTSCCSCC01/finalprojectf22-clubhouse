@@ -59,7 +59,8 @@ function MyClubs() {
   return(
     <Container sx={{ display:"block", py: 4, px: 4}} maxWidth="lg">
       <Grid>
-      { clubs2.map((item) => {
+      {clubs.length === 0 ? <Typography variant="h5" color="#bbbbbb" m={6} width="100%" textAlign="center">You're not in any clubs :(</Typography>
+      : clubs2.map((item) => {
       for (const a of clubs) {
         if ( a.clubName === item.clubName ){
           return (<Grid item sx={{m: 2}} key={item}>

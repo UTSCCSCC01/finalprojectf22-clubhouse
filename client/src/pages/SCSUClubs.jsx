@@ -43,10 +43,10 @@ class SCSUClubs extends Component{
    */
 
   displayClubInfo = (clubs) => {
-    if (!clubs.length) return null;
+    if (!clubs.length) return (<Typography variant="h5" color="#bbbbbb" m={4} width="100%" textAlign="center">No clubs :(</Typography>);
     return clubs.map((club, index) => (
       <Grid sx={{ m: 2 }} item key={index}>
-        <SCSUClubCard key={index} cKey={club._id} eImage={club.image} cName={club.clubName} cPhone={club.clubPhone} cEmail={club.email}></SCSUClubCard>
+        <SCSUClubCard key={index} list={this.state.clubs} updateList={(updated) => this.setState({clubs: updated})} cKey={club._id} cImage={club.image} cName={club.clubName} cPhone={club.clubPhone} cEmail={club.email}></SCSUClubCard>
       </Grid>
     ));
   }

@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ClubApplyButton from '../components/ClubApplyButton.jsx';
 import StudentClubProfile from './StudentClubProfile.jsx';
+import { getCookie } from '../libraries/cookieDAO.js';
 
 /**
  * Display fetched information in a card
@@ -31,6 +32,8 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function AllClubsCard(props) {
+  const accountType = getCookie("accountType")
+
   const [cName, setCname] = useState('');
   const [cDesc, setCdesc] = useState('');
   const [cPhone, setCphone] = useState('');
@@ -78,7 +81,7 @@ export default function AllClubsCard(props) {
       </CardContent>
 
       <CardActions disableSpacing>
-        <ClubApplyButton clubEmail={props.cEmail} clubName={props.cName} />
+        {accountType === "student" && <ClubApplyButton clubEmail={props.cEmail} clubName={props.cName} />}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

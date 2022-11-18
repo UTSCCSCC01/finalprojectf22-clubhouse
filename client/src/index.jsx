@@ -54,7 +54,7 @@ ReactDOM.render(
         <Route exact path="/new-announcement" element={<NewAnnouncement />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/MyAccount" element={<MyAccounts />} />
-        <Route path="/register" element={<RegisterForm />} />
+        <Route exact path="/register" element={<RegisterForm />} />
         <Route path="/events" element={<Events />} />
         <Route exact path="/create-position" element={<PositionCreate />} />
         <Route path="/positions" element={<Positions />} />

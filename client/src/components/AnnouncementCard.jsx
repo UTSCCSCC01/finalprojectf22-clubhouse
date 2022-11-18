@@ -13,12 +13,12 @@ const AnnouncementCard = props => {
     const a = props.announcement;
 
     return (
-        <Card sx={{display: 'flex', flexDirection: 'column' }}>
+        <Card sx={{display: 'flex', flexDirection: 'column', width: "280px"}}>
             <CardActionArea>
                 <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography variant='subtitle2' >{a.clubName} </Typography>  
-                    <Typography variant='body2'>{a.subject} </Typography> 
-                    <Typography >{a.message} </Typography> 
+                    <Typography fontWeight={500} fontSize="18px" >{a.clubName} </Typography>  
+                    <Typography fontWeight={500} fontSize="16px" >{a.subject} </Typography> 
+                    <Typography variant="body2">{a.message} </Typography> 
                 </CardContent>
             </CardActionArea>
         </Card>

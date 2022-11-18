@@ -16,13 +16,13 @@ class NotificationMenu extends React.Component {
 
     render() {
         return (
-            <Menu {...this.props} open={Boolean(this.props.anchorEl)}>
+            <Menu width="100%" {...this.props} open={Boolean(this.props.anchorEl)}>
                 {this.props.notifs.map(v => (
                     <AnnouncementCard announcement={v} />
                 ))}
-                <Button sx={{width: "100%"}}>
+                {/* <Button sx={{width: "100%"}}>
                     Unregister from emails
-                </Button>
+                </Button> */}
             </Menu>
         )
     }

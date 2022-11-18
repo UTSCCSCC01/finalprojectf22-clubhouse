@@ -43,7 +43,7 @@ function MyEvents() {
    */
   
   const displayClubInfo = (events) => {
-    if (!events.length) return null;
+    if (!events.length) return <Typography variant="h5" color="#bbbbbb" m={6} width="100%" textAlign="center">You have no upcoming events :(</Typography>;
     return events.map((club, index) => (
       <Grid item key={index} m={2}>
         <EventCard key={club._id} eKey = {club._id} cName={club.clubName} eName={club.eventName} eDate={club.eventDate} eJoin={club.eventJoin} eImage={club.eventImage} eStartTime={club.eventStartTime} eEndTime={club.eventEndTime} eLoc={club.eventLoc} eTags={club.eventTags} eDesc={club.eventDesc} eAttendees={club.eventAttendees}/>

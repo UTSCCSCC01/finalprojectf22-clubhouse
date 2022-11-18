@@ -125,7 +125,7 @@ function ClubAdminMain() {
                     <Container>
                         <Typography style={{ textAlign: 'center', marginBottom: '20px' }} variant="h4">Current Members</Typography>
                     </Container>
-                    <Paper elevation={3} sx={{backgroundColor: "#f9f9f9", width: "450px", height: "450px", p: 2, ml: "auto", mr: "auto"}}>
+                    <Paper elevation={3} sx={{backgroundColor: "#f9f9f9", width: "450px", height: "420px", p: 2, ml: "auto", mr: "auto"}}>
                         <Stack spacing={2} style={{ textAlign: 'center', m: 1}}>
                             {members.map((member) => {
                                 return <PotentialMemCard member={member} onDeny={deleteMember} visible={false} message={"Are you sure you want to remove " + member.userName + " from the club?"} />
@@ -137,7 +137,7 @@ function ClubAdminMain() {
 
                 <Box width="500px" sx={{m: 2}}>
                     <Typography style={{ textAlign: 'center', marginBottom: '20px' }} variant="h4">Requesting Members</Typography>
-                    <Paper elevation={3} sx={{backgroundColor: "#f9f9f9", width: "450px", height: "450px", p: 2, ml: "auto", mr: "auto"}}>
+                    <Paper elevation={3} sx={{backgroundColor: "#f9f9f9", width: "450px", height: "420px", p: 2, ml: "auto", mr: "auto"}}>
                         <Stack spacing={2} style={{ textAlign: 'center'}}>
                             {potentialMembers.map((member) => {
                                 return (
