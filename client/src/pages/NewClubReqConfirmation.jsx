@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 // DELETE
 const NewClubReqConfirmation = () => {
     useEffect( ()  => {
-        Auth({student: "/allclubs", null: "/login", club: "/clubMain"});
+        Auth({student: "/allclubs", nonauth: "/login", club: "/clubMain"});
     }, []);
     return (
         <Box sx={{

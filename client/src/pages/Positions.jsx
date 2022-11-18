@@ -24,7 +24,7 @@ class Positions extends Component{
   };
 
   componentDidMount = async () => {
-    Auth({null: "/login"});
+    Auth({nonauth: "/login"});
     await this.getPositionInfo();
   };
 

@@ -20,7 +20,7 @@ function MyClubs() {
   const [clubs, setClubs] = useState([]);
   const [clubs2, setClubs2] = useState([]);
   useEffect(() => {
-    Auth({admin: "/SCSUClubs", null: "/login", club: "/clubMain"});
+    Auth({admin: "/SCSUClubs", nonauth: "/login", club: "/clubMain"});
     const getclubs = async ()=>{
       const res = await fetch('http://127.0.0.1:5001/clubs');
       const data = await res.json();

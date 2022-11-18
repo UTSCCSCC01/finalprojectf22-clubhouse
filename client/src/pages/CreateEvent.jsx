@@ -21,7 +21,7 @@ const CreateEvent = () => {
 
     const classes = useStyles();
     useEffect( ()  => {
-        Auth({student: "/allclubs", null: "/login", admin: "/SCSUClubs"});
+        Auth({student: "/allclubs", nonauth: "/login", admin: "/SCSUClubs"});
     }, []);
     return (
         <Container className={classes.container}>
