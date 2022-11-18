@@ -71,7 +71,7 @@ const ClubRegisterReq = () => {
     }
 
     useEffect(() => {
-        Auth({ student: "/allclubs", null: "/login", club: "/clubMain" });
+        Auth({ student: "/allclubs", admin: "/SCSUClubs", club: "/clubMain" });
     }, []);
 
     const onSubmit = async (e) => {

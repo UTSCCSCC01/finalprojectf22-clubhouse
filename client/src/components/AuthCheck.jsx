@@ -5,11 +5,9 @@ import { getCookie } from '../libraries/cookieDAO'
  */
 const Auth = function(notallowed) {
     var accountType = getCookie("accountType");
-    if (accountType === null) {
-        console.log("user: "+ accountType);
-
-        if (Object.keys(notallowed).includes("null")) {
-            window.location = notallowed["null"];
+    if (!accountType) {
+        if (Object.keys(notallowed).includes("nonauth")) {
+            window.location = notallowed["nonauth"];
         }
     }
     if (Object.keys(notallowed).includes(accountType)) {

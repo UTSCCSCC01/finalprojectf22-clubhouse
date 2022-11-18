@@ -20,7 +20,7 @@ function ClubAdminMain() {
    * 
    */
     useEffect(  ()  => {
-        Auth({student: "/allclubs", null: "/login", admin: "/SCSUClubs"});
+        Auth({student: "/allclubs", nonauth: "/login", admin: "/SCSUClubs"});
         const  fetchmembers = async () => {
             console.log(clubName);
             const res = await fetch("http://127.0.0.1:5001/club/members/" + clubName);

@@ -64,7 +64,7 @@ const [value, setValue] = React.useState(0);
     setValue(newValue);
   };
   useEffect( ()  => {
-    Auth({admin: "/SCSUClubs", null: "/login", club: "/clubMain"});
+    Auth({admin: "/SCSUClubs", nonauth: "/login", club: "/clubMain"});
   }, []);
 
 
