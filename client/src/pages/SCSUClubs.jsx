@@ -45,7 +45,7 @@ class SCSUClubs extends Component{
   displayClubInfo = (clubs) => {
     if (!clubs.length) return null;
     return clubs.map((club, index) => (
-      <Grid item key={index} xs={12} sm={6} md={4}>
+      <Grid sx={{ m: 2 }} item key={index}>
         <SCSUClubCard key={index} cKey={club._id} eImage={club.image} cName={club.clubName} cPhone={club.clubPhone} cEmail={club.email}></SCSUClubCard>
       </Grid>
     ));
@@ -54,9 +54,9 @@ class SCSUClubs extends Component{
   render() {
     console.log('State: ', this.state);
     return(
-      <Container sx={{ py: 4, px: 4}} maxWidth="lg">
-        <Typography style={{padding: "50px 50px 50px 50px"}} variant="h2" align="center">Browse All Clubs</Typography>
-      <Grid container spacing={3}>
+      <Container sx={{ mt: "120px", px: 4}} maxWidth="lg">
+        <Typography variant="h2" align="center" gutterBottom >Browse All Clubs</Typography>
+      <Grid container mt="24px">
         {this.displayClubInfo(this.state.clubs)}
       </Grid>
       </Container>

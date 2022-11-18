@@ -98,7 +98,7 @@ adminPofileRoutes.route("/club/profileimg/:clubName").get(function (req, res) {
  */
  adminPofileRoutes.route("/club/events").get(function (req, res) {
   let db_connect = dbo.getDb("main");
-  var perpage = 3;
+  var perpage = 20;
   var total =  db_connect.collection("events").count();
   var pages = Math.ceil(total/perpage);
   var pageNumber = (req.query.page == null) ? 1 : req.query.page;

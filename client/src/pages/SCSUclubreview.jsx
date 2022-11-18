@@ -30,15 +30,15 @@ function SCSUclubreview(props){
             justifyContent: "center",
             alignItems: "center",
             width: "800px",
-            margin: "100px auto 48px auto"
+            margin: "120px auto 48px auto"
         }}>
 
-            <Typography variant="h4" color="primary">
+            <Typography variant="h2" gutterBottom>
                 Club Registration Requests
             </Typography>
             
             <Container maxWidth="lg" >
-                <Grid container spacing={2} >
+                <Grid container spacing={2} sx={{justifyContent: "center"}}>
                     {items.map((item) => {
                         return (
                             <Grid item key={item}>

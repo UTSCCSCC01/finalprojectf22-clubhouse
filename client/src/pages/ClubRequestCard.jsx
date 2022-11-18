@@ -67,10 +67,10 @@ export default function ClubRequestCard(props) {
     };
 
   return (
-    <Card sx={{ width: 800 }} raised >
+    <Card sx={{ p: 1, width: 800 }} raised >
     <Box display="flex">
       <CardContent sx={{ flexGrow: 1, minWidth: 350 }}>
-        <Typography gutterBottom variant="h7" component="h2">{props.cName} </Typography>  
+        <Typography gutterBottom variant="h5" component="h2">{props.cName} </Typography>  
       </CardContent>
      
       <CardActions>

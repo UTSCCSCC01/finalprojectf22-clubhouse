@@ -23,7 +23,7 @@ function SCSUClubCard(props) {
   }
 
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Card sx={{ width: 350, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: "space-between"}} raised>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -36,7 +36,7 @@ function SCSUClubCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button onClick={() => {
+        <Button sx={{m: 1}} onClick={() => {
           fetch('http://localhost:5001/clubs/del/' + props.cKey, {method: 'DELETE'}).then(() => {
           }).catch((err) => {
             console.log(err);

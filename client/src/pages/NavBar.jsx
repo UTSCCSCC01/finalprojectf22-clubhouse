@@ -227,10 +227,18 @@ useRouteMatch = (patterns) => {
                 <Grid item xs={2}>
                 <Grid container direction='row' justifyContent="flex-end" alignItems="center" spacing ={2} >
                 <Grid item>
-                  <Button  textColor="inherit" variant="contained" href ={"/login"}>Login</Button>
+                  <Button sx={{
+                      ":visited": { backgroundColor: "#1976d2" },
+                      ":visited:hover": { backgroundColor: "#1565c0" }
+                    }}
+                    textColor="inherit" variant="contained" href ={"/login"}>Login</Button>
                   </Grid>
                   <Grid item>
-                  <Button textColor="inherit" variant="contained" href ={"/register"}>Register</Button>
+                  <Button sx={{
+                      ":visited": { backgroundColor: "#1976d2" },
+                      ":visited:hover": { backgroundColor: "#1565c0" }
+                    }}
+                    textColor="inherit" variant="contained" href ={"/register"}>Register</Button>
                   </Grid>
                   </Grid>
                   </Grid>

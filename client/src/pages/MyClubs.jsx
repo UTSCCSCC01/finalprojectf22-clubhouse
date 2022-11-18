@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import MyClubsCard from "./MyClubsCard.jsx";
 import { useEffect,useState } from "react";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { getCookie } from "../libraries/cookieDAO.js";
-import AllClubsCard from "./AllClubsCard.jsx";
+import MyClubsCard from "./MyClubsCard.jsx";
 import '../styles.css';
 import Auth from '../components/AuthCheck.jsx';
 
@@ -58,13 +57,13 @@ function MyClubs() {
   
 
   return(
-    <Container sx={{ py: 4, px: 4}} maxWidth="lg">
-      <Grid container spacing={3}>
+    <Container sx={{ display:"block", py: 4, px: 4}} maxWidth="lg">
+      <Grid>
       { clubs2.map((item) => {
       for (const a of clubs) {
         if ( a.clubName === item.clubName ){
-          return (<Grid item key={item}>
-            <AllClubsCard key={item._id}  cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
+          return (<Grid item sx={{m: 2}} key={item}>
+            <MyClubsCard key={item._id}  cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
            </Grid>)
         }
         else{

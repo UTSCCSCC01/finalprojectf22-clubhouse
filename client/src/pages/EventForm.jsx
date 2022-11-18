@@ -13,6 +13,10 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { makeStyles } from '@material-ui/core';
 import TagsInput from "./TagsInput.jsx"
 import { getCookie } from '../libraries/cookieDAO'
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const useStyles = makeStyles({
     timepicker: {
@@ -33,7 +37,6 @@ const useStyles = makeStyles({
 
 const EventForm = () => {
 
-    const navigate = useNavigate();
     const classes = useStyles();
 
     // stores the url of the image
@@ -47,12 +50,27 @@ const EventForm = () => {
     const [eventTags, setEventTags] = useState([]);
     const eventAttendees = [];
 
+    const [open, setOpen] = useState(false);
+    const [submitStatus, setStatus] = useState(""); // "success" or "error"
+    
+    /**
+     * Clears the input fields
+     */
+    const clearForm = () => {
+        setEventImage("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png");
+        setEventName("");
+        setEventLoc("");
+        setEventDesc("");
+        setStartTime(dayjs().add(1, 'h').minute(0));
+        setEndTime(dayjs().add(2, 'h').minute(0));
+        setEventTags([]);
+    }
+
     /**
      * Update and store the event start time. Update the event 
      * end time if the start time occurs after the end time.
      * @param {dayjs} newValue 
      */
-
     const handleStartChange = (newValue) => {
         if (newValue.isAfter(eventEndTime)) {
             setEndTime(newValue.add(1, 'h'));
@@ -81,7 +99,7 @@ const EventForm = () => {
 
     const resizeFile = (image) =>
         new Promise((resolve) => {
-            Resizer.imageFileResizer(image, 400, 400, "JPEG", 90, 0, (uri) => { resolve(uri); }, "base64" );
+            Resizer.imageFileResizer(image, 400, 400, "JPEG", 90, 0, (uri) => { resolve(uri); }, "base64");
         });
 
     /**
@@ -101,7 +119,7 @@ const EventForm = () => {
      * Create the event and redirect to homepage.
      * @param {Event} e 
      */
-    
+
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -113,11 +131,15 @@ const EventForm = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newEvent)
         }).then(() => {
-           
+            setStatus("success");
+            setOpen(true);
+            clearForm();
         }).catch((err) => {
             console.log(err);
+            setStatus("error");
+            setOpen(true);
         })
-        
+
     };
 
     return (
@@ -223,11 +245,11 @@ const EventForm = () => {
             <Box sx={{ display: 'flex', justifyContent: "space-between", padding: 0, margin: '24px 0px 24px 0px' }}>
                 <Button
                     className={classes.button}
-                    onClick={() => navigate("/")} // change path
+                    onClick={clearForm}
                     variant="contained"
                     color="secondary"
                     endIcon={<DeleteForeverOutlinedIcon />}
-                >Delete</Button>
+                >Clear</Button>
                 <Button
                     className={classes.button}
                     onClick={onSubmit}
@@ -237,6 +259,28 @@ const EventForm = () => {
                     endIcon={<EventAvailableIcon />}
                 >Save</Button>
             </Box>
+
+            <Collapse in={open}>
+                <Alert
+                    severity={submitStatus}
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setOpen(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    {submitStatus === "success" ? "Event scheduled." : "Unable to schedule event."}
+                </Alert>
+            </Collapse>
+
         </Box>
     );
 }

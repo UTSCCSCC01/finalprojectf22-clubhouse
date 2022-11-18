@@ -156,48 +156,44 @@ export default function StudentEventCard(props) {
     setOnOff(!OnOff);
   }
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
-    
-    <Card  raised sx={{ width: 370 }} >
+    <Card raised sx={{ width: 350 }} >
       <CardMedia
-                component="img"
-                height="250"
-                image={props.eImage} alt="UTSC"/>
+        component="img"
+        height="250"
+        image={props.eImage} alt="UTSC" />
       <CardContent sx={{ width: 370 }}>
-                <Typography gutterBottom variant="h7" component="h2">{props.eName} by {props.cName} </Typography>  
-                <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
-                <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")} - {dateFormat(props.eEndTime, "shortTime")}</Typography>
-                <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>    
-                <Box display="inline-flex" flexWrap="wrap" mt="20px"> 
-                    {(props.eTags).map((tag) => (
-                        <EventTag data={tag}/> 
-                    ))}
-                </Box>
-            </CardContent>
+        <Typography gutterBottom variant="h5" component="h2">{props.eName} by {props.cName} </Typography>
+        <Typography><EventIcon fontSize="inherit" ></EventIcon>  {dateFormat(props.eStartTime, "mmmm dS, yyyy")} </Typography>
+        <Typography><TimeIcon fontSize="inherit"></TimeIcon> {dateFormat(props.eStartTime, "shortTime")}</Typography>
+        <Typography>  <LocationOnIcon fontSize="inherit"></LocationOnIcon> {props.eLoc} </Typography>
+
+      </CardContent>
 
       <CardActions disableSpacing>
-        <Button onClick={handleClickOpen} variant={OnOff ? "outlined": "contained"}
-        sx={{ marginBottom: 2, marginLeft: 2 }}>{OnOff ? 'cancel': 'sign up'}</Button>
+        <Button onClick={handleClickOpen} variant={OnOff ? "outlined" : "contained"}
+          sx={{ marginBottom: 1.5, marginLeft: 1.5 }}>{OnOff ? 'cancel' : 'sign up'}</Button>
         <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogContent dividers>
-          <Typography gutterBottom>
-          {OnOff ? 'You successfully registered for the event!': 'You successfully cancelled your registration for the event!'}   
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Close
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <DialogContent dividers>
+            <Typography gutterBottom>
+              {OnOff ? 'You successfully registered for the event!' : 'You successfully cancelled your registration for the event!'}
+
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose}>
+              Close
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -209,7 +205,13 @@ export default function StudentEventCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{props.eDesc}</Typography>
+          <Typography sx={{m: "0 4px 0 4px"}} paragraph>{props.eDesc}</Typography>
+
+          <Box display="inline-flex" flexWrap="wrap" mt="20px">
+            {(props.eTags).map((tag) => (
+              <EventTag data={tag} />
+            ))}
+          </Box>
         </CardContent>
       </Collapse>
     </Card>

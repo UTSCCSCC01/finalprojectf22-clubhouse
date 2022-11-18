@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActions, Box, CardActionArea, Backdrop, Dialog} from '@mui/material';
+import { CardActions, Box, CardActionArea, Backdrop, Dialog } from '@mui/material';
 import { useState } from 'react';
 import EventTag from "./EventTag.jsx"
 import { styled } from '@mui/material/styles';
@@ -31,55 +31,52 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function AllClubsCard(props) {
-    const [cName, setCname] = useState('');
-    const [cDesc, setCdesc] = useState('');
-    const [cPhone, setCphone] = useState('');
-    const [cEmail, setCemail] = useState('');
+  const [cName, setCname] = useState('');
+  const [cDesc, setCdesc] = useState('');
+  const [cPhone, setCphone] = useState('');
+  const [cEmail, setCemail] = useState('');
 
-    const [expanded, setExpanded] = React.useState(false);
-/**
-   * setting expanded to true when clicked on image
-   * 
-   */
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-    const [open, setOpen] = React.useState(false);
-    /**
-   * Set open to false
-   */
-    const handleClose = () => {
-      setOpen(false);
-    };
-    /**
-   * toggle open  
-   */
-    const handleToggle = () => {
-      setOpen(!open);
-    };
+  const [expanded, setExpanded] = React.useState(false);
+  /**
+     * setting expanded to true when clicked on image
+     * 
+     */
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+  const [open, setOpen] = React.useState(false);
+  /**
+ * Set open to false
+ */
+  const handleClose = () => {
+    setOpen(false);
+  };
+  /**
+ * toggle open  
+ */
+  const handleToggle = () => {
+    setOpen(!open);
+  };
   return (
 
-    <Card sx={{ maxWidth: 345 }} >
-      <Dialog fullScreen open={open} onClose={handleClose}
-        >    <StudentClubProfile close={handleClose} img={props.cImage} phoneNumber={props.cPhone} clubName ={props.cName} email={props.cEmail} description={props.cDesc}  ></StudentClubProfile>
+    <Card raised sx={{ maxWidth: 350 }} >
+      <Dialog fullScreen open={open} onClose={handleClose}>
+        <StudentClubProfile close={handleClose} img={props.cImage} phoneNumber={props.cPhone} clubName={props.cName} email={props.cEmail} description={props.cDesc}  ></StudentClubProfile>
       </Dialog>
       <CardActionArea onClick={handleToggle}>
 
-      <CardMedia
-                component="img"
-                height="250"
-                image={props.cImage} alt="UTSC"/>
-                </CardActionArea>
-      <CardContent sx={{ flexGrow: 1, minWidth: 350 }}>
-                <Typography gutterBottom variant="h7" component="h2">{props.cName} </Typography>  
-                <Box display="inline-flex" flexWrap="wrap" mt="20px"> 
-                    {(props.cTags).map((tag) => (
-                        <EventTag data={tag}/> 
-                    ))}
-                </Box>
-            
-            </CardContent>
-            
+        <CardMedia
+          component="img"
+          height="250"
+          image={props.cImage} alt="UTSC" />
+      </CardActionArea>
+      <CardContent sx={{ flexGrow: 1, minWidth: 350, paddingBottom: 0 }}>
+        <Typography variant="h5" component="h2" gutterBottom>{props.cName}</Typography>
+        <Typography>{props.cEmail}</Typography>
+        <Typography>{props.cPhone}</Typography>
+
+      </CardContent>
+
       <CardActions disableSpacing>
         <ClubApplyButton clubEmail={props.cEmail} clubName={props.cName} />
         <ExpandMore
@@ -93,7 +90,12 @@ export default function AllClubsCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{props.cDesc}</Typography>
+          <Typography sx={{m: "0 4px 0 4px"}} paragraph>{props.cDesc}</Typography>
+          <Box display="inline-flex" flexWrap="wrap" mt="20px">
+            {(props.cTags).map((tag) => (
+              <EventTag data={tag} />
+            ))}
+          </Box>
         </CardContent>
       </Collapse>
     </Card>
