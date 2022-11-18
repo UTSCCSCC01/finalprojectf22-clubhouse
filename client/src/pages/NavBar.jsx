@@ -142,7 +142,7 @@ useRouteMatch = (patterns) => {
                     <Tab label="My Account" value={3} href={routes[3]} />
                 </Tabs>
                   <Button sx={{ marginLeft: 'auto' }} variant="contained" onClick={this.menuHandler}><NotificationsActiveIcon /></Button>
-                  <NotificationMenu anchorEl={this.state.menuAnchorEl} onClose={this.menuHandler} notifs={this.state.notifs}/>
+                  <NotificationMenu width="300px" anchorEl={this.state.menuAnchorEl} onClose={this.menuHandler} notifs={this.state.notifs}/>
                   <Button sx={{ marginLeft: '10px' }} variant="contained" onClick={this.handleLogout}> Logout</Button>
             </Toolbar>
         </AppBar>
