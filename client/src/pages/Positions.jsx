@@ -46,7 +46,7 @@ class Positions extends Component{
    */
 
   displayPositionInfo = (positions) => {
-    if (!positions.length) return null;
+    if (!positions.length) return <Typography variant="h5" color="#bbbbbb" m={4} width="100%" textAlign="center">No jobs :(</Typography>;
     return positions.map((position, index) => (
       
       <Grid item sx={{ m: 2 }} key={index}>

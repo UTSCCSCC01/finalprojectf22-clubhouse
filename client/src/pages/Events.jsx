@@ -234,7 +234,8 @@ function Events(props) {
 
       <Container maxWidth="lg" >
         <Grid container>
-          {items && items.filter(item => item.eventStartTime >= dateFormat(now, "isoDateTime")).map((item) => {
+          {items.length === 0 ? <Typography variant="h5" color="#bbbbbb" m={4} width="100%" textAlign="center">No events :(</Typography>
+          : items.filter(item => item.eventStartTime >= dateFormat(now, "isoDateTime")).map((item) => {
             if (matchesQuery(item)) {
               return (<Grid sx={{ m: 2 }} item key={item}>
                 <EventCard key={item._id} eKey={item._id} cName={item.clubName} eName={item.eventName} eDate={item.eventDate} eJoin={item.eventJoin} eImage={item.eventImage} eStartTime={item.eventStartTime} eEndTime={item.eventEndTime} eLoc={item.eventLoc} eTags={item.eventTags} eDesc={item.eventDesc} eAttendees={item.eventAttendees} />

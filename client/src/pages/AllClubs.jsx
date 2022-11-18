@@ -171,7 +171,8 @@ function AllClubs(props) {
       </Box>
       <Container maxWidth="lg">
         <Grid container>
-          {items.map((item) => {
+          {items.length === 0 ? <Typography variant="h5" color="#bbbbbb" m={4} width="100%" textAlign="center">No clubs :(</Typography>
+          : items.map((item) => {
             if ((search === "" && Object.keys(tagName).length == 0) || (search !== "" && conTainsS(item)) || (conTains(item)) || (conTainsS(item) && !conTainsS(item))) {
               return (
                 <Grid sx={{ m: 2 }} item key={item}>

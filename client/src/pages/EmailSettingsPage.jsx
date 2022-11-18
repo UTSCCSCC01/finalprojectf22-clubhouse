@@ -59,8 +59,8 @@ class EmailSettingsPage extends React.Component {
         return (
             <Container sx={{mt:2}}>
                 <Typography variant="h5" gutterBottom>Email Notifications</Typography>
-                {this.state.clubs === [] && <Typography>You are not in any clubs!</Typography> }
-                {this.state.clubs.map(v => this.generateSettingElement(v.clubName, v.clubEmail))}
+                {this.state.clubs.length === 0 ? <Typography>No clubs here :(</Typography>
+                : this.state.clubs.map(v => this.generateSettingElement(v.clubName, v.clubEmail))}
             </Container>
         )
     }
