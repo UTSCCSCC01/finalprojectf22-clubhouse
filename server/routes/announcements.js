@@ -67,16 +67,18 @@ announcementRoutes.route("/announcements/new").post(
     
     
 
-    await members.forEach(async element => {
-      let emailCfg = {
-        from: "utscclubhouse@gmail.com",
-        to: element.email,
-        subject: "Notification from " + element.clubName + ": " + req.body.subject,
-        text: req.body.message
-      }
+    await Promise.all(members.map(element => { // send all email out at the same time
+      if (element.emailNotifications != false) { // still yes if undefined
+        let emailCfg = {
+          from: "utscclubhouse@gmail.com",
+          to: element.email,
+          subject: "Notification from " + element.clubName + ": " + req.body.subject,
+          text: req.body.message
+        }
 
-      await emailWrapper.sendEmail(emailCfg);
-    });
+        return emailWrapper.sendEmail(emailCfg);
+      }
+    }));
 
     db_connect.collection("announcements").insertOne(myobj, function (err, res) {
       if (err) throw err;
