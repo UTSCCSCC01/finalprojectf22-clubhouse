@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { TextField, Container, Typography, Grid, Button } from '@material-ui/core'
+import { TextField, Container, Typography, Grid, Button, Link } from '@mui/material'
 import config from  '../../config.json'
 import Auth from '../components/AuthCheck.jsx';
+
 /**
  * RegisterForm
  * @component
@@ -35,7 +36,7 @@ class RegisterForm extends Component {
     let ce = this.state.scerror !== null;
     return (
       <Container>
-        <Typography style={{ paddingTop: "140px" }} variant="h2" align="center">Register</Typography>
+        <Typography style={{ paddingTop: "140px" }} variant="h2" align="center" gutterBottom>Register</Typography>
         <Grid container direction="column" style={{ textAlign: "center", marginBottom: "110px" }}>
           <Grid item>
             <TextField margin="normal" id="name" label="Name" variant="outlined" style={{ width: 350 }} onChange={this.handleTextFieldChange} />
@@ -52,6 +53,9 @@ class RegisterForm extends Component {
           <Grid item>
             <Button variant="contained" color="primary" style={{ width: 350, marginTop: 25 }} onClick={this.submit}>Register</Button>
           </Grid>
+          
+          <Link sx={{m: "20px"}} textAlign="center" href="/club-register"><Typography>Want to register as a club?</Typography></Link>
+          
           {!this.state.showVerification ? null : (
             <div>
               <Grid item>
