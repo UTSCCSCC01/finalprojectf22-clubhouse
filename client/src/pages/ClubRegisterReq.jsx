@@ -207,7 +207,7 @@ const ClubRegisterReq = () => {
             </Box>
 
             <Collapse sx={{width: "100%"}} in={open}>
-                <Alert sx={{width: "100%", mb: 2}}
+                <Alert sx={{ mb: 2}}
                     severity={submitStatus}
                     action={
                         <IconButton
