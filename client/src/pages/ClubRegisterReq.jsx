@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from 'react-router';
 import { Box, Typography, Button, TextField } from "@mui/material";
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input'
 import { useState, useEffect } from "react";
@@ -7,10 +6,12 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import SendIcon from '@mui/icons-material/Send';
 import TagsInput from "./TagsInput.jsx"
 import Auth from "../components/AuthCheck.jsx";
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const ClubRegisterReq = () => {
-
-    const navigate = useNavigate();
 
     const [clubName, setClubName] = useState("");
     const [password, setPassword] = useState("");
@@ -20,11 +21,26 @@ const ClubRegisterReq = () => {
     const [desc, setDesc] = useState("");
 
     const [nameError, setNameError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [phoneError, setPhoneError] = useState("");
     const [descError, setDescError] = useState("");
 
-    function isValid(cName, cEmail, cPhone, cDesc) {
+    const [open, setOpen] = useState(false);
+    const [submitStatus, setStatus] = useState("error"); // "success" or "error"
+    const successMessage = "Your club registration request has been successfully submitted. Your email will be contacted once a decision has been reached."
+    const failMessage = "Unable to submit club request."
+
+    const clearForm = () => {
+        setClubName("");
+        setPassword("");
+        setEmail("");
+        setPhone("");
+        setDesc("");
+        setTags([]);
+    }
+
+    function isValid(cName, cEmail, cPassword, cPhone, cDesc) {
 
         let valid = true;
 
@@ -34,6 +50,10 @@ const ClubRegisterReq = () => {
         }
         if (!cEmail) {
             setEmailError("Email cannot be empty.")
+            valid = false;
+        }
+        if (!cPassword) {
+            setPasswordError("Password cannot be empty.");
             valid = false;
         }
         if (!cDesc) {
@@ -49,19 +69,19 @@ const ClubRegisterReq = () => {
         return valid;
 
     }
-    useEffect( ()  => {
-        Auth({student: "/allclubs", null: "/login", club: "/clubMain"});
+
+    useEffect(() => {
+        Auth({ student: "/allclubs", null: "/login", club: "/clubMain" });
     }, []);
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        if (!isValid(clubName, email, phone, desc)) {
+        if (!isValid(clubName, email, password, phone, desc)) {
             return;
         }
 
         const newClub = { clubName, email, phone, tags, desc, password };
-
-        console.log(newClub);
 
         const responseObj = await fetch('http://localhost:5001/clubs/register-request/create', {
             method: 'POST',
@@ -79,10 +99,14 @@ const ClubRegisterReq = () => {
             if (response.emailTaken) {
                 setEmailError("An account with this email already exists.");
             }
+            setStatus("error");
+            setOpen(true);
             return;
         }
 
-        navigate("/club-signup-confirmation"); // redirect to confirmation page
+        setStatus("success");
+        setOpen(true);
+        clearForm();
     };
 
     return (
@@ -104,6 +128,7 @@ const ClubRegisterReq = () => {
                 variant="outlined"
                 fullWidth
                 required
+                error={nameError !== ""}
                 helperText={nameError}
                 value={clubName}
                 onBlur={() => setNameError("")}
@@ -120,7 +145,7 @@ const ClubRegisterReq = () => {
                     error={emailError !== ""}
                     helperText={emailError}
                     onBlur={() => setEmailError("")}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 />
 
                 <MuiTelInput
@@ -142,8 +167,10 @@ const ClubRegisterReq = () => {
                 variant="outlined"
                 fullWidth
                 required
+                error={passwordError !== ""}
+                helperText={passwordError}
                 value={password}
-                onBlur={() => setNameError("")}
+                onBlur={() => setPasswordError("")}
                 onChange={(e) => setPassword(e.target.value)}
             />
 
@@ -165,7 +192,7 @@ const ClubRegisterReq = () => {
 
             <Box sx={{ width: "100%", display: 'flex', justifyContent: "space-between", padding: 0 }}>
                 <Button
-                    onClick={() => navigate("/")} // change path
+                    onClick={clearForm}
                     variant="contained"
                     color="secondary"
                     endIcon={<DeleteForeverOutlinedIcon />}
@@ -178,6 +205,27 @@ const ClubRegisterReq = () => {
                     endIcon={<SendIcon />}
                 >Submit Request</Button>
             </Box>
+
+            <Collapse sx={{width: "100%"}} in={open}>
+                <Alert sx={{width: "100%", mb: 2}}
+                    severity={submitStatus}
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setOpen(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                >
+                    {submitStatus === "success" ? successMessage : failMessage}
+                </Alert>
+            </Collapse>
+
         </Box>
     );
 }

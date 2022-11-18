@@ -4,6 +4,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Auth from "../components/AuthCheck.jsx";
 import { useEffect } from 'react';
 
+// DELETE
 const NewClubReqConfirmation = () => {
     useEffect( ()  => {
         Auth({student: "/allclubs", null: "/login", club: "/clubMain"});

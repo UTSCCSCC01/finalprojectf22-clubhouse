@@ -134,10 +134,11 @@ const EventForm = () => {
             setStatus("success");
             setOpen(true);
             clearForm();
-        }).catch((err) => {
-            console.log(err);
+        }, () => {
             setStatus("error");
             setOpen(true);
+        }).catch((err) => {
+            console.log(err);
         })
 
     };
