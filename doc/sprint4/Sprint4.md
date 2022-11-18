@@ -19,7 +19,10 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
     * If denied, the individual who sent the request receives a rejection email
     * If accepted, they receive an email and are provided with the credentials they can use to sign in as a club admin.
 - Subtasks: 
-    - NEED TO ADD
+    - Implement UI for seeing club registration requests
+    - Implement endpoint for approving club registration requests
+    - Implement endpoint for rejecting club registration requests
+    - Implement email wrapper
 
 2. **MIN-23:**
 - Priority: low
@@ -29,7 +32,8 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
     * The club admin of that club cannot no longer sign into their club account
     * All students in that club are removed from the club
 - Subtasks:
-    - NEED TO ADD
+    - Properly implement the delete function to fully delete a club (i.e. need to remove the club's login info, members, events, job postings)
+    - Make sure a club can't log-in afterward.
 
 3. **MIN-30:** 
 - Priority: low
@@ -37,7 +41,10 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
 - Criteria of satisfaction: 
     * Different navigation bars should be displayed for different types of users (not logged in/student/club admin/scsu)
 - Subtasks: 
-    - NEED TO ADD
+    - Create a navbar for not logged in, student, club, and SCSU
+    - Link all pages
+    - Implement logout
+
 
 4. **MIN-31:**
 - Priority: low
@@ -46,7 +53,9 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
     * Users should be redirected if they are not authorized to view a page
     * Users should be redirected to login page if they click a button and are not logged in
 - Subtasks: 
-    - NEED TO ADD
+    - make function to simplify check
+    - apply function to every page
+    - test functionality
 
 5. **MIN-32:**
 - Priority: low
@@ -57,7 +66,8 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
     * A logged in student should be able to see a list of upcoming events they joined
     * Student should be able to leave clubs and events
 - Subtasks:  
-    - NEED TO ADD
+    - Create UI
+    - Implement backend data fetch
 
 6. **MIN-33:**
 - Priority: low
@@ -65,7 +75,9 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
 - Criteria of satisfaction: 
     * Make UI look nice
 - Subtasks:  
-    - NEED TO ADD
+    - Make the layout of every page match
+    - Update club profile pages to use MUI components
+    - Display confirmation messages after creating an event/club request/job posting
 
 7. **MIN-34:**
 - Priority: low
@@ -74,7 +86,10 @@ Finish User stories MIN-22, 23, 30, 31, 32, 33, 34
     * A logged in student should be able to toggle whether they want to receive emails
     * The student should be able to choose a setting for each club they are a member of
 - Subtasks:  
-    - NEED TO ADD
+    - Create settings component
+    - Create settings page
+    - Update setting endpoint
+    - Backwards compatibility for no notification
 
 ## Spikes 
 - none
