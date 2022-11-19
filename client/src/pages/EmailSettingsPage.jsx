@@ -5,6 +5,11 @@ import config from  '../../config.json'
 import { getCookie } from "../libraries/cookieDAO.js";
 import { Typography } from "@mui/material";
 
+/**
+ * Email Settings Page
+ * @component
+ */
+
 class EmailSettingsPage extends React.Component {
     constructor(props) {
         super(props);

@@ -15,6 +15,7 @@ import EmailSettingsPage from './EmailSettingsPage.jsx';
 
 /**
  * MUI tabs managing function.
+ * @component
  */
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

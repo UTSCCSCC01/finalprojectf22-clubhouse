@@ -1,7 +1,13 @@
 import { getCookie } from '../libraries/cookieDAO'
+
+/**
+ * @module libraries/AuthCheck
+ */
+
+
 /**
  * Redirects users if they are not allowed to access a page
- * @param {} notallowed - the accounttype and page to redirect to if the user is not allowed to access the page
+ * @param {Object} notallowed - the accounttype and page to redirect to if the user is not allowed to access the page
  */
 const Auth = function(notallowed) {
     var accountType = getCookie("accountType");

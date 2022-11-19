@@ -8,6 +8,7 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 /**
  * @module routes/myClubs
+*/
 
 /**
  * Retrives all club members of the club from the club-members collection in the main database
