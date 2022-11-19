@@ -30,6 +30,8 @@ function SCSUClubCard(props) {
   };
 
   const handleDelete = () => {
+    handleConfirmYesClose();
+    
     fetch('http://localhost:5001/clubs/del/' + props.cKey, { method: 'DELETE' }).then(() => {
     }).catch((err) => {
       console.log(err);
