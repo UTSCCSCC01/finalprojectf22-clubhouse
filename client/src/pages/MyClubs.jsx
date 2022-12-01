@@ -58,7 +58,7 @@ function MyClubs() {
 
   return(
     <Container sx={{ display:"block", py: 4, px: 4}} maxWidth="lg">
-      <Grid>
+      <Grid container>
       {clubs.length === 0 ? <Typography variant="h5" color="#bbbbbb" m={6} width="100%" textAlign="center">You're not in any clubs :(</Typography>
       : clubs2.map((item) => {
       for (const a of clubs) {
@@ -66,9 +66,6 @@ function MyClubs() {
           return (<Grid item sx={{m: 2}} key={item}>
             <MyClubsCard key={item._id}  cName={item.clubName} cPhone={item.clubPhone} cDesc={item.clubDesc} cEmail={item.email} cImage={item.image}  cTags={item.clubTags}/>
            </Grid>)
-        }
-        else{
-          return (<Grid item key={item}></Grid>)
         }
       }
       
