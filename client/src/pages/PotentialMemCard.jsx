@@ -43,7 +43,11 @@ export default function PotentialMemCard(props) {
   };
 
   const handleAcceptClick = () => {
+    setConfirmYes(false);
+    setConfirmNo(false);
+    
     props.onAccept(props.member._id);
+    setOpen(false);
 
   };
   // console.log(props.member._id);
