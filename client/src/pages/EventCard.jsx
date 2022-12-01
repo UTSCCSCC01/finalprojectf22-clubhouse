@@ -119,7 +119,7 @@ export default function EventCard(props) {
       {accountType === "student" &&
         (<CardContent>
           <Button onClick={handleClickOpen} variant={OnOff ? "outlined" : "contained"}
-            sx={{ marginBottom: 1.5, marginLeft: 1.5 }}>{OnOff ? 'cancel' : 'sign up'}
+            sx={{width: "96px", marginBottom: 1.5, marginLeft: 1.5 }}>{OnOff ? 'cancel' : 'sign up'}
           </Button>
         </CardContent>)}
     </Card>
