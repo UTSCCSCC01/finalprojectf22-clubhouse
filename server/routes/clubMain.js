@@ -33,7 +33,7 @@ clubMainRoutes.route("/club/members/:clubName").get(async function (req, res) {
  */
    clubMainRoutes.route("/club/members/:id").delete(function (req, res) {
     let db_connect = dbo.getDb("main");
-    let myquery = { _id: ObjectId(req.params.id)  };
+    let myquery = { _id: req.params.id  };
     db_connect
       .collection("club-members")
       .deleteOne(myquery, function (err, result) {
