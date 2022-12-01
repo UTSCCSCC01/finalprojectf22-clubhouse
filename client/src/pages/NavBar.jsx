@@ -167,7 +167,7 @@ useRouteMatch = (patterns) => {
                 <Tabs sx = {{ marginLeft: 'auto' }}  textColor="inherit" value={this.state.value} onChange={this.handleChange} indicatorColor="primary">
 
                     <Tab label="Home" value={0} href={routes[0]}/>
-                    <Tab label="Make an Accouncement" value={1} href={routes[1]}/>
+                    <Tab label="Make an Announcement" value={1} href={routes[1]}/>
                     <Tab label="Create an Event" value={2} href={routes[2]}/>
                     <Tab label="Create a Position" value={3} href={routes[3]}/>
                     <Tab label="Profile" value={4} href={routes[4]}/>
