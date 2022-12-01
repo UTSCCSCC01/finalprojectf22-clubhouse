@@ -167,7 +167,7 @@ useRouteMatch = (patterns) => {
                 <Tabs sx = {{ marginLeft: 'auto' }}  textColor="inherit" value={this.state.value} onChange={this.handleChange} indicatorColor="primary">
 
                     <Tab label="Home" value={0} href={routes[0]}/>
-                    <Tab label="Make an Accouncement" value={1} href={routes[1]}/>
+                    <Tab label="Make an Announcement" value={1} href={routes[1]}/>
                     <Tab label="Create an Event" value={2} href={routes[2]}/>
                     <Tab label="Create a Position" value={3} href={routes[3]}/>
                     <Tab label="Profile" value={4} href={routes[4]}/>
@@ -224,23 +224,19 @@ useRouteMatch = (patterns) => {
                     <Tab label="Events" href={routes[1]}></Tab>
                 </Tabs>
                 </Grid>
-                <Grid item xs={2}>
-                <Grid container direction='row' justifyContent="flex-end" alignItems="center" spacing ={2} >
                 <Grid item>
+                <Box display="flex" flexWrap="none" alignItems="center" sx={{gap: 1.5}} >
                   <Button sx={{
                       ":visited": { backgroundColor: "#1976d2" },
                       ":visited:hover": { backgroundColor: "#1565c0" }
                     }}
                     textColor="inherit" variant="contained" href ={"/login"}>Login</Button>
-                  </Grid>
-                  <Grid item>
                   <Button sx={{
                       ":visited": { backgroundColor: "#1976d2" },
-                      ":visited:hover": { backgroundColor: "#1565c0" }
+                      ":visited:hover": { backgroundColor: "#1565c0" },
                     }}
                     textColor="inherit" variant="contained" href ={"/register"}>Register</Button>
-                  </Grid>
-                  </Grid>
+                  </Box>
                   </Grid>
                   </Grid>
             </Toolbar>
